@@ -55,6 +55,10 @@ dependencies {
     implementation 'androidx.activity:activity-compose:1.4.0'
 
     implementation "com.google.accompanist:accompanist-systemuicontroller:0.24.1-alpha"
+    implementation "io.coil-kt:coil-compose:1.4.0"
+    def ktor_version="2.0.0-beta-1"
+    implementation "io.ktor:ktor-client-core:$ktor_version"
+    implementation "io.ktor:ktor-client-cio:$ktor_version"
 
     debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
 }

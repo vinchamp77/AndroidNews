@@ -31,7 +31,7 @@ private val LightColorPalette = lightColors(
 @Composable
 fun AndroidNewsTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    useSystemUIController: Boolean = true,
+    useSystemUIController: Boolean,
     content: @Composable () -> Unit) {
 
     val colors = if (darkTheme) {

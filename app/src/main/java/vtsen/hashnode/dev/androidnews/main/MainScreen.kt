@@ -33,7 +33,7 @@ fun MainUI(viewModel: MainViewModel) {
 @Preview(showBackground = true)
 @Composable
 private fun DefaultPreview() {
-    val viewModel = MainViewModel()
+    val viewModel = MainViewModel(app = null)
     viewModel.mockData()
     MainScreen(viewModel, useSystemUIController = false)
 }

@@ -1,4 +1,4 @@
-package vtsen.hashnode.dev.androidnews.data
+package vtsen.hashnode.dev.androidnews.main
 
 import vtsen.hashnode.dev.androidnews.utils.FeedItem
 

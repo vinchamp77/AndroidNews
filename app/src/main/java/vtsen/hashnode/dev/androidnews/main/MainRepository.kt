@@ -2,8 +2,6 @@ package vtsen.hashnode.dev.androidnews.main
 
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import vtsen.hashnode.dev.androidnews.data.Article
-import vtsen.hashnode.dev.androidnews.data.asArticles
 import vtsen.hashnode.dev.androidnews.remote.WebService
 import vtsen.hashnode.dev.androidnews.utils.FeedParser
 import vtsen.hashnode.dev.androidnews.utils.Utils

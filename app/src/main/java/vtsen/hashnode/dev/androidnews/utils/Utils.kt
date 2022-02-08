@@ -1,6 +1,6 @@
 package vtsen.hashnode.dev.androidnews.utils
 
-import vtsen.hashnode.dev.androidnews.data.Article
+import vtsen.hashnode.dev.androidnews.main.Article
 
 object Utils {
     fun createArticle() : Article {

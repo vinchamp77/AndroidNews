@@ -1,4 +1,4 @@
-package vtsen.hashnode.dev.androidnews.main
+package vtsen.hashnode.dev.androidnews.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.ViewModel

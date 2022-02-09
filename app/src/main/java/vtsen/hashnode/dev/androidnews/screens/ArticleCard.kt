@@ -1,4 +1,4 @@
-package vtsen.hashnode.dev.androidnews.main
+package vtsen.hashnode.dev.androidnews.screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
@@ -17,6 +17,7 @@ import vtsen.hashnode.dev.androidnews.R
 import vtsen.hashnode.dev.androidnews.ui.theme.PaddingMedium
 import vtsen.hashnode.dev.androidnews.ui.theme.PaddingSmall
 import vtsen.hashnode.dev.androidnews.utils.Utils
+import vtsen.hashnode.dev.androidnews.viewmodel.Article
 
 @Composable
 fun ArticleCard(article: Article) {
@@ -55,10 +56,10 @@ fun ArticleContent(article: Article) {
             .padding(end = PaddingSmall)
     ) {
 
-        Text(text = article.title!!, fontWeight = FontWeight.SemiBold)
+        Text(text = article.title, fontWeight = FontWeight.SemiBold)
 
         Spacer(Modifier.padding(PaddingSmall))
-        Text(text = article.pubDate!!)
+        Text(text = article.pubDate)
     }
 
 }

@@ -2,7 +2,7 @@ package vtsen.hashnode.dev.androidnews.local
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import vtsen.hashnode.dev.androidnews.main.Article
+import vtsen.hashnode.dev.androidnews.viewmodel.Article
 
 @Entity(tableName = "article")
 data class ArticleEntity (

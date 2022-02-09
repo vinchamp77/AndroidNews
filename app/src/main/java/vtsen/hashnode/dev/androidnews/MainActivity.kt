@@ -4,9 +4,9 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
-import vtsen.hashnode.dev.androidnews.main.MainScreen
-import vtsen.hashnode.dev.androidnews.main.MainViewModel
-import vtsen.hashnode.dev.androidnews.main.MainViewModelFactory
+import vtsen.hashnode.dev.androidnews.screens.MainScreen
+import vtsen.hashnode.dev.androidnews.viewmodel.MainViewModel
+import vtsen.hashnode.dev.androidnews.viewmodel.MainViewModelFactory
 
 class MainActivity : ComponentActivity() {
 

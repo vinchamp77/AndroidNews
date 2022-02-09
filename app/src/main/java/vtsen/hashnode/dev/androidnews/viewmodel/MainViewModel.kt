@@ -1,4 +1,4 @@
-package vtsen.hashnode.dev.androidnews.main
+package vtsen.hashnode.dev.androidnews.viewmodel
 
 import android.content.Context
 import androidx.lifecycle.ViewModel
@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import vtsen.hashnode.dev.androidnews.local.ArticlesDatabase
 import vtsen.hashnode.dev.androidnews.remote.WebService
+import vtsen.hashnode.dev.androidnews.repository.MainRepository
 
 class MainViewModel(context: Context) : ViewModel() {
 

@@ -5,8 +5,8 @@ import androidx.room.PrimaryKey
 import vtsen.hashnode.dev.androidnews.viewmodel.Article
 
 @Entity(tableName = "article")
-data class ArticleEntity (
-    @PrimaryKey val id: Int,
+data class ArticleEntity(
+    @PrimaryKey val id: String,
 
     val title: String,
     val description: String,

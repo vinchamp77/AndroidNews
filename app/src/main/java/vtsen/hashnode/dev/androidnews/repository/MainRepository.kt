@@ -1,31 +1,48 @@
 package vtsen.hashnode.dev.androidnews.repository
 
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.withContext
 import vtsen.hashnode.dev.androidnews.local.ArticlesDatabase
+import vtsen.hashnode.dev.androidnews.local.asArticles
 import vtsen.hashnode.dev.androidnews.remote.WebService
-import vtsen.hashnode.dev.androidnews.viewmodel.Article
 import vtsen.hashnode.dev.androidnews.utils.FeedParser
 import vtsen.hashnode.dev.androidnews.utils.Utils
-import vtsen.hashnode.dev.androidnews.utils.asArticles
+import vtsen.hashnode.dev.androidnews.utils.asArticleEntities
+import vtsen.hashnode.dev.androidnews.viewmodel.Article
 
 private const val TAG = "MainRepository"
+private const val URL = "https://vtsen.hashnode.dev/rss.xml"
 
 class MainRepository(
     private val database: ArticlesDatabase,
-    private val webService: WebService) {
+    private val webService: WebService,
+) {
+    enum class Status {
+        SUCCESS,
+        FAIL,
+    }
 
     private val _articles = MutableStateFlow<List<Article>>(listOf())
     val articles: StateFlow<List<Article>> = _articles
 
+    suspend fun refresh(): Status {
 
+        var status = Status.SUCCESS
 
-    private val url = "https://vtsen.hashnode.dev/rss.xml"
+        withContext(Dispatchers.IO) {
 
-    suspend fun refresh() {
-        val xmlString = webService.getXMlString(url)
-        val feedItems = FeedParser().parse(xmlString)
-        _articles.value = feedItems.asArticles()
+            try {
+                loadFeedItems()
+            } catch(e: Exception) {
+                status = Status.FAIL
+            }
+
+            loadDatabase()
+        }
+
+        return status
     }
 
     fun mockData() {
@@ -36,5 +53,17 @@ class MainRepository(
             articles.add(Utils.createArticle())
         }
         _articles.value = articles
+    }
+
+    private suspend fun loadFeedItems() {
+        val xmlString = webService.getXMlString(URL)
+        val feedItems =  FeedParser().parse(xmlString)
+        val articleEntities = feedItems.asArticleEntities()
+        database.dao.clear()
+        database.dao.insertAll(articleEntities)
+    }
+
+    private suspend fun loadDatabase() {
+        _articles.value = database.dao.getAll().asArticles()
     }
 }

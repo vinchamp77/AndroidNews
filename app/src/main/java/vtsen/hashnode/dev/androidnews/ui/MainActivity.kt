@@ -1,10 +1,10 @@
-package vtsen.hashnode.dev.androidnews
+package vtsen.hashnode.dev.androidnews.ui
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
-import vtsen.hashnode.dev.androidnews.screens.MainApp
+import vtsen.hashnode.dev.androidnews.ui.screens.MainApp
 import vtsen.hashnode.dev.androidnews.viewmodel.MainViewModel
 import vtsen.hashnode.dev.androidnews.viewmodel.MainViewModelFactory
 

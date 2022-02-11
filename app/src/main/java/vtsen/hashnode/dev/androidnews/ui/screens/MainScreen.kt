@@ -1,4 +1,4 @@
-package vtsen.hashnode.dev.androidnews.screens
+package vtsen.hashnode.dev.androidnews.ui.screens
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn

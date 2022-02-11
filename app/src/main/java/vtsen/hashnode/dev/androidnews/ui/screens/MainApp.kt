@@ -1,4 +1,4 @@
-package vtsen.hashnode.dev.androidnews.screens
+package vtsen.hashnode.dev.androidnews.ui.screens
 
 import androidx.compose.material.Scaffold
 import androidx.compose.material.ScaffoldState

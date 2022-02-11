@@ -6,7 +6,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import vtsen.hashnode.dev.androidnews.screens.MainScreen
+import vtsen.hashnode.dev.androidnews.ui.screens.MainScreen
 import vtsen.hashnode.dev.androidnews.viewmodel.MainViewModel
 
 @Composable

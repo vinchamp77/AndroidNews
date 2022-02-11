@@ -6,9 +6,9 @@ import androidx.lifecycle.ViewModelProvider
 
 @Suppress("UNCHECKED_CAST")
 class MainViewModelFactory(private val app: Application)
-    : ViewModelProvider.Factory {
+    : ViewModelProvider.NewInstanceFactory() {
 
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
 
         if (modelClass.isAssignableFrom(MainViewModel::class.java)) {
             return MainViewModel(app) as T

@@ -21,14 +21,14 @@ import vtsen.hashnode.dev.androidnews.utils.Utils
 import vtsen.hashnode.dev.androidnews.viewmodel.Article
 
 @Composable
-fun ArticleCard(article: Article, onArticleCardClick: () -> Unit) {
+fun ArticleCard(article: Article, onArticleCardClick: (String) -> Unit) {
 
     Column (
         modifier = Modifier
             .fillMaxWidth()
             .padding(PaddingMedium)
             .clickable {
-                onArticleCardClick()
+                onArticleCardClick(article.id)
             }
 
     ) {

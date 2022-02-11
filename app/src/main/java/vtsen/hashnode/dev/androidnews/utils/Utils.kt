@@ -8,6 +8,7 @@ import java.util.*
 object Utils {
     fun createArticle() : Article {
         return Article(
+            id = "",
             title = "How to Implement Hilt in Android App?",
             description = "",
             link = "https://vtsen.hashnode.dev/how-to-implement-hilt-in-android-app",

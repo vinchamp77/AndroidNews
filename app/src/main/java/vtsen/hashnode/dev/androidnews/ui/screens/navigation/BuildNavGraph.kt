@@ -1,4 +1,4 @@
-package com.example.simplenavigationcompose.navigation
+package vtsen.hashnode.dev.androidnews.ui.screens.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavGraphBuilder
@@ -28,21 +28,23 @@ private fun addMainScreen(
     viewModel: MainViewModel
 ) {
     navGraphBuilder.composable(route = NavRoute.Main.path) {
-        MainScreen(viewModel)
-//            navigateToHome = {
-//                navController.navigate(NavRoute.Home.path)
-//            }
-//        )
+        MainScreen(
+            viewModel,
+            navigateToArticle = {
+                navController.navigate(NavRoute.Article.path)
+            },
+        )
     }
 }
 
-//private fun addHomeScreen(
+//private fun addArticleScreen(
 //    navController: NavHostController,
-//    navGraphBuilder: NavGraphBuilder
+//    navGraphBuilder: NavGraphBuilder,
+//    viewModel: MainViewModel
 //) {
 //    navGraphBuilder.composable(route = NavRoute.Home.path) {
 //
-//        HomeScreen(
+//        ArticleScreen(
 //            navigateToProfile = { id, showDetails ->
 //                navController.navigate(NavRoute.Profile.withArgs(id.toString(), showDetails.toString()))
 //            },

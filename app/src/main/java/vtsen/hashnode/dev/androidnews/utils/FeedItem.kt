@@ -1,7 +1,6 @@
 package vtsen.hashnode.dev.androidnews.utils
 
 import vtsen.hashnode.dev.androidnews.repository.local.ArticleEntity
-import vtsen.hashnode.dev.androidnews.viewmodel.Article
 
 data class FeedItem(
     val title: String,
@@ -9,23 +8,6 @@ data class FeedItem(
     val link: String,
     val pubDate: String,
     val image: String)
-
-
-fun List<FeedItem>.asArticles() : List<Article> {
-    return map { item ->
-        item.asArticle()
-    }
-}
-
-fun FeedItem.asArticle() : Article {
-    return Article(
-        title = title,
-        description = description,
-        link = link,
-        pubDate = pubDate,
-        image = image,
-    )
-}
 
 fun List<FeedItem>.asArticleEntities() : List<ArticleEntity> {
     var id = 0

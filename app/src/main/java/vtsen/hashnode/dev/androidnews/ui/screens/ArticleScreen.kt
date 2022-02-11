@@ -7,9 +7,15 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.viewinterop.AndroidView
 
+@Composable
+fun ArticleScreen() {
+
+}
+
+
 
 @Composable
-fun LoadWebUrl(url: String) {
+private fun LoadWebUrl(url: String) {
 
     if (url.isEmpty()) {
         return
@@ -27,7 +33,7 @@ fun LoadWebUrl(url: String) {
 }
 
 @Composable
-fun LoadWebHtml(html: String) {
+private fun LoadWebHtml(html: String) {
 
     if (html.isEmpty()) {
         return

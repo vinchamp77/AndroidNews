@@ -11,7 +11,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import vtsen.hashnode.dev.androidnews.viewmodel.MainViewModel
 
 @Composable
-fun MainScreen(viewModel: MainViewModel) {
+fun MainScreen(
+    viewModel: MainViewModel,
+    navigateToArticle: (String) -> Unit,
+) {
 
     val articles = viewModel.articles.collectAsState()
 
@@ -21,9 +24,7 @@ fun MainScreen(viewModel: MainViewModel) {
         items(items = articles.value) { article ->
             ArticleCard(
                 article = article,
-                onArticleCardClick = {
-                    viewModel.onArticleCardClick(article)
-                }
+                onArticleCardClick = navigateToArticle
             )
         }
     }
@@ -35,6 +36,8 @@ private fun DefaultPreview() {
 
     val viewModel = MainViewModel(LocalContext.current)
     viewModel.mockData()
-    //MainScreen(viewModel, useSystemUIController = false)
-    MainScreen(viewModel)
+
+    MainScreen(
+        viewModel,
+        navigateToArticle = {})
 }

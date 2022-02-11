@@ -23,6 +23,7 @@ fun List<ArticleEntity>.asArticles() : List<Article> {
 
 fun ArticleEntity.asArticle(): Article {
     return Article(
+        id = id,
         title = title,
         description = description,
         link = link,

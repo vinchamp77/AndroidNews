@@ -8,7 +8,7 @@ import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.stringResource
-import com.example.simplenavigationcompose.navigation.BuildNavGraph
+import vtsen.hashnode.dev.androidnews.ui.screens.navigation.BuildNavGraph
 import vtsen.hashnode.dev.androidnews.ui.theme.AndroidNewsTheme
 import vtsen.hashnode.dev.androidnews.viewmodel.MainViewModel
 
@@ -18,7 +18,7 @@ fun MainApp(viewModel: MainViewModel, useSystemUIController: Boolean) {
 
         val scaffoldState = rememberScaffoldState()
         Scaffold(scaffoldState = scaffoldState) {
-            BuildNavGraph( viewModel)
+            BuildNavGraph(viewModel)
         }
 
         ShowSnackBar(scaffoldState, viewModel)

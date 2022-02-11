@@ -4,9 +4,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.withContext
-import vtsen.hashnode.dev.androidnews.local.ArticlesDatabase
-import vtsen.hashnode.dev.androidnews.local.asArticles
-import vtsen.hashnode.dev.androidnews.remote.WebService
+import vtsen.hashnode.dev.androidnews.repository.local.ArticlesDatabase
+import vtsen.hashnode.dev.androidnews.repository.local.asArticles
+import vtsen.hashnode.dev.androidnews.repository.remote.WebService
 import vtsen.hashnode.dev.androidnews.utils.FeedParser
 import vtsen.hashnode.dev.androidnews.utils.Utils
 import vtsen.hashnode.dev.androidnews.utils.asArticleEntities

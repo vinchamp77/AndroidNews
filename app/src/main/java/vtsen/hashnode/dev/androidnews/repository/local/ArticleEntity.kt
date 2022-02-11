@@ -1,4 +1,4 @@
-package vtsen.hashnode.dev.androidnews.local
+package vtsen.hashnode.dev.androidnews.repository.local
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

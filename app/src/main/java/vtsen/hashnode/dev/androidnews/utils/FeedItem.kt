@@ -1,6 +1,6 @@
 package vtsen.hashnode.dev.androidnews.utils
 
-import vtsen.hashnode.dev.androidnews.local.ArticleEntity
+import vtsen.hashnode.dev.androidnews.repository.local.ArticleEntity
 import vtsen.hashnode.dev.androidnews.viewmodel.Article
 
 data class FeedItem(

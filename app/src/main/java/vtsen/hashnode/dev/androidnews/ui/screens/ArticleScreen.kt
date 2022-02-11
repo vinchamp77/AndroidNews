@@ -6,9 +6,10 @@ import android.webkit.WebViewClient
 import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.viewinterop.AndroidView
+import vtsen.hashnode.dev.androidnews.viewmodel.MainViewModel
 
 @Composable
-fun ArticleScreen() {
+fun ArticleScreen(viewModel: MainViewModel, id: String) {
 
 }
 

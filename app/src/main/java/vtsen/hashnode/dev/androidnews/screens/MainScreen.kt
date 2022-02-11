@@ -46,11 +46,15 @@ private fun MainUI(viewModel: MainViewModel) {
         modifier = Modifier.fillMaxSize(),
     ) {
         items(items = articles.value) { article ->
-            ArticleCard(article = article)
+            ArticleCard(
+                article = article,
+                onArticleCardClick = {
+                    viewModel.onArticleCardClick(article)
+                }
+            )
         }
     }
 }
-
 
 @Composable
 private fun ShowSnackBar(scaffoldState: ScaffoldState, viewModel: MainViewModel) {

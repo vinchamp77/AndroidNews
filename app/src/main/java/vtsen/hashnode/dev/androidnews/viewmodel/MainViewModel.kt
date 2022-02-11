@@ -2,7 +2,6 @@ package vtsen.hashnode.dev.androidnews.viewmodel
 
 import android.content.Context
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
@@ -24,6 +23,9 @@ class MainViewModel(context: Context) : ViewModel() {
     )
     val articles = repository.articles
 
+    var html: String? by mutableStateOf("")
+    private set
+
     init {
         refresh()
     }
@@ -34,6 +36,10 @@ class MainViewModel(context: Context) : ViewModel() {
 
     fun clearSnackBar() {
         snackBarStringId = null
+    }
+
+    fun onArticleCardClick(article: Article) {
+        html = article.link
     }
 
     private fun refresh() {

@@ -1,6 +1,7 @@
 package vtsen.hashnode.dev.androidnews.screens
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Divider
 import androidx.compose.material.MaterialTheme
@@ -20,12 +21,15 @@ import vtsen.hashnode.dev.androidnews.utils.Utils
 import vtsen.hashnode.dev.androidnews.viewmodel.Article
 
 @Composable
-fun ArticleCard(article: Article) {
+fun ArticleCard(article: Article, onArticleCardClick: () -> Unit) {
 
     Column (
         modifier = Modifier
             .fillMaxWidth()
             .padding(PaddingMedium)
+            .clickable {
+                onArticleCardClick()
+            }
 
     ) {
 
@@ -59,7 +63,7 @@ fun ArticleContent(article: Article) {
         Text(text = article.title, fontWeight = FontWeight.SemiBold)
 
         Spacer(Modifier.padding(PaddingSmall))
-        Text(text = article.pubDate)
+        Text(text = Utils.getElapsedTime(article.pubDate))
     }
 
 }
@@ -84,7 +88,10 @@ fun ArticleImage(article: Article) {
 @Preview(showBackground = true)
 @Composable
 private fun DefaultPreview() {
-    ArticleCard(Utils.createArticle())
+    ArticleCard(
+        article = Utils.createArticle(),
+        onArticleCardClick = { }
+    )
 }
 
 

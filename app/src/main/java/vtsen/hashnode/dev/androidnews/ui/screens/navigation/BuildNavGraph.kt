@@ -9,7 +9,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import vtsen.hashnode.dev.androidnews.ui.screens.ArticleScreen
-import vtsen.hashnode.dev.androidnews.ui.screens.MainScreen
+import vtsen.hashnode.dev.androidnews.ui.screens.main.MainScreen
 import vtsen.hashnode.dev.androidnews.viewmodel.MainViewModel
 
 @Composable

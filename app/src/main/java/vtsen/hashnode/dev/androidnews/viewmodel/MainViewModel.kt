@@ -8,9 +8,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import vtsen.hashnode.dev.androidnews.R
+import vtsen.hashnode.dev.androidnews.repository.MainRepository
 import vtsen.hashnode.dev.androidnews.repository.local.ArticlesDatabase
 import vtsen.hashnode.dev.androidnews.repository.remote.WebService
-import vtsen.hashnode.dev.androidnews.repository.MainRepository
 
 class MainViewModel(context: Context) : ViewModel() {
 
@@ -22,9 +22,6 @@ class MainViewModel(context: Context) : ViewModel() {
         WebService(),
     )
     val articles = repository.articles
-
-    var html: String? by mutableStateOf("")
-    private set
 
     init {
         refresh()
@@ -38,8 +35,11 @@ class MainViewModel(context: Context) : ViewModel() {
         snackBarStringId = null
     }
 
-    fun onArticleCardClick(article: Article) {
-        html = article.link
+    fun getArticle(id: String): Article {
+        val article = articles.value.find { article ->
+            article.id == id
+        }
+        return article!!
     }
 
     private fun refresh() {

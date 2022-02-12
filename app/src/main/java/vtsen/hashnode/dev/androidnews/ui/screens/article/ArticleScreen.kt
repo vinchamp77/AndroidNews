@@ -10,10 +10,9 @@ import vtsen.hashnode.dev.androidnews.viewmodel.MainViewModel
 
 @Composable
 fun ArticleScreen(viewModel: MainViewModel, id: String) {
-
+    val article = viewModel.getArticle(id)
+    LoadWebUrl(url = article.link)
 }
-
-
 
 @Composable
 private fun LoadWebUrl(url: String) {

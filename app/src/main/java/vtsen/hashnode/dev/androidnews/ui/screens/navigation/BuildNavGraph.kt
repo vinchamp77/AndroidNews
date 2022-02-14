@@ -36,7 +36,7 @@ private fun addMainScreen(
         MainScreen(
             viewModel,
             navigateToArticle = { id ->
-                navController.navigate(NavRoute.Article.withArgs(id))
+                navController.navigate(NavRoute.Article.withArgs(id.toString()))
             },
         )
     }
@@ -51,7 +51,7 @@ private fun addArticleScreen(
         route = NavRoute.Article.withArgsFormat(NavRoute.Article.id),
         arguments = listOf(
             navArgument(NavRoute.Article.id) {
-                type = NavType.StringType
+                type = NavType.IntType
             }
         )
     ) { navBackStackEntry ->
@@ -60,7 +60,7 @@ private fun addArticleScreen(
 
         ArticleScreen(
             viewModel,
-            id = args?.getString(NavRoute.Article.id)!!
+            id = args?.getInt(NavRoute.Article.id)!!
         )
     }
 }

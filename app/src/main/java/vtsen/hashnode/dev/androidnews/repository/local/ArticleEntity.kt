@@ -6,8 +6,8 @@ import vtsen.hashnode.dev.androidnews.viewmodel.Article
 
 @Entity(tableName = "article")
 data class ArticleEntity(
-    @PrimaryKey val id: String,
-
+    @PrimaryKey(autoGenerate = true)
+    val id: Int,
     val title: String,
     val description: String,
     val link: String,

@@ -10,16 +10,14 @@ data class FeedItem(
     val image: String)
 
 fun List<FeedItem>.asArticleEntities() : List<ArticleEntity> {
-    var id = 0
     return map { item ->
-        ++id
-        item.asArticleEntity(id.toString())
+        item.asArticleEntity()
     }
 }
 
-fun FeedItem.asArticleEntity(id: String) : ArticleEntity {
+fun FeedItem.asArticleEntity() : ArticleEntity {
     return ArticleEntity(
-        id = id,
+        id = 0,
         title = title,
         description = description,
         link = link,

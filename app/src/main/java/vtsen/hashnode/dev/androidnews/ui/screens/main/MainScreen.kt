@@ -13,7 +13,7 @@ import vtsen.hashnode.dev.androidnews.viewmodel.MainViewModel
 @Composable
 fun MainScreen(
     viewModel: MainViewModel,
-    navigateToArticle: (String) -> Unit,
+    navigateToArticle: (Int) -> Unit,
 ) {
 
     val articles = viewModel.articles.collectAsState()

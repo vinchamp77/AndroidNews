@@ -35,7 +35,7 @@ class MainViewModel(context: Context) : ViewModel() {
         snackBarStringId = null
     }
 
-    fun getArticle(id: String): Article {
+    fun getArticle(id: Int): Article {
         val article = articles.value.find { article ->
             article.id == id
         }

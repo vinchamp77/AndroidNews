@@ -21,7 +21,7 @@ import vtsen.hashnode.dev.androidnews.utils.Utils
 import vtsen.hashnode.dev.androidnews.viewmodel.Article
 
 @Composable
-fun ArticleCard(article: Article, onArticleCardClick: (String) -> Unit) {
+fun ArticleCard(article: Article, onArticleCardClick: (Int) -> Unit) {
 
     Column (
         modifier = Modifier

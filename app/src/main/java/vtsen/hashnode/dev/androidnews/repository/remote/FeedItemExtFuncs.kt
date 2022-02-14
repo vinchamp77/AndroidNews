@@ -1,13 +1,6 @@
-package vtsen.hashnode.dev.androidnews.utils
+package vtsen.hashnode.dev.androidnews.repository.remote
 
 import vtsen.hashnode.dev.androidnews.repository.local.ArticleEntity
-
-data class FeedItem(
-    val title: String,
-    val description: String,
-    val link: String,
-    val pubDate: String,
-    val image: String)
 
 fun List<FeedItem>.asArticleEntities() : List<ArticleEntity> {
     return map { item ->

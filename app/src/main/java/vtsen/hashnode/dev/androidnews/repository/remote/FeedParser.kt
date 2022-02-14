@@ -1,4 +1,4 @@
-package vtsen.hashnode.dev.androidnews.utils
+package vtsen.hashnode.dev.androidnews.repository.remote
 
 import org.xmlpull.v1.XmlPullParser
 import org.xmlpull.v1.XmlPullParserFactory
@@ -68,6 +68,7 @@ class FeedParser {
         return text
     }
 
+    @Suppress("ControlFlowWithEmptyBody")
     private fun skipTag(parser: XmlPullParser)  {
         while (parser.next() != XmlPullParser.END_TAG) {
         }

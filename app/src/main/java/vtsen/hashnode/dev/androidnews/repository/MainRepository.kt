@@ -6,10 +6,10 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.withContext
 import vtsen.hashnode.dev.androidnews.repository.local.ArticlesDatabase
 import vtsen.hashnode.dev.androidnews.repository.local.asArticles
+import vtsen.hashnode.dev.androidnews.repository.remote.FeedParser
 import vtsen.hashnode.dev.androidnews.repository.remote.WebService
-import vtsen.hashnode.dev.androidnews.utils.FeedParser
+import vtsen.hashnode.dev.androidnews.repository.remote.asArticleEntities
 import vtsen.hashnode.dev.androidnews.utils.Utils
-import vtsen.hashnode.dev.androidnews.utils.asArticleEntities
 import vtsen.hashnode.dev.androidnews.viewmodel.Article
 
 private const val TAG = "MainRepository"

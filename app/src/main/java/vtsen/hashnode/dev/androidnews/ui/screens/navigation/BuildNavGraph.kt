@@ -6,44 +6,57 @@ import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import vtsen.hashnode.dev.androidnews.ui.screens.ArticleScreen
 import vtsen.hashnode.dev.androidnews.ui.screens.home.HomeScreen
 import vtsen.hashnode.dev.androidnews.viewmodel.MainViewModel
 
 @Composable
-fun BuildNavGraph(viewModel: MainViewModel) {
-
-    val navController = rememberNavController()
+fun BuildNavGraph(viewModel: MainViewModel, navHostController: NavHostController) {
 
     NavHost(
-        navController = navController,
-        startDestination = NavRoute.Main.path
+        navController = navHostController,
+        startDestination = NavRoute.Home.path
     ) {
         val navGraphBuilder = this
-        addMainScreen(navController, navGraphBuilder, viewModel)
-        addArticleScreen(navController,navGraphBuilder, viewModel)
+        addHomeScreen(navHostController, navGraphBuilder, viewModel)
+        addBookmarksScreen(navHostController, navGraphBuilder, viewModel)
+        addArticleScreen(navHostController,navGraphBuilder, viewModel)
     }
 }
 
-private fun addMainScreen(
-    navController: NavHostController,
+private fun addHomeScreen(
+    navHostController: NavHostController,
     navGraphBuilder: NavGraphBuilder,
     viewModel: MainViewModel
 ) {
-    navGraphBuilder.composable(route = NavRoute.Main.path) {
+    navGraphBuilder.composable(route = NavRoute.Home.path) {
         HomeScreen(
             viewModel,
             navigateToArticle = { id ->
-                navController.navigate(NavRoute.Article.withArgs(id.toString()))
+                navHostController.navigate(NavRoute.Article.withArgs(id.toString()))
+            },
+        )
+    }
+}
+
+private fun addBookmarksScreen(
+    navHostController: NavHostController,
+    navGraphBuilder: NavGraphBuilder,
+    viewModel: MainViewModel
+) {
+    navGraphBuilder.composable(route = NavRoute.Bookmarks.path) {
+        HomeScreen(
+            viewModel,
+            navigateToArticle = { id ->
+                navHostController.navigate(NavRoute.Article.withArgs(id.toString()))
             },
         )
     }
 }
 
 private fun addArticleScreen(
-    navController: NavHostController,
+    navHostController: NavHostController,
     navGraphBuilder: NavGraphBuilder,
     viewModel: MainViewModel
 ) {

@@ -8,6 +8,8 @@ import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.stringResource
+import androidx.navigation.compose.rememberNavController
+import vtsen.hashnode.dev.androidnews.ui.screens.navigation.BottomBarNav
 import vtsen.hashnode.dev.androidnews.ui.screens.navigation.BuildNavGraph
 import vtsen.hashnode.dev.androidnews.ui.theme.AndroidNewsTheme
 import vtsen.hashnode.dev.androidnews.viewmodel.MainViewModel
@@ -17,8 +19,13 @@ fun MainScreen(viewModel: MainViewModel, useSystemUIController: Boolean) {
     AndroidNewsTheme(useSystemUIController = useSystemUIController) {
 
         val scaffoldState = rememberScaffoldState()
-        Scaffold(scaffoldState = scaffoldState) {
-            BuildNavGraph(viewModel)
+        val navHostController = rememberNavController()
+
+        Scaffold(
+            scaffoldState = scaffoldState,
+            bottomBar = { BottomBarNav(navHostController = navHostController)}
+        ) {
+            BuildNavGraph(viewModel, navHostController)
         }
 
         ShowSnackBar(scaffoldState, viewModel)

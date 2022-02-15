@@ -2,7 +2,9 @@ package vtsen.hashnode.dev.androidnews.ui.screens.navigation
 
 sealed class NavRoute(val path: String) {
 
-    object Main: NavRoute("main")
+    object Home: NavRoute("home")
+
+    object Bookmarks: NavRoute("bookmars")
 
     object Article: NavRoute("article") {
         val id = "id"

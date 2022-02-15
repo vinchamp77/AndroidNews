@@ -48,7 +48,7 @@ android {
 
 dependencies {
     implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.4.0'
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.4.1'
     implementation 'androidx.activity:activity-compose:1.4.0'
 
     // required by "?attr/colorControlNormal" icon drawable vector xml
@@ -56,8 +56,9 @@ dependencies {
 
     implementation "androidx.compose.material:material:$compose_version"
     implementation "androidx.compose.ui:ui-tooling-preview:$compose_version"
-    implementation "androidx.navigation:navigation-compose:2.5.0-alpha01"
     debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
+
+    implementation "androidx.navigation:navigation-compose:2.5.0-alpha02"
 
     implementation "com.google.accompanist:accompanist-systemuicontroller:0.24.1-alpha"
 

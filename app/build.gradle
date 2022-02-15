@@ -51,7 +51,7 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.4.0'
     implementation 'androidx.activity:activity-compose:1.4.0'
 
-    // required by "?attr/colorControlNormal" ic_home.xml
+    // required by "?attr/colorControlNormal" icon drawable vector xml
     implementation 'androidx.appcompat:appcompat:1.4.1'
 
     implementation "androidx.compose.material:material:$compose_version"

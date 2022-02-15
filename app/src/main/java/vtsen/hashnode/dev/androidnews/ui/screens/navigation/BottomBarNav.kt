@@ -22,7 +22,7 @@ fun BottomBarNav(navHostController: NavController) {
         BottomNavigationItem(
             icon = {
                 Icon(
-                    painter = painterResource(R.drawable.ic_home),
+                    painter = painterResource(R.drawable.ic_article),
                     contentDescription = NavRoute.Home.path
                 )
             },
@@ -34,7 +34,7 @@ fun BottomBarNav(navHostController: NavController) {
                     }
                 }
             },
-            label = {Text(NavRoute.Home.path)}
+            label = {Text("Articles")}
         )
 
         val bookmarksSelected =  currentRoute == NavRoute.Bookmarks.path

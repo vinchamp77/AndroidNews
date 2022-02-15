@@ -7,6 +7,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import vtsen.hashnode.dev.androidnews.R
@@ -34,7 +35,7 @@ fun BottomBarNav(navHostController: NavController) {
                     }
                 }
             },
-            label = {Text("Articles")}
+            label = {Text(stringResource(R.string.articles))}
         )
 
         val bookmarksSelected =  currentRoute == NavRoute.Bookmarks.path
@@ -53,7 +54,7 @@ fun BottomBarNav(navHostController: NavController) {
                     }
                 }
             },
-            label = { Text(NavRoute.Bookmarks.path) }
+            label = { Text(stringResource(R.string.bookmarks)) }
         )
     }
 }

@@ -4,7 +4,7 @@ sealed class NavRoute(val path: String) {
 
     object Home: NavRoute("home")
 
-    object Bookmarks: NavRoute("bookmars")
+    object Bookmarks: NavRoute("bookmarks")
 
     object Article: NavRoute("article") {
         val id = "id"

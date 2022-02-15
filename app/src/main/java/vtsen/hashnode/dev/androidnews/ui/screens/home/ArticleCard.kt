@@ -1,4 +1,4 @@
-package vtsen.hashnode.dev.androidnews.ui.screens.main
+package vtsen.hashnode.dev.androidnews.ui.screens.home
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable

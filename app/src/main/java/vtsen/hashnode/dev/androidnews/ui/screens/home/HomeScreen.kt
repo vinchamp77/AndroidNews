@@ -1,4 +1,4 @@
-package vtsen.hashnode.dev.androidnews.ui.screens.main
+package vtsen.hashnode.dev.androidnews.ui.screens.home
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
@@ -11,7 +11,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import vtsen.hashnode.dev.androidnews.viewmodel.MainViewModel
 
 @Composable
-fun MainScreen(
+fun HomeScreen(
     viewModel: MainViewModel,
     navigateToArticle: (Int) -> Unit,
 ) {
@@ -37,7 +37,7 @@ private fun DefaultPreview() {
     val viewModel = MainViewModel(LocalContext.current)
     viewModel.mockData()
 
-    MainScreen(
+    HomeScreen(
         viewModel,
         navigateToArticle = {})
 }

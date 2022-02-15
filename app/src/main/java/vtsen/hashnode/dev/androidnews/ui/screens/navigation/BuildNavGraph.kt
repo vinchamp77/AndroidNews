@@ -9,7 +9,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import vtsen.hashnode.dev.androidnews.ui.screens.ArticleScreen
-import vtsen.hashnode.dev.androidnews.ui.screens.main.MainScreen
+import vtsen.hashnode.dev.androidnews.ui.screens.home.HomeScreen
 import vtsen.hashnode.dev.androidnews.viewmodel.MainViewModel
 
 @Composable
@@ -33,7 +33,7 @@ private fun addMainScreen(
     viewModel: MainViewModel
 ) {
     navGraphBuilder.composable(route = NavRoute.Main.path) {
-        MainScreen(
+        HomeScreen(
             viewModel,
             navigateToArticle = { id ->
                 navController.navigate(NavRoute.Article.withArgs(id.toString()))

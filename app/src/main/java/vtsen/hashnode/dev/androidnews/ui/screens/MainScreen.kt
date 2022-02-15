@@ -13,7 +13,7 @@ import vtsen.hashnode.dev.androidnews.ui.theme.AndroidNewsTheme
 import vtsen.hashnode.dev.androidnews.viewmodel.MainViewModel
 
 @Composable
-fun MainApp(viewModel: MainViewModel, useSystemUIController: Boolean) {
+fun MainScreen(viewModel: MainViewModel, useSystemUIController: Boolean) {
     AndroidNewsTheme(useSystemUIController = useSystemUIController) {
 
         val scaffoldState = rememberScaffoldState()

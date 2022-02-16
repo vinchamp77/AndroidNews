@@ -39,7 +39,8 @@ abstract class ArticlesDatabase : RoomDatabase() {
 
     suspend fun clear() {
         dao.clear()
-        runSqlQuery("DELETE FROM sqlite_sequence WHERE name='article'")
+        // reset auto increment of the primary key
+        runSqlQuery("DELETE FROM sqlite_sequence WHERE name='${DatabaseConstants.ARTICLE_TABLE_NAME}'")
     }
 
     private fun runSqlQuery(value: String) {

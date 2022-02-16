@@ -59,11 +59,11 @@ class MainRepository(
         val xmlString = webService.getXMlString(URL)
         val feedItems =  FeedParser().parse(xmlString)
         val articleEntities = feedItems.asArticleEntities()
-        database.dao.clear()
-        database.dao.insertAll(articleEntities)
+        database.clear()
+        database.insertAll(articleEntities)
     }
 
     private suspend fun loadDatabase() {
-        _articles.value = database.dao.getAll().asArticles()
+        _articles.value = database.getAll().asArticles()
     }
 }

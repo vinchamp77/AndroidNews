@@ -3,13 +3,10 @@ package vtsen.hashnode.dev.androidnews.repository.local
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = DatabaseConstants.ARTICLE_TABLE_NAME)
-data class ArticleEntity(
+@Entity(tableName = "article_settings")
+data class ArticleSettingsEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
-    val title: String,
-    val description: String,
     val link: String,
-    val pubDate: String,
-    val image: String,
+    val bookmarked: Boolean,
 )

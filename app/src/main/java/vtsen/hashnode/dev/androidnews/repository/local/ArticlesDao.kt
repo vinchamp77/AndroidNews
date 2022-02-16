@@ -5,8 +5,6 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 
-private const val TABLE_NAME = "article"
-
 @Dao
 interface ArticlesDao {
     @Query("SELECT * FROM article")
@@ -15,7 +13,7 @@ interface ArticlesDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(articles: List<ArticleEntity>)
 
-    @Query("DELETE FROM $TABLE_NAME")
+    @Query("DELETE FROM ${DatabaseConstants.ARTICLE_TABLE_NAME}")
     suspend fun clear()
 }
 

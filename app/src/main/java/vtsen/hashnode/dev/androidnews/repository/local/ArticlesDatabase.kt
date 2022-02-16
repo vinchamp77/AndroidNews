@@ -7,11 +7,11 @@ import androidx.room.RoomDatabase
 
 @Database(
     version = 1,
-    entities = [ArticleEntity::class],
+    entities = [ArticleEntity::class, ArticleSettingsEntity::class],
     exportSchema = false)
 abstract class ArticlesDatabase : RoomDatabase() {
 
-    abstract val dao: ArticlesDao
+    protected abstract val dao: ArticlesDao
 
     companion object {
         @Volatile
@@ -31,5 +31,18 @@ abstract class ArticlesDatabase : RoomDatabase() {
                 return INSTANCE
             }
         }
+    }
+
+    suspend fun getAll() = dao.getAll()
+
+    suspend fun insertAll(articles: List<ArticleEntity>) = dao.insertAll(articles)
+
+    suspend fun clear() {
+        dao.clear()
+        runSqlQuery("DELETE FROM sqlite_sequence WHERE name='article'")
+    }
+
+    private fun runSqlQuery(value: String) {
+        INSTANCE.openHelper.writableDatabase.execSQL(value)
     }
 }

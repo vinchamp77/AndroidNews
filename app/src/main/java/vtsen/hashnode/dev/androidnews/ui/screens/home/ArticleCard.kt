@@ -3,13 +3,12 @@ package vtsen.hashnode.dev.androidnews.ui.screens.home
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Divider
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -32,15 +31,18 @@ fun ArticleCard(article: Article, onArticleCardClick: (Int) -> Unit) {
             }
 
     ) {
-
         ArticleRow(article)
         Spacer(Modifier.padding(PaddingSmall))
+
+        ArticleBottomRow(article)
+        Spacer(Modifier.padding(PaddingSmall))
+
         Divider(thickness = 2.dp)
     }
 }
 
 @Composable
-fun ArticleRow(article: Article) {
+private fun ArticleRow(article: Article) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -53,7 +55,7 @@ fun ArticleRow(article: Article) {
 }
 
 @Composable
-fun ArticleContent(article: Article) {
+private fun ArticleContent(article: Article) {
     Column(
         modifier = Modifier
             .width(200.dp)
@@ -62,14 +64,14 @@ fun ArticleContent(article: Article) {
 
         Text(text = article.title, fontWeight = FontWeight.SemiBold)
 
-        Spacer(Modifier.padding(PaddingSmall))
+        Spacer(Modifier.padding(PaddingMedium))
         Text(text = Utils.getElapsedTime(article.pubDate))
     }
 
 }
 
 @Composable
-fun ArticleImage(article: Article) {
+private fun ArticleImage(article: Article) {
     Image(
         painter = rememberImagePainter(
             data = article.image,
@@ -83,6 +85,49 @@ fun ArticleImage(article: Article) {
             .size(150.dp, 150.dp)
             .clip(MaterialTheme.shapes.medium)
     )
+}
+
+@Composable
+private fun ArticleBottomRow(article: Article) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+        ,
+        horizontalArrangement = Arrangement.SpaceEvenly
+    ) {
+        AddBookMarkIconButton(article)
+
+        IconButton(onClick = {}) {
+            Icon(
+                painter = painterResource(R.drawable.ic_share),
+                contentDescription = null
+            )
+        }
+
+        IconButton(onClick = {}) {
+            Icon(
+                painter = painterResource(R.drawable.ic_radio_button_unchecked),
+                contentDescription = null
+            )
+        }
+
+        IconButton(onClick = {}) {
+            Icon(
+                painter = painterResource(R.drawable.ic_public),
+                contentDescription = null
+            )
+        }
+    }
+}
+
+@Composable
+private fun AddBookMarkIconButton(article: Article) {
+    IconButton(onClick = {}) {
+        Icon(
+            painter = painterResource(R.drawable.ic_bookmark_border),
+            contentDescription = null
+        )
+    }
 }
 
 @Preview(showBackground = true)

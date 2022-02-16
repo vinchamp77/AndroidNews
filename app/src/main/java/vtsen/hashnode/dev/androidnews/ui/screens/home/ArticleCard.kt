@@ -26,12 +26,8 @@ fun ArticleCard(article: Article, onArticleCardClick: (Int) -> Unit) {
         modifier = Modifier
             .fillMaxWidth()
             .padding(PaddingMedium)
-            .clickable {
-                onArticleCardClick(article.id)
-            }
-
     ) {
-        ArticleRow(article)
+        ArticleRow(article, onArticleCardClick)
         Spacer(Modifier.padding(PaddingSmall))
 
         ArticleBottomRow(article)
@@ -42,10 +38,16 @@ fun ArticleCard(article: Article, onArticleCardClick: (Int) -> Unit) {
 }
 
 @Composable
-private fun ArticleRow(article: Article) {
+private fun ArticleRow(
+    article: Article,
+    onArticleCardClick: (Int) -> Unit
+) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
+            .clickable {
+                onArticleCardClick(article.id)
+            }
         ,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {

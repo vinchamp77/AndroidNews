@@ -14,6 +14,7 @@ object Utils {
             link = "https://vtsen.hashnode.dev/how-to-implement-hilt-in-android-app",
             pubDate = "Sat, 05 Feb 2022 00:27:48 GMT",
             image = "https://cdn.hashnode.com/res/hashnode/image/upload/v1643788167289/tf0hGfYSO.jpeg",
+            bookmarked = false,
         )
     }
 

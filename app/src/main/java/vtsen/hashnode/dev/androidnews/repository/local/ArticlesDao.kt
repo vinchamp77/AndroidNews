@@ -1,19 +1,26 @@
 package vtsen.hashnode.dev.androidnews.repository.local
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface ArticlesDao {
-    @Query("SELECT * FROM article")
-    suspend fun getAll(): List<ArticleEntity>
+    @Query("SELECT * FROM ${DatabaseConstants.ARTICLE_TABLE_NAME} ORDER by pubDate DESC")
+    fun selectAllArticles(): Flow<List<ArticleEntity>>
+
+    @Query("SELECT * FROM ${DatabaseConstants.ARTICLE_TABLE_NAME} WHERE id = :id")
+    fun selectArticleById(id: Int): ArticleEntity
+
+    @Query("SELECT * FROM ${DatabaseConstants.ARTICLE_TABLE_NAME} WHERE link= :link")
+    fun selectArticleByLink(link: String): ArticleEntity?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAll(articles: List<ArticleEntity>)
+    fun insertArticle(article: ArticleEntity)
+
+    @Update
+    fun updateArticle(article: ArticleEntity)
 
     @Query("DELETE FROM ${DatabaseConstants.ARTICLE_TABLE_NAME}")
-    suspend fun clear()
+    fun deleteAllArticles()
 }
 

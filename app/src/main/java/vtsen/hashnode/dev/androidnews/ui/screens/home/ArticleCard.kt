@@ -20,8 +20,11 @@ import vtsen.hashnode.dev.androidnews.utils.Utils
 import vtsen.hashnode.dev.androidnews.viewmodel.Article
 
 @Composable
-fun ArticleCard(article: Article, onArticleCardClick: (Int) -> Unit) {
-
+fun ArticleCard(
+    article: Article,
+    onArticleCardClick: (Int) -> Unit,
+    onBookmarkClick: (Int) -> Unit,
+) {
     Column (
         modifier = Modifier
             .fillMaxWidth()
@@ -30,7 +33,7 @@ fun ArticleCard(article: Article, onArticleCardClick: (Int) -> Unit) {
         ArticleRow(article, onArticleCardClick)
         Spacer(Modifier.padding(PaddingSmall))
 
-        ArticleBottomRow(article)
+        ArticleBottomRow(article, onBookmarkClick)
         Spacer(Modifier.padding(PaddingSmall))
 
         Divider(thickness = 2.dp)
@@ -67,7 +70,7 @@ private fun ArticleContent(article: Article) {
         Text(text = article.title, fontWeight = FontWeight.SemiBold)
 
         Spacer(Modifier.padding(PaddingMedium))
-        Text(text = Utils.getElapsedTime(article.pubDate))
+        Text(text = Utils.parseDateLongToElapsedTime(article.pubDate))
     }
 
 }
@@ -90,14 +93,23 @@ private fun ArticleImage(article: Article) {
 }
 
 @Composable
-private fun ArticleBottomRow(article: Article) {
+private fun ArticleBottomRow(
+    article: Article,
+    onBookmarkClick: (Int) -> Unit,
+) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
         ,
         horizontalArrangement = Arrangement.SpaceEvenly
     ) {
-        AddBookMarkIconButton(article)
+        //AddBookMarkIconButton(article)
+        IconButton(onClick = { onBookmarkClick(article.id) }) {
+            Icon(
+                painter = painterResource(R.drawable.ic_bookmark_border),
+                contentDescription = null
+            )
+        }
 
         IconButton(onClick = {}) {
             Icon(
@@ -137,7 +149,8 @@ private fun AddBookMarkIconButton(article: Article) {
 private fun DefaultPreview() {
     ArticleCard(
         article = Utils.createArticle(),
-        onArticleCardClick = { }
+        onArticleCardClick = {},
+        onBookmarkClick = {},
     )
 }
 

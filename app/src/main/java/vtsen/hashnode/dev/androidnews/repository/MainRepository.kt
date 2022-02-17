@@ -1,16 +1,17 @@
 package vtsen.hashnode.dev.androidnews.repository
 
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import vtsen.hashnode.dev.androidnews.repository.local.ArticleEntity
 import vtsen.hashnode.dev.androidnews.repository.local.ArticlesDatabase
-import vtsen.hashnode.dev.androidnews.repository.local.asArticles
+import vtsen.hashnode.dev.androidnews.repository.remote.FeedItem
 import vtsen.hashnode.dev.androidnews.repository.remote.FeedParser
 import vtsen.hashnode.dev.androidnews.repository.remote.WebService
 import vtsen.hashnode.dev.androidnews.repository.remote.asArticleEntities
-import vtsen.hashnode.dev.androidnews.utils.Utils
 import vtsen.hashnode.dev.androidnews.viewmodel.Article
+import vtsen.hashnode.dev.androidnews.viewmodel.asArticleEntity
 
 private const val TAG = "MainRepository"
 private const val URL = "https://vtsen.hashnode.dev/rss.xml"
@@ -24,46 +25,43 @@ class MainRepository(
         FAIL,
     }
 
-    private val _articles = MutableStateFlow<List<Article>>(listOf())
-    val articles: StateFlow<List<Article>> = _articles
+    val articles = database.selectAllArticles()
 
-    suspend fun refresh(): Status {
+    suspend fun refresh(): Status = withContext(Dispatchers.IO) {
 
         var status = Status.SUCCESS
 
-        withContext(Dispatchers.IO) {
+        try {
+            val feedItems = fetchFeedItems()
+            updateDatabase(feedItems.asArticleEntities())
 
-            try {
-                loadFeedItems()
-            } catch(e: Exception) {
-                status = Status.FAIL
-            }
-
-            loadDatabase()
+        } catch(e: Exception) {
+            e.printStackTrace()
+            status = Status.FAIL
         }
 
-        return status
+        status
     }
 
-    fun mockData() {
-
-        val articles: MutableList<Article> = mutableListOf()
-
-        repeat(10) {
-            articles.add(Utils.createArticle())
-        }
-        _articles.value = articles
+    suspend fun updateArticle(article: Article) = withContext(Dispatchers.IO) {
+        database.updateArticle(article.asArticleEntity())
     }
 
-    private suspend fun loadFeedItems() {
+    private suspend fun fetchFeedItems() : List<FeedItem> {
         val xmlString = webService.getXMlString(URL)
-        val feedItems =  FeedParser().parse(xmlString)
-        val articleEntities = feedItems.asArticleEntities()
-        database.clear()
-        database.insertAll(articleEntities)
+        return FeedParser().parse(xmlString)
     }
 
-    private suspend fun loadDatabase() {
-        _articles.value = database.getAll().asArticles()
+    private suspend fun updateDatabase(articleEntities: List<ArticleEntity>) = coroutineScope  {
+        for(articleEntity in articleEntities) {
+            launch{
+                val articleFound = database.selectArticleByLink(articleEntity.link)
+                if(articleFound == null) {
+                    database.insertArticle(articleEntity)
+                } else {
+                    database.updateArticle(articleEntity)
+                }
+            }
+        }
     }
 }

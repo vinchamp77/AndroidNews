@@ -1,6 +1,7 @@
 package vtsen.hashnode.dev.androidnews.repository.remote
 
 import vtsen.hashnode.dev.androidnews.repository.local.ArticleEntity
+import vtsen.hashnode.dev.androidnews.utils.Utils
 
 fun List<FeedItem>.asArticleEntities() : List<ArticleEntity> {
     return map { item ->
@@ -14,7 +15,8 @@ fun FeedItem.asArticleEntity() : ArticleEntity {
         title = title,
         description = description,
         link = link,
-        pubDate = pubDate,
+        pubDate = Utils.parsePubDateStringToLong(pubDate),
         image = image,
+        bookmarked = false,
     )
 }

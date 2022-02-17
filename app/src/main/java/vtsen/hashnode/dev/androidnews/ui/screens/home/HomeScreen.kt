@@ -16,15 +16,19 @@ fun HomeScreen(
     navigateToArticle: (Int) -> Unit,
 ) {
 
-    val articles = viewModel.articles.collectAsState()
+    val articlesState = viewModel.articlesStateFlow.collectAsState()
+    if(articlesState.value == null) {
+        return
+    }
 
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
     ) {
-        items(items = articles.value) { article ->
+        items(items = articlesState.value!!) { article ->
             ArticleCard(
                 article = article,
-                onArticleCardClick = navigateToArticle
+                onArticleCardClick = navigateToArticle,
+                onBookmarkClick = viewModel::onBookmarkClick
             )
         }
     }
@@ -34,8 +38,7 @@ fun HomeScreen(
 @Composable
 private fun DefaultPreview() {
 
-    val viewModel = MainViewModel(LocalContext.current)
-    viewModel.mockData()
+    val viewModel = MainViewModel(LocalContext.current, preview = true)
 
     HomeScreen(
         viewModel,

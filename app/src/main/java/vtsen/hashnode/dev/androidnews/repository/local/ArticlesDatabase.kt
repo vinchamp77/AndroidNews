@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 
 @Database(
     version = 1,
-    entities = [ArticleEntity::class, ArticleSettingsEntity::class],
+    entities = [ArticleEntity::class],
     exportSchema = false)
 abstract class ArticlesDatabase : RoomDatabase() {
 
@@ -15,12 +15,12 @@ abstract class ArticlesDatabase : RoomDatabase() {
 
     companion object {
         @Volatile
-        private lateinit var INSTANCE: ArticlesDatabase
+        private lateinit var instance: ArticlesDatabase
 
         fun getInstance(context: Context): ArticlesDatabase {
             synchronized(this) {
-                if (!::INSTANCE.isInitialized) {
-                    INSTANCE = Room.databaseBuilder(
+                if (!::instance.isInitialized) {
+                    instance = Room.databaseBuilder(
                         context.applicationContext,
                         ArticlesDatabase::class.java,
                         "articles.db")
@@ -28,22 +28,23 @@ abstract class ArticlesDatabase : RoomDatabase() {
                         .build()
                 }
 
-                return INSTANCE
+                return instance
             }
         }
     }
 
-    suspend fun getAll() = dao.getAll()
-
-    suspend fun insertAll(articles: List<ArticleEntity>) = dao.insertAll(articles)
-
-    suspend fun clear() {
-        dao.clear()
+    fun selectAllArticles() = dao.selectAllArticles()
+    fun selectArticleByLink(link: String) = dao.selectArticleByLink(link)
+    fun selectArticleById(id: Int) = dao.selectArticleById(id)
+    fun insertArticle(article: ArticleEntity) = dao.insertArticle(article)
+    fun updateArticle(article: ArticleEntity) = dao.updateArticle(article)
+    fun deleteAllArticles() {
+        dao.deleteAllArticles()
         // reset auto increment of the primary key
         runSqlQuery("DELETE FROM sqlite_sequence WHERE name='${DatabaseConstants.ARTICLE_TABLE_NAME}'")
     }
 
     private fun runSqlQuery(value: String) {
-        INSTANCE.openHelper.writableDatabase.execSQL(value)
+        instance.openHelper.writableDatabase.execSQL(value)
     }
 }

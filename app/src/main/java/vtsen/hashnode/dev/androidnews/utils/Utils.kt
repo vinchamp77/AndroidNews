@@ -5,6 +5,7 @@ import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 
+@Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 object Utils {
     fun createArticle() : Article {
         return Article(
@@ -12,34 +13,34 @@ object Utils {
             title = "How to Implement Hilt in Android App?",
             description = "",
             link = "https://vtsen.hashnode.dev/how-to-implement-hilt-in-android-app",
-            pubDate = "Sat, 05 Feb 2022 00:27:48 GMT",
+            pubDate = Date().time,
             image = "https://cdn.hashnode.com/res/hashnode/image/upload/v1643788167289/tf0hGfYSO.jpeg",
             bookmarked = false,
         )
     }
 
-    fun getElapsedTime(pubDate: String, shortOutput: Boolean = false): String {
-        // Set time as pubDate as a fall back.
-        val time: String
-        // The date formats to try.
-        val dateFormats = listOf(
-            "EEE, dd MMM yyyy HH:mm:ss zzz",
-            "EEE, dd MMM yyyy HH:mm zzz",
-            "EEE, dd MMM yyyy HH:mm zzz"
-        )
-        var diff = 0L
+    private val pubDateFormats = listOf(
+        "EEE, dd MMM yyyy HH:mm:ss zzz",
+        "EEE, dd MMM yyyy HH:mm zzz",
+        "EEE, dd MMM yyyy HH:mm zzz"
+    )
 
-        // Try all three date formats, exit when one works.
-        for (dateFormat in dateFormats) {
+    fun parsePubDateStringToLong(value: String) = parsePubDateStringToDate(value).time
+    private fun parsePubDateStringToDate(value: String) : Date {
+        for (dateFormat in pubDateFormats) {
             try {
                 val articleDateFormat = SimpleDateFormat(dateFormat, Locale.US)
-                val date = articleDateFormat.parse(pubDate)
-                diff = Date().time - date!!.time
+                return articleDateFormat.parse(value)
             } catch (e: ParseException) {
             }
         }
 
-        // Convert the time in milliseconds into a string.
+        return Date()
+    }
+
+    fun parseDateLongToElapsedTime(value: Long, shortOutput: Boolean = false) : String {
+        val diff = Date().time - value
+        val time: String
         when {
             // Minutes.
             diff < 1000L * 60L * 60L -> {

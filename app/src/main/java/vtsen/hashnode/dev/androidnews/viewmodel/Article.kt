@@ -5,7 +5,7 @@ data class Article(
     val title: String,
     val description: String,
     val link: String,
-    val pubDate: String,
+    val pubDate: Long,
     val image: String,
-    val bookmarked: Boolean,
+    var bookmarked: Boolean,
 )

@@ -20,7 +20,7 @@ import vtsen.hashnode.dev.androidnews.utils.Utils
 
 class MainViewModel(context: Context, preview: Boolean = false) : ViewModel() {
 
-    var snackBarStringId: Int? by mutableStateOf(null)
+    var showSnackBarStringId: Int? by mutableStateOf(null)
     private set
 
     private val repository = MainRepository(
@@ -45,8 +45,8 @@ class MainViewModel(context: Context, preview: Boolean = false) : ViewModel() {
         }
     }
 
-    fun clearSnackBar() {
-        snackBarStringId = null
+    fun clearShowSnackBarStringId() {
+        showSnackBarStringId = null
     }
 
     fun getArticle(id: Int): Article {
@@ -67,6 +67,17 @@ class MainViewModel(context: Context, preview: Boolean = false) : ViewModel() {
 
         var article1 = getArticle(id)
         article1 = article1
+
+//        showSnackBarStringId = -1
+//        if(id == 1) {
+//            showSnackBarStringId = R.string.test
+//        } else {
+//            showSnackBarStringId = R.string.no_internet
+//        }
+
+//        _snackBarStringIdState.value = null
+//        _snackBarStringIdState.value = R.string.test
+        //refresh()
     }
 
     private fun mockPreviewData() {
@@ -81,7 +92,7 @@ class MainViewModel(context: Context, preview: Boolean = false) : ViewModel() {
         viewModelScope.launch {
             val status = repository.refresh()
             if (status == MainRepository.Status.FAIL) {
-                snackBarStringId = R.string.no_internet
+                showSnackBarStringId = R.string.no_internet
             }
         }
     }

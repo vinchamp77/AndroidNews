@@ -1,5 +1,6 @@
 package vtsen.hashnode.dev.androidnews.ui.screens.home
 
+import android.content.Context
 import android.content.Intent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
@@ -28,18 +29,22 @@ fun HomeScreen(
                 onArticleCardClick = navigateToArticle,
                 onBookmarkClick = viewModel::onBookmarkClick,
                 onShareClick = {
-                    val sendIntent: Intent = Intent().apply {
-                        action = Intent.ACTION_SEND
-                        putExtra(Intent.EXTRA_TEXT, article.link)
-                        type = "text/plain"
-                    }
-                    val shareIntent = Intent.createChooser(sendIntent, null)
-                    startActivity(context, shareIntent, null)
+                    shareArticle(context, article.link)
                 },
                 onReadClick = viewModel::onReadClick
             )
         }
     }
+}
+
+private fun shareArticle(context: Context, link: String) {
+    val sendIntent: Intent = Intent().apply {
+        action = Intent.ACTION_SEND
+        putExtra(Intent.EXTRA_TEXT, link)
+        type = "text/plain"
+    }
+    val shareIntent = Intent.createChooser(sendIntent, null)
+    startActivity(context, shareIntent, null)
 }
 
 @Preview(showBackground = true)

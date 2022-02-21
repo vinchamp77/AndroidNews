@@ -5,7 +5,9 @@ import androidx.compose.material.ScaffoldState
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
 import vtsen.hashnode.dev.androidnews.ui.screens.navigation.BottomBarNav
 import vtsen.hashnode.dev.androidnews.ui.screens.navigation.BuildNavGraph
@@ -44,4 +46,16 @@ private fun ShowSnackBar(scaffoldState: ScaffoldState, viewModel: MainViewModel)
             viewModel.clearShowSnackBarStringId()
         }
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun MainScreenPreview() {
+
+    val viewModel = MainViewModel(LocalContext.current, preview = true)
+
+    MainScreen(
+        viewModel,
+        useSystemUIController = false,
+    )
 }

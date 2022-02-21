@@ -1,5 +1,6 @@
 package vtsen.hashnode.dev.androidnews.ui.screens.navigation
 
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Icon
@@ -14,47 +15,63 @@ import vtsen.hashnode.dev.androidnews.R
 
 @Composable
 fun BottomBarNav(navHostController: NavController) {
-    val navBackStackEntry by navHostController.currentBackStackEntryAsState()
-    val currentRoute = navBackStackEntry?.destination?.route
 
     BottomNavigation {
-
-        val homeSelected = currentRoute == NavRoute.Home.path
-        BottomNavigationItem(
-            icon = {
-                Icon(
-                    painter = painterResource(R.drawable.ic_article),
-                    contentDescription = NavRoute.Home.path
-                )
-            },
-            selected = homeSelected,
-            onClick = {
-                if(!homeSelected) {
-                    navHostController.navigate(NavRoute.Home.path) {
-                        popUpTo(NavRoute.Home.path) { inclusive = true }
-                    }
-                }
-            },
-            label = {Text(stringResource(R.string.articles))}
+        AddBottomNavigationItem(
+            rowScope = this,
+            navHostController = navHostController,
+            drawableId = R.drawable.ic_home,
+            targetNavRoutePath = NavRoute.Home.path,
+            labelStringResourceId = R.string.home
         )
 
-        val bookmarksSelected =  currentRoute == NavRoute.Bookmarks.path
-        BottomNavigationItem(
-            icon = {
-                Icon(
-                    painter = painterResource(R.drawable.ic_bookmarks),
-                    contentDescription = NavRoute.Bookmarks.path
-                )
-            },
-            selected = bookmarksSelected,
-            onClick = {
-                if(!bookmarksSelected) {
-                    navHostController.navigate(NavRoute.Bookmarks.path) {
-                        popUpTo(NavRoute.Home.path) { inclusive = false }
-                    }
-                }
-            },
-            label = { Text(stringResource(R.string.bookmarks)) }
+        AddBottomNavigationItem(
+            rowScope = this,
+            navHostController = navHostController,
+            drawableId = R.drawable.ic_article,
+            targetNavRoutePath = NavRoute.Bookmarks.path,
+            labelStringResourceId = R.string.unread_articles
+        )
+
+        AddBottomNavigationItem(
+            rowScope = this,
+            navHostController = navHostController,
+            drawableId = R.drawable.ic_bookmarks,
+            targetNavRoutePath = NavRoute.Bookmarks.path,
+            labelStringResourceId = R.string.bookmarks
         )
     }
+}
+
+@Composable
+private fun AddBottomNavigationItem(
+    rowScope: RowScope,
+    navHostController: NavController,
+    drawableId: Int,
+    targetNavRoutePath: String,
+    labelStringResourceId: Int) {
+
+    val navBackStackEntry by navHostController.currentBackStackEntryAsState()
+    val currentNavRoutePath = navBackStackEntry?.destination?.route
+
+    val selected = currentNavRoutePath == targetNavRoutePath
+    rowScope.BottomNavigationItem(
+        icon = {
+            Icon(
+                painter = painterResource(drawableId),
+                contentDescription = stringResource(labelStringResourceId)
+            )
+        },
+        selected = selected,
+        onClick = {
+            if(!selected) {
+                navHostController.navigate(targetNavRoutePath) {
+                    popUpTo(NavRoute.Home.path) {
+                        inclusive = (targetNavRoutePath == NavRoute.Home.path)
+                    }
+                }
+            }
+        },
+        label = {Text(stringResource(labelStringResourceId))}
+    )
 }

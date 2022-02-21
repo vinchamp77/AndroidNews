@@ -8,4 +8,5 @@ data class Article(
     val pubDate: Long,
     val image: String,
     val bookmarked: Boolean,
+    val read: Boolean,
 )

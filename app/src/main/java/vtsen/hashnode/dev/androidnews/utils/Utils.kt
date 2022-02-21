@@ -16,6 +16,7 @@ object Utils {
             pubDate = Date().time,
             image = "https://cdn.hashnode.com/res/hashnode/image/upload/v1643788167289/tf0hGfYSO.jpeg",
             bookmarked = false,
+            read = false,
         )
     }
 

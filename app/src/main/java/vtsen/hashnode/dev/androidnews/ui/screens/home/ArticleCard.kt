@@ -25,6 +25,8 @@ fun ArticleCard(
     article: Article,
     onArticleCardClick: (Int) -> Unit,
     onBookmarkClick: (Int) -> Unit,
+    onShareClick: (Int) -> Unit,
+    onReadClick: (Int) -> Unit,
 ) {
     Column (
         modifier = Modifier
@@ -34,7 +36,7 @@ fun ArticleCard(
         ArticleRow(article, onArticleCardClick)
         Spacer(Modifier.padding(PaddingSmall))
 
-        ArticleBottomRow(article, onBookmarkClick)
+        ArticleBottomRow(article, onBookmarkClick, onShareClick, onReadClick)
         Spacer(Modifier.padding(PaddingSmall))
 
         Divider(thickness = 2.dp)
@@ -97,6 +99,8 @@ private fun ArticleImage(article: Article) {
 private fun ArticleBottomRow(
     article: Article,
     onBookmarkClick: (Int) -> Unit,
+    onShareClick: (Int) -> Unit,
+    onReadClick: (Int) -> Unit,
 ) {
     Row(
         modifier = Modifier
@@ -115,21 +119,19 @@ private fun ArticleBottomRow(
 
         AddIconButton(
             article = article,
-            onIconClick = onBookmarkClick,
+            onIconClick = onShareClick,
             iconPainter = painterResource(R.drawable.ic_share),
         )
 
         AddIconButton(
             article = article,
-            onIconClick = onBookmarkClick,
-            iconPainter = painterResource(R.drawable.ic_radio_button_unchecked),
+            onIconClick = onReadClick,
+            iconPainter = if (article.read)
+                painterResource(R.drawable.ic_check_circle)
+            else
+                painterResource(R.drawable.ic_radio_button_unchecked)
         )
 
-        AddIconButton(
-            article = article,
-            onIconClick = onBookmarkClick,
-            iconPainter = painterResource(R.drawable.ic_public),
-        )
     }
 }
 
@@ -154,6 +156,8 @@ private fun DefaultPreview() {
         article = Utils.createArticle(),
         onArticleCardClick = {},
         onBookmarkClick = {},
+        onShareClick = {},
+        onReadClick = {},
     )
 }
 

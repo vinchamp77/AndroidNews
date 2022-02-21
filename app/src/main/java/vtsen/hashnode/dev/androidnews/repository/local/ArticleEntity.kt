@@ -13,4 +13,5 @@ data class ArticleEntity(
     val pubDate: Long,
     val image: String,
     val bookmarked: Boolean,
+    val read: Boolean,
 )

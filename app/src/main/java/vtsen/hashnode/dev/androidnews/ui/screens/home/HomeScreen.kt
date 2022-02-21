@@ -23,7 +23,9 @@ fun HomeScreen(
             ArticleCard(
                 article = article,
                 onArticleCardClick = navigateToArticle,
-                onBookmarkClick = viewModel::onBookmarkClick
+                onBookmarkClick = viewModel::onBookmarkClick,
+                onShareClick = viewModel::onBookmarkClick,
+                onReadClick = viewModel::onReadClick
             )
         }
     }

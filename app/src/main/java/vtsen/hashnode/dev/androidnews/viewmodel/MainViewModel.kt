@@ -37,6 +37,12 @@ class MainViewModel(context: Context, preview: Boolean = false) : ViewModel() {
             mockPreviewArticles()
         } else {
             refresh()
+
+            viewModelScope.launch {
+                articlesFlow.collect { articleList ->
+                    articles = articleList
+                }
+            }
         }
     }
 
@@ -54,7 +60,12 @@ class MainViewModel(context: Context, preview: Boolean = false) : ViewModel() {
 
     fun onBookmarkClick(id: Int) = viewModelScope.launch {
         val article = getArticle(id)
-        repository.updateArticle(article.asArticleEntity(!article.bookmarked))
+        repository.updateArticle(article.asArticleEntity(bookmarked = !article.bookmarked))
+    }
+
+    fun onReadClick(id: Int) = viewModelScope.launch {
+        val article = getArticle(id)
+        repository.updateArticle(article.asArticleEntity(read = !article.read))
     }
 
     private fun mockPreviewArticles() {
@@ -70,11 +81,6 @@ class MainViewModel(context: Context, preview: Boolean = false) : ViewModel() {
             val status = repository.refresh()
             if (status == MainRepository.Status.FAIL) {
                 showSnackBarStringId = R.string.no_internet
-            }
-
-            articlesFlow.collect {
-                //articles = null
-                articles = it
             }
         }
     }

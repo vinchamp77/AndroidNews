@@ -18,5 +18,6 @@ fun FeedItem.asArticleEntity() : ArticleEntity {
         pubDate = Utils.parsePubDateStringToLong(pubDate),
         image = image,
         bookmarked = false,
+        read = false,
     )
 }

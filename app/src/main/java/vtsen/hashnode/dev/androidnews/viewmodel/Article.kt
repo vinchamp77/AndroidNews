@@ -7,5 +7,5 @@ data class Article(
     val link: String,
     val pubDate: Long,
     val image: String,
-    var bookmarked: Boolean,
+    val bookmarked: Boolean,
 )

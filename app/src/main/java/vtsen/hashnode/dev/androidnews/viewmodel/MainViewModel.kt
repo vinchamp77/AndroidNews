@@ -6,10 +6,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharingStarted.Companion.WhileSubscribed
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import vtsen.hashnode.dev.androidnews.R
 import vtsen.hashnode.dev.androidnews.repository.MainRepository
@@ -20,26 +18,23 @@ import vtsen.hashnode.dev.androidnews.utils.Utils
 
 class MainViewModel(context: Context, preview: Boolean = false) : ViewModel() {
 
-    var showSnackBarStringId: Int? by mutableStateOf(null)
-    private set
-
     private val repository = MainRepository(
         ArticlesDatabase.getInstance(context),
         WebService(),
     )
 
-    private val _previewArticles = MutableStateFlow<List<Article>>(listOf())
-    private val articlesFlow = repository.articles.map { articleEntity ->
+    private val articlesFlow = repository.articlesFlow.map { articleEntity ->
         articleEntity.asArticles()
     }
-    val articlesStateFlow = if (preview)
-            _previewArticles
-        else
-            articlesFlow.stateIn(viewModelScope, WhileSubscribed(), null)
+    var articles: List<Article>? by mutableStateOf(null)
+        private set
+
+    var showSnackBarStringId: Int? by mutableStateOf(null)
+        private set
 
     init {
         if(preview) {
-            mockPreviewData()
+            mockPreviewArticles()
         } else {
             refresh()
         }
@@ -50,42 +45,24 @@ class MainViewModel(context: Context, preview: Boolean = false) : ViewModel() {
     }
 
     fun getArticle(id: Int): Article {
-        val article = articlesStateFlow.value!!.find { article ->
+        val article = articles!!.find { article ->
             article.id == id
         }
+
         return article!!
     }
 
-    //TODO:
-    fun onBookmarkClick(id: Int) {
+    fun onBookmarkClick(id: Int) = viewModelScope.launch {
         val article = getArticle(id)
-        article.bookmarked = true
-
-        viewModelScope.launch {
-            repository.updateArticle(article)
-        }
-
-        var article1 = getArticle(id)
-        article1 = article1
-
-//        showSnackBarStringId = -1
-//        if(id == 1) {
-//            showSnackBarStringId = R.string.test
-//        } else {
-//            showSnackBarStringId = R.string.no_internet
-//        }
-
-//        _snackBarStringIdState.value = null
-//        _snackBarStringIdState.value = R.string.test
-        //refresh()
+        repository.updateArticle(article.asArticleEntity(!article.bookmarked))
     }
 
-    private fun mockPreviewData() {
+    private fun mockPreviewArticles() {
         val articles: MutableList<Article> = mutableListOf()
         repeat(10) {
             articles.add(Utils.createArticle())
         }
-        _previewArticles.value = articles
+        this.articles = articles
     }
 
     private fun refresh() {
@@ -93,6 +70,11 @@ class MainViewModel(context: Context, preview: Boolean = false) : ViewModel() {
             val status = repository.refresh()
             if (status == MainRepository.Status.FAIL) {
                 showSnackBarStringId = R.string.no_internet
+            }
+
+            articlesFlow.collect {
+                //articles = null
+                articles = it
             }
         }
     }

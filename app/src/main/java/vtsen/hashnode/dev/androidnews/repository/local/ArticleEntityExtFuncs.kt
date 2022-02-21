@@ -16,6 +16,6 @@ fun ArticleEntity.asArticle(): Article {
         link = link,
         pubDate = pubDate,
         image = image,
-        bookmarked = false,
+        bookmarked = bookmarked,
     )
 }

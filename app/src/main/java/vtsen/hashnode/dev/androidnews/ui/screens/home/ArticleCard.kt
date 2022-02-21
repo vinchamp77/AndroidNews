@@ -7,6 +7,7 @@ import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -103,42 +104,44 @@ private fun ArticleBottomRow(
         ,
         horizontalArrangement = Arrangement.SpaceEvenly
     ) {
-        //AddBookMarkIconButton(article)
-        IconButton(onClick = { onBookmarkClick(article.id) }) {
-            Icon(
-                painter = painterResource(R.drawable.ic_bookmark_border),
-                contentDescription = null
-            )
-        }
+        AddIconButton(
+            article = article,
+            onIconClick = onBookmarkClick,
+            iconPainter = if (article.bookmarked)
+                painterResource(R.drawable.ic_bookmarked)
+            else
+                painterResource(R.drawable.ic_bookmark_border),
+        )
 
-        IconButton(onClick = {}) {
-            Icon(
-                painter = painterResource(R.drawable.ic_share),
-                contentDescription = null
-            )
-        }
+        AddIconButton(
+            article = article,
+            onIconClick = onBookmarkClick,
+            iconPainter = painterResource(R.drawable.ic_share),
+        )
 
-        IconButton(onClick = {}) {
-            Icon(
-                painter = painterResource(R.drawable.ic_radio_button_unchecked),
-                contentDescription = null
-            )
-        }
+        AddIconButton(
+            article = article,
+            onIconClick = onBookmarkClick,
+            iconPainter = painterResource(R.drawable.ic_radio_button_unchecked),
+        )
 
-        IconButton(onClick = {}) {
-            Icon(
-                painter = painterResource(R.drawable.ic_public),
-                contentDescription = null
-            )
-        }
+        AddIconButton(
+            article = article,
+            onIconClick = onBookmarkClick,
+            iconPainter = painterResource(R.drawable.ic_public),
+        )
     }
 }
 
 @Composable
-private fun AddBookMarkIconButton(article: Article) {
-    IconButton(onClick = {}) {
+private fun AddIconButton(
+    article: Article,
+    onIconClick: (Int) -> Unit,
+    iconPainter: Painter
+) {
+    IconButton(onClick = { onIconClick(article.id) }) {
         Icon(
-            painter = painterResource(R.drawable.ic_bookmark_border),
+            painter = iconPainter,
             contentDescription = null
         )
     }

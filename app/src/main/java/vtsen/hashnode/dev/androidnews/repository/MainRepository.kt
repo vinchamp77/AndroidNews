@@ -10,8 +10,6 @@ import vtsen.hashnode.dev.androidnews.repository.remote.FeedItem
 import vtsen.hashnode.dev.androidnews.repository.remote.FeedParser
 import vtsen.hashnode.dev.androidnews.repository.remote.WebService
 import vtsen.hashnode.dev.androidnews.repository.remote.asArticleEntities
-import vtsen.hashnode.dev.androidnews.viewmodel.Article
-import vtsen.hashnode.dev.androidnews.viewmodel.asArticleEntity
 
 private const val TAG = "MainRepository"
 private const val URL = "https://vtsen.hashnode.dev/rss.xml"
@@ -25,7 +23,7 @@ class MainRepository(
         FAIL,
     }
 
-    val articles = database.selectAllArticles()
+    val articlesFlow = database.selectAllArticles()
 
     suspend fun refresh(): Status = withContext(Dispatchers.IO) {
 
@@ -43,8 +41,12 @@ class MainRepository(
         status
     }
 
-    suspend fun updateArticle(article: Article) = withContext(Dispatchers.IO) {
-        database.updateArticle(article.asArticleEntity())
+    suspend fun updateArticle(articleEntity: ArticleEntity) = withContext(Dispatchers.IO) {
+        database.updateArticle(articleEntity)
+    }
+
+    suspend fun getArticle(id: Int) = withContext(Dispatchers.IO) {
+        database.selectArticleById(id)
     }
 
     private suspend fun fetchFeedItems() : List<FeedItem> {

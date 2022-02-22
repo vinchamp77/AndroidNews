@@ -8,6 +8,9 @@ interface ArticlesDao {
     @Query("SELECT * FROM ${DatabaseConstants.ARTICLE_TABLE_NAME} ORDER by pubDate DESC")
     fun selectAllArticles(): Flow<List<ArticleEntity>>
 
+    @Query("SELECT * FROM ${DatabaseConstants.ARTICLE_TABLE_NAME} WHERE bookmarked = 1 ORDER by pubDate DESC")
+    fun selectBookmarkedArticles(): Flow<List<ArticleEntity>>
+
     @Query("SELECT * FROM ${DatabaseConstants.ARTICLE_TABLE_NAME} WHERE id = :id")
     fun selectArticleById(id: Int): ArticleEntity
 

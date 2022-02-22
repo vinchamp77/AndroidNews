@@ -29,7 +29,7 @@ fun BottomBarNav(navHostController: NavController) {
             rowScope = this,
             navHostController = navHostController,
             drawableId = R.drawable.ic_article,
-            targetNavRoutePath = NavRoute.Bookmarks.path,
+            targetNavRoutePath = NavRoute.Bookmarks.path, //TODO
             labelStringResourceId = R.string.unread_articles
         )
 

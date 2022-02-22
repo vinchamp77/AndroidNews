@@ -7,7 +7,7 @@ import java.util.*
 
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 object Utils {
-    fun createArticle() : Article {
+    fun createArticle(bookmarked: Boolean = false, read: Boolean = false) : Article {
         return Article(
             id = 0,
             title = "How to Implement Hilt in Android App?",
@@ -15,8 +15,8 @@ object Utils {
             link = "https://vtsen.hashnode.dev/how-to-implement-hilt-in-android-app",
             pubDate = Date().time,
             image = "https://cdn.hashnode.com/res/hashnode/image/upload/v1643788167289/tf0hGfYSO.jpeg",
-            bookmarked = false,
-            read = false,
+            bookmarked = bookmarked,
+            read = read,
         )
     }
 

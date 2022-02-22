@@ -26,7 +26,13 @@ class MainViewModel(context: Context, preview: Boolean = false) : ViewModel() {
     private val articlesFlow = repository.articlesFlow.map { articleEntity ->
         articleEntity.asArticles()
     }
-    var articles: List<Article>? by mutableStateOf(null)
+    var allArticles: List<Article>? by mutableStateOf(null)
+        private set
+
+    private val bookmarkedArticlesFlow = repository.bookmarkedArticlesFlow.map { articleEntity ->
+        articleEntity.asArticles()
+    }
+    var bookmarkedArticles: List<Article>? by mutableStateOf(null)
         private set
 
     var showSnackBarStringId: Int? by mutableStateOf(null)
@@ -37,12 +43,7 @@ class MainViewModel(context: Context, preview: Boolean = false) : ViewModel() {
             mockPreviewArticles()
         } else {
             refresh()
-
-            viewModelScope.launch {
-                articlesFlow.collect { articleList ->
-                    articles = articleList
-                }
-            }
+            collectFlows()
         }
     }
 
@@ -51,7 +52,7 @@ class MainViewModel(context: Context, preview: Boolean = false) : ViewModel() {
     }
 
     fun getArticle(id: Int): Article {
-        val article = articles!!.find { article ->
+        val article = allArticles!!.find { article ->
             article.id == id
         }
 
@@ -69,11 +70,17 @@ class MainViewModel(context: Context, preview: Boolean = false) : ViewModel() {
     }
 
     private fun mockPreviewArticles() {
-        val articles: MutableList<Article> = mutableListOf()
+        var articles: MutableList<Article> = mutableListOf()
         repeat(10) {
             articles.add(Utils.createArticle())
         }
-        this.articles = articles
+        allArticles = articles
+
+        articles = mutableListOf()
+        repeat(10) {
+            articles.add(Utils.createArticle(bookmarked = true, read = true))
+        }
+        bookmarkedArticles = articles
     }
 
     private fun refresh() {
@@ -81,6 +88,23 @@ class MainViewModel(context: Context, preview: Boolean = false) : ViewModel() {
             val status = repository.refresh()
             if (status == MainRepository.Status.FAIL) {
                 showSnackBarStringId = R.string.no_internet
+            }
+        }
+    }
+
+    private fun collectFlows() {
+        viewModelScope.launch {
+
+            launch {
+                articlesFlow.collect { articles ->
+                    allArticles = articles
+                }
+            }
+
+            launch {
+                bookmarkedArticlesFlow.collect { articles ->
+                    bookmarkedArticles = articles
+                }
             }
         }
     }

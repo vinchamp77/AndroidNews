@@ -24,6 +24,7 @@ class MainRepository(
     }
 
     val articlesFlow = database.selectAllArticles()
+    val bookmarkedArticlesFlow = database.selectBookmarkedArticles()
 
     suspend fun refresh(): Status = withContext(Dispatchers.IO) {
 

@@ -8,6 +8,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import vtsen.hashnode.dev.androidnews.ui.screens.ArticleScreen
+import vtsen.hashnode.dev.androidnews.ui.screens.bookmarks.BookmarksScreen
 import vtsen.hashnode.dev.androidnews.ui.screens.home.HomeScreen
 import vtsen.hashnode.dev.androidnews.viewmodel.MainViewModel
 
@@ -46,7 +47,7 @@ private fun addBookmarksScreen(
     viewModel: MainViewModel
 ) {
     navGraphBuilder.composable(route = NavRoute.Bookmarks.path) {
-        HomeScreen(
+        BookmarksScreen(
             viewModel,
             navigateToArticle = { id ->
                 navHostController.navigate(NavRoute.Article.withArgs(id.toString()))
@@ -55,6 +56,8 @@ private fun addBookmarksScreen(
     }
 }
 
+
+//TODO: Unread article screen
 private fun addArticleScreen(
     navHostController: NavHostController,
     navGraphBuilder: NavGraphBuilder,

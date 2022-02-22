@@ -3,8 +3,8 @@ package vtsen.hashnode.dev.androidnews.repository.local
 import vtsen.hashnode.dev.androidnews.viewmodel.Article
 
 fun List<ArticleEntity>.asArticles() : List<Article> {
-    return map { item ->
-        item.asArticle()
+    return map { articleEntity ->
+        articleEntity.asArticle()
     }
 }
 

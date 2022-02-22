@@ -4,8 +4,8 @@ import vtsen.hashnode.dev.androidnews.repository.local.ArticleEntity
 import vtsen.hashnode.dev.androidnews.utils.Utils
 
 fun List<FeedItem>.asArticleEntities() : List<ArticleEntity> {
-    return map { item ->
-        item.asArticleEntity()
+    return map { feedItem ->
+        feedItem.asArticleEntity()
     }
 }
 

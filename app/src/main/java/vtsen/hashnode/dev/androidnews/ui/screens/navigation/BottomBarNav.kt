@@ -17,28 +17,29 @@ import vtsen.hashnode.dev.androidnews.R
 fun BottomBarNav(navHostController: NavController) {
 
     BottomNavigation {
+        // Home
         AddBottomNavigationItem(
             rowScope = this,
             navHostController = navHostController,
             drawableId = R.drawable.ic_home,
             targetNavRoutePath = NavRoute.Home.path,
-            labelStringResourceId = R.string.home
+            labelStringResourceId = R.string.home,
         )
-
+        // Unread
         AddBottomNavigationItem(
             rowScope = this,
             navHostController = navHostController,
             drawableId = R.drawable.ic_article,
-            targetNavRoutePath = NavRoute.Bookmarks.path, //TODO
-            labelStringResourceId = R.string.unread_articles
+            targetNavRoutePath = NavRoute.Unread.path,
+            labelStringResourceId = R.string.unread_articles,
         )
-
+        // Bookmarks
         AddBottomNavigationItem(
             rowScope = this,
             navHostController = navHostController,
             drawableId = R.drawable.ic_bookmarks,
             targetNavRoutePath = NavRoute.Bookmarks.path,
-            labelStringResourceId = R.string.bookmarks
+            labelStringResourceId = R.string.bookmarks,
         )
     }
 }

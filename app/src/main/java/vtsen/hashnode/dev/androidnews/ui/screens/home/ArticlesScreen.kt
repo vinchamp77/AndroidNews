@@ -13,6 +13,8 @@ import androidx.core.content.ContextCompat
 import vtsen.hashnode.dev.androidnews.viewmodel.Article
 import vtsen.hashnode.dev.androidnews.viewmodel.MainViewModel
 
+//TODO: Empty Articles
+
 @Composable
 fun ArticlesScreen(
     viewModel: MainViewModel,

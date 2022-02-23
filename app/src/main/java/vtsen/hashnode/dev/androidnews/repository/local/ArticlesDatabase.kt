@@ -35,6 +35,7 @@ abstract class ArticlesDatabase : RoomDatabase() {
 
     fun selectAllArticles() = dao.selectAllArticles()
     fun selectBookmarkedArticles() = dao.selectBookmarkedArticles()
+    fun selectUnreadArticles() = dao.selectUnreadArticles()
     fun selectArticleByLink(link: String) = dao.selectArticleByLink(link)
     fun selectArticleById(id: Int) = dao.selectArticleById(id)
     fun insertArticle(article: ArticleEntity) = dao.insertArticle(article)

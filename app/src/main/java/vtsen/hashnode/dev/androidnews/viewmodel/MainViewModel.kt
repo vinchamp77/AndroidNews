@@ -22,17 +22,23 @@ class MainViewModel(context: Context, preview: Boolean = false) : ViewModel() {
         ArticlesDatabase.getInstance(context),
         WebService(),
     )
-
+    // All articles
     private val articlesFlow = repository.articlesFlow.map { articleEntity ->
         articleEntity.asArticles()
     }
     var allArticles: List<Article>? by mutableStateOf(null)
         private set
-
+    // Bookmarked articles
     private val bookmarkedArticlesFlow = repository.bookmarkedArticlesFlow.map { articleEntity ->
         articleEntity.asArticles()
     }
     var bookmarkedArticles: List<Article>? by mutableStateOf(null)
+        private set
+    // Unread articles
+    private val unreadArticlesFlow = repository.unreadArticlesFlow.map { articleEntity ->
+        articleEntity.asArticles()
+    }
+    var unreadArticles: List<Article>? by mutableStateOf(null)
         private set
 
     var showSnackBarStringId: Int? by mutableStateOf(null)
@@ -59,14 +65,14 @@ class MainViewModel(context: Context, preview: Boolean = false) : ViewModel() {
         return article!!
     }
 
-    fun onBookmarkClick(id: Int) = viewModelScope.launch {
-        val article = getArticle(id)
-        repository.updateArticle(article.asArticleEntity(bookmarked = !article.bookmarked))
-    }
-
     fun onReadClick(id: Int) = viewModelScope.launch {
         val article = getArticle(id)
         repository.updateArticle(article.asArticleEntity(read = !article.read))
+    }
+
+    fun onBookmarkClick(id: Int) = viewModelScope.launch {
+        val article = getArticle(id)
+        repository.updateArticle(article.asArticleEntity(bookmarked = !article.bookmarked))
     }
 
     private fun mockPreviewArticles() {
@@ -81,6 +87,8 @@ class MainViewModel(context: Context, preview: Boolean = false) : ViewModel() {
             articles.add(Utils.createArticle(bookmarked = true, read = true))
         }
         bookmarkedArticles = articles
+
+        unreadArticles = articles
     }
 
     private fun refresh() {
@@ -104,6 +112,12 @@ class MainViewModel(context: Context, preview: Boolean = false) : ViewModel() {
             launch {
                 bookmarkedArticlesFlow.collect { articles ->
                     bookmarkedArticles = articles
+                }
+            }
+
+            launch {
+                unreadArticlesFlow.collect { articles ->
+                    unreadArticles = articles
                 }
             }
         }

@@ -1,16 +1,20 @@
 package vtsen.hashnode.dev.androidnews.ui.screens
 
-import androidx.compose.material.Scaffold
-import androidx.compose.material.ScaffoldState
-import androidx.compose.material.rememberScaffoldState
+import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import vtsen.hashnode.dev.androidnews.ui.screens.navigation.BottomBarNav
 import vtsen.hashnode.dev.androidnews.ui.screens.navigation.BuildNavGraph
+import vtsen.hashnode.dev.androidnews.ui.screens.navigation.NavRoute
 import vtsen.hashnode.dev.androidnews.ui.theme.AndroidNewsTheme
 import vtsen.hashnode.dev.androidnews.viewmodel.MainViewModel
 
@@ -23,12 +27,29 @@ fun MainScreen(viewModel: MainViewModel, useSystemUIController: Boolean) {
 
         Scaffold(
             scaffoldState = scaffoldState,
-            bottomBar = { BottomBarNav(navHostController = navHostController)}
+            topBar = { TopBar(navHostController) },
+            bottomBar = { BottomBarNav(navHostController) }
         ) {
             BuildNavGraph(viewModel, navHostController)
         }
 
         ShowSnackBar(scaffoldState, viewModel)
+    }
+}
+
+@Composable
+private fun TopBar(navHostController: NavHostController) {
+
+    val navBackStackEntry by navHostController.currentBackStackEntryAsState()
+    val currentNavRoutePath = navBackStackEntry?.destination?.route
+
+    if(currentNavRoutePath?.contains(NavRoute.Article.path) == false) return
+
+    IconButton(onClick = { }) {
+        Icon(
+            imageVector = Icons.Filled.ArrowBack,
+            contentDescription = null
+        )
     }
 }
 

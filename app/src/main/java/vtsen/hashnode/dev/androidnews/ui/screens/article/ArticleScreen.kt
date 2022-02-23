@@ -4,6 +4,8 @@ import android.webkit.WebChromeClient
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.compose.foundation.layout.Column
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.viewinterop.AndroidView
 import vtsen.hashnode.dev.androidnews.viewmodel.MainViewModel
@@ -11,7 +13,11 @@ import vtsen.hashnode.dev.androidnews.viewmodel.MainViewModel
 @Composable
 fun ArticleScreen(viewModel: MainViewModel, id: Int) {
     val article = viewModel.getArticle(id)
-    LoadWebUrl(url = article.link)
+    //LoadWebUrl(url = article.link)
+    LoadWebHtml(
+        title = article.title,
+        html = article.description,
+    )
 }
 
 @Composable
@@ -33,13 +39,15 @@ private fun LoadWebUrl(url: String) {
 }
 
 @Composable
-private fun LoadWebHtml(html: String) {
+private fun LoadWebHtml(title: String, html: String) {
 
     if (html.isEmpty()) {
         return
     }
 
     Column {
+
+        Text(text = title, style = MaterialTheme.typography.h4)
 
         AndroidView(factory = {
             WebView(it).apply {

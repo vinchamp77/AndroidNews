@@ -40,6 +40,9 @@ class MainViewModel(context: Context, preview: Boolean = false) : ViewModel() {
     }
     var unreadArticles: List<Article>? by mutableStateOf(null)
         private set
+    // current article
+    var currentArticle: Article? by mutableStateOf(null)
+        private set
 
     var showSnackBarStringId: Int? by mutableStateOf(null)
         private set
@@ -57,12 +60,8 @@ class MainViewModel(context: Context, preview: Boolean = false) : ViewModel() {
         showSnackBarStringId = null
     }
 
-    fun getArticle(id: Int): Article {
-        val article = allArticles!!.find { article ->
-            article.id == id
-        }
-
-        return article!!
+    fun onNavigateToArticleScreen(id: Int) {
+        currentArticle = getArticle(id)
     }
 
     fun onReadClick(id: Int) = viewModelScope.launch {
@@ -73,6 +72,14 @@ class MainViewModel(context: Context, preview: Boolean = false) : ViewModel() {
     fun onBookmarkClick(id: Int) = viewModelScope.launch {
         val article = getArticle(id)
         repository.updateArticle(article.asArticleEntity(bookmarked = !article.bookmarked))
+    }
+
+    private fun getArticle(id: Int): Article {
+        val article = allArticles!!.find { article ->
+            article.id == id
+        }
+
+        return article!!
     }
 
     private fun mockPreviewArticles() {

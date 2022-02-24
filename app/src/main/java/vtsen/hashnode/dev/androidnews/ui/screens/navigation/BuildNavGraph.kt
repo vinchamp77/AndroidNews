@@ -88,10 +88,9 @@ private fun addArticleScreen(
     ) { navBackStackEntry ->
 
         val args = navBackStackEntry.arguments
+        val id = args?.getInt(NavRoute.Article.id)!!
+        viewModel.onNavigateToArticleScreen(id)
 
-        ArticleScreen(
-            viewModel,
-            id = args?.getInt(NavRoute.Article.id)!!
-        )
+        ArticleScreen(viewModel.currentArticle!!)
     }
 }

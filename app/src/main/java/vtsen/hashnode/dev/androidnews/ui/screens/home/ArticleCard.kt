@@ -3,11 +3,12 @@ package vtsen.hashnode.dev.androidnews.ui.screens.home
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.*
+import androidx.compose.material.Divider
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -15,6 +16,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberImagePainter
 import vtsen.hashnode.dev.androidnews.R
+import vtsen.hashnode.dev.androidnews.ui.screens.common.AddIconButton
 import vtsen.hashnode.dev.androidnews.ui.theme.PaddingMedium
 import vtsen.hashnode.dev.androidnews.ui.theme.PaddingSmall
 import vtsen.hashnode.dev.androidnews.utils.Utils
@@ -132,20 +134,6 @@ private fun ArticleBottomRow(
                 painterResource(R.drawable.ic_radio_button_unchecked)
         )
 
-    }
-}
-
-@Composable
-private fun AddIconButton(
-    article: Article,
-    onIconClick: (Int) -> Unit,
-    iconPainter: Painter
-) {
-    IconButton(onClick = { onIconClick(article.id) }) {
-        Icon(
-            painter = iconPainter,
-            contentDescription = null
-        )
     }
 }
 

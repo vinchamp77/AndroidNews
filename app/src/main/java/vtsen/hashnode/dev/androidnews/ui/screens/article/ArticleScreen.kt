@@ -8,11 +8,10 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.viewinterop.AndroidView
-import vtsen.hashnode.dev.androidnews.viewmodel.MainViewModel
+import vtsen.hashnode.dev.androidnews.viewmodel.Article
 
 @Composable
-fun ArticleScreen(viewModel: MainViewModel, id: Int) {
-    val article = viewModel.getArticle(id)
+fun ArticleScreen(article: Article) {
     //LoadWebUrl(url = article.link)
     LoadWebHtml(
         title = article.title,

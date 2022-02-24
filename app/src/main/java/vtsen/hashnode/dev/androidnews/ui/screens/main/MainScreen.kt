@@ -1,8 +1,8 @@
 package vtsen.hashnode.dev.androidnews.ui.screens
 
-import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.Scaffold
+import androidx.compose.material.ScaffoldState
+import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -12,6 +12,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import vtsen.hashnode.dev.androidnews.ui.screens.article.ArticleTopBar
 import vtsen.hashnode.dev.androidnews.ui.screens.navigation.BottomBarNav
 import vtsen.hashnode.dev.androidnews.ui.screens.navigation.BuildNavGraph
 import vtsen.hashnode.dev.androidnews.ui.screens.navigation.NavRoute
@@ -27,7 +28,7 @@ fun MainScreen(viewModel: MainViewModel, useSystemUIController: Boolean) {
 
         Scaffold(
             scaffoldState = scaffoldState,
-            topBar = { TopBar(navHostController) },
+            topBar = { TopBar(navHostController, viewModel) },
             bottomBar = { BottomBarNav(navHostController) }
         ) {
             BuildNavGraph(viewModel, navHostController)
@@ -38,18 +39,13 @@ fun MainScreen(viewModel: MainViewModel, useSystemUIController: Boolean) {
 }
 
 @Composable
-private fun TopBar(navHostController: NavHostController) {
+private fun TopBar(navHostController: NavHostController, viewModel: MainViewModel) {
 
     val navBackStackEntry by navHostController.currentBackStackEntryAsState()
-    val currentNavRoutePath = navBackStackEntry?.destination?.route
+    val currentNavRoutePath = navBackStackEntry?.destination?.route ?: return
 
-    if(currentNavRoutePath?.contains(NavRoute.Article.path) == false) return
-
-    IconButton(onClick = { }) {
-        Icon(
-            imageVector = Icons.Filled.ArrowBack,
-            contentDescription = null
-        )
+    if (currentNavRoutePath.contains(NavRoute.Article.path)) {
+        ArticleTopBar(navHostController, viewModel)
     }
 }
 

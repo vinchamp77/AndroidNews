@@ -29,7 +29,6 @@ class FeedParser {
 
     private fun readFeedItem(parser: XmlPullParser): FeedItem {
         var title = ""
-        var description = ""
         var link = ""
         var pubDate = ""
         var image = ""
@@ -37,9 +36,6 @@ class FeedParser {
         while (parser.next() != XmlPullParser.END_TAG) {
             if (parser.eventType == XmlPullParser.START_TAG && parser.name == "title") {
                 title = readText(parser)
-
-            } else if(parser.eventType == XmlPullParser.START_TAG && parser.name == "description") {
-                description = readText(parser)
 
             } else if(parser.eventType == XmlPullParser.START_TAG && parser.name == "link") {
                 link = readText(parser)
@@ -55,7 +51,7 @@ class FeedParser {
             }
         }
 
-        return FeedItem(title, description, link, pubDate, image)
+        return FeedItem(title, link, pubDate, image)
     }
 
     private fun readText(parser: XmlPullParser) : String {

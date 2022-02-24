@@ -9,7 +9,6 @@ fun Article.asArticleEntity(
     return ArticleEntity(
         id = id,
         title = title,
-        description = description,
         link = link,
         pubDate = pubDate,
         image = image,

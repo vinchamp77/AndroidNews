@@ -13,7 +13,6 @@ fun FeedItem.asArticleEntity() : ArticleEntity {
     return ArticleEntity(
         id = 0,
         title = title,
-        description = description,
         link = link,
         pubDate = Utils.parsePubDateStringToLong(pubDate),
         image = image,

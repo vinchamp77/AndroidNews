@@ -12,10 +12,10 @@ fun List<ArticleFeed>.asArticleEntities() : List<ArticleEntity> {
 fun ArticleFeed.asArticleEntity() : ArticleEntity {
     return ArticleEntity(
         id = 0,
-        title = title,
-        link = link,
-        pubDate = Utils.parsePubDateStringToLong(pubDate),
-        image = image,
+        title = feedItem.title,
+        link = feedItem.link,
+        pubDate = Utils.parsePubDateStringToLong(feedItem.pubDate),
+        image = feedItem.image,
         bookmarked = false,
         read = false,
     )

@@ -6,7 +6,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import vtsen.hashnode.dev.androidnews.repository.local.ArticleEntity
 import vtsen.hashnode.dev.androidnews.repository.local.ArticlesDatabase
-import vtsen.hashnode.dev.androidnews.repository.remote.FeedItem
+import vtsen.hashnode.dev.androidnews.repository.remote.ArticleFeed
 import vtsen.hashnode.dev.androidnews.repository.remote.FeedParser
 import vtsen.hashnode.dev.androidnews.repository.remote.WebService
 import vtsen.hashnode.dev.androidnews.repository.remote.asArticleEntities
@@ -32,8 +32,8 @@ class MainRepository(
         var status = Status.SUCCESS
 
         try {
-            val feedItems = fetchFeedItems()
-            updateDatabase(feedItems.asArticleEntities())
+            val articlesFeed = fetchArticlesFeed()
+            updateDatabase(articlesFeed.asArticleEntities())
 
         } catch(e: Exception) {
             e.printStackTrace()
@@ -51,7 +51,7 @@ class MainRepository(
         database.selectArticleById(id)
     }
 
-    private suspend fun fetchFeedItems() : List<FeedItem> {
+    private suspend fun fetchArticlesFeed() : List<ArticleFeed> {
         val xmlString = webService.getXMlString(URL)
         return FeedParser().parse(xmlString)
     }

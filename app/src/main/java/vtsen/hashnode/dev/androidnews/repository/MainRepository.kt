@@ -6,6 +6,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import vtsen.hashnode.dev.androidnews.repository.local.ArticleEntity
 import vtsen.hashnode.dev.androidnews.repository.local.ArticlesDatabase
+import vtsen.hashnode.dev.androidnews.repository.local.asArticleEntity
 import vtsen.hashnode.dev.androidnews.repository.remote.ArticleFeed
 import vtsen.hashnode.dev.androidnews.repository.remote.FeedParser
 import vtsen.hashnode.dev.androidnews.repository.remote.WebService
@@ -63,7 +64,9 @@ class MainRepository(
                 if(articleFound == null) {
                     database.insertArticle(articleEntity)
                 } else {
-                    database.updateArticle(articleEntity)
+                    //Important Note: articleEntity.id is different than the one in articleFound.id (database)
+                    val data = articleEntity.asArticleEntity(articleFound.id)
+                    database.updateArticle(data)
                 }
             }
         }

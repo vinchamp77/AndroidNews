@@ -22,3 +22,18 @@ fun ArticleEntity.asArticle(): Article {
         feedTitle = feedTitle,
     )
 }
+
+fun ArticleEntity.asArticleEntity(id: Int): ArticleEntity {
+    return ArticleEntity(
+        id = id,
+        title = title,
+        link = link,
+        author = author,
+        pubDate = pubDate,
+        image = image,
+        bookmarked = bookmarked,
+        read = read,
+
+        feedTitle = feedTitle,
+    )
+}

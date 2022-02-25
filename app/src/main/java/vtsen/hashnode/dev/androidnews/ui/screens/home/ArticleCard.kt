@@ -73,6 +73,10 @@ private fun ArticleContent(article: Article) {
     ) {
 
         Text(text = article.title, fontWeight = FontWeight.SemiBold)
+        Spacer(Modifier.padding(PaddingSmall))
+
+        Text(text = article.feedTitle)
+        Text(text = article.author)
 
         Spacer(Modifier.padding(PaddingMedium))
         Text(text = Utils.parseDateLongToElapsedTime(article.pubDate))

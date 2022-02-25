@@ -14,12 +14,12 @@ fun ArticleFeed.asArticleEntity() : ArticleEntity {
         id = 0,
         title = feedItem.title,
         link = feedItem.link,
+        author = feedItem.author,
         pubDate = Utils.parsePubDateStringToLong(feedItem.pubDate),
         image = feedItem.image,
         bookmarked = false,
         read = false,
 
         feedTitle = feedTitle,
-        author = author,
     )
 }

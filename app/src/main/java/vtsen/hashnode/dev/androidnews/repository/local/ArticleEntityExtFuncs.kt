@@ -13,12 +13,12 @@ fun ArticleEntity.asArticle(): Article {
         id = id,
         title = title,
         link = link,
+        author = author,
         pubDate = pubDate,
         image = image,
         bookmarked = bookmarked,
         read = read,
 
         feedTitle = feedTitle,
-        author = author,
     )
 }

@@ -16,13 +16,22 @@ class FeedParser {
 
         val articlesFeed = mutableListOf<ArticleFeed>()
 
+        var feedTitle = ""
+        var author = ""
+
         while (parser.eventType != XmlPullParser.END_DOCUMENT) {
-            if (parser.eventType  == XmlPullParser.START_TAG && parser.name == "item") {
+
+            if (parser.eventType  == XmlPullParser.START_TAG && parser.name == "title") {
+                feedTitle = readText(parser)
+
+            } else if (parser.eventType  == XmlPullParser.START_TAG && parser.name == "title") {
+                feedTitle = readText(parser)
+
+            } else if (parser.eventType  == XmlPullParser.START_TAG && parser.name == "item") {
                 val feedItem = readFeedItem(parser)
                 val articleFeed = ArticleFeed(
                     feedItem = feedItem,
-                    feedTitle = "Kotlin",
-                    author = "Vincent Tsen")
+                    feedTitle = "Kotlin")
                 articlesFeed.add(articleFeed)
             }
             parser.next()
@@ -34,6 +43,7 @@ class FeedParser {
     private fun readFeedItem(parser: XmlPullParser): FeedItem {
         var title = ""
         var link = ""
+        var author = ""
         var pubDate = ""
         var image = ""
 
@@ -55,7 +65,7 @@ class FeedParser {
             }
         }
 
-        return FeedItem(title, link, pubDate, image)
+        return FeedItem(title, link, author, pubDate, image)
     }
 
     private fun readText(parser: XmlPullParser) : String {

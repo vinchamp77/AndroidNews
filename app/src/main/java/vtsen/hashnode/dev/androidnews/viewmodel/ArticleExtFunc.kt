@@ -10,12 +10,12 @@ fun Article.asArticleEntity(
         id = id,
         title = title,
         link = link,
+        author = author,
         pubDate = pubDate,
         image = image,
         bookmarked = bookmarked ?: this.bookmarked,
         read = read ?: this.read,
 
         feedTitle = feedTitle,
-        author = author,
     )
 }

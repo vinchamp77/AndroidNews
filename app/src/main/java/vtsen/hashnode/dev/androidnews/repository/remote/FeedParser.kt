@@ -19,7 +19,10 @@ class FeedParser {
         while (parser.eventType != XmlPullParser.END_DOCUMENT) {
             if (parser.eventType  == XmlPullParser.START_TAG && parser.name == "item") {
                 val feedItem = readFeedItem(parser)
-                val articleFeed = ArticleFeed(feedItem = feedItem)
+                val articleFeed = ArticleFeed(
+                    feedItem = feedItem,
+                    feedTitle = "Kotlin",
+                    author = "Vincent Tsen")
                 articlesFeed.add(articleFeed)
             }
             parser.next()

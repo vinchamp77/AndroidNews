@@ -14,5 +14,8 @@ fun Article.asArticleEntity(
         image = image,
         bookmarked = bookmarked ?: this.bookmarked,
         read = read ?: this.read,
+
+        feedTitle = feedTitle,
+        author = author,
     )
 }

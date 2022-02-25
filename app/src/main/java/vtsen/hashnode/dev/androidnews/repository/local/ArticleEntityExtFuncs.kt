@@ -17,5 +17,8 @@ fun ArticleEntity.asArticle(): Article {
         image = image,
         bookmarked = bookmarked,
         read = read,
+
+        feedTitle = feedTitle,
+        author = author,
     )
 }

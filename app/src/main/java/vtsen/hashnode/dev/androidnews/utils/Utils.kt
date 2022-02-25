@@ -16,6 +16,9 @@ object Utils {
             image = "https://cdn.hashnode.com/res/hashnode/image/upload/v1643788167289/tf0hGfYSO.jpeg",
             bookmarked = bookmarked,
             read = read,
+
+            feedTitle = "Android Kotlin Weekly",
+            author = "Vincent Tsen",
         )
     }
 

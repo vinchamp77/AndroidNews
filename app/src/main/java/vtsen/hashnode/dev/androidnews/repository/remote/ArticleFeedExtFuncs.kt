@@ -18,5 +18,8 @@ fun ArticleFeed.asArticleEntity() : ArticleEntity {
         image = feedItem.image,
         bookmarked = false,
         read = false,
+
+        feedTitle = feedTitle,
+        author = author,
     )
 }

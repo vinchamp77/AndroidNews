@@ -17,21 +17,17 @@ class FeedParser {
         val articlesFeed = mutableListOf<ArticleFeed>()
 
         var feedTitle = ""
-        var author = ""
 
         while (parser.eventType != XmlPullParser.END_DOCUMENT) {
 
             if (parser.eventType  == XmlPullParser.START_TAG && parser.name == "title") {
                 feedTitle = readText(parser)
 
-            } else if (parser.eventType  == XmlPullParser.START_TAG && parser.name == "title") {
-                feedTitle = readText(parser)
-
             } else if (parser.eventType  == XmlPullParser.START_TAG && parser.name == "item") {
                 val feedItem = readFeedItem(parser)
                 val articleFeed = ArticleFeed(
                     feedItem = feedItem,
-                    feedTitle = "Kotlin")
+                    feedTitle = feedTitle)
                 articlesFeed.add(articleFeed)
             }
             parser.next()
@@ -53,6 +49,9 @@ class FeedParser {
 
             } else if(parser.eventType == XmlPullParser.START_TAG && parser.name == "link") {
                 link = readText(parser)
+
+            } else if(parser.eventType == XmlPullParser.START_TAG && parser.name == "dc:creator") {
+                author = readText(parser)
 
             } else if(parser.eventType == XmlPullParser.START_TAG && parser.name == "pubDate") {
                 pubDate = readText(parser)

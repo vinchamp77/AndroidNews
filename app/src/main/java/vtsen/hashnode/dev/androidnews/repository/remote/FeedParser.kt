@@ -10,11 +10,11 @@ class FeedParser {
     private val pullParserFactory = XmlPullParserFactory.newInstance()
     private val parser = pullParserFactory.newPullParser()
 
-    fun parse(xml: String): List<FeedItem> {
+    fun parse(xml: String): List<ArticleFeed> {
 
         parser.setInput(xml.byteInputStream(), null)
 
-        val items = mutableListOf<FeedItem>()
+        val items = mutableListOf<ArticleFeed>()
 
         while (parser.eventType != XmlPullParser.END_DOCUMENT) {
             if (parser.eventType  == XmlPullParser.START_TAG && parser.name == "item") {
@@ -27,7 +27,7 @@ class FeedParser {
         return items
     }
 
-    private fun readFeedItem(parser: XmlPullParser): FeedItem {
+    private fun readFeedItem(parser: XmlPullParser): ArticleFeed {
         var title = ""
         var link = ""
         var pubDate = ""
@@ -51,7 +51,7 @@ class FeedParser {
             }
         }
 
-        return FeedItem(title, link, pubDate, image)
+        return ArticleFeed(title, link, pubDate, image)
     }
 
     private fun readText(parser: XmlPullParser) : String {

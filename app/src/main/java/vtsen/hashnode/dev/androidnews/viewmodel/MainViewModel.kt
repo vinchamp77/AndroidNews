@@ -17,7 +17,7 @@ import vtsen.hashnode.dev.androidnews.repository.remote.WebService
 import vtsen.hashnode.dev.androidnews.utils.Utils
 
 class MainViewModel(context: Context, preview: Boolean = false) : ViewModel() {
-
+    // Repository
     private val repository = MainRepository(
         ArticlesDatabase.getInstance(context),
         WebService(),
@@ -40,11 +40,14 @@ class MainViewModel(context: Context, preview: Boolean = false) : ViewModel() {
     }
     var unreadArticles: List<Article>? by mutableStateOf(null)
         private set
-    // current article
+    // Current article
     var currentArticle: Article? by mutableStateOf(null)
         private set
-
+    // Snack bar id
     var showSnackBarStringId: Int? by mutableStateOf(null)
+        private set
+    // Search string
+    var searchQuery: String by mutableStateOf("")
         private set
 
     init {
@@ -74,6 +77,10 @@ class MainViewModel(context: Context, preview: Boolean = false) : ViewModel() {
         repository.updateArticle(article.asArticleEntity(bookmarked = !article.bookmarked))
     }
 
+    fun onSearchQueryChanged(value: String) {
+        searchQuery = value
+    }
+
     private fun getArticle(id: Int): Article {
         val article = allArticles!!.find { article ->
             article.id == id
@@ -96,6 +103,8 @@ class MainViewModel(context: Context, preview: Boolean = false) : ViewModel() {
         bookmarkedArticles = articles
 
         unreadArticles = articles
+
+        currentArticle = articles[0]
     }
 
     private fun refresh() {

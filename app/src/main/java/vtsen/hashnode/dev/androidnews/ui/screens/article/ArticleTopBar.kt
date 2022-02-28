@@ -10,8 +10,11 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import vtsen.hashnode.dev.androidnews.R
 import vtsen.hashnode.dev.androidnews.ui.screens.common.AddIconButton
 import vtsen.hashnode.dev.androidnews.viewmodel.MainViewModel
@@ -58,4 +61,16 @@ fun ArticleTopBar(navHostController: NavHostController, viewModel: MainViewModel
             }
         }
     }
+}
+@Preview(showBackground = true)
+@Composable
+private fun DefaultPreview() {
+
+    val viewModel = MainViewModel(LocalContext.current, preview = true)
+    val navHostController = rememberNavController()
+
+    ArticleTopBar(
+        navHostController,
+        viewModel,
+    )
 }

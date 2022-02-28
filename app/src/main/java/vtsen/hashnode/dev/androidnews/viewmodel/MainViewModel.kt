@@ -49,6 +49,12 @@ class MainViewModel(context: Context, preview: Boolean = false) : ViewModel() {
     // Search string
     var searchQuery: String by mutableStateOf("")
         private set
+    // Searched articles
+    var searchedArticles: List<Article>? by mutableStateOf(null)
+        private set
+    // Searched result title
+    var searchedResultResId: Int? by mutableStateOf(null)
+        private set
 
     init {
         if(preview) {
@@ -79,6 +85,14 @@ class MainViewModel(context: Context, preview: Boolean = false) : ViewModel() {
 
     fun onSearchQueryChanged(value: String) {
         searchQuery = value
+    }
+
+    fun onAllArticlesSearch() {
+        searchedArticles = allArticles!!.filter { article ->
+            article.title.contains(searchQuery, ignoreCase = true)
+        }
+
+        searchedResultResId = R.string.all_articles
     }
 
     private fun getArticle(id: Int): Article {

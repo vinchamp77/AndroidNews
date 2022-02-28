@@ -1,9 +1,8 @@
-package vtsen.hashnode.dev.androidnews.ui.screens.article.searchresults
+package vtsen.hashnode.dev.androidnews.ui.screens.searchresults
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
-import vtsen.hashnode.dev.androidnews.ui.screens.bookmarks.BookmarksScreen
 import vtsen.hashnode.dev.androidnews.ui.screens.home.ArticlesScreen
 import vtsen.hashnode.dev.androidnews.viewmodel.MainViewModel
 
@@ -16,7 +15,7 @@ fun SearchResultsScreen(
 
     ArticlesScreen(
         viewModel = viewModel,
-        articles = viewModel.bookmarkedArticles!! ,
+        articles = viewModel.searchedArticles!! ,
         navigateToArticle = navigateToArticle)
 }
 
@@ -26,7 +25,7 @@ private fun DefaultPreview() {
 
     val viewModel = MainViewModel(LocalContext.current, preview = true)
 
-    BookmarksScreen(
+    SearchResultsScreen(
         viewModel,
         navigateToArticle = {})
 }

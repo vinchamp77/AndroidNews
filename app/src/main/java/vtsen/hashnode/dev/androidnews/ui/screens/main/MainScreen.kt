@@ -14,6 +14,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import vtsen.hashnode.dev.androidnews.ui.screens.article.ArticleTopBar
 import vtsen.hashnode.dev.androidnews.ui.screens.home.ArticlesTopBar
+import vtsen.hashnode.dev.androidnews.ui.screens.home.SearchResultsTopBar
 import vtsen.hashnode.dev.androidnews.ui.screens.navigation.BottomBarNav
 import vtsen.hashnode.dev.androidnews.ui.screens.navigation.BuildNavGraph
 import vtsen.hashnode.dev.androidnews.ui.screens.navigation.NavRoute
@@ -47,6 +48,10 @@ private fun TopBar(navHostController: NavHostController, viewModel: MainViewMode
 
     if (currentNavRoutePath.contains(NavRoute.Article.path)) {
         ArticleTopBar(navHostController, viewModel)
+
+    } else if (currentNavRoutePath.contains(NavRoute.SearchResults.path)) {
+            SearchResultsTopBar(navHostController, viewModel)
+
     } else {
         ArticlesTopBar(navHostController, viewModel)
     }

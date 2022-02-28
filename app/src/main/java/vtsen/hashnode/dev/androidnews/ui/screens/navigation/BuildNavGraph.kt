@@ -8,9 +8,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import vtsen.hashnode.dev.androidnews.ui.screens.ArticleScreen
-import vtsen.hashnode.dev.androidnews.ui.screens.article.searchresults.SearchResultsScreen
 import vtsen.hashnode.dev.androidnews.ui.screens.bookmarks.BookmarksScreen
 import vtsen.hashnode.dev.androidnews.ui.screens.home.HomeScreen
+import vtsen.hashnode.dev.androidnews.ui.screens.searchresults.SearchResultsScreen
 import vtsen.hashnode.dev.androidnews.ui.screens.unread.UnreadScreen
 import vtsen.hashnode.dev.androidnews.viewmodel.MainViewModel
 
@@ -36,6 +36,7 @@ private fun addHomeScreen(
     viewModel: MainViewModel
 ) {
     navGraphBuilder.composable(route = NavRoute.Home.path) {
+
         HomeScreen(
             viewModel,
             navigateToArticle = { id ->
@@ -51,6 +52,7 @@ private fun addUnreadScreen(
     viewModel: MainViewModel
 ) {
     navGraphBuilder.composable(route = NavRoute.Unread.path) {
+
         UnreadScreen(
             viewModel,
             navigateToArticle = { id ->
@@ -66,6 +68,7 @@ private fun addBookmarksScreen(
     viewModel: MainViewModel
 ) {
     navGraphBuilder.composable(route = NavRoute.Bookmarks.path) {
+
         BookmarksScreen(
             viewModel,
             navigateToArticle = { id ->
@@ -101,7 +104,10 @@ private fun addSearchResultsScreen(
     navGraphBuilder: NavGraphBuilder,
     viewModel: MainViewModel
 ) {
-    navGraphBuilder.composable(route = NavRoute.SearchResults.path) {
+    navGraphBuilder.composable(
+        route = NavRoute.SearchResults.path
+    ) {
+
         SearchResultsScreen(
             viewModel,
             navigateToArticle = { id ->

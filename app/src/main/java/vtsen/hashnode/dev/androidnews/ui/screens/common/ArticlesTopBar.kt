@@ -19,6 +19,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import vtsen.hashnode.dev.androidnews.ui.screens.navigation.NavRoute
 import vtsen.hashnode.dev.androidnews.viewmodel.MainViewModel
 
 @OptIn(ExperimentalComposeUiApi::class)
@@ -44,7 +45,8 @@ fun ArticlesTopBar(navHostController: NavHostController, viewModel: MainViewMode
                 ),
                 keyboardActions = KeyboardActions(
                     onDone = {
-                        //onExecuteSearch()
+                        viewModel.onAllArticlesSearch()
+                        navHostController.navigate(NavRoute.SearchResults.path)
                         keyboardController!!.hide()
                     },
                 ),

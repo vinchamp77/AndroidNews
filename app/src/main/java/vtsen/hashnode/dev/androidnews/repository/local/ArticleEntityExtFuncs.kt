@@ -23,7 +23,11 @@ fun ArticleEntity.asArticle(): Article {
     )
 }
 
-fun ArticleEntity.asArticleEntity(id: Int): ArticleEntity {
+fun ArticleEntity.asArticleEntity(
+    id: Int,
+    bookmarked: Boolean,
+    read: Boolean,
+): ArticleEntity {
     return ArticleEntity(
         id = id,
         title = title,

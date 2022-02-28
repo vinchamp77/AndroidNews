@@ -6,4 +6,8 @@
     <string name="unread_articles">Unread Articles</string>
     <string name="bookmarks">Bookmarks</string>
 
+    <string name="searched_result_title">Searched Results: %s</string>
+    <string name="all_articles">All Articles</string>
+    <string name="bookmarked_articles">Bookmarked Articles</string>
+
 </resources>

@@ -64,8 +64,14 @@ class MainRepository(
                 if(articleFound == null) {
                     database.insertArticle(articleEntity)
                 } else {
-                    //Important Note: articleEntity.id is different than the one in articleFound.id (database)
-                    val data = articleEntity.asArticleEntity(articleFound.id)
+                    //Important Note:
+                    // (1) articleEntity.id is different than the one in articleFound.id (database)
+                    // (2) We want to keep the saved bookmarked and read articles, do not want to overwrites it
+                    val data = articleEntity.asArticleEntity(
+                        articleFound.id,
+                        articleFound.bookmarked,
+                        articleFound.read,
+                    )
                     database.updateArticle(data)
                 }
             }

@@ -95,6 +95,23 @@ class MainViewModel(context: Context, preview: Boolean = false) : ViewModel() {
         searchedResultResId = R.string.all_articles
     }
 
+    fun onUnreadArticlesSearch() {
+        searchedArticles = unreadArticles!!.filter { article ->
+            article.title.contains(searchQuery, ignoreCase = true)
+        }
+
+        searchedResultResId = R.string.unread_articles
+    }
+
+    fun onBookmarkedArticlesSearch() {
+        searchedArticles = bookmarkedArticles!!.filter { article ->
+            article.title.contains(searchQuery, ignoreCase = true)
+        }
+
+        searchedResultResId = R.string.bookmarked_articles
+    }
+
+
     private fun getArticle(id: Int): Article {
         val article = allArticles!!.find { article ->
             article.id == id

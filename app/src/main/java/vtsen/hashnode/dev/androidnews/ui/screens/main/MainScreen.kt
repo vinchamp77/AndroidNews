@@ -13,11 +13,13 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import vtsen.hashnode.dev.androidnews.ui.screens.article.ArticleTopBar
-import vtsen.hashnode.dev.androidnews.ui.screens.home.ArticlesTopBar
+import vtsen.hashnode.dev.androidnews.ui.screens.bookmarks.BookmarkedArticlesTopBar
+import vtsen.hashnode.dev.androidnews.ui.screens.home.AllArticlesTopBar
 import vtsen.hashnode.dev.androidnews.ui.screens.home.SearchResultsTopBar
 import vtsen.hashnode.dev.androidnews.ui.screens.navigation.BottomBarNav
 import vtsen.hashnode.dev.androidnews.ui.screens.navigation.BuildNavGraph
 import vtsen.hashnode.dev.androidnews.ui.screens.navigation.NavRoute
+import vtsen.hashnode.dev.androidnews.ui.screens.unread.UnreadArticlesTopBar
 import vtsen.hashnode.dev.androidnews.ui.theme.AndroidNewsTheme
 import vtsen.hashnode.dev.androidnews.viewmodel.MainViewModel
 
@@ -46,14 +48,23 @@ private fun TopBar(navHostController: NavHostController, viewModel: MainViewMode
     val navBackStackEntry by navHostController.currentBackStackEntryAsState()
     val currentNavRoutePath = navBackStackEntry?.destination?.route ?: return
 
-    if (currentNavRoutePath.contains(NavRoute.Article.path)) {
-        ArticleTopBar(navHostController, viewModel)
-
+    // All articles
+    if (currentNavRoutePath.contains(NavRoute.Home.path)) {
+        AllArticlesTopBar(navHostController, viewModel)
+    // Unread articles
+    } else if (currentNavRoutePath.contains(NavRoute.Unread.path)) {
+        UnreadArticlesTopBar(navHostController, viewModel)
+    // Bookmarked articles
+    } else if (currentNavRoutePath.contains(NavRoute.Bookmarks.path)) {
+        BookmarkedArticlesTopBar(navHostController, viewModel)
+    // Search results articles
     } else if (currentNavRoutePath.contains(NavRoute.SearchResults.path)) {
-            SearchResultsTopBar(navHostController, viewModel)
-
+        SearchResultsTopBar(navHostController, viewModel)
+    // Single article
+    } else if (currentNavRoutePath.contains(NavRoute.Article.path)) {
+        ArticleTopBar(navHostController, viewModel)
     } else {
-        ArticlesTopBar(navHostController, viewModel)
+        throw Exception("Invalid navigation path!")
     }
 }
 

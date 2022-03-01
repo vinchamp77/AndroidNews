@@ -24,7 +24,11 @@ import vtsen.hashnode.dev.androidnews.viewmodel.MainViewModel
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
-fun ArticlesTopBar(navHostController: NavHostController, viewModel: MainViewModel) {
+fun ArticlesTopBar(
+    navHostController: NavHostController,
+    viewModel: MainViewModel,
+    onArticlesSearch: () -> Unit,
+) {
 
     val keyboardController = LocalSoftwareKeyboardController.current
 
@@ -45,7 +49,7 @@ fun ArticlesTopBar(navHostController: NavHostController, viewModel: MainViewMode
                 ),
                 keyboardActions = KeyboardActions(
                     onDone = {
-                        viewModel.onAllArticlesSearch()
+                        onArticlesSearch()
                         navHostController.navigate(NavRoute.SearchResults.path)
                         keyboardController!!.hide()
                     },
@@ -65,5 +69,6 @@ private fun DefaultPreview() {
     ArticlesTopBar(
         navHostController,
         viewModel,
+        viewModel::onAllArticlesSearch
     )
 }

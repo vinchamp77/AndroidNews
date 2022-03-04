@@ -13,7 +13,7 @@
     <string name="no_articles">No Articles!</string>
     <string name="no_articles_desc">The feed does not contain any articles.</string>
     <string name="no_search_articles_desc">The article search does not find anything.</string>
-    <string name="no_unread_articles_desc">You have read all articles.</string>
+    <string name="no_unread_articles_desc">Congratulation! You have read all articles.</string>
     <string name="no_bookmarked_articles_desc">Bookmark an article and it will show up here.</string>
 
 </resources>

@@ -3,7 +3,8 @@ package vtsen.hashnode.dev.androidnews.ui.screens.bookmarks
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
-import vtsen.hashnode.dev.androidnews.ui.screens.home.ArticlesScreen
+import vtsen.hashnode.dev.androidnews.R
+import vtsen.hashnode.dev.androidnews.ui.screens.common.ArticlesScreen
 import vtsen.hashnode.dev.androidnews.viewmodel.MainViewModel
 
 @Composable
@@ -16,7 +17,9 @@ fun BookmarksScreen(
     ArticlesScreen(
         viewModel = viewModel,
         articles = viewModel.bookmarkedArticles!! ,
-        navigateToArticle = navigateToArticle)
+        navigateToArticle = navigateToArticle,
+        R.string.no_bookmarked_articles_desc,
+    )
 }
 
 @Preview(showBackground = true)

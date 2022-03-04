@@ -3,7 +3,8 @@ package vtsen.hashnode.dev.androidnews.ui.screens.searchresults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
-import vtsen.hashnode.dev.androidnews.ui.screens.home.ArticlesScreen
+import vtsen.hashnode.dev.androidnews.R
+import vtsen.hashnode.dev.androidnews.ui.screens.common.ArticlesScreen
 import vtsen.hashnode.dev.androidnews.viewmodel.MainViewModel
 
 @Composable
@@ -16,7 +17,9 @@ fun SearchResultsScreen(
     ArticlesScreen(
         viewModel = viewModel,
         articles = viewModel.searchedArticles!! ,
-        navigateToArticle = navigateToArticle)
+        navigateToArticle = navigateToArticle,
+        noArticlesDescStrResId = R.string.no_search_articles_desc,
+    )
 }
 
 @Preview(showBackground = true)

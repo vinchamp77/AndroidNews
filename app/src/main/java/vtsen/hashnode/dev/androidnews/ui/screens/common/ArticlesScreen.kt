@@ -1,31 +1,44 @@
-package vtsen.hashnode.dev.androidnews.ui.screens.home
+package vtsen.hashnode.dev.androidnews.ui.screens.common
 
 import android.content.Context
 import android.content.Intent
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.content.ContextCompat
+import vtsen.hashnode.dev.androidnews.R
+import vtsen.hashnode.dev.androidnews.ui.screens.home.ArticleCard
+import vtsen.hashnode.dev.androidnews.ui.theme.PaddingSmall
 import vtsen.hashnode.dev.androidnews.viewmodel.Article
 import vtsen.hashnode.dev.androidnews.viewmodel.MainViewModel
-
-//TODO: Empty Articles
 
 @Composable
 fun ArticlesScreen(
     viewModel: MainViewModel,
     articles: List<Article>,
     navigateToArticle: (Int) -> Unit,
+    noArticlesDescStrResId: Int,
 ) {
-    val context = LocalContext.current
 
+    if (articles.isEmpty()) {
+        ShowNoArticles(noArticlesDescStrResId)
+        return
+    }
+
+    val context = LocalContext.current
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
     ) {
+
+
         items(items = articles) { article ->
             ArticleCard(
                 article = article,
@@ -37,6 +50,25 @@ fun ArticlesScreen(
                 onReadClick = viewModel::onReadClick
             )
         }
+    }
+}
+
+@Composable
+private fun ShowNoArticles(noArticlesDescStrResId: Int) {
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+        Text(
+            text = stringResource(R.string.no_articles),
+            style = MaterialTheme.typography.h4,
+        )
+
+        Spacer(Modifier.padding(PaddingSmall))
+        Text(
+            text = stringResource(noArticlesDescStrResId),
+        )
     }
 }
 
@@ -57,7 +89,9 @@ private fun DefaultPreview() {
     val viewModel = MainViewModel(LocalContext.current, preview = true)
 
     ArticlesScreen(
-        viewModel,
-        viewModel.allArticles!!,
-        navigateToArticle = {})
+        viewModel = viewModel,
+        articles = viewModel.allArticles!!,
+        navigateToArticle = {},
+        noArticlesDescStrResId = R.string.no_articles_desc,
+    )
 }

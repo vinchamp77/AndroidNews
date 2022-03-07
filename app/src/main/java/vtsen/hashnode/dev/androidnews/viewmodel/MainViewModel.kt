@@ -69,6 +69,10 @@ class MainViewModel(context: Context, preview: Boolean = false) : ViewModel() {
         showSnackBarStringId = null
     }
 
+    fun clearSearchQuery() {
+        searchQuery = ""
+    }
+
     fun onNavigateToArticleScreen(id: Int) {
         currentArticle = getArticle(id)
     }

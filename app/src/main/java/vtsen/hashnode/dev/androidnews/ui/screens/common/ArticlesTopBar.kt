@@ -1,21 +1,21 @@
 package vtsen.hashnode.dev.androidnews.ui.screens.home
 
-import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.Icon
-import androidx.compose.material.Text
-import androidx.compose.material.TextField
-import androidx.compose.material.TopAppBar
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
@@ -31,38 +31,39 @@ fun ArticlesTopBar(
     viewModel: MainViewModel,
     onArticlesSearch: () -> Unit,
 ) {
-
     val keyboardController = LocalSoftwareKeyboardController.current
+    viewModel.clearSearchQuery()
 
-    TopAppBar {
-        Row(
+    TopAppBar(
+        contentPadding = PaddingValues(PaddingSmall)
+    ) {
+        TextField(
             modifier = Modifier
-                .fillMaxWidth(),
-        ) {
-            TextField(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = PaddingSmall)
-                ,
-                value = viewModel.searchQuery,
-                onValueChange = viewModel::onSearchQueryChanged,
+                .fillMaxWidth()
+                .clip(RoundedCornerShape(20))
+                .background(color = MaterialTheme.colors.background)
 
-                label = { Text(text = "Search") },
-                leadingIcon = { Icon(Icons.Filled.Search, contentDescription = "") },
-                keyboardOptions = KeyboardOptions(
-                    imeAction = ImeAction.Search,
-                ),
-                keyboardActions = KeyboardActions(
-                    onSearch = {
-                        onArticlesSearch()
-                        navHostController.navigate(NavRoute.SearchResults.path)
-                        keyboardController!!.hide()
-                    },
-                ),
-                singleLine = true,
-            )
-        }
+            ,
+            value = viewModel.searchQuery,
+            onValueChange = viewModel::onSearchQueryChanged,
+
+            label = { Text(text = "Search") },
+            leadingIcon = { Icon(Icons.Filled.Search, contentDescription = "") },
+            keyboardOptions = KeyboardOptions(
+                imeAction = ImeAction.Search,
+            ),
+            keyboardActions = KeyboardActions(
+                onSearch = {
+                    onArticlesSearch()
+                    navHostController.navigate(NavRoute.SearchResults.path)
+                    keyboardController!!.hide()
+                },
+            ),
+            singleLine = true,
+            textStyle = TextStyle(color = MaterialTheme.colors.onSurface)
+        )
     }
+
 }
 
 @Preview(showBackground = true)

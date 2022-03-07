@@ -16,7 +16,8 @@ import vtsen.hashnode.dev.androidnews.R
 @Composable
 fun BottomBarNav(navHostController: NavController) {
 
-    BottomNavigation {
+    BottomNavigation(
+    ) {
         // Home
         AddBottomNavigationItem(
             rowScope = this,

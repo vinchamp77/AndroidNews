@@ -2,6 +2,7 @@ package vtsen.hashnode.dev.androidnews.ui.screens.home
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Icon
@@ -20,6 +21,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import vtsen.hashnode.dev.androidnews.ui.screens.navigation.NavRoute
+import vtsen.hashnode.dev.androidnews.ui.theme.PaddingSmall
 import vtsen.hashnode.dev.androidnews.viewmodel.MainViewModel
 
 @OptIn(ExperimentalComposeUiApi::class)
@@ -38,22 +40,26 @@ fun ArticlesTopBar(
                 .fillMaxWidth(),
         ) {
             TextField(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = PaddingSmall)
+                ,
                 value = viewModel.searchQuery,
                 onValueChange = viewModel::onSearchQueryChanged,
 
                 label = { Text(text = "Search") },
                 leadingIcon = { Icon(Icons.Filled.Search, contentDescription = "") },
                 keyboardOptions = KeyboardOptions(
-                    imeAction = ImeAction.Done,
+                    imeAction = ImeAction.Search,
                 ),
                 keyboardActions = KeyboardActions(
-                    onDone = {
+                    onSearch = {
                         onArticlesSearch()
                         navHostController.navigate(NavRoute.SearchResults.path)
                         keyboardController!!.hide()
                     },
                 ),
+                singleLine = true,
             )
         }
     }

@@ -12,7 +12,6 @@ import vtsen.hashnode.dev.androidnews.repository.remote.FeedParser
 import vtsen.hashnode.dev.androidnews.repository.remote.WebService
 import vtsen.hashnode.dev.androidnews.repository.remote.asArticleEntities
 
-private const val TAG = "MainRepository"
 private const val URL = "https://vtsen.hashnode.dev/rss.xml"
 
 class MainRepository(
@@ -50,6 +49,18 @@ class MainRepository(
 
     suspend fun getArticle(id: Int) = withContext(Dispatchers.IO) {
         database.selectArticleById(id)
+    }
+
+    suspend fun getAllArticlesByTitle(title: String): List<ArticleEntity> = withContext(Dispatchers.IO) {
+        return@withContext database.selectAllArticlesByTitle(title)
+    }
+
+    suspend fun getUnreadArticlesByTitle(title: String): List<ArticleEntity> = withContext(Dispatchers.IO) {
+        return@withContext database.selectUnreadArticlesByTitle(title)
+    }
+
+    suspend fun getBookmarkedArticlesByTitle(title: String): List<ArticleEntity> = withContext(Dispatchers.IO) {
+        return@withContext database.selectBookmarkedArticlesByTitle(title)
     }
 
     private suspend fun fetchArticlesFeed() : List<ArticleFeed> {

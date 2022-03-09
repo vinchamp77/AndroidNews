@@ -71,6 +71,8 @@ class MainViewModel(context: Context, preview: Boolean = false) : ViewModel() {
 
     fun clearSearchQuery() {
         searchQuery = ""
+        searchedArticles = null
+        searchedResultResId = null
     }
 
     fun onNavigateToArticleScreen(id: Int) {
@@ -80,18 +82,22 @@ class MainViewModel(context: Context, preview: Boolean = false) : ViewModel() {
     fun onReadClick(id: Int) = viewModelScope.launch {
         val article = getArticle(id)
         repository.updateArticle(article.asArticleEntity(read = !article.read))
+
+        updateSearchedArticles()
     }
 
     fun onBookmarkClick(id: Int) = viewModelScope.launch {
         val article = getArticle(id)
         repository.updateArticle(article.asArticleEntity(bookmarked = !article.bookmarked))
+
+        updateSearchedArticles()
     }
 
     fun onSearchQueryChanged(value: String) {
         searchQuery = value
     }
 
-    fun onAllArticlesSearch() {
+    fun onAllArticlesSearch() = viewModelScope.launch {
         searchedArticles = allArticles!!.filter { article ->
             article.title.contains(searchQuery, ignoreCase = true)
         }
@@ -122,6 +128,23 @@ class MainViewModel(context: Context, preview: Boolean = false) : ViewModel() {
         }
 
         return article!!
+    }
+
+    private suspend fun updateSearchedArticles() {
+        if(searchQuery.isEmpty()) return
+
+        if (searchedResultResId == R.string.all_articles) {
+            searchedArticles = repository.getAllArticlesByTitle(searchQuery).asArticles()
+
+        } else if (searchedResultResId == R.string.unread_articles) {
+            searchedArticles = repository.getUnreadArticlesByTitle(searchQuery).asArticles()
+
+        } else if (searchedResultResId == R.string.bookmarked_articles) {
+            searchedArticles = repository.getBookmarkedArticlesByTitle(searchQuery).asArticles()
+
+        } else {
+            throw Exception("Unexpected updateSearchedArticles()!")
+        }
     }
 
     private fun mockPreviewArticles() {

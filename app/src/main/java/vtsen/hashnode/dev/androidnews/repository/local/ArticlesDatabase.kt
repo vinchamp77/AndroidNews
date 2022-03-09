@@ -34,10 +34,17 @@ abstract class ArticlesDatabase : RoomDatabase() {
     }
 
     fun selectAllArticles() = dao.selectAllArticles()
+    fun selectAllArticlesByTitle(title: String) = dao.selectAllArticlesByTitle("%$title%")
+
     fun selectBookmarkedArticles() = dao.selectBookmarkedArticles()
+    fun selectBookmarkedArticlesByTitle(title: String) = dao.selectBookmarkedArticlesByTitle("%$title%")
+
     fun selectUnreadArticles() = dao.selectUnreadArticles()
+    fun selectUnreadArticlesByTitle(title: String) = dao.selectUnreadArticlesByTitle("%$title%")
+
     fun selectArticleByLink(link: String) = dao.selectArticleByLink(link)
     fun selectArticleById(id: Int) = dao.selectArticleById(id)
+
     fun insertArticle(article: ArticleEntity) = dao.insertArticle(article)
     fun updateArticle(article: ArticleEntity) = dao.updateArticle(article)
     fun deleteAllArticles() {

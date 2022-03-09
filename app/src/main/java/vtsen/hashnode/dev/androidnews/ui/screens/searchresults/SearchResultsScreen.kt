@@ -12,7 +12,7 @@ fun SearchResultsScreen(
     viewModel: MainViewModel,
     navigateToArticle: (Int) -> Unit,
 ) {
-    if(viewModel.bookmarkedArticles == null) return
+    if(viewModel.searchedArticles == null) return
 
     ArticlesScreen(
         viewModel = viewModel,

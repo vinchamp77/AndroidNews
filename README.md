@@ -1,5 +1,13 @@
 # Android News App
+
+This is a simple RSS feed reader app that currently reads my blog's feed. 
+
 ![](screenshots/Android_News_Overview.gif)
+
+## Features
+- Bookmark article
+- Mark article as read
+- Search articles
 
 ## Requirements
 - Android Studio Bumblebee or later

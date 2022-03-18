@@ -13,7 +13,7 @@ This is a simple RSS feed reader app that currently reads my blog's feed.
 - Android Studio Bumblebee or later
 
 ## Tech Stack
-- MVVM Architecture
+- [MVVM Architecture](https://vtsen.hashnode.dev/mvc-vs-mvp-vs-mvvm-design-patterns)
 - Jetpack Compose
 - Ktor Client
 - Room Database
@@ -21,7 +21,7 @@ This is a simple RSS feed reader app that currently reads my blog's feed.
 - XmlPullParser
 - Compose Navigation
 - Webview
-- Kotlin Coroutines & Flow
+- Coroutines & Flow
 
 ## See Also
 For other projects, refer to my [Android projects page](https://vtsen.hashnode.dev/projects).

@@ -1,4 +1,4 @@
-# Android News App
+# Android News App (Jetpack Compose)
 
 This is a simple RSS feed reader app that currently reads my blog's feed. 
 

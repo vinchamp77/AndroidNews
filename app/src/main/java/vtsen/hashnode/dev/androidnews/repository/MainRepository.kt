@@ -1,9 +1,6 @@
 package vtsen.hashnode.dev.androidnews.repository
 
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 import vtsen.hashnode.dev.androidnews.repository.local.ArticleEntity
 import vtsen.hashnode.dev.androidnews.repository.local.ArticlesDatabase
 import vtsen.hashnode.dev.androidnews.repository.local.asArticleEntity
@@ -12,7 +9,6 @@ import vtsen.hashnode.dev.androidnews.repository.remote.FeedParser
 import vtsen.hashnode.dev.androidnews.repository.remote.WebService
 import vtsen.hashnode.dev.androidnews.repository.remote.asArticleEntities
 
-private const val URL = "https://vtsen.hashnode.dev/rss.xml"
 
 class MainRepository(
     private val database: ArticlesDatabase,
@@ -26,6 +22,10 @@ class MainRepository(
     val articlesFlow = database.selectAllArticles()
     val unreadArticlesFlow = database.selectUnreadArticles()
     val bookmarkedArticlesFlow = database.selectBookmarkedArticles()
+
+    private val urls = listOf(
+        "https://vtsen.hashnode.dev/rss.xml",
+    )
 
     suspend fun refresh(): Status = withContext(Dispatchers.IO) {
 
@@ -63,9 +63,23 @@ class MainRepository(
         return@withContext database.selectBookmarkedArticlesByTitle(title)
     }
 
-    private suspend fun fetchArticlesFeed() : List<ArticleFeed> {
-        val xmlString = webService.getXMlString(URL)
-        return FeedParser().parse(xmlString)
+    private suspend fun fetchArticlesFeed() : List<ArticleFeed> = coroutineScope {
+        val results = mutableListOf<ArticleFeed>()
+        val jobs = mutableListOf<Job>()
+
+        for(url in urls) {
+            val job = launch {
+                val xmlString = webService.getXMlString(url)
+                val articleFeeds = FeedParser().parse(xmlString)
+                results.addAll(articleFeeds)
+            }
+
+            jobs.add(job)
+        }
+
+        jobs.joinAll()
+
+        return@coroutineScope results
     }
 
     private suspend fun updateDatabase(articleEntities: List<ArticleEntity>) = coroutineScope  {

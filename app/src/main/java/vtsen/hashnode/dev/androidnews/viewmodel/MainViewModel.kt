@@ -6,6 +6,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
@@ -16,7 +17,10 @@ import vtsen.hashnode.dev.androidnews.repository.local.asArticles
 import vtsen.hashnode.dev.androidnews.repository.remote.WebService
 import vtsen.hashnode.dev.androidnews.utils.Utils
 
-class MainViewModel(context: Context, preview: Boolean = false) : ViewModel() {
+class MainViewModel(
+    context: Context,
+    mockArticles: Boolean = false,
+) : ViewModel() {
     // Repository
     private val repository = MainRepository(
         ArticlesDatabase.getInstance(context),
@@ -57,8 +61,8 @@ class MainViewModel(context: Context, preview: Boolean = false) : ViewModel() {
         private set
 
     init {
-        if(preview) {
-            mockPreviewArticles()
+        if(mockArticles) {
+            mockArticles()
         } else {
             refresh()
             collectFlows()
@@ -147,7 +151,7 @@ class MainViewModel(context: Context, preview: Boolean = false) : ViewModel() {
         }
     }
 
-    private fun mockPreviewArticles() {
+    private fun mockArticles() {
         var articles: MutableList<Article> = mutableListOf()
         repeat(10) {
             articles.add(Utils.createArticle())
@@ -175,7 +179,7 @@ class MainViewModel(context: Context, preview: Boolean = false) : ViewModel() {
     }
 
     private fun collectFlows() {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
 
             launch {
                 articlesFlow.collect { articles ->

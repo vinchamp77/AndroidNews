@@ -3,6 +3,8 @@ package vtsen.hashnode.dev.androidnews
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.runBlocking
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Rule
@@ -14,6 +16,7 @@ import vtsen.hashnode.dev.androidnews.viewmodel.MainViewModel
 class MainViewModelTest {
 
     private lateinit var viewModel: MainViewModel
+    private lateinit var mockViewModel: MainViewModel
 
     @get:Rule
     var instantExecutorRule = InstantTaskExecutorRule()
@@ -21,10 +24,17 @@ class MainViewModelTest {
     @Before
     fun setupViewModel() {
         viewModel = MainViewModel(ApplicationProvider.getApplicationContext())
+        mockViewModel = MainViewModel(ApplicationProvider.getApplicationContext(), mockArticles = true)
     }
 
     @Test
-    fun addition_isCorrect() {
-        Assert.assertEquals(4, 2 + 2)
+    fun allArticles_areNotNull() {
+
+        Assert.assertNotEquals(null, mockViewModel.allArticles)
+
+        runBlocking {
+            delay(1000)
+            Assert.assertNotEquals(null, viewModel.allArticles)
+        }
     }
 }

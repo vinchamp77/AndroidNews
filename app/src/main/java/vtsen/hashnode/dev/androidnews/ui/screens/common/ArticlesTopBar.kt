@@ -70,7 +70,7 @@ fun ArticlesTopBar(
 @Composable
 private fun DefaultPreview() {
 
-    val viewModel = MainViewModel(LocalContext.current, preview = true)
+    val viewModel = MainViewModel(LocalContext.current, mockArticles = true)
     val navHostController = rememberNavController()
 
     ArticlesTopBar(

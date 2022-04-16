@@ -9,10 +9,9 @@ import org.junit.runner.RunWith
 import org.junit.Assert.*
 
 @RunWith(AndroidJUnit4::class)
-class ExampleInstrumentedTest {
+class AppContextTest {
     @Test
     fun useAppContext() {
-        // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
         assertEquals("vtsen.hashnode.dev.androidnews", appContext.packageName)
     }

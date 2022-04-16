@@ -10,12 +10,13 @@ import vtsen.hashnode.dev.androidnews.viewmodel.Article
 fun AddIconButton(
     article: Article,
     onIconClick: (Int) -> Unit,
-    iconPainter: Painter
+    iconPainter: Painter,
+    contentDescription: String? = null,
 ) {
     IconButton(onClick = { onIconClick(article.id) }) {
         Icon(
             painter = iconPainter,
-            contentDescription = null
+            contentDescription = contentDescription
         )
     }
 }

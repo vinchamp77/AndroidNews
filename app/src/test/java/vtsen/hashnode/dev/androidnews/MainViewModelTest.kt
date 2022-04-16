@@ -24,7 +24,7 @@ class MainViewModelTest {
     @Before
     fun setupViewModel() {
         viewModel = MainViewModel(ApplicationProvider.getApplicationContext())
-        mockViewModel = MainViewModel(ApplicationProvider.getApplicationContext(), mockArticles = true)
+        mockViewModel = MainViewModel(ApplicationProvider.getApplicationContext(), useFakeData = true)
     }
 
     @Test

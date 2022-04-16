@@ -19,7 +19,7 @@ import vtsen.hashnode.dev.androidnews.utils.Utils
 
 class MainViewModel(
     context: Context,
-    mockArticles: Boolean = false,
+    useFakeData: Boolean = false,
 ) : ViewModel() {
     // Repository
     private val repository = MainRepository(
@@ -46,6 +46,7 @@ class MainViewModel(
         private set
     // Current article
     var currentArticle: Article? by mutableStateOf(null)
+
         private set
     // Snack bar id
     var showSnackBarStringId: Int? by mutableStateOf(null)
@@ -61,8 +62,8 @@ class MainViewModel(
         private set
 
     init {
-        if(mockArticles) {
-            mockArticles()
+        if(useFakeData) {
+            makeFakeArticles()
         } else {
             refresh()
             collectFlows()
@@ -151,7 +152,7 @@ class MainViewModel(
         }
     }
 
-    private fun mockArticles() {
+    private fun makeFakeArticles() {
         var articles: MutableList<Article> = mutableListOf()
         repeat(10) {
             articles.add(Utils.createArticle())

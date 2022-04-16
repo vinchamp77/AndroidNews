@@ -88,7 +88,7 @@ private fun ShowSnackBar(scaffoldState: ScaffoldState, viewModel: MainViewModel)
 @Composable
 fun MainScreenPreview() {
 
-    val viewModel = MainViewModel(LocalContext.current, mockArticles = true)
+    val viewModel = MainViewModel(LocalContext.current, useFakeData = true)
 
     MainScreen(
         viewModel,

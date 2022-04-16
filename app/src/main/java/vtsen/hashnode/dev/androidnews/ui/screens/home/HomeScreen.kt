@@ -26,7 +26,7 @@ fun HomeScreen(
 @Composable
 private fun DefaultPreview() {
 
-    val viewModel = MainViewModel(LocalContext.current, mockArticles = true)
+    val viewModel = MainViewModel(LocalContext.current, useFakeData = true)
 
     HomeScreen(
         viewModel,

@@ -1,4 +1,4 @@
-package vtsen.hashnode.dev.androidnews.repository.local
+package vtsen.hashnode.dev.androidnews.data.local
 
 import android.content.Context
 import androidx.room.Database

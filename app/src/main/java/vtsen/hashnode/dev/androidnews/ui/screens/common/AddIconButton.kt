@@ -4,7 +4,7 @@ import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.painter.Painter
-import vtsen.hashnode.dev.androidnews.viewmodel.Article
+import vtsen.hashnode.dev.androidnews.ui.viewmodel.Article
 
 @Composable
 fun AddIconButton(

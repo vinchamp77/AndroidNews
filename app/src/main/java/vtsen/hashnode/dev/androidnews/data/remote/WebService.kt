@@ -1,4 +1,4 @@
-package vtsen.hashnode.dev.androidnews.repository.remote
+package vtsen.hashnode.dev.androidnews.data.remote
 
 import io.ktor.client.*
 import io.ktor.client.call.*

@@ -1,4 +1,4 @@
-package vtsen.hashnode.dev.androidnews.repository.remote
+package vtsen.hashnode.dev.androidnews.data.remote
 
 data class ArticleFeed(
     val feedItem: FeedItem,

@@ -1,4 +1,4 @@
-package vtsen.hashnode.dev.androidnews.viewmodel
+package vtsen.hashnode.dev.androidnews.ui.viewmodel
 
 import android.content.Context
 import androidx.compose.runtime.getValue
@@ -11,10 +11,10 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import vtsen.hashnode.dev.androidnews.R
-import vtsen.hashnode.dev.androidnews.repository.MainRepository
-import vtsen.hashnode.dev.androidnews.repository.local.ArticlesDatabase
-import vtsen.hashnode.dev.androidnews.repository.local.asArticles
-import vtsen.hashnode.dev.androidnews.repository.remote.WebService
+import vtsen.hashnode.dev.androidnews.data.repository.MainRepository
+import vtsen.hashnode.dev.androidnews.data.local.ArticlesDatabase
+import vtsen.hashnode.dev.androidnews.data.local.asArticles
+import vtsen.hashnode.dev.androidnews.data.remote.WebService
 import vtsen.hashnode.dev.androidnews.utils.Utils
 
 class MainViewModel(

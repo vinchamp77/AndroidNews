@@ -1,4 +1,4 @@
-package vtsen.hashnode.dev.androidnews.repository.remote
+package vtsen.hashnode.dev.androidnews.data.remote
 
 import org.xmlpull.v1.XmlPullParser
 import org.xmlpull.v1.XmlPullParserFactory

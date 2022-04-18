@@ -12,7 +12,7 @@ import vtsen.hashnode.dev.androidnews.ui.screens.bookmarks.BookmarksScreen
 import vtsen.hashnode.dev.androidnews.ui.screens.home.HomeScreen
 import vtsen.hashnode.dev.androidnews.ui.screens.searchresults.SearchResultsScreen
 import vtsen.hashnode.dev.androidnews.ui.screens.unread.UnreadScreen
-import vtsen.hashnode.dev.androidnews.viewmodel.MainViewModel
+import vtsen.hashnode.dev.androidnews.ui.viewmodel.MainViewModel
 
 @Composable
 fun BuildNavGraph(viewModel: MainViewModel, navHostController: NavHostController) {

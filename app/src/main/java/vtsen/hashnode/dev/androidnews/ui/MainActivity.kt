@@ -8,8 +8,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import vtsen.hashnode.dev.androidnews.ui.screens.MainScreen
 import vtsen.hashnode.dev.androidnews.ui.screens.MainScreenPreview
-import vtsen.hashnode.dev.androidnews.viewmodel.MainViewModel
-import vtsen.hashnode.dev.androidnews.viewmodel.MainViewModelFactory
+import vtsen.hashnode.dev.androidnews.ui.viewmodel.MainViewModel
+import vtsen.hashnode.dev.androidnews.ui.viewmodel.MainViewModelFactory
 
 class MainActivity : ComponentActivity() {
 

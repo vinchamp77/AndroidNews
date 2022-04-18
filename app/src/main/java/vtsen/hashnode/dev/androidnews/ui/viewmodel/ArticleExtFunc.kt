@@ -1,6 +1,6 @@
-package vtsen.hashnode.dev.androidnews.viewmodel
+package vtsen.hashnode.dev.androidnews.ui.viewmodel
 
-import vtsen.hashnode.dev.androidnews.repository.local.ArticleEntity
+import vtsen.hashnode.dev.androidnews.data.local.ArticleEntity
 
 fun Article.asArticleEntity(
     bookmarked: Boolean? = null,

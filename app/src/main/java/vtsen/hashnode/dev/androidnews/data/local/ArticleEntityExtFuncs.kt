@@ -1,6 +1,6 @@
-package vtsen.hashnode.dev.androidnews.repository.local
+package vtsen.hashnode.dev.androidnews.data.local
 
-import vtsen.hashnode.dev.androidnews.viewmodel.Article
+import vtsen.hashnode.dev.androidnews.ui.viewmodel.Article
 
 fun List<ArticleEntity>.asArticles() : List<Article> {
     return map { articleEntity ->

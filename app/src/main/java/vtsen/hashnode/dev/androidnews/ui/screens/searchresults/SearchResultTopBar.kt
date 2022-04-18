@@ -8,7 +8,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import vtsen.hashnode.dev.androidnews.R
-import vtsen.hashnode.dev.androidnews.viewmodel.MainViewModel
+import vtsen.hashnode.dev.androidnews.ui.viewmodel.MainViewModel
 
 @Composable
 fun SearchResultsTopBar(navHostController: NavHostController, viewModel: MainViewModel) {

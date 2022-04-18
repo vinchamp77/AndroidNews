@@ -1,6 +1,6 @@
-package vtsen.hashnode.dev.androidnews.repository.remote
+package vtsen.hashnode.dev.androidnews.data.remote
 
-import vtsen.hashnode.dev.androidnews.repository.local.ArticleEntity
+import vtsen.hashnode.dev.androidnews.data.local.ArticleEntity
 import vtsen.hashnode.dev.androidnews.utils.Utils
 
 fun List<ArticleFeed>.asArticleEntities() : List<ArticleEntity> {

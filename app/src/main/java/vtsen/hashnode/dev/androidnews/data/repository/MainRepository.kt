@@ -1,13 +1,13 @@
-package vtsen.hashnode.dev.androidnews.repository
+package vtsen.hashnode.dev.androidnews.data.repository
 
 import kotlinx.coroutines.*
-import vtsen.hashnode.dev.androidnews.repository.local.ArticleEntity
-import vtsen.hashnode.dev.androidnews.repository.local.ArticlesDatabase
-import vtsen.hashnode.dev.androidnews.repository.local.asArticleEntity
-import vtsen.hashnode.dev.androidnews.repository.remote.ArticleFeed
-import vtsen.hashnode.dev.androidnews.repository.remote.FeedParser
-import vtsen.hashnode.dev.androidnews.repository.remote.WebService
-import vtsen.hashnode.dev.androidnews.repository.remote.asArticleEntities
+import vtsen.hashnode.dev.androidnews.data.local.ArticleEntity
+import vtsen.hashnode.dev.androidnews.data.local.ArticlesDatabase
+import vtsen.hashnode.dev.androidnews.data.local.asArticleEntity
+import vtsen.hashnode.dev.androidnews.data.remote.ArticleFeed
+import vtsen.hashnode.dev.androidnews.data.remote.FeedParser
+import vtsen.hashnode.dev.androidnews.data.remote.WebService
+import vtsen.hashnode.dev.androidnews.data.remote.asArticleEntities
 
 
 class MainRepository(

@@ -17,8 +17,8 @@ import androidx.core.content.ContextCompat
 import vtsen.hashnode.dev.androidnews.R
 import vtsen.hashnode.dev.androidnews.ui.screens.home.ArticleCard
 import vtsen.hashnode.dev.androidnews.ui.theme.PaddingSmall
-import vtsen.hashnode.dev.androidnews.viewmodel.Article
-import vtsen.hashnode.dev.androidnews.viewmodel.MainViewModel
+import vtsen.hashnode.dev.androidnews.ui.viewmodel.Article
+import vtsen.hashnode.dev.androidnews.ui.viewmodel.MainViewModel
 
 @Composable
 fun ArticlesScreen(

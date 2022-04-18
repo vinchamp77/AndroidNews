@@ -21,7 +21,7 @@ import vtsen.hashnode.dev.androidnews.ui.screens.navigation.BuildNavGraph
 import vtsen.hashnode.dev.androidnews.ui.screens.navigation.NavRoute
 import vtsen.hashnode.dev.androidnews.ui.screens.unread.UnreadArticlesTopBar
 import vtsen.hashnode.dev.androidnews.ui.theme.AndroidNewsTheme
-import vtsen.hashnode.dev.androidnews.viewmodel.MainViewModel
+import vtsen.hashnode.dev.androidnews.ui.viewmodel.MainViewModel
 
 @Composable
 fun MainScreen(viewModel: MainViewModel, useSystemUIController: Boolean) {

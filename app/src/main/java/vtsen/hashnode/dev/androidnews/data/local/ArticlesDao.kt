@@ -1,4 +1,4 @@
-package vtsen.hashnode.dev.androidnews.repository.local
+package vtsen.hashnode.dev.androidnews.data.local
 
 import androidx.room.*
 import kotlinx.coroutines.flow.Flow

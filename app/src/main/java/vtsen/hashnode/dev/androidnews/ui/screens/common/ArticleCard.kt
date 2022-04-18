@@ -20,7 +20,7 @@ import vtsen.hashnode.dev.androidnews.ui.screens.common.AddIconButton
 import vtsen.hashnode.dev.androidnews.ui.theme.PaddingMedium
 import vtsen.hashnode.dev.androidnews.ui.theme.PaddingSmall
 import vtsen.hashnode.dev.androidnews.utils.Utils
-import vtsen.hashnode.dev.androidnews.viewmodel.Article
+import vtsen.hashnode.dev.androidnews.ui.viewmodel.Article
 
 @Composable
 fun ArticleCard(

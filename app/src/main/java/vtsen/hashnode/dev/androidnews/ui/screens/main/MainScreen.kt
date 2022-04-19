@@ -24,10 +24,10 @@ import vtsen.hashnode.dev.androidnews.ui.screens.navigation.BuildNavGraph
 import vtsen.hashnode.dev.androidnews.ui.screens.navigation.NavRoute
 import vtsen.hashnode.dev.androidnews.ui.screens.unread.UnreadArticlesTopBar
 import vtsen.hashnode.dev.androidnews.ui.theme.AndroidNewsTheme
-import vtsen.hashnode.dev.androidnews.ui.viewmodel.MainViewModel
+import vtsen.hashnode.dev.androidnews.ui.screens.home.HomeViewModel
 
 @Composable
-fun MainScreen(viewModel: MainViewModel, useSystemUIController: Boolean) {
+fun MainScreen(viewModel: HomeViewModel, useSystemUIController: Boolean) {
     AndroidNewsTheme(useSystemUIController = useSystemUIController) {
 
         val scaffoldState = rememberScaffoldState()
@@ -46,7 +46,7 @@ fun MainScreen(viewModel: MainViewModel, useSystemUIController: Boolean) {
 }
 
 @Composable
-private fun TopBar(navHostController: NavHostController, viewModel: MainViewModel) {
+private fun TopBar(navHostController: NavHostController, viewModel: HomeViewModel) {
 
     val navBackStackEntry by navHostController.currentBackStackEntryAsState()
     val currentNavRoutePath = navBackStackEntry?.destination?.route ?: return
@@ -72,7 +72,7 @@ private fun TopBar(navHostController: NavHostController, viewModel: MainViewMode
 }
 
 @Composable
-private fun ShowSnackBar(scaffoldState: ScaffoldState, viewModel: MainViewModel) {
+private fun ShowSnackBar(scaffoldState: ScaffoldState, viewModel: HomeViewModel) {
 
     viewModel.showSnackBarStringId?.let { stringId ->
         val msg = stringResource(stringId)
@@ -95,7 +95,7 @@ fun MainScreenPreview() {
         ArticlesDatabase.getInstance(LocalContext.current),
         WebService(),
     )
-    val viewModel = MainViewModel(repository, useFakeData = true)
+    val viewModel = HomeViewModel(repository, useFakeData = true)
 
     MainScreen(
         viewModel,

@@ -1,7 +1,6 @@
 package vtsen.hashnode.dev.androidnews
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import androidx.compose.ui.platform.LocalContext
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import kotlinx.coroutines.delay
@@ -14,13 +13,13 @@ import org.junit.runner.RunWith
 import vtsen.hashnode.dev.androidnews.data.local.ArticlesDatabase
 import vtsen.hashnode.dev.androidnews.data.remote.WebService
 import vtsen.hashnode.dev.androidnews.data.repository.MainRepository
-import vtsen.hashnode.dev.androidnews.ui.viewmodel.MainViewModel
+import vtsen.hashnode.dev.androidnews.ui.screens.home.HomeViewModel
 
 @RunWith(AndroidJUnit4::class)
-class MainViewModelTest {
+class HomeViewModelTest {
 
-    private lateinit var viewModel: MainViewModel
-    private lateinit var mockViewModel: MainViewModel
+    private lateinit var viewModel: HomeViewModel
+    private lateinit var mockViewModel: HomeViewModel
 
     @get:Rule
     var instantExecutorRule = InstantTaskExecutorRule()
@@ -31,8 +30,8 @@ class MainViewModelTest {
             ArticlesDatabase.getInstance(ApplicationProvider.getApplicationContext()),
             WebService(),
         )
-        viewModel = MainViewModel(repository)
-        mockViewModel = MainViewModel(repository, useFakeData = true)
+        viewModel = HomeViewModel(repository)
+        mockViewModel = HomeViewModel(repository, useFakeData = true)
     }
 
     @Test

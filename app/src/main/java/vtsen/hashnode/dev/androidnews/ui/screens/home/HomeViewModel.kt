@@ -1,6 +1,5 @@
-package vtsen.hashnode.dev.androidnews.ui.viewmodel
+package vtsen.hashnode.dev.androidnews.ui.screens.home
 
-import android.content.Context
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -12,12 +11,12 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import vtsen.hashnode.dev.androidnews.R
 import vtsen.hashnode.dev.androidnews.data.repository.MainRepository
-import vtsen.hashnode.dev.androidnews.data.local.ArticlesDatabase
 import vtsen.hashnode.dev.androidnews.data.local.asArticles
-import vtsen.hashnode.dev.androidnews.data.remote.WebService
+import vtsen.hashnode.dev.androidnews.domain.model.Article
+import vtsen.hashnode.dev.androidnews.ui.viewmodel.asArticleEntity
 import vtsen.hashnode.dev.androidnews.utils.Utils
 
-class MainViewModel(
+class HomeViewModel(
     private val repository: MainRepository,
     useFakeData: Boolean = false,
 ) : ViewModel() {

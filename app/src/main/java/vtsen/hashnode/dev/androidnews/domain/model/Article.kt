@@ -1,4 +1,4 @@
-package vtsen.hashnode.dev.androidnews.ui.viewmodel
+package vtsen.hashnode.dev.androidnews.domain.model
 
 data class Article(
     val id: Int,

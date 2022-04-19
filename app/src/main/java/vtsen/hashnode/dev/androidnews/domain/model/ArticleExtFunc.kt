@@ -1,6 +1,7 @@
 package vtsen.hashnode.dev.androidnews.ui.viewmodel
 
 import vtsen.hashnode.dev.androidnews.data.local.ArticleEntity
+import vtsen.hashnode.dev.androidnews.domain.model.Article
 
 fun Article.asArticleEntity(
     bookmarked: Boolean? = null,

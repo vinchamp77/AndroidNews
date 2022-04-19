@@ -8,7 +8,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.viewinterop.AndroidView
-import vtsen.hashnode.dev.androidnews.ui.viewmodel.Article
+import vtsen.hashnode.dev.androidnews.domain.model.Article
 
 @Composable
 fun ArticleScreen(article: Article) {

@@ -1,6 +1,6 @@
 package vtsen.hashnode.dev.androidnews.utils
 
-import vtsen.hashnode.dev.androidnews.ui.viewmodel.Article
+import vtsen.hashnode.dev.androidnews.domain.model.Article
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*

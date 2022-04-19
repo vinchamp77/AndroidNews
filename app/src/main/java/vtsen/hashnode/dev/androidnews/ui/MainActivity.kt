@@ -11,23 +11,26 @@ import vtsen.hashnode.dev.androidnews.data.remote.WebService
 import vtsen.hashnode.dev.androidnews.data.repository.MainRepository
 import vtsen.hashnode.dev.androidnews.ui.screens.MainScreen
 import vtsen.hashnode.dev.androidnews.ui.screens.MainScreenPreview
-import vtsen.hashnode.dev.androidnews.ui.viewmodel.MainViewModel
-import vtsen.hashnode.dev.androidnews.ui.viewmodel.MainViewModelFactory
+import vtsen.hashnode.dev.androidnews.ui.screens.home.HomeViewModel
+import vtsen.hashnode.dev.androidnews.ui.screens.home.HomeViewModelFactory
 
 class MainActivity : ComponentActivity() {
 
-    private val viewModel by viewModels<MainViewModel> {
-        val repository = MainRepository(
+    private val repository by lazy {
+        MainRepository(
             ArticlesDatabase.getInstance(application),
             WebService(),
         )
-        MainViewModelFactory(repository)
+    }
+
+    private val homeViewModel by viewModels<HomeViewModel> {
+        HomeViewModelFactory(repository)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            MainScreen(viewModel, useSystemUIController = true)
+            MainScreen(homeViewModel, useSystemUIController = true)
         }
     }
 }

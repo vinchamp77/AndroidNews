@@ -15,6 +15,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.content.ContextCompat
 import vtsen.hashnode.dev.androidnews.R
+import vtsen.hashnode.dev.androidnews.data.local.ArticlesDatabase
+import vtsen.hashnode.dev.androidnews.data.remote.WebService
+import vtsen.hashnode.dev.androidnews.data.repository.MainRepository
 import vtsen.hashnode.dev.androidnews.ui.screens.home.ArticleCard
 import vtsen.hashnode.dev.androidnews.ui.theme.PaddingSmall
 import vtsen.hashnode.dev.androidnews.ui.viewmodel.Article
@@ -86,7 +89,11 @@ private fun shareArticle(context: Context, link: String) {
 @Composable
 private fun DefaultPreview() {
 
-    val viewModel = MainViewModel(LocalContext.current, useFakeData = true)
+    val repository = MainRepository(
+        ArticlesDatabase.getInstance(LocalContext.current),
+        WebService(),
+    )
+    val viewModel = MainViewModel(repository, useFakeData = true)
 
     ArticlesScreen(
         viewModel = viewModel,

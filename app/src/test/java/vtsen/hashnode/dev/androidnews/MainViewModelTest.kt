@@ -1,6 +1,7 @@
 package vtsen.hashnode.dev.androidnews
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.compose.ui.platform.LocalContext
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import kotlinx.coroutines.delay
@@ -10,6 +11,9 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import vtsen.hashnode.dev.androidnews.data.local.ArticlesDatabase
+import vtsen.hashnode.dev.androidnews.data.remote.WebService
+import vtsen.hashnode.dev.androidnews.data.repository.MainRepository
 import vtsen.hashnode.dev.androidnews.ui.viewmodel.MainViewModel
 
 @RunWith(AndroidJUnit4::class)
@@ -23,8 +27,12 @@ class MainViewModelTest {
 
     @Before
     fun setupViewModel() {
-        viewModel = MainViewModel(ApplicationProvider.getApplicationContext())
-        mockViewModel = MainViewModel(ApplicationProvider.getApplicationContext(), useFakeData = true)
+        val repository = MainRepository(
+            ArticlesDatabase.getInstance(ApplicationProvider.getApplicationContext()),
+            WebService(),
+        )
+        viewModel = MainViewModel(repository)
+        mockViewModel = MainViewModel(repository, useFakeData = true)
     }
 
     @Test

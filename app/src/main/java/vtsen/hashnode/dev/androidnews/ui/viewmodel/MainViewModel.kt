@@ -18,14 +18,10 @@ import vtsen.hashnode.dev.androidnews.data.remote.WebService
 import vtsen.hashnode.dev.androidnews.utils.Utils
 
 class MainViewModel(
-    context: Context,
+    private val repository: MainRepository,
     useFakeData: Boolean = false,
 ) : ViewModel() {
-    // Repository
-    private val repository = MainRepository(
-        ArticlesDatabase.getInstance(context),
-        WebService(),
-    )
+
     // All articles
     private val articlesFlow = repository.articlesFlow.map { articleEntity ->
         articleEntity.asArticles()

@@ -8,6 +8,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import vtsen.hashnode.dev.androidnews.R
+import vtsen.hashnode.dev.androidnews.data.local.ArticlesDatabase
+import vtsen.hashnode.dev.androidnews.data.remote.WebService
+import vtsen.hashnode.dev.androidnews.data.repository.MainRepository
 import vtsen.hashnode.dev.androidnews.ui.viewmodel.MainViewModel
 
 @Composable
@@ -28,7 +31,11 @@ fun SearchResultsTopBar(navHostController: NavHostController, viewModel: MainVie
 @Composable
 private fun DefaultPreview() {
 
-    val viewModel = MainViewModel(LocalContext.current, useFakeData = true)
+    val repository = MainRepository(
+        ArticlesDatabase.getInstance(LocalContext.current),
+        WebService(),
+    )
+    val viewModel = MainViewModel(repository, useFakeData = true)
     val navHostController = rememberNavController()
 
     SearchResultsTopBar(

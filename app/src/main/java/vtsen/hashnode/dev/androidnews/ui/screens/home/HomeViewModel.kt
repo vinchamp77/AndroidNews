@@ -7,52 +7,33 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import vtsen.hashnode.dev.androidnews.R
-import vtsen.hashnode.dev.androidnews.data.repository.MainRepository
-import vtsen.hashnode.dev.androidnews.data.local.asArticles
 import vtsen.hashnode.dev.androidnews.domain.model.Article
-import vtsen.hashnode.dev.androidnews.ui.viewmodel.asArticleEntity
+import vtsen.hashnode.dev.androidnews.domain.repository.ArticlesRepository
 import vtsen.hashnode.dev.androidnews.utils.Utils
 
 class HomeViewModel(
-    private val repository: MainRepository,
+    private val repository: ArticlesRepository,
     useFakeData: Boolean = false,
 ) : ViewModel() {
 
-    // All articles
-    private val articlesFlow = repository.articlesFlow.map { articleEntity ->
-        articleEntity.asArticles()
-    }
     var allArticles: List<Article>? by mutableStateOf(null)
         private set
-    // Bookmarked articles
-    private val bookmarkedArticlesFlow = repository.bookmarkedArticlesFlow.map { articleEntity ->
-        articleEntity.asArticles()
-    }
     var bookmarkedArticles: List<Article>? by mutableStateOf(null)
         private set
-    // Unread articles
-    private val unreadArticlesFlow = repository.unreadArticlesFlow.map { articleEntity ->
-        articleEntity.asArticles()
-    }
     var unreadArticles: List<Article>? by mutableStateOf(null)
         private set
-    // Current article
     var currentArticle: Article? by mutableStateOf(null)
-
         private set
-    // Snack bar id
+
     var showSnackBarStringId: Int? by mutableStateOf(null)
         private set
-    // Search string
+
     var searchQuery: String by mutableStateOf("")
         private set
-    // Searched articles
     var searchedArticles: List<Article>? by mutableStateOf(null)
         private set
-    // Searched result title
     var searchedResultResId: Int? by mutableStateOf(null)
         private set
 
@@ -81,14 +62,14 @@ class HomeViewModel(
 
     fun onReadClick(id: Int) = viewModelScope.launch {
         val article = getArticle(id)
-        repository.updateArticle(article.asArticleEntity(read = !article.read))
+        repository.updateArticle(article.copy(read = !article.read))
 
         updateSearchedArticles()
     }
 
     fun onBookmarkClick(id: Int) = viewModelScope.launch {
         val article = getArticle(id)
-        repository.updateArticle(article.asArticleEntity(bookmarked = !article.bookmarked))
+        repository.updateArticle(article.copy(bookmarked = !article.bookmarked))
 
         updateSearchedArticles()
     }
@@ -134,13 +115,13 @@ class HomeViewModel(
         if(searchQuery.isEmpty()) return
 
         if (searchedResultResId == R.string.all_articles) {
-            searchedArticles = repository.getAllArticlesByTitle(searchQuery).asArticles()
+            searchedArticles = repository.getAllArticlesByTitle(searchQuery)
 
         } else if (searchedResultResId == R.string.unread_articles) {
-            searchedArticles = repository.getUnreadArticlesByTitle(searchQuery).asArticles()
+            searchedArticles = repository.getUnreadArticlesByTitle(searchQuery)
 
         } else if (searchedResultResId == R.string.bookmarked_articles) {
-            searchedArticles = repository.getBookmarkedArticlesByTitle(searchQuery).asArticles()
+            searchedArticles = repository.getBookmarkedArticlesByTitle(searchQuery)
 
         } else {
             throw Exception("Unexpected updateSearchedArticles()!")
@@ -168,7 +149,7 @@ class HomeViewModel(
     private fun refresh() {
         viewModelScope.launch {
             val status = repository.refresh()
-            if (status == MainRepository.Status.FAIL) {
+            if (status == ArticlesRepository.Status.FAIL) {
                 showSnackBarStringId = R.string.no_internet
             }
         }
@@ -178,19 +159,19 @@ class HomeViewModel(
         viewModelScope.launch(Dispatchers.IO) {
 
             launch {
-                articlesFlow.collect { articles ->
+                repository.articlesFlow.collect { articles ->
                     allArticles = articles
                 }
             }
 
             launch {
-                bookmarkedArticlesFlow.collect { articles ->
+                repository.bookmarkedArticlesFlow.collect { articles ->
                     bookmarkedArticles = articles
                 }
             }
 
             launch {
-                unreadArticlesFlow.collect { articles ->
+                repository.unreadArticlesFlow.collect { articles ->
                     unreadArticles = articles
                 }
             }

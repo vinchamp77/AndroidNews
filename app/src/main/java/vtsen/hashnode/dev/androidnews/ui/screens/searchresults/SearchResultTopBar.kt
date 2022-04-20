@@ -10,7 +10,7 @@ import androidx.navigation.compose.rememberNavController
 import vtsen.hashnode.dev.androidnews.R
 import vtsen.hashnode.dev.androidnews.data.local.ArticlesDatabase
 import vtsen.hashnode.dev.androidnews.data.remote.WebService
-import vtsen.hashnode.dev.androidnews.data.repository.MainRepository
+import vtsen.hashnode.dev.androidnews.data.repository.SqlArticlesRepository
 
 @Composable
 fun SearchResultsTopBar(navHostController: NavHostController, viewModel: HomeViewModel) {
@@ -30,7 +30,7 @@ fun SearchResultsTopBar(navHostController: NavHostController, viewModel: HomeVie
 @Composable
 private fun DefaultPreview() {
 
-    val repository = MainRepository(
+    val repository = SqlArticlesRepository(
         ArticlesDatabase.getInstance(LocalContext.current),
         WebService(),
     )

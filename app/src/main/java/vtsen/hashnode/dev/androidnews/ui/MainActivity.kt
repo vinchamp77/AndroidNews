@@ -8,7 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import vtsen.hashnode.dev.androidnews.data.local.ArticlesDatabase
 import vtsen.hashnode.dev.androidnews.data.remote.WebService
-import vtsen.hashnode.dev.androidnews.data.repository.MainRepository
+import vtsen.hashnode.dev.androidnews.data.repository.SqlArticlesRepository
 import vtsen.hashnode.dev.androidnews.ui.screens.MainScreen
 import vtsen.hashnode.dev.androidnews.ui.screens.MainScreenPreview
 import vtsen.hashnode.dev.androidnews.ui.screens.home.HomeViewModel
@@ -17,7 +17,7 @@ import vtsen.hashnode.dev.androidnews.ui.screens.home.HomeViewModelFactory
 class MainActivity : ComponentActivity() {
 
     private val repository by lazy {
-        MainRepository(
+        SqlArticlesRepository(
             ArticlesDatabase.getInstance(application),
             WebService(),
         )

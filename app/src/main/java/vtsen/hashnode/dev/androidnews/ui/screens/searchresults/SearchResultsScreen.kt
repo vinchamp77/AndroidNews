@@ -6,7 +6,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import vtsen.hashnode.dev.androidnews.R
 import vtsen.hashnode.dev.androidnews.data.local.ArticlesDatabase
 import vtsen.hashnode.dev.androidnews.data.remote.WebService
-import vtsen.hashnode.dev.androidnews.data.repository.MainRepository
+import vtsen.hashnode.dev.androidnews.data.repository.SqlArticlesRepository
 import vtsen.hashnode.dev.androidnews.ui.screens.common.ArticlesScreen
 import vtsen.hashnode.dev.androidnews.ui.screens.home.HomeViewModel
 
@@ -29,7 +29,7 @@ fun SearchResultsScreen(
 @Composable
 private fun DefaultPreview() {
 
-    val repository = MainRepository(
+    val repository = SqlArticlesRepository(
         ArticlesDatabase.getInstance(LocalContext.current),
         WebService(),
     )

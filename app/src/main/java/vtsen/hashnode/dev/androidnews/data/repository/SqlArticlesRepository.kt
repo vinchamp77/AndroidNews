@@ -1,35 +1,43 @@
 package vtsen.hashnode.dev.androidnews.data.repository
 
 import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.map
 import vtsen.hashnode.dev.androidnews.data.local.ArticleEntity
 import vtsen.hashnode.dev.androidnews.data.local.ArticlesDatabase
-import vtsen.hashnode.dev.androidnews.data.local.asArticleEntity
+import vtsen.hashnode.dev.androidnews.data.local.asArticle
+import vtsen.hashnode.dev.androidnews.data.local.asArticles
 import vtsen.hashnode.dev.androidnews.data.remote.ArticleFeed
 import vtsen.hashnode.dev.androidnews.data.remote.FeedParser
 import vtsen.hashnode.dev.androidnews.data.remote.WebService
 import vtsen.hashnode.dev.androidnews.data.remote.asArticleEntities
+import vtsen.hashnode.dev.androidnews.domain.model.Article
+import vtsen.hashnode.dev.androidnews.domain.repository.ArticlesRepository
+import vtsen.hashnode.dev.androidnews.ui.viewmodel.asArticleEntity
 
-
-class MainRepository(
+class SqlArticlesRepository(
     private val database: ArticlesDatabase,
     private val webService: WebService,
-) {
-    enum class Status {
-        SUCCESS,
-        FAIL,
-    }
-
-    val articlesFlow = database.selectAllArticles()
-    val unreadArticlesFlow = database.selectUnreadArticles()
-    val bookmarkedArticlesFlow = database.selectBookmarkedArticles()
+) : ArticlesRepository {
 
     private val urls = listOf(
         "https://vtsen.hashnode.dev/rss.xml",
     )
 
-    suspend fun refresh(): Status = withContext(Dispatchers.IO) {
+    override val articlesFlow = database.selectAllArticles().map { articlesEntity ->
+        articlesEntity.asArticles()
+    }
 
-        var status = Status.SUCCESS
+    override val unreadArticlesFlow = database.selectUnreadArticles().map { articleEntity ->
+        articleEntity.asArticles()
+    }
+
+    override val bookmarkedArticlesFlow = database.selectBookmarkedArticles().map { articleEntity ->
+        articleEntity.asArticles()
+    }
+
+    override suspend fun refresh(): ArticlesRepository.Status = withContext(Dispatchers.IO) {
+
+        var status = ArticlesRepository.Status.SUCCESS
 
         try {
             val articlesFeed = fetchArticlesFeed()
@@ -37,30 +45,30 @@ class MainRepository(
 
         } catch(e: Exception) {
             e.printStackTrace()
-            status = Status.FAIL
+            status = ArticlesRepository.Status.FAIL
         }
 
         status
     }
 
-    suspend fun updateArticle(articleEntity: ArticleEntity) = withContext(Dispatchers.IO) {
-        database.updateArticle(articleEntity)
+    override suspend fun updateArticle(article: Article) = withContext(Dispatchers.IO) {
+        database.updateArticle(article.asArticleEntity())
     }
 
-    suspend fun getArticle(id: Int) = withContext(Dispatchers.IO) {
-        database.selectArticleById(id)
+    override suspend fun getArticle(id: Int) = withContext(Dispatchers.IO) {
+        database.selectArticleById(id).asArticle()
     }
 
-    suspend fun getAllArticlesByTitle(title: String): List<ArticleEntity> = withContext(Dispatchers.IO) {
-        return@withContext database.selectAllArticlesByTitle(title)
+    override suspend fun getAllArticlesByTitle(title: String): List<Article> = withContext(Dispatchers.IO) {
+        return@withContext database.selectAllArticlesByTitle(title).asArticles()
     }
 
-    suspend fun getUnreadArticlesByTitle(title: String): List<ArticleEntity> = withContext(Dispatchers.IO) {
-        return@withContext database.selectUnreadArticlesByTitle(title)
+    override suspend fun getUnreadArticlesByTitle(title: String): List<Article> = withContext(Dispatchers.IO) {
+        return@withContext database.selectUnreadArticlesByTitle(title).asArticles()
     }
 
-    suspend fun getBookmarkedArticlesByTitle(title: String): List<ArticleEntity> = withContext(Dispatchers.IO) {
-        return@withContext database.selectBookmarkedArticlesByTitle(title)
+    override suspend fun getBookmarkedArticlesByTitle(title: String): List<Article> = withContext(Dispatchers.IO) {
+        return@withContext database.selectBookmarkedArticlesByTitle(title).asArticles()
     }
 
     private suspend fun fetchArticlesFeed() : List<ArticleFeed> = coroutineScope {
@@ -92,10 +100,10 @@ class MainRepository(
                     //Important Note:
                     // (1) articleEntity.id is different than the one in articleFound.id (database)
                     // (2) We want to keep the saved bookmarked and read articles, do not want to overwrites it
-                    val data = articleEntity.asArticleEntity(
-                        articleFound.id,
-                        articleFound.bookmarked,
-                        articleFound.read,
+                    val data = articleEntity.copy(
+                        id = articleFound.id,
+                        bookmarked = articleFound.bookmarked,
+                        read = articleFound.read,
                     )
                     database.updateArticle(data)
                 }

@@ -17,7 +17,7 @@ import androidx.core.content.ContextCompat
 import vtsen.hashnode.dev.androidnews.R
 import vtsen.hashnode.dev.androidnews.data.local.ArticlesDatabase
 import vtsen.hashnode.dev.androidnews.data.remote.WebService
-import vtsen.hashnode.dev.androidnews.data.repository.MainRepository
+import vtsen.hashnode.dev.androidnews.data.repository.SqlArticlesRepository
 import vtsen.hashnode.dev.androidnews.ui.screens.home.ArticleCard
 import vtsen.hashnode.dev.androidnews.ui.theme.PaddingSmall
 import vtsen.hashnode.dev.androidnews.domain.model.Article
@@ -89,7 +89,7 @@ private fun shareArticle(context: Context, link: String) {
 @Composable
 private fun DefaultPreview() {
 
-    val repository = MainRepository(
+    val repository = SqlArticlesRepository(
         ArticlesDatabase.getInstance(LocalContext.current),
         WebService(),
     )

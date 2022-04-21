@@ -11,9 +11,10 @@ import vtsen.hashnode.dev.androidnews.R
 import vtsen.hashnode.dev.androidnews.data.local.ArticlesDatabase
 import vtsen.hashnode.dev.androidnews.data.remote.WebService
 import vtsen.hashnode.dev.androidnews.data.repository.SqlArticlesRepository
+import vtsen.hashnode.dev.androidnews.ui.viewmodel.MainViewModel
 
 @Composable
-fun SearchResultsTopBar(navHostController: NavHostController, viewModel: HomeViewModel) {
+fun SearchResultsTopBar(navHostController: NavHostController, viewModel: MainViewModel) {
 
     TopAppBar {
 
@@ -34,7 +35,7 @@ private fun DefaultPreview() {
         ArticlesDatabase.getInstance(LocalContext.current),
         WebService(),
     )
-    val viewModel = HomeViewModel(repository, useFakeData = true)
+    val viewModel = MainViewModel(repository, useFakeData = true)
     val navHostController = rememberNavController()
 
     SearchResultsTopBar(

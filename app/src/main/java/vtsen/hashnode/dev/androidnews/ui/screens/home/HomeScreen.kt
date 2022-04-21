@@ -8,10 +8,11 @@ import vtsen.hashnode.dev.androidnews.data.local.ArticlesDatabase
 import vtsen.hashnode.dev.androidnews.data.remote.WebService
 import vtsen.hashnode.dev.androidnews.data.repository.SqlArticlesRepository
 import vtsen.hashnode.dev.androidnews.ui.screens.common.ArticlesScreen
+import vtsen.hashnode.dev.androidnews.ui.viewmodel.MainViewModel
 
 @Composable
 fun HomeScreen(
-    viewModel: HomeViewModel,
+    viewModel: MainViewModel,
     navigateToArticle: (Int) -> Unit,
 ) {
     if(viewModel.allArticles == null) return
@@ -32,7 +33,7 @@ private fun DefaultPreview() {
         ArticlesDatabase.getInstance(LocalContext.current),
         WebService(),
     )
-    val viewModel = HomeViewModel(repository, useFakeData = true)
+    val viewModel = MainViewModel(repository, useFakeData = true)
 
     HomeScreen(
         viewModel,

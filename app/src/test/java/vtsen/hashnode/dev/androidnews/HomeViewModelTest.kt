@@ -13,13 +13,13 @@ import org.junit.runner.RunWith
 import vtsen.hashnode.dev.androidnews.data.local.ArticlesDatabase
 import vtsen.hashnode.dev.androidnews.data.remote.WebService
 import vtsen.hashnode.dev.androidnews.data.repository.SqlArticlesRepository
-import vtsen.hashnode.dev.androidnews.ui.screens.home.HomeViewModel
+import vtsen.hashnode.dev.androidnews.ui.viewmodel.MainViewModel
 
 @RunWith(AndroidJUnit4::class)
 class HomeViewModelTest {
 
-    private lateinit var viewModel: HomeViewModel
-    private lateinit var mockViewModel: HomeViewModel
+    private lateinit var viewModel: MainViewModel
+    private lateinit var mockViewModel: MainViewModel
 
     @get:Rule
     var instantExecutorRule = InstantTaskExecutorRule()
@@ -30,8 +30,8 @@ class HomeViewModelTest {
             ArticlesDatabase.getInstance(ApplicationProvider.getApplicationContext()),
             WebService(),
         )
-        viewModel = HomeViewModel(repository)
-        mockViewModel = HomeViewModel(repository, useFakeData = true)
+        viewModel = MainViewModel(repository)
+        mockViewModel = MainViewModel(repository, useFakeData = true)
     }
 
     @Test

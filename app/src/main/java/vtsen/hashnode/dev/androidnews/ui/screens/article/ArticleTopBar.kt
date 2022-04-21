@@ -20,10 +20,10 @@ import vtsen.hashnode.dev.androidnews.data.local.ArticlesDatabase
 import vtsen.hashnode.dev.androidnews.data.remote.WebService
 import vtsen.hashnode.dev.androidnews.data.repository.SqlArticlesRepository
 import vtsen.hashnode.dev.androidnews.ui.screens.common.AddIconButton
-import vtsen.hashnode.dev.androidnews.ui.screens.home.HomeViewModel
+import vtsen.hashnode.dev.androidnews.ui.viewmodel.MainViewModel
 
 @Composable
-fun ArticleTopBar(navHostController: NavHostController, viewModel: HomeViewModel) {
+fun ArticleTopBar(navHostController: NavHostController, viewModel: MainViewModel) {
     TopAppBar {
 
         Row(
@@ -73,7 +73,7 @@ private fun DefaultPreview() {
         ArticlesDatabase.getInstance(LocalContext.current),
         WebService(),
     )
-    val viewModel = HomeViewModel(repository, useFakeData = true)
+    val viewModel = MainViewModel(repository, useFakeData = true)
     val navHostController = rememberNavController()
 
     ArticleTopBar(

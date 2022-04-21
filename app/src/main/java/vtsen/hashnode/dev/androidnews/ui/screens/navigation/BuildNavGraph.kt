@@ -12,10 +12,10 @@ import vtsen.hashnode.dev.androidnews.ui.screens.bookmarks.BookmarksScreen
 import vtsen.hashnode.dev.androidnews.ui.screens.home.HomeScreen
 import vtsen.hashnode.dev.androidnews.ui.screens.searchresults.SearchResultsScreen
 import vtsen.hashnode.dev.androidnews.ui.screens.unread.UnreadScreen
-import vtsen.hashnode.dev.androidnews.ui.screens.home.HomeViewModel
+import vtsen.hashnode.dev.androidnews.ui.viewmodel.MainViewModel
 
 @Composable
-fun BuildNavGraph(viewModel: HomeViewModel, navHostController: NavHostController) {
+fun BuildNavGraph(viewModel: MainViewModel, navHostController: NavHostController) {
 
     NavHost(
         navController = navHostController,
@@ -33,7 +33,7 @@ fun BuildNavGraph(viewModel: HomeViewModel, navHostController: NavHostController
 private fun addHomeScreen(
     navHostController: NavHostController,
     navGraphBuilder: NavGraphBuilder,
-    viewModel: HomeViewModel
+    viewModel: MainViewModel
 ) {
     navGraphBuilder.composable(route = NavRoute.Home.path) {
 
@@ -49,7 +49,7 @@ private fun addHomeScreen(
 private fun addUnreadScreen(
     navHostController: NavHostController,
     navGraphBuilder: NavGraphBuilder,
-    viewModel: HomeViewModel
+    viewModel: MainViewModel
 ) {
     navGraphBuilder.composable(route = NavRoute.Unread.path) {
 
@@ -65,7 +65,7 @@ private fun addUnreadScreen(
 private fun addBookmarksScreen(
     navHostController: NavHostController,
     navGraphBuilder: NavGraphBuilder,
-    viewModel: HomeViewModel
+    viewModel: MainViewModel
 ) {
     navGraphBuilder.composable(route = NavRoute.Bookmarks.path) {
 
@@ -80,7 +80,7 @@ private fun addBookmarksScreen(
 
 private fun addArticleScreen(
     navGraphBuilder: NavGraphBuilder,
-    viewModel: HomeViewModel
+    viewModel: MainViewModel
 ) {
     navGraphBuilder.composable(
         route = NavRoute.Article.withArgsFormat(NavRoute.Article.id),
@@ -102,7 +102,7 @@ private fun addArticleScreen(
 private fun addSearchResultsScreen(
     navHostController: NavHostController,
     navGraphBuilder: NavGraphBuilder,
-    viewModel: HomeViewModel
+    viewModel: MainViewModel
 ) {
     navGraphBuilder.composable(
         route = NavRoute.SearchResults.path

@@ -11,8 +11,8 @@ import vtsen.hashnode.dev.androidnews.data.remote.WebService
 import vtsen.hashnode.dev.androidnews.data.repository.SqlArticlesRepository
 import vtsen.hashnode.dev.androidnews.ui.screens.MainScreen
 import vtsen.hashnode.dev.androidnews.ui.screens.MainScreenPreview
-import vtsen.hashnode.dev.androidnews.ui.screens.home.HomeViewModel
-import vtsen.hashnode.dev.androidnews.ui.screens.home.HomeViewModelFactory
+import vtsen.hashnode.dev.androidnews.ui.viewmodel.MainViewModel
+import vtsen.hashnode.dev.androidnews.ui.viewmodel.MainViewModelFactory
 
 class MainActivity : ComponentActivity() {
 
@@ -23,8 +23,8 @@ class MainActivity : ComponentActivity() {
         )
     }
 
-    private val homeViewModel by viewModels<HomeViewModel> {
-        HomeViewModelFactory(repository)
+    private val homeViewModel by viewModels<MainViewModel> {
+        MainViewModelFactory(repository)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -21,11 +21,11 @@ import vtsen.hashnode.dev.androidnews.data.repository.SqlArticlesRepository
 import vtsen.hashnode.dev.androidnews.ui.screens.home.ArticleCard
 import vtsen.hashnode.dev.androidnews.ui.theme.PaddingSmall
 import vtsen.hashnode.dev.androidnews.domain.model.Article
-import vtsen.hashnode.dev.androidnews.ui.screens.home.HomeViewModel
+import vtsen.hashnode.dev.androidnews.ui.viewmodel.MainViewModel
 
 @Composable
 fun ArticlesScreen(
-    viewModel: HomeViewModel,
+    viewModel: MainViewModel,
     articles: List<Article>,
     navigateToArticle: (Int) -> Unit,
     noArticlesDescStrResId: Int,
@@ -93,7 +93,7 @@ private fun DefaultPreview() {
         ArticlesDatabase.getInstance(LocalContext.current),
         WebService(),
     )
-    val viewModel = HomeViewModel(repository, useFakeData = true)
+    val viewModel = MainViewModel(repository, useFakeData = true)
 
     ArticlesScreen(
         viewModel = viewModel,

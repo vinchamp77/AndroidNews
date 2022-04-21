@@ -1,4 +1,4 @@
-package vtsen.hashnode.dev.androidnews.ui.screens.home
+package vtsen.hashnode.dev.androidnews.ui.viewmodel
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -13,7 +13,7 @@ import vtsen.hashnode.dev.androidnews.domain.model.Article
 import vtsen.hashnode.dev.androidnews.domain.repository.ArticlesRepository
 import vtsen.hashnode.dev.androidnews.utils.Utils
 
-class HomeViewModel(
+class MainViewModel(
     private val repository: ArticlesRepository,
     useFakeData: Boolean = false,
 ) : ViewModel() {

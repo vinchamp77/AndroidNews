@@ -25,12 +25,13 @@ import vtsen.hashnode.dev.androidnews.data.remote.WebService
 import vtsen.hashnode.dev.androidnews.data.repository.SqlArticlesRepository
 import vtsen.hashnode.dev.androidnews.ui.screens.navigation.NavRoute
 import vtsen.hashnode.dev.androidnews.ui.theme.PaddingSmall
+import vtsen.hashnode.dev.androidnews.ui.viewmodel.MainViewModel
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun ArticlesTopBar(
     navHostController: NavHostController,
-    viewModel: HomeViewModel,
+    viewModel: MainViewModel,
     onArticlesSearch: () -> Unit,
 ) {
     val keyboardController = LocalSoftwareKeyboardController.current
@@ -76,7 +77,7 @@ private fun DefaultPreview() {
         ArticlesDatabase.getInstance(LocalContext.current),
         WebService(),
     )
-    val viewModel = HomeViewModel(repository, useFakeData = true)
+    val viewModel = MainViewModel(repository, useFakeData = true)
     val navHostController = rememberNavController()
 
     ArticlesTopBar(

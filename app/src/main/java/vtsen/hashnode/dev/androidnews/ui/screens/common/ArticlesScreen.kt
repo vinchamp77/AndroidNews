@@ -14,6 +14,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.content.ContextCompat
+import com.google.accompanist.swiperefresh.SwipeRefresh
+import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import vtsen.hashnode.dev.androidnews.R
 import vtsen.hashnode.dev.androidnews.data.local.ArticlesDatabase
 import vtsen.hashnode.dev.androidnews.data.remote.WebService
@@ -30,28 +32,31 @@ fun ArticlesScreen(
     navigateToArticle: (Int) -> Unit,
     noArticlesDescStrResId: Int,
 ) {
-
     if (articles.isEmpty()) {
         ShowNoArticles(noArticlesDescStrResId)
         return
     }
 
-    val context = LocalContext.current
-    LazyColumn(
-        modifier = Modifier.fillMaxSize(),
+    SwipeRefresh(
+        state = rememberSwipeRefreshState(viewModel.isRefreshing),
+        onRefresh = { viewModel.refresh() }
     ) {
+        val context = LocalContext.current
+        LazyColumn(
+            modifier = Modifier.fillMaxSize(),
+        ) {
 
-
-        items(items = articles) { article ->
-            ArticleCard(
-                article = article,
-                onArticleCardClick = navigateToArticle,
-                onBookmarkClick = viewModel::onBookmarkClick,
-                onShareClick = {
-                    shareArticle(context, article.link)
-                },
-                onReadClick = viewModel::onReadClick
-            )
+            items(items = articles) { article ->
+                ArticleCard(
+                    article = article,
+                    onArticleCardClick = navigateToArticle,
+                    onBookmarkClick = viewModel::onBookmarkClick,
+                    onShareClick = {
+                        shareArticle(context, article.link)
+                    },
+                    onReadClick = viewModel::onReadClick
+                )
+            }
         }
     }
 }

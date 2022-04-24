@@ -37,12 +37,26 @@ class MainViewModel(
     var searchedResultResId: Int? by mutableStateOf(null)
         private set
 
+    var isRefreshing: Boolean by mutableStateOf(false)
+        private set
+
     init {
         if(useFakeData) {
             makeFakeArticles()
         } else {
             refresh()
             collectFlows()
+        }
+    }
+
+    fun refresh() {
+        viewModelScope.launch {
+            isRefreshing = true
+            val status = repository.refresh()
+            if (status == ArticlesRepository.Status.FAIL) {
+                showSnackBarStringId = R.string.no_internet
+            }
+            isRefreshing = false
         }
     }
 
@@ -144,15 +158,6 @@ class MainViewModel(
         unreadArticles = articles
 
         currentArticle = articles[0]
-    }
-
-    private fun refresh() {
-        viewModelScope.launch {
-            val status = repository.refresh()
-            if (status == ArticlesRepository.Status.FAIL) {
-                showSnackBarStringId = R.string.no_internet
-            }
-        }
     }
 
     private fun collectFlows() {

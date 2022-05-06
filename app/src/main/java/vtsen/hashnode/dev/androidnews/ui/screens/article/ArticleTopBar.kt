@@ -16,9 +16,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import vtsen.hashnode.dev.androidnews.R
-import vtsen.hashnode.dev.androidnews.data.local.ArticlesDatabase
 import vtsen.hashnode.dev.androidnews.data.remote.WebService
 import vtsen.hashnode.dev.androidnews.data.repository.SqlArticlesRepository
+import vtsen.hashnode.dev.androidnews.di.DatabaseModule
 import vtsen.hashnode.dev.androidnews.ui.screens.common.AddIconButton
 import vtsen.hashnode.dev.androidnews.ui.viewmodel.MainViewModel
 
@@ -70,7 +70,7 @@ fun ArticleTopBar(navHostController: NavHostController, viewModel: MainViewModel
 private fun DefaultPreview() {
 
     val repository = SqlArticlesRepository(
-        ArticlesDatabase.getInstance(LocalContext.current),
+        DatabaseModule.provideDatabase(LocalContext.current),
         WebService(),
     )
     val viewModel = MainViewModel(repository, useFakeData = true)

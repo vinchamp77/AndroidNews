@@ -17,9 +17,9 @@ import androidx.core.content.ContextCompat
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import vtsen.hashnode.dev.androidnews.R
-import vtsen.hashnode.dev.androidnews.data.local.ArticlesDatabase
 import vtsen.hashnode.dev.androidnews.data.remote.WebService
 import vtsen.hashnode.dev.androidnews.data.repository.SqlArticlesRepository
+import vtsen.hashnode.dev.androidnews.di.DatabaseModule
 import vtsen.hashnode.dev.androidnews.ui.screens.home.ArticleCard
 import vtsen.hashnode.dev.androidnews.ui.theme.PaddingSmall
 import vtsen.hashnode.dev.androidnews.domain.model.Article
@@ -95,7 +95,7 @@ private fun shareArticle(context: Context, link: String) {
 private fun DefaultPreview() {
 
     val repository = SqlArticlesRepository(
-        ArticlesDatabase.getInstance(LocalContext.current),
+        DatabaseModule.provideDatabase(LocalContext.current),
         WebService(),
     )
     val viewModel = MainViewModel(repository, useFakeData = true)

@@ -13,8 +13,9 @@ import vtsen.hashnode.dev.androidnews.data.remote.asArticleEntities
 import vtsen.hashnode.dev.androidnews.domain.model.Article
 import vtsen.hashnode.dev.androidnews.domain.repository.ArticlesRepository
 import vtsen.hashnode.dev.androidnews.ui.viewmodel.asArticleEntity
+import javax.inject.Inject
 
-class SqlArticlesRepository(
+class SqlArticlesRepository @Inject constructor(
     private val database: ArticlesDatabase,
     private val webService: WebService,
 ) : ArticlesRepository {

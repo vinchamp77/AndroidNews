@@ -5,6 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -12,11 +13,17 @@ import vtsen.hashnode.dev.androidnews.R
 import vtsen.hashnode.dev.androidnews.domain.model.Article
 import vtsen.hashnode.dev.androidnews.domain.repository.ArticlesRepository
 import vtsen.hashnode.dev.androidnews.utils.Utils
+import javax.inject.Inject
 
-class MainViewModel(
-    private val repository: ArticlesRepository,
-    useFakeData: Boolean = false,
-) : ViewModel() {
+@HiltViewModel
+class MainViewModel
+    @Inject constructor(
+        private val repository: ArticlesRepository,
+    ) : ViewModel() {
+
+    constructor (repository: ArticlesRepository, useFakeData: Boolean) : this(repository) {
+        if(useFakeData) makeFakeArticles()
+    }
 
     var allArticles: List<Article>? by mutableStateOf(null)
         private set
@@ -41,12 +48,8 @@ class MainViewModel(
         private set
 
     init {
-        if(useFakeData) {
-            makeFakeArticles()
-        } else {
-            refresh()
-            collectFlows()
-        }
+        refresh()
+        collectFlows()
     }
 
     fun refresh() {

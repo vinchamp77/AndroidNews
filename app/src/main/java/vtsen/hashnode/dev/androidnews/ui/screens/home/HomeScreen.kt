@@ -4,9 +4,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import vtsen.hashnode.dev.androidnews.R
-import vtsen.hashnode.dev.androidnews.data.local.ArticlesDatabase
 import vtsen.hashnode.dev.androidnews.data.remote.WebService
 import vtsen.hashnode.dev.androidnews.data.repository.SqlArticlesRepository
+import vtsen.hashnode.dev.androidnews.di.DatabaseModule
 import vtsen.hashnode.dev.androidnews.ui.screens.common.ArticlesScreen
 import vtsen.hashnode.dev.androidnews.ui.viewmodel.MainViewModel
 
@@ -30,7 +30,7 @@ fun HomeScreen(
 private fun DefaultPreview() {
 
     val repository = SqlArticlesRepository(
-        ArticlesDatabase.getInstance(LocalContext.current),
+        DatabaseModule.provideDatabase(LocalContext.current),
         WebService(),
     )
     val viewModel = MainViewModel(repository, useFakeData = true)

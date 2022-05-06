@@ -1,8 +1,6 @@
 package vtsen.hashnode.dev.androidnews.data.local
 
-import android.content.Context
 import androidx.room.Database
-import androidx.room.Room
 import androidx.room.RoomDatabase
 
 @Database(
@@ -12,26 +10,6 @@ import androidx.room.RoomDatabase
 abstract class ArticlesDatabase : RoomDatabase() {
 
     protected abstract val dao: ArticlesDao
-
-    companion object {
-        @Volatile
-        private lateinit var instance: ArticlesDatabase
-
-        fun getInstance(context: Context): ArticlesDatabase {
-            synchronized(this) {
-                if (!::instance.isInitialized) {
-                    instance = Room.databaseBuilder(
-                        context.applicationContext,
-                        ArticlesDatabase::class.java,
-                        "articles.db")
-                        .fallbackToDestructiveMigration()
-                        .build()
-                }
-
-                return instance
-            }
-        }
-    }
 
     fun selectAllArticles() = dao.selectAllArticles()
     fun selectAllArticlesByTitle(title: String) = dao.selectAllArticlesByTitle("%$title%")
@@ -54,6 +32,6 @@ abstract class ArticlesDatabase : RoomDatabase() {
     }
 
     private fun runSqlQuery(value: String) {
-        instance.openHelper.writableDatabase.execSQL(value)
+        openHelper.writableDatabase.execSQL(value)
     }
 }

@@ -42,12 +42,6 @@ class MainViewModel(private val repository: ArticlesRepository) : ViewModel() {
         private set
 
     init {
-//        if(useFakeData) {
-//            makeFakeArticles()
-//        } else {
-//            refresh()
-//            collectFlows()
-//        }
         refresh()
         collectFlows()
     }

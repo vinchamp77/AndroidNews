@@ -54,6 +54,6 @@ abstract class ArticlesDatabase : RoomDatabase() {
     }
 
     private fun runSqlQuery(value: String) {
-        instance.openHelper.writableDatabase.execSQL(value)
+        openHelper.writableDatabase.execSQL(value)
     }
 }

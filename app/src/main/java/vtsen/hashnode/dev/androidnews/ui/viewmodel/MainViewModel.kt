@@ -13,10 +13,11 @@ import vtsen.hashnode.dev.androidnews.domain.model.Article
 import vtsen.hashnode.dev.androidnews.domain.repository.ArticlesRepository
 import vtsen.hashnode.dev.androidnews.utils.Utils
 
-class MainViewModel(
-    private val repository: ArticlesRepository,
-    useFakeData: Boolean = false,
-) : ViewModel() {
+class MainViewModel(private val repository: ArticlesRepository) : ViewModel() {
+
+    constructor (repository: ArticlesRepository, useFakeData: Boolean) : this(repository) {
+        if(useFakeData) makeFakeArticles()
+    }
 
     var allArticles: List<Article>? by mutableStateOf(null)
         private set
@@ -41,12 +42,14 @@ class MainViewModel(
         private set
 
     init {
-        if(useFakeData) {
-            makeFakeArticles()
-        } else {
-            refresh()
-            collectFlows()
-        }
+//        if(useFakeData) {
+//            makeFakeArticles()
+//        } else {
+//            refresh()
+//            collectFlows()
+//        }
+        refresh()
+        collectFlows()
     }
 
     fun refresh() {

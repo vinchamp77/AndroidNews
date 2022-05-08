@@ -13,7 +13,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import vtsen.hashnode.dev.androidnews.data.remote.WebService
-import vtsen.hashnode.dev.androidnews.data.repository.SqlArticlesRepository
+import vtsen.hashnode.dev.androidnews.data.repository.ArticlesRepositoryImpl
 import vtsen.hashnode.dev.androidnews.di.DatabaseModule
 import vtsen.hashnode.dev.androidnews.ui.screens.article.ArticleTopBar
 import vtsen.hashnode.dev.androidnews.ui.screens.bookmarks.BookmarkedArticlesTopBar
@@ -91,7 +91,7 @@ private fun ShowSnackBar(scaffoldState: ScaffoldState, viewModel: MainViewModel)
 @Composable
 fun MainScreenPreview() {
 
-    val repository = SqlArticlesRepository(
+    val repository = ArticlesRepositoryImpl(
         DatabaseModule.provideDatabase(LocalContext.current),
         WebService(),
     )

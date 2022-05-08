@@ -4,7 +4,7 @@ import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import vtsen.hashnode.dev.androidnews.data.repository.SqlArticlesRepository
+import vtsen.hashnode.dev.androidnews.data.repository.ArticlesRepositoryImpl
 import vtsen.hashnode.dev.androidnews.domain.repository.ArticlesRepository
 import javax.inject.Singleton
 
@@ -14,5 +14,5 @@ abstract class RepositoryModule {
 
     @Binds
     @Singleton
-    abstract fun bindArticlesRepository(impl: SqlArticlesRepository): ArticlesRepository
+    abstract fun bindArticlesRepository(impl: ArticlesRepositoryImpl): ArticlesRepository
 }

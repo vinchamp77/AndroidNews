@@ -19,7 +19,7 @@ import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import vtsen.hashnode.dev.androidnews.R
 import vtsen.hashnode.dev.androidnews.data.local.ArticlesDatabase
 import vtsen.hashnode.dev.androidnews.data.remote.WebService
-import vtsen.hashnode.dev.androidnews.data.repository.SqlArticlesRepository
+import vtsen.hashnode.dev.androidnews.data.repository.ArticlesRepositoryImpl
 import vtsen.hashnode.dev.androidnews.ui.screens.home.ArticleCard
 import vtsen.hashnode.dev.androidnews.ui.theme.PaddingSmall
 import vtsen.hashnode.dev.androidnews.domain.model.Article
@@ -94,7 +94,7 @@ private fun shareArticle(context: Context, link: String) {
 @Composable
 private fun DefaultPreview() {
 
-    val repository = SqlArticlesRepository(
+    val repository = ArticlesRepositoryImpl(
         ArticlesDatabase.getInstance(LocalContext.current),
         WebService(),
     )

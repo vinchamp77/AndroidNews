@@ -12,7 +12,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import vtsen.hashnode.dev.androidnews.data.local.ArticlesDatabase
 import vtsen.hashnode.dev.androidnews.data.remote.WebService
-import vtsen.hashnode.dev.androidnews.data.repository.SqlArticlesRepository
+import vtsen.hashnode.dev.androidnews.data.repository.ArticlesRepositoryImpl
 import vtsen.hashnode.dev.androidnews.ui.viewmodel.MainViewModel
 
 @RunWith(AndroidJUnit4::class)
@@ -26,7 +26,7 @@ class HomeViewModelTest {
 
     @Before
     fun setupViewModel() {
-        val repository = SqlArticlesRepository(
+        val repository = ArticlesRepositoryImpl(
             ArticlesDatabase.getInstance(ApplicationProvider.getApplicationContext()),
             WebService(),
         )

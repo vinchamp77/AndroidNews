@@ -14,7 +14,7 @@ import vtsen.hashnode.dev.androidnews.domain.model.Article
 import vtsen.hashnode.dev.androidnews.domain.repository.ArticlesRepository
 import vtsen.hashnode.dev.androidnews.ui.viewmodel.asArticleEntity
 
-class SqlArticlesRepository(
+class ArticlesRepositoryImpl(
     private val database: ArticlesDatabase,
     private val webService: WebService,
 ) : ArticlesRepository {

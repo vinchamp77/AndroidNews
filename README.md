@@ -24,5 +24,8 @@ This is a simple RSS feed reader app that currently reads my blog's feed.
 - [Coroutines](https://vtsen.hashnode.dev/kotlin-coroutines-basics-simple-android-app-demo) & Flow
 - Accompanist (System UI & Swipe Refresh)
 
+## Future
+- Refactor: decouple `ViewModel` from composable funtions
+
 ## See Also
 For other projects, refer to my [Android projects page](https://vtsen.hashnode.dev/projects).

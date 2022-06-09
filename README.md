@@ -1,8 +1,10 @@
 # Simple RSS Feed Reader (Kotlin and Jetpack Compose)
 
-This is a simple RSS feed reader app that currently reads my blog's feed - [rss.xml](https://vtsen.hashnode.dev/rss.xml).
+This is a simple RSS feed reader app that currently reads my blog's feed - [rss.xml](https://vtsen.hashnode.dev/rss.xml). 
 
 ![](screenshots/Android_News_Overview.gif)
+
+> Note: This is my first Jetpack Compose app. So there could have a lot improvements needed and may not follow 100% best practices. See "Future Refactor" section below.
 
 ## Features
 - Bookmark article

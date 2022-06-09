@@ -27,5 +27,5 @@ This is a simple RSS feed reader app that currently reads my blog's feed - [rss.
 - Accompanist (System UI & Swipe Refresh)
 
 ## Future Refactor
-- Decouple `ViewModel` from composable funtions, state hoisting at higher composable function
+- Decouple `ViewModel` from composable functions, state hoisting at higher composable function
 - Rename composable functions not to start with "verb" because it implies action (which is not)

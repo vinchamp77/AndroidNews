@@ -1,12 +1,13 @@
-# Android News App (Jetpack Compose)
+# Simple RSS Feed Reader (Kotlin and Jetpack Compose)
 
-This is a simple RSS feed reader app that currently reads my blog's feed. 
+This is a simple RSS feed reader app that currently reads my blog's feed - [rss.xml](https://vtsen.hashnode.dev/rss.xml).
 
 ![](screenshots/Android_News_Overview.gif)
 
 ## Features
 - Bookmark article
-- Mark article as read
+- Share article
+- Mark article as read / unread
 - Search articles
 
 ## Requirements
@@ -19,13 +20,12 @@ This is a simple RSS feed reader app that currently reads my blog's feed.
 - Room Database
 - Coil
 - XmlPullParser
-- Compose Navigation
+- [Compose Navigation](https://vtsen.hashnode.dev/simple-jetpack-compose-navigation-example)
+- Scaffold (Top/Bottom Bar)
 - Webview
 - [Coroutines](https://vtsen.hashnode.dev/kotlin-coroutines-basics-simple-android-app-demo) & Flow
 - Accompanist (System UI & Swipe Refresh)
 
-## Future
-- Refactor: decouple `ViewModel` from composable funtions
-
-## See Also
-For other projects, refer to my [Android projects page](https://vtsen.hashnode.dev/projects).
+## Future Refactor
+- Decouple `ViewModel` from composable funtions, state hoisting at higher composable function
+- Rename composable functions not to start with "verb" because it implies action (which is not)

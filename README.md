@@ -28,6 +28,13 @@ This is a simple RSS feed reader app that currently reads my blog's feed - [rss.
 - [Coroutines](https://vtsen.hashnode.dev/kotlin-coroutines-basics-simple-android-app-demo) & Flow
 - Accompanist (System UI & Swipe Refresh)
 
+## Articles
+- [Convert View Model to Use Hilt Dependency Injection](https://vtsen.hashnode.dev/convert-view-model-to-use-hilt-dependency-injection)
+
 ## Future Refactor
 - Decouple `ViewModel` from composable functions, state hoisting at higher composable function
 - Rename composable functions not to start with "verb" because it implies action (which is not)
+
+## Branches
+- [master](https://github.com/vinchamp77/AndroidNews)
+- [hilt](https://github.com/vinchamp77/AndroidNews/tree/hilt) - convert view model to use hilt

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Android News</string>
+    <string name="app_name">Android Kotlin Weekly</string>
     <string name="no_internet">No Internet!</string>
 
     <string name="home">Home</string>

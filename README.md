@@ -4,8 +4,6 @@ This is a simple RSS feed reader app that currently reads my blog's feed - [rss.
 
 ![](screenshots/Android_News_Overview.gif)
 
-> Note: This is my first Jetpack Compose app. So there could have a lot improvements needed and may not follow 100% best practices. See "Future Refactor" section below.
-
 ## Features
 - Bookmark article
 - Share article
@@ -30,10 +28,6 @@ This is a simple RSS feed reader app that currently reads my blog's feed - [rss.
 
 ## Articles
 - [Convert View Model to Use Hilt Dependency Injection](https://vtsen.hashnode.dev/convert-view-model-to-use-hilt-dependency-injection)
-
-## Future Refactor
-- Decouple `ViewModel` from composable functions, state hoisting at higher composable function
-- Rename composable functions not to start with "verb" because it implies action (which is not)
 
 ## Branches
 - [master](https://github.com/vinchamp77/AndroidNews)

@@ -16,7 +16,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberImagePainter
 import vtsen.hashnode.dev.androidnews.R
-import vtsen.hashnode.dev.androidnews.ui.screens.common.AddIconButton
+import vtsen.hashnode.dev.androidnews.ui.screens.common.ArticleIconButton
 import vtsen.hashnode.dev.androidnews.ui.theme.PaddingMedium
 import vtsen.hashnode.dev.androidnews.ui.theme.PaddingSmall
 import vtsen.hashnode.dev.androidnews.utils.Utils
@@ -114,7 +114,7 @@ private fun ArticleBottomRow(
         ,
         horizontalArrangement = Arrangement.SpaceEvenly
     ) {
-        AddIconButton(
+        ArticleIconButton(
             article = article,
             onIconClick = onBookmarkClick,
             iconPainter = if (article.bookmarked)
@@ -123,13 +123,13 @@ private fun ArticleBottomRow(
                 painterResource(R.drawable.ic_bookmark_border),
         )
 
-        AddIconButton(
+        ArticleIconButton(
             article = article,
             onIconClick = onShareClick,
             iconPainter = painterResource(R.drawable.ic_share),
         )
 
-        AddIconButton(
+        ArticleIconButton(
             article = article,
             onIconClick = onReadClick,
             iconPainter = if (article.read)

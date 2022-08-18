@@ -12,11 +12,11 @@ import vtsen.hashnode.dev.androidnews.domain.model.Article
 
 @Composable
 fun ArticleScreen(article: Article) {
-    LoadWebUrl(url = article.link)
+    ArticleWebView(url = article.link)
 }
 
 @Composable
-private fun LoadWebUrl(url: String) {
+private fun ArticleWebView(url: String) {
 
     if (url.isEmpty()) {
         return
@@ -36,7 +36,7 @@ private fun LoadWebUrl(url: String) {
 //For offline-mode reference if it needs to be supported in future
 //it does not 100 % working correctly
 @Composable
-private fun LoadWebHtml(title: String, html: String) {
+private fun ArticleWebView(title: String, html: String) {
 
     if (html.isEmpty()) {
         return

@@ -19,7 +19,7 @@ fun BottomBarNav(navHostController: NavController) {
     BottomNavigation(
     ) {
         // Home
-        AddBottomNavigationItem(
+        BottomNavigationItem(
             rowScope = this,
             navHostController = navHostController,
             drawableId = R.drawable.ic_home,
@@ -27,7 +27,7 @@ fun BottomBarNav(navHostController: NavController) {
             labelStringResourceId = R.string.home,
         )
         // Unread
-        AddBottomNavigationItem(
+        BottomNavigationItem(
             rowScope = this,
             navHostController = navHostController,
             drawableId = R.drawable.ic_article,
@@ -35,7 +35,7 @@ fun BottomBarNav(navHostController: NavController) {
             labelStringResourceId = R.string.unread_articles,
         )
         // Bookmarks
-        AddBottomNavigationItem(
+        BottomNavigationItem(
             rowScope = this,
             navHostController = navHostController,
             drawableId = R.drawable.ic_bookmarks,
@@ -46,7 +46,7 @@ fun BottomBarNav(navHostController: NavController) {
 }
 
 @Composable
-private fun AddBottomNavigationItem(
+private fun BottomNavigationItem(
     rowScope: RowScope,
     navHostController: NavController,
     drawableId: Int,

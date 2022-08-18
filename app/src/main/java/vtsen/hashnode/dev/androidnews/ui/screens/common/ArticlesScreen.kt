@@ -33,7 +33,7 @@ fun ArticlesScreen(
     noArticlesDescStrResId: Int,
 ) {
     if (articles.isEmpty()) {
-        ShowNoArticles(noArticlesDescStrResId)
+        NoArticlesScreen(noArticlesDescStrResId)
         return
     }
 
@@ -62,7 +62,7 @@ fun ArticlesScreen(
 }
 
 @Composable
-private fun ShowNoArticles(noArticlesDescStrResId: Int) {
+private fun NoArticlesScreen(noArticlesDescStrResId: Int) {
     Column(
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,

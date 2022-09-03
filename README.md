@@ -27,6 +27,7 @@ This is a simple RSS feed reader app that currently reads my blog (Android Kotli
 - Accompanist (System UI & Swipe Refresh)
 
 ## Articles
+- [Simple RSS Feed Reader - Jetpack Compose](https://vtsen.hashnode.dev/simple-rss-feed-reader-jetpack-compose)
 - [Convert View Model to Use Hilt Dependency Injection](https://vtsen.hashnode.dev/convert-view-model-to-use-hilt-dependency-injection)
 
 ## Branches

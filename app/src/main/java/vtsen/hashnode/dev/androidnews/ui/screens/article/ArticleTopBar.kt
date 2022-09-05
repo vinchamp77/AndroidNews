@@ -19,7 +19,7 @@ import vtsen.hashnode.dev.androidnews.R
 import vtsen.hashnode.dev.androidnews.data.remote.WebService
 import vtsen.hashnode.dev.androidnews.data.repository.ArticlesRepositoryImpl
 import vtsen.hashnode.dev.androidnews.di.DatabaseModule
-import vtsen.hashnode.dev.androidnews.ui.screens.common.AddIconButton
+import vtsen.hashnode.dev.androidnews.ui.screens.common.ArticleIconButton
 import vtsen.hashnode.dev.androidnews.ui.viewmodel.MainViewModel
 
 @Composable
@@ -43,7 +43,7 @@ fun ArticleTopBar(navHostController: NavHostController, viewModel: MainViewModel
 
                 val article = viewModel.currentArticle!!
 
-                AddIconButton(
+                ArticleIconButton(
                     article = article,
                     onIconClick = viewModel::onReadClick,
                     iconPainter = if (article.read)
@@ -52,7 +52,7 @@ fun ArticleTopBar(navHostController: NavHostController, viewModel: MainViewModel
                         painterResource(R.drawable.ic_radio_button_unchecked)
                 )
 
-                AddIconButton(
+                ArticleIconButton(
                     article = article,
                     onIconClick = viewModel::onBookmarkClick,
                     iconPainter = if (article.bookmarked)

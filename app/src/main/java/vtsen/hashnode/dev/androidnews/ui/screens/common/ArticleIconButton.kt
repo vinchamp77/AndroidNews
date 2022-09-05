@@ -7,7 +7,7 @@ import androidx.compose.ui.graphics.painter.Painter
 import vtsen.hashnode.dev.androidnews.domain.model.Article
 
 @Composable
-fun AddIconButton(
+fun ArticleIconButton(
     article: Article,
     onIconClick: (Int) -> Unit,
     iconPainter: Painter,

@@ -20,7 +20,7 @@ import vtsen.hashnode.dev.androidnews.ui.screens.bookmarks.BookmarkedArticlesTop
 import vtsen.hashnode.dev.androidnews.ui.screens.home.AllArticlesTopBar
 import vtsen.hashnode.dev.androidnews.ui.screens.home.SearchResultsTopBar
 import vtsen.hashnode.dev.androidnews.ui.screens.navigation.BottomBarNav
-import vtsen.hashnode.dev.androidnews.ui.screens.navigation.BuildNavGraph
+import vtsen.hashnode.dev.androidnews.ui.screens.navigation.NavGraph
 import vtsen.hashnode.dev.androidnews.ui.screens.navigation.NavRoute
 import vtsen.hashnode.dev.androidnews.ui.screens.unread.UnreadArticlesTopBar
 import vtsen.hashnode.dev.androidnews.ui.theme.AndroidNewsTheme
@@ -38,10 +38,10 @@ fun MainScreen(viewModel: MainViewModel, useSystemUIController: Boolean) {
             topBar = { TopBar(navHostController, viewModel) },
             bottomBar = { BottomBarNav(navHostController) }
         ) {
-            BuildNavGraph(viewModel, navHostController)
+            NavGraph(viewModel, navHostController)
         }
 
-        ShowSnackBar(scaffoldState, viewModel)
+        SnackBar(scaffoldState, viewModel)
     }
 }
 
@@ -72,7 +72,7 @@ private fun TopBar(navHostController: NavHostController, viewModel: MainViewMode
 }
 
 @Composable
-private fun ShowSnackBar(scaffoldState: ScaffoldState, viewModel: MainViewModel) {
+private fun SnackBar(scaffoldState: ScaffoldState, viewModel: MainViewModel) {
 
     viewModel.showSnackBarStringId?.let { stringId ->
         val msg = stringResource(stringId)

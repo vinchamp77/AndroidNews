@@ -12,6 +12,7 @@ import kotlinx.coroutines.launch
 import vtsen.hashnode.dev.androidnews.R
 import vtsen.hashnode.dev.androidnews.domain.model.Article
 import vtsen.hashnode.dev.androidnews.domain.repository.ArticlesRepository
+import vtsen.hashnode.dev.androidnews.domain.repository.ArticlesRepositoryStatus
 import vtsen.hashnode.dev.androidnews.utils.Utils
 import javax.inject.Inject
 
@@ -56,7 +57,7 @@ class MainViewModel
         viewModelScope.launch {
             isRefreshing = true
             val status = repository.refresh()
-            if (status == ArticlesRepository.Status.FAIL) {
+            if (status == ArticlesRepositoryStatus.Fail) {
                 showSnackBarStringId = R.string.no_internet
             }
             isRefreshing = false

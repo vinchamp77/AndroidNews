@@ -15,7 +15,7 @@ import vtsen.hashnode.dev.androidnews.ui.screens.unread.UnreadScreen
 import vtsen.hashnode.dev.androidnews.ui.viewmodel.MainViewModel
 
 @Composable
-fun BuildNavGraph(viewModel: MainViewModel, navHostController: NavHostController) {
+fun NavGraph(viewModel: MainViewModel, navHostController: NavHostController) {
 
     NavHost(
         navController = navHostController,

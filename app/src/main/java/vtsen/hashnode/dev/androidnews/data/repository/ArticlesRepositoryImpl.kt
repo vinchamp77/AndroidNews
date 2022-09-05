@@ -12,7 +12,8 @@ import vtsen.hashnode.dev.androidnews.data.remote.WebService
 import vtsen.hashnode.dev.androidnews.data.remote.asArticleEntities
 import vtsen.hashnode.dev.androidnews.domain.model.Article
 import vtsen.hashnode.dev.androidnews.domain.repository.ArticlesRepository
-import vtsen.hashnode.dev.androidnews.ui.viewmodel.asArticleEntity
+import vtsen.hashnode.dev.androidnews.data.mapper.asArticleEntity
+import vtsen.hashnode.dev.androidnews.domain.repository.ArticlesRepositoryStatus
 import javax.inject.Inject
 
 class ArticlesRepositoryImpl @Inject constructor(
@@ -36,9 +37,9 @@ class ArticlesRepositoryImpl @Inject constructor(
         articleEntity.asArticles()
     }
 
-    override suspend fun refresh(): ArticlesRepository.Status = withContext(Dispatchers.IO) {
+    override suspend fun refresh(): ArticlesRepositoryStatus = withContext(Dispatchers.IO) {
 
-        var status = ArticlesRepository.Status.SUCCESS
+        var status:ArticlesRepositoryStatus = ArticlesRepositoryStatus.Success
 
         try {
             val articlesFeed = fetchArticlesFeed()
@@ -46,7 +47,7 @@ class ArticlesRepositoryImpl @Inject constructor(
 
         } catch(e: Exception) {
             e.printStackTrace()
-            status = ArticlesRepository.Status.FAIL
+            status = ArticlesRepositoryStatus.Fail
         }
 
         status

@@ -4,6 +4,7 @@ import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.flow
 import vtsen.hashnode.dev.androidnews.domain.model.Article
 import vtsen.hashnode.dev.androidnews.domain.repository.ArticlesRepository
+import vtsen.hashnode.dev.androidnews.domain.repository.ArticlesRepositoryStatus
 import vtsen.hashnode.dev.androidnews.utils.Utils
 
 class FakeArticlesRepositoryImpl() : ArticlesRepository {
@@ -37,7 +38,7 @@ class FakeArticlesRepositoryImpl() : ArticlesRepository {
         makeFakeArticles()
     }
 
-    override suspend fun refresh(): ArticlesRepository.Status = ArticlesRepository.Status.SUCCESS
+    override suspend fun refresh(): ArticlesRepositoryStatus = ArticlesRepositoryStatus.Success
 
     override suspend fun updateArticle(article: Article) {}
 

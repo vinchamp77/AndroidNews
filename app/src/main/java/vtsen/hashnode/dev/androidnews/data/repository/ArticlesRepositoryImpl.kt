@@ -1,5 +1,6 @@
 package vtsen.hashnode.dev.androidnews.data.repository
 
+import android.content.Context
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.map
 import vtsen.hashnode.dev.androidnews.data.local.ArticleEntity
@@ -15,10 +16,27 @@ import vtsen.hashnode.dev.androidnews.domain.repository.ArticlesRepository
 import vtsen.hashnode.dev.androidnews.data.mapper.asArticleEntity
 import vtsen.hashnode.dev.androidnews.domain.repository.ArticlesRepositoryStatus
 
-class ArticlesRepositoryImpl(
+class ArticlesRepositoryImpl private constructor(
     private val database: ArticlesDatabase,
     private val webService: WebService,
 ) : ArticlesRepository {
+
+    companion object {
+        @Volatile
+        private lateinit var instance: ArticlesRepository
+
+        fun getInstance(context: Context): ArticlesRepository {
+            synchronized(this) {
+                if(!::instance.isInitialized) {
+                    instance = ArticlesRepositoryImpl(
+                        ArticlesDatabase.getInstance(context),
+                        WebService(),
+                    )
+                }
+                return instance
+            }
+        }
+    }
 
     private val urls = listOf(
         "https://vtsen.hashnode.dev/rss.xml",

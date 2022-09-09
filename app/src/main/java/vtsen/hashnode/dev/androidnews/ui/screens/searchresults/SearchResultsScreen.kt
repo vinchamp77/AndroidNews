@@ -29,10 +29,7 @@ fun SearchResultsScreen(
 @Composable
 private fun DefaultPreview() {
 
-    val repository = ArticlesRepositoryImpl(
-        ArticlesDatabase.getInstance(LocalContext.current),
-        WebService(),
-    )
+    val repository = ArticlesRepositoryImpl.getInstance(LocalContext.current)
     val viewModel = MainViewModel(repository, useFakeData = true)
 
     SearchResultsScreen(

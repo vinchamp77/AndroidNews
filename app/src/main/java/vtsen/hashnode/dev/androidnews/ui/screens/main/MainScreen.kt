@@ -91,10 +91,7 @@ private fun SnackBar(scaffoldState: ScaffoldState, viewModel: MainViewModel) {
 @Composable
 fun MainScreenPreview() {
 
-    val repository = ArticlesRepositoryImpl(
-        ArticlesDatabase.getInstance(LocalContext.current),
-        WebService(),
-    )
+    val repository = ArticlesRepositoryImpl.getInstance(LocalContext.current)
     val viewModel = MainViewModel(repository, useFakeData = true)
 
     MainScreen(

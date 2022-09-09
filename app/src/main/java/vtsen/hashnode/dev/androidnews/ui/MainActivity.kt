@@ -16,10 +16,7 @@ import vtsen.hashnode.dev.androidnews.ui.viewmodel.MainViewModelFactory
 class MainActivity : ComponentActivity() {
 
     private val repository by lazy {
-        ArticlesRepositoryImpl(
-            ArticlesDatabase.getInstance(application),
-            WebService(),
-        )
+        ArticlesRepositoryImpl.getInstance(application)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

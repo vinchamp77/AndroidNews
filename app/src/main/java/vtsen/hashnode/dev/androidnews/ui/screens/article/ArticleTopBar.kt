@@ -69,10 +69,7 @@ fun ArticleTopBar(navHostController: NavHostController, viewModel: MainViewModel
 @Composable
 private fun DefaultPreview() {
 
-    val repository = ArticlesRepositoryImpl(
-        ArticlesDatabase.getInstance(LocalContext.current),
-        WebService(),
-    )
+    val repository = ArticlesRepositoryImpl.getInstance(LocalContext.current)
     val viewModel = MainViewModel(repository, useFakeData = true)
     val navHostController = rememberNavController()
 

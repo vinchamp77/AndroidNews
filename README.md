@@ -32,4 +32,4 @@ This is a simple RSS feed reader app that currently reads my blog (Android Kotli
 
 ## Branches
 - [master](https://github.com/vinchamp77/AndroidNews)
-- [hilt](https://github.com/vinchamp77/AndroidNews/tree/hilt) - convert view model to use hilt
+- [hilt](https://github.com/vinchamp77/AndroidNews/tree/hilt) - convert view model to use hilt ([diff](https://github.com/vinchamp77/AndroidNews/compare/master..hilt)) 

@@ -41,26 +41,26 @@ fun ArticleTopBar(navHostController: NavHostController, viewModel: MainViewModel
 
             Row {
 
-                val article = viewModel.currentArticle!!
+                val article = viewModel.currentArticle
+                article?.run {
+                    ArticleIconButton(
+                        article = article,
+                        onIconClick = viewModel::onReadClick,
+                        iconPainter = if (article.read)
+                            painterResource(R.drawable.ic_check_circle)
+                        else
+                            painterResource(R.drawable.ic_radio_button_unchecked)
+                    )
 
-                ArticleIconButton(
-                    article = article,
-                    onIconClick = viewModel::onReadClick,
-                    iconPainter = if (article.read)
-                        painterResource(R.drawable.ic_check_circle)
-                    else
-                        painterResource(R.drawable.ic_radio_button_unchecked)
-                )
-
-                ArticleIconButton(
-                    article = article,
-                    onIconClick = viewModel::onBookmarkClick,
-                    iconPainter = if (article.bookmarked)
-                        painterResource(R.drawable.ic_bookmarked)
-                    else
-                        painterResource(R.drawable.ic_bookmark_border),
-                )
-
+                    ArticleIconButton(
+                        article = article,
+                        onIconClick = viewModel::onBookmarkClick,
+                        iconPainter = if (article.bookmarked)
+                            painterResource(R.drawable.ic_bookmarked)
+                        else
+                            painterResource(R.drawable.ic_bookmark_border),
+                    )
+                }
             }
         }
     }

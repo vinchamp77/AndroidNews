@@ -56,18 +56,16 @@ class ArticlesRepositoryImpl private constructor(
 
     override suspend fun refresh(): ArticlesRepositoryStatus = withContext(Dispatchers.IO) {
 
-        var status:ArticlesRepositoryStatus = ArticlesRepositoryStatus.Success
-
         try {
             val articlesFeed = fetchArticlesFeed()
             updateDatabase(articlesFeed.asArticleEntities())
 
         } catch(e: Exception) {
             e.printStackTrace()
-            status = ArticlesRepositoryStatus.Fail
+            return@withContext ArticlesRepositoryStatus.Fail
         }
 
-        status
+        return@withContext ArticlesRepositoryStatus.Success
     }
 
     override suspend fun updateArticle(article: Article) = withContext(Dispatchers.IO) {

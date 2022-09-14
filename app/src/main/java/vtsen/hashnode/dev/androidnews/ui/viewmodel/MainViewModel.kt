@@ -5,9 +5,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.yield
 import vtsen.hashnode.dev.androidnews.R
 import vtsen.hashnode.dev.androidnews.domain.model.Article
 import vtsen.hashnode.dev.androidnews.domain.repository.ArticlesRepository
@@ -43,15 +42,13 @@ class MainViewModel(private val repository: ArticlesRepository) : ViewModel() {
         private set
 
     init {
-        refresh()
         collectFlows()
     }
 
     fun refresh() {
         viewModelScope.launch {
             isRefreshing = true
-            val status = repository.refresh()
-            if (status == ArticlesRepositoryStatus.Fail) {
+            if (repository.refresh()== ArticlesRepositoryStatus.Fail) {
                 showSnackBarStringId = R.string.no_internet
             }
             isRefreshing = false
@@ -159,7 +156,7 @@ class MainViewModel(private val repository: ArticlesRepository) : ViewModel() {
     }
 
     private fun collectFlows() {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
 
             launch {
                 repository.articlesFlow.collect { articles ->

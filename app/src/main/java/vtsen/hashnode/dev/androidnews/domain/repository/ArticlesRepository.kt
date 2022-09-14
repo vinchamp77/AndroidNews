@@ -11,7 +11,7 @@ interface ArticlesRepository {
 
     val bookmarkedArticlesFlow: Flow<List<Article>>
 
-    suspend fun refresh(): ArticlesRepositoryStatus
+    suspend fun refresh() : ArticlesRepositoryStatus
 
     suspend fun updateArticle(article: Article)
 

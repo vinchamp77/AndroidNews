@@ -3,6 +3,7 @@
     package="vtsen.hashnode.dev.androidnews">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <application
         android:name=".app.AndroidNewsApplication"
@@ -15,6 +16,7 @@
 
         <activity
             android:name=".ui.MainActivity"
+            android:launchMode="singleTop"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -39,7 +39,7 @@ class FakeArticlesRepositoryImpl() : ArticlesRepository {
     }
 
     override suspend fun refresh() : ArticlesRepositoryStatus {
-        return ArticlesRepositoryStatus.Success
+        return ArticlesRepositoryStatus.Success(true)
     }
 
     override suspend fun updateArticle(article: Article) {}

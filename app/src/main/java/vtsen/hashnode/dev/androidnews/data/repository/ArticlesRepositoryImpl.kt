@@ -65,7 +65,7 @@ class ArticlesRepositoryImpl private constructor(
             return@withContext ArticlesRepositoryStatus.Fail
         }
 
-        return@withContext ArticlesRepositoryStatus.Success
+        return@withContext ArticlesRepositoryStatus.Success(true)
     }
 
     override suspend fun updateArticle(article: Article) = withContext(Dispatchers.IO) {

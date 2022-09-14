@@ -24,8 +24,8 @@ class SyncWorker(appContext: Context, params: WorkerParameters)
 
     override suspend fun doWork(): Result {
         val repository = ArticlesRepositoryImpl.getInstance(applicationContext)
-
-        if (repository.refresh() == ArticlesRepositoryStatus.Success) {
+        val status = repository.refresh()
+        if (status is ArticlesRepositoryStatus.Success) {
 
             with(NotificationManagerCompat.from(applicationContext)) {
                 notify(0, createNotification())

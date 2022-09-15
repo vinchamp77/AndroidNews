@@ -47,12 +47,8 @@ class MainViewModel(private val repository: ArticlesRepository) : ViewModel() {
 
     fun refresh() {
         viewModelScope.launch {
-            isRefreshing = true
-            if (repository.refresh()== ArticlesRepositoryStatus.Fail) {
-                showSnackBarStringId = R.string.no_internet
-            }
-            isRefreshing = false
-        }
+            repository.refresh()
+          }
     }
 
     fun clearShowSnackBarStringId() {
@@ -157,6 +153,17 @@ class MainViewModel(private val repository: ArticlesRepository) : ViewModel() {
 
     private fun collectFlows() {
         viewModelScope.launch {
+
+            launch {
+                repository.statusFlow.collect { status ->
+                    isRefreshing = status is ArticlesRepositoryStatus.IsLoading
+
+                    if(status is ArticlesRepositoryStatus.Fail) {
+                        showSnackBarStringId = R.string.no_internet
+                    }
+
+                }
+            }
 
             launch {
                 repository.articlesFlow.collect { articles ->

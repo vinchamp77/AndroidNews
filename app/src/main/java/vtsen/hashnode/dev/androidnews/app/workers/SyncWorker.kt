@@ -20,15 +20,18 @@ import vtsen.hashnode.dev.androidnews.ui.MainActivity
 class SyncWorker(appContext: Context, params: WorkerParameters)
     : CoroutineWorker(appContext, params) {
 
-    private val notificationChannelId = "DemoNotificationChannelId"
+    private val notificationChannelId = "AndroidNewsNotificationChannelId"
 
     override suspend fun doWork(): Result {
         val repository = ArticlesRepositoryImpl.getInstance(applicationContext)
         val status = repository.refresh()
+
         if (status is ArticlesRepositoryStatus.Success) {
 
-            with(NotificationManagerCompat.from(applicationContext)) {
-                notify(0, createNotification())
+            if(status.withNewArticles) {
+                with(NotificationManagerCompat.from(applicationContext)) {
+                    notify(0, createNotification())
+                }
             }
 
             return Result.success()
@@ -55,9 +58,8 @@ class SyncWorker(appContext: Context, params: WorkerParameters)
 
 
         return NotificationCompat.Builder(applicationContext, notificationChannelId)
-            .setSmallIcon(R.drawable.ic_android_kotlin_weekly)
-            .setContentTitle(applicationContext.getString(R.string.app_name))
-            .setContentText("Work Request Done!")
+            .setSmallIcon(R.mipmap.ic_launcher)
+            .setContentText("New Articles Arrived!")
             .setContentIntent(mainActivityPendingIntent)
             .setAutoCancel(true)
             .build()
@@ -69,7 +71,7 @@ class SyncWorker(appContext: Context, params: WorkerParameters)
 
             val notificationChannel = NotificationChannel(
                 notificationChannelId,
-                "DemoWorker",
+                "Sync Articles",
                 NotificationManager.IMPORTANCE_DEFAULT,
             )
 

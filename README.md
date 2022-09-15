@@ -26,6 +26,7 @@ This is a simple RSS feed reader app that currently reads my blog (Android Kotli
 - [Coroutines](https://vtsen.hashnode.dev/kotlin-coroutines-basics-simple-android-app-demo) & Flow
 - Accompanist (System UI & Swipe Refresh)
 - Work Manager
+- Notification
 
 ## Articles
 - [Simple RSS Feed Reader - Jetpack Compose](https://vtsen.hashnode.dev/simple-rss-feed-reader-jetpack-compose)

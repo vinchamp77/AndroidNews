@@ -11,7 +11,7 @@ This is a simple RSS feed reader app that currently reads my blog (Android Kotli
 - Search articles
 
 ## Requirements
-- Android Studio Bumblebee or later
+- Android Studio Dolphin or later
 
 ## Tech Stack
 - [MVVM Architecture](https://vtsen.hashnode.dev/mvc-vs-mvp-vs-mvvm-design-patterns)

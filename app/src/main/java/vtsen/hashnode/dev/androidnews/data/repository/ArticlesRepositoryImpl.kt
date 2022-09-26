@@ -1,6 +1,8 @@
 package vtsen.hashnode.dev.androidnews.data.repository
 
 import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import vtsen.hashnode.dev.androidnews.data.local.ArticleEntity
 import vtsen.hashnode.dev.androidnews.data.local.ArticlesDatabase
@@ -25,6 +27,15 @@ class ArticlesRepositoryImpl @Inject constructor(
         "https://vtsen.hashnode.dev/rss.xml",
     )
 
+    private var newArticlesFound: Boolean = false
+    private var _status: ArticlesRepositoryStatus = ArticlesRepositoryStatus.Invalid
+    override val statusFlow: Flow<ArticlesRepositoryStatus> = flow {
+        while(true) {
+            delay(500)
+            emit(_status)
+        }
+    }
+
     override val articlesFlow = database.selectAllArticles().map { articlesEntity ->
         articlesEntity.asArticles()
     }
@@ -39,18 +50,20 @@ class ArticlesRepositoryImpl @Inject constructor(
 
     override suspend fun refresh(): ArticlesRepositoryStatus = withContext(Dispatchers.IO) {
 
-        var status:ArticlesRepositoryStatus = ArticlesRepositoryStatus.Success
+        newArticlesFound = false
+        _status = ArticlesRepositoryStatus.IsLoading
 
         try {
             val articlesFeed = fetchArticlesFeed()
             updateDatabase(articlesFeed.asArticleEntities())
+            _status = ArticlesRepositoryStatus.Success(newArticlesFound)
 
         } catch(e: Exception) {
             e.printStackTrace()
-            status = ArticlesRepositoryStatus.Fail
+            _status = ArticlesRepositoryStatus.Fail
         }
 
-        status
+        return@withContext _status
     }
 
     override suspend fun updateArticle(article: Article) = withContext(Dispatchers.IO) {
@@ -98,6 +111,7 @@ class ArticlesRepositoryImpl @Inject constructor(
                 val articleFound = database.selectArticleByLink(articleEntity.link)
                 if(articleFound == null) {
                     database.insertArticle(articleEntity)
+                    newArticlesFound = true
                 } else {
                     //Important Note:
                     // (1) articleEntity.id is different than the one in articleFound.id (database)

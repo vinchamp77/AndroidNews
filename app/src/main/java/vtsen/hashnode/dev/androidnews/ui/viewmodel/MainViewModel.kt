@@ -6,8 +6,6 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import vtsen.hashnode.dev.androidnews.R
 import vtsen.hashnode.dev.androidnews.domain.model.Article
@@ -55,13 +53,8 @@ class MainViewModel
 
     fun refresh() {
         viewModelScope.launch {
-            isRefreshing = true
-            val status = repository.refresh()
-            if (status == ArticlesRepositoryStatus.Fail) {
-                showSnackBarStringId = R.string.no_internet
-            }
-            isRefreshing = false
-        }
+            repository.refresh()
+          }
     }
 
     fun clearShowSnackBarStringId() {
@@ -165,7 +158,18 @@ class MainViewModel
     }
 
     private fun collectFlows() {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
+
+            launch {
+                repository.statusFlow.collect { status ->
+                    isRefreshing = status is ArticlesRepositoryStatus.IsLoading
+
+                    if(status is ArticlesRepositoryStatus.Fail) {
+                        showSnackBarStringId = R.string.no_internet
+                    }
+
+                }
+            }
 
             launch {
                 repository.articlesFlow.collect { articles ->

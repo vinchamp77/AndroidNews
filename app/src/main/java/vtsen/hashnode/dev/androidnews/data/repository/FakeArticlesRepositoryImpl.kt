@@ -1,6 +1,7 @@
 package vtsen.hashnode.dev.androidnews.data.repository
 
 import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import vtsen.hashnode.dev.androidnews.domain.model.Article
 import vtsen.hashnode.dev.androidnews.domain.repository.ArticlesRepository
@@ -9,9 +10,15 @@ import vtsen.hashnode.dev.androidnews.utils.Utils
 
 class FakeArticlesRepositoryImpl() : ArticlesRepository {
 
+    private var _status: ArticlesRepositoryStatus = ArticlesRepositoryStatus.Invalid
+    override val statusFlow: Flow<ArticlesRepositoryStatus> = flow {
+        while(true) {
+            delay(1000)
+            emit(_status)
+        }
+    }
+
     private var allArticles: MutableList<Article> = mutableListOf()
-    private var bookmarkedArticles: MutableList<Article> = mutableListOf()
-    private var unreadArticles: MutableList<Article> = mutableListOf()
 
     override val articlesFlow = flow {
         while(true){
@@ -20,6 +27,7 @@ class FakeArticlesRepositoryImpl() : ArticlesRepository {
         }
     }
 
+    private var unreadArticles: MutableList<Article> = mutableListOf()
     override val unreadArticlesFlow = flow {
         while(true){
             emit(unreadArticles)
@@ -27,6 +35,7 @@ class FakeArticlesRepositoryImpl() : ArticlesRepository {
         }
     }
 
+    private var bookmarkedArticles: MutableList<Article> = mutableListOf()
     override val bookmarkedArticlesFlow = flow {
         while(true){
             emit(bookmarkedArticles)
@@ -38,7 +47,9 @@ class FakeArticlesRepositoryImpl() : ArticlesRepository {
         makeFakeArticles()
     }
 
-    override suspend fun refresh(): ArticlesRepositoryStatus = ArticlesRepositoryStatus.Success
+    override suspend fun refresh() : ArticlesRepositoryStatus {
+        return ArticlesRepositoryStatus.Success(true)
+    }
 
     override suspend fun updateArticle(article: Article) {}
 

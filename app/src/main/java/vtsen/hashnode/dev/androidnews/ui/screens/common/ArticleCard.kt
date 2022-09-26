@@ -1,6 +1,5 @@
-package vtsen.hashnode.dev.androidnews.ui.screens.home
+package vtsen.hashnode.dev.androidnews.ui.screens.common
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Divider
@@ -10,17 +9,18 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import coil.compose.rememberImagePainter
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import vtsen.hashnode.dev.androidnews.R
-import vtsen.hashnode.dev.androidnews.ui.screens.common.ArticleIconButton
+import vtsen.hashnode.dev.androidnews.domain.model.Article
 import vtsen.hashnode.dev.androidnews.ui.theme.PaddingMedium
 import vtsen.hashnode.dev.androidnews.ui.theme.PaddingSmall
 import vtsen.hashnode.dev.androidnews.utils.Utils
-import vtsen.hashnode.dev.androidnews.domain.model.Article
 
 @Composable
 fun ArticleCard(
@@ -86,13 +86,11 @@ private fun ArticleContent(article: Article) {
 
 @Composable
 private fun ArticleImage(article: Article) {
-    Image(
-        painter = rememberImagePainter(
-            data = article.image,
-            builder = {
-                placeholder(R.drawable.loading_animation)
-            }
-        ),
+    AsyncImage(
+        model = ImageRequest.Builder(LocalContext.current)
+            .data(article.image)
+            .placeholder(R.drawable.loading_animation)
+            .build(),
         contentScale = ContentScale.Crop,
         contentDescription = "",
         modifier = Modifier

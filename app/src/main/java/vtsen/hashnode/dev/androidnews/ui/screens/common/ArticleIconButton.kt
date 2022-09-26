@@ -9,11 +9,11 @@ import vtsen.hashnode.dev.androidnews.domain.model.Article
 @Composable
 fun ArticleIconButton(
     article: Article,
-    onIconClick: (Int) -> Unit,
+    onIconClick: (Article) -> Unit,
     iconPainter: Painter,
     contentDescription: String? = null,
 ) {
-    IconButton(onClick = { onIconClick(article.id) }) {
+    IconButton(onClick = { onIconClick(article) }) {
         Icon(
             painter = iconPainter,
             contentDescription = contentDescription

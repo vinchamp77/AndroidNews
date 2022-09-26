@@ -1,4 +1,4 @@
-package vtsen.hashnode.dev.androidnews.ui.screens.navigation
+package vtsen.hashnode.dev.androidnews.ui.screens.main.navigation
 
 sealed class NavRoute(val path: String) {
 
@@ -12,7 +12,9 @@ sealed class NavRoute(val path: String) {
         val id = "id"
     }
 
-    object SearchResults: NavRoute("search_results")
+    object SearchResults: NavRoute("search_results") {
+        val query = "query"
+    }
 
     fun withArgs(vararg args: String): String {
         return buildString {

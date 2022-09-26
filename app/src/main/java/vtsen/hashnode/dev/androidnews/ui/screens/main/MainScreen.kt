@@ -1,88 +1,47 @@
-package vtsen.hashnode.dev.androidnews.ui.screens
+package vtsen.hashnode.dev.androidnews.ui.screens.main
 
-import androidx.compose.material.Scaffold
-import androidx.compose.material.ScaffoldState
-import androidx.compose.material.rememberScaffoldState
+import android.annotation.SuppressLint
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.rememberNavController
-import vtsen.hashnode.dev.androidnews.data.local.ArticlesDatabase
-import vtsen.hashnode.dev.androidnews.data.remote.WebService
 import vtsen.hashnode.dev.androidnews.data.repository.ArticlesRepositoryImpl
-import vtsen.hashnode.dev.androidnews.ui.screens.article.ArticleTopBar
-import vtsen.hashnode.dev.androidnews.ui.screens.bookmarks.BookmarkedArticlesTopBar
-import vtsen.hashnode.dev.androidnews.ui.screens.home.AllArticlesTopBar
-import vtsen.hashnode.dev.androidnews.ui.screens.home.SearchResultsTopBar
-import vtsen.hashnode.dev.androidnews.ui.screens.navigation.BottomBarNav
-import vtsen.hashnode.dev.androidnews.ui.screens.navigation.NavGraph
-import vtsen.hashnode.dev.androidnews.ui.screens.navigation.NavRoute
-import vtsen.hashnode.dev.androidnews.ui.screens.unread.UnreadArticlesTopBar
+import vtsen.hashnode.dev.androidnews.ui.screens.common.SnackBar
+import vtsen.hashnode.dev.androidnews.ui.screens.main.navigation.BottomBarNav
+import vtsen.hashnode.dev.androidnews.ui.screens.main.navigation.NavGraph
+import vtsen.hashnode.dev.androidnews.ui.screens.main.navigation.TopBar
 import vtsen.hashnode.dev.androidnews.ui.theme.AndroidNewsTheme
 import vtsen.hashnode.dev.androidnews.ui.viewmodel.MainViewModel
+import vtsen.hashnode.dev.androidnews.ui.viewmodel.UiState
+import vtsen.hashnode.dev.androidnews.ui.viewmodel.UiStateViewModel
 
+@OptIn(ExperimentalLifecycleComposeApi::class)
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun MainScreen(viewModel: MainViewModel, useSystemUIController: Boolean) {
+fun MainScreen(
+    tmpViewModel: MainViewModel,
+    viewModel: UiStateViewModel,
+    useSystemUIController: Boolean) {
     AndroidNewsTheme(useSystemUIController = useSystemUIController) {
 
         val scaffoldState = rememberScaffoldState()
         val navHostController = rememberNavController()
+        val uiState: UiState by viewModel.uiStateFlow.collectAsStateWithLifecycle()
 
         Scaffold(
             scaffoldState = scaffoldState,
-            topBar = { TopBar(navHostController, viewModel) },
+            topBar = { TopBar(navHostController, tmpViewModel) },
             bottomBar = { BottomBarNav(navHostController) }
         ) {
-            NavGraph(viewModel, navHostController)
+            NavGraph(tmpViewModel, navHostController)
         }
 
-        SnackBar(scaffoldState, viewModel)
-    }
-}
-
-@Composable
-private fun TopBar(navHostController: NavHostController, viewModel: MainViewModel) {
-
-    val navBackStackEntry by navHostController.currentBackStackEntryAsState()
-    val currentNavRoutePath = navBackStackEntry?.destination?.route ?: return
-
-    // All articles
-    if (currentNavRoutePath.contains(NavRoute.Home.path)) {
-        AllArticlesTopBar(navHostController, viewModel)
-    // Unread articles
-    } else if (currentNavRoutePath.contains(NavRoute.Unread.path)) {
-        UnreadArticlesTopBar(navHostController, viewModel)
-    // Bookmarked articles
-    } else if (currentNavRoutePath.contains(NavRoute.Bookmarks.path)) {
-        BookmarkedArticlesTopBar(navHostController, viewModel)
-    // Search results articles
-    } else if (currentNavRoutePath.contains(NavRoute.SearchResults.path)) {
-        SearchResultsTopBar(navHostController, viewModel)
-    // Single article
-    } else if (currentNavRoutePath.contains(NavRoute.Article.path)) {
-        ArticleTopBar(navHostController, viewModel)
-    } else {
-        throw Exception("Invalid navigation path!")
-    }
-}
-
-@Composable
-private fun SnackBar(scaffoldState: ScaffoldState, viewModel: MainViewModel) {
-
-    viewModel.showSnackBarStringId?.let { stringId ->
-        val msg = stringResource(stringId)
-
-        LaunchedEffect(viewModel.showSnackBarStringId) {
-            scaffoldState.snackbarHostState.showSnackbar(
-                message = msg,
-            )
-
-            viewModel.clearShowSnackBarStringId()
+        if(uiState is UiState.Error) {
+            SnackBar(scaffoldState, (uiState as UiState.Error).msgResId)
         }
     }
 }
@@ -92,10 +51,12 @@ private fun SnackBar(scaffoldState: ScaffoldState, viewModel: MainViewModel) {
 fun MainScreenPreview() {
 
     val repository = ArticlesRepositoryImpl.getInstance(LocalContext.current)
-    val viewModel = MainViewModel(repository, useFakeData = true)
-
+    val tmpViewModel = MainViewModel(repository, useFakeData = true)
+    val viewModel = UiStateViewModel(repository)
     MainScreen(
+        tmpViewModel,
         viewModel,
         useSystemUIController = false,
     )
 }
+

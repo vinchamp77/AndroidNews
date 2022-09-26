@@ -11,6 +11,7 @@ import vtsen.hashnode.dev.androidnews.R
 import vtsen.hashnode.dev.androidnews.domain.model.Article
 import vtsen.hashnode.dev.androidnews.domain.repository.ArticlesRepository
 import vtsen.hashnode.dev.androidnews.domain.repository.ArticlesRepositoryStatus
+import vtsen.hashnode.dev.androidnews.ui.screens.main.navigation.NavRoute.Article.id
 import vtsen.hashnode.dev.androidnews.utils.Utils
 
 class MainViewModel(private val repository: ArticlesRepository) : ViewModel() {
@@ -65,15 +66,13 @@ class MainViewModel(private val repository: ArticlesRepository) : ViewModel() {
         currentArticle = getArticle(id)
     }
 
-    fun onReadClick(id: Int) = viewModelScope.launch {
-        val article = getArticle(id)
+    fun onReadClick(article: Article) = viewModelScope.launch {
         repository.updateArticle(article.copy(read = !article.read))
 
         updateSearchedArticles()
     }
 
-    fun onBookmarkClick(id: Int) = viewModelScope.launch {
-        val article = getArticle(id)
+    fun onBookmarkClick(article: Article) = viewModelScope.launch {
         repository.updateArticle(article.copy(bookmarked = !article.bookmarked))
 
         updateSearchedArticles()

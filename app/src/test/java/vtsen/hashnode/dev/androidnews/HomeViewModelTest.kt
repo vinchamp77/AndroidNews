@@ -10,6 +10,7 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.robolectric.RuntimeEnvironment.application
 import vtsen.hashnode.dev.androidnews.data.local.ArticlesDatabase
 import vtsen.hashnode.dev.androidnews.data.remote.WebService
 import vtsen.hashnode.dev.androidnews.data.repository.ArticlesRepositoryImpl
@@ -26,10 +27,7 @@ class HomeViewModelTest {
 
     @Before
     fun setupViewModel() {
-        val repository = ArticlesRepositoryImpl(
-            ArticlesDatabase.getInstance(ApplicationProvider.getApplicationContext()),
-            WebService(),
-        )
+        val repository = ArticlesRepositoryImpl.getInstance(ApplicationProvider.getApplicationContext())
         viewModel = MainViewModel(repository)
         mockViewModel = MainViewModel(repository, useFakeData = true)
     }

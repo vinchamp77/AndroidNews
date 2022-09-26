@@ -16,21 +16,24 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.content.ContextCompat
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
+import kotlinx.coroutines.Job
 import vtsen.hashnode.dev.androidnews.R
-import vtsen.hashnode.dev.androidnews.data.local.ArticlesDatabase
-import vtsen.hashnode.dev.androidnews.data.remote.WebService
 import vtsen.hashnode.dev.androidnews.data.repository.ArticlesRepositoryImpl
 import vtsen.hashnode.dev.androidnews.ui.screens.home.ArticleCard
 import vtsen.hashnode.dev.androidnews.ui.theme.PaddingSmall
 import vtsen.hashnode.dev.androidnews.domain.model.Article
 import vtsen.hashnode.dev.androidnews.ui.viewmodel.MainViewModel
+import kotlin.reflect.KFunction1
 
 @Composable
 fun ArticlesScreen(
-    viewModel: MainViewModel,
     articles: List<Article>,
-    navigateToArticle: (Int) -> Unit,
     noArticlesDescStrResId: Int,
+    isRefreshing: Boolean,
+    navigateToArticle: (Article) -> Unit,
+    onRefresh: () -> Unit,
+    onBookmarkClick: (Article) -> Unit,
+    onReadClick: (Article) -> Unit,
 ) {
     if (articles.isEmpty()) {
         NoArticlesScreen(noArticlesDescStrResId)
@@ -38,8 +41,8 @@ fun ArticlesScreen(
     }
 
     SwipeRefresh(
-        state = rememberSwipeRefreshState(viewModel.isRefreshing),
-        onRefresh = { viewModel.refresh() }
+        state = rememberSwipeRefreshState(isRefreshing),
+        onRefresh = { onRefresh() }
     ) {
         val context = LocalContext.current
         LazyColumn(
@@ -50,11 +53,11 @@ fun ArticlesScreen(
                 ArticleCard(
                     article = article,
                     onArticleCardClick = navigateToArticle,
-                    onBookmarkClick = viewModel::onBookmarkClick,
-                    onShareClick = {
+                    onBookmarkClick = onBookmarkClick,
+                    onShareClick = { article ->
                         shareArticle(context, article.link)
                     },
-                    onReadClick = viewModel::onReadClick
+                    onReadClick = onReadClick,
                 )
             }
         }
@@ -98,9 +101,12 @@ private fun DefaultPreview() {
     val viewModel = MainViewModel(repository, useFakeData = true)
 
     ArticlesScreen(
-        viewModel = viewModel,
-        articles = viewModel.allArticles!!,
-        navigateToArticle = {},
+        articles = viewModel.allArticles!! ,
         noArticlesDescStrResId = R.string.no_articles_desc,
+        isRefreshing = viewModel.isRefreshing,
+        navigateToArticle = {},
+        onRefresh = viewModel::refresh,
+        onBookmarkClick = viewModel::onBookmarkClick,
+        onReadClick = viewModel::onReadClick,
     )
 }

@@ -7,12 +7,22 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.viewinterop.AndroidView
+import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import vtsen.hashnode.dev.androidnews.domain.model.Article
+import vtsen.hashnode.dev.androidnews.ui.screens.article.ArticleViewModel
 
+@OptIn(ExperimentalLifecycleComposeApi::class)
 @Composable
-fun ArticleScreen(article: Article) {
-    ArticleWebView(url = article.link)
+fun ArticleScreen(viewModel: ArticleViewModel) {
+
+    val articles by viewModel.articleStateFlow.collectAsStateWithLifecycle()
+
+    if (articles == null) return
+
+    ArticleWebView(url = articles!![0].link)
 }
 
 @Composable

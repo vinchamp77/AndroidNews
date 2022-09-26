@@ -4,24 +4,26 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import vtsen.hashnode.dev.androidnews.R
-import vtsen.hashnode.dev.androidnews.data.local.ArticlesDatabase
-import vtsen.hashnode.dev.androidnews.data.remote.WebService
 import vtsen.hashnode.dev.androidnews.data.repository.ArticlesRepositoryImpl
+import vtsen.hashnode.dev.androidnews.domain.model.Article
 import vtsen.hashnode.dev.androidnews.ui.screens.common.ArticlesScreen
 import vtsen.hashnode.dev.androidnews.ui.viewmodel.MainViewModel
 
 @Composable
 fun SearchResultsScreen(
     viewModel: MainViewModel,
-    navigateToArticle: (Int) -> Unit,
+    navigateToArticle: (Article) -> Unit,
 ) {
     if(viewModel.searchedArticles == null) return
 
     ArticlesScreen(
-        viewModel = viewModel,
         articles = viewModel.searchedArticles!! ,
-        navigateToArticle = navigateToArticle,
         noArticlesDescStrResId = R.string.no_search_articles_desc,
+        isRefreshing = viewModel.isRefreshing,
+        navigateToArticle = navigateToArticle,
+        onRefresh = viewModel::refresh,
+        onBookmarkClick = viewModel::onBookmarkClick,
+        onReadClick = viewModel::onReadClick,
     )
 }
 

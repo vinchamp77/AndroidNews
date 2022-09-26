@@ -23,7 +23,7 @@ import androidx.navigation.compose.rememberNavController
 import vtsen.hashnode.dev.androidnews.data.local.ArticlesDatabase
 import vtsen.hashnode.dev.androidnews.data.remote.WebService
 import vtsen.hashnode.dev.androidnews.data.repository.ArticlesRepositoryImpl
-import vtsen.hashnode.dev.androidnews.ui.screens.navigation.NavRoute
+import vtsen.hashnode.dev.androidnews.ui.screens.main.navigation.NavRoute
 import vtsen.hashnode.dev.androidnews.ui.theme.PaddingSmall
 import vtsen.hashnode.dev.androidnews.ui.viewmodel.MainViewModel
 

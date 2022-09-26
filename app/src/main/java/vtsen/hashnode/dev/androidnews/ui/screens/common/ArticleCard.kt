@@ -28,10 +28,10 @@ import vtsen.hashnode.dev.androidnews.domain.model.Article
 @Composable
 fun ArticleCard(
     article: Article,
-    onArticleCardClick: (Int) -> Unit,
-    onBookmarkClick: (Int) -> Unit,
-    onShareClick: (Int) -> Unit,
-    onReadClick: (Int) -> Unit,
+    onArticleCardClick: (Article) -> Unit,
+    onBookmarkClick: (Article) -> Unit,
+    onShareClick: (Article) -> Unit,
+    onReadClick: (Article) -> Unit,
 ) {
     Column (
         modifier = Modifier
@@ -51,13 +51,13 @@ fun ArticleCard(
 @Composable
 private fun ArticleRow(
     article: Article,
-    onArticleCardClick: (Int) -> Unit
+    onArticleCardClick: (Article) -> Unit
 ) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .clickable {
-                onArticleCardClick(article.id)
+                onArticleCardClick(article)
             }
         ,
         horizontalArrangement = Arrangement.SpaceBetween
@@ -105,9 +105,9 @@ private fun ArticleImage(article: Article) {
 @Composable
 private fun ArticleBottomRow(
     article: Article,
-    onBookmarkClick: (Int) -> Unit,
-    onShareClick: (Int) -> Unit,
-    onReadClick: (Int) -> Unit,
+    onBookmarkClick: (Article) -> Unit,
+    onShareClick: (Article) -> Unit,
+    onReadClick: (Article) -> Unit,
 ) {
     Row(
         modifier = Modifier

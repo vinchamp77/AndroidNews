@@ -7,12 +7,12 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import vtsen.hashnode.dev.androidnews.data.local.ArticleEntity
 import vtsen.hashnode.dev.androidnews.data.local.ArticlesDatabase
-import vtsen.hashnode.dev.androidnews.data.local.asArticle
-import vtsen.hashnode.dev.androidnews.data.local.asArticles
+import vtsen.hashnode.dev.androidnews.data.mapper.toArticle
+import vtsen.hashnode.dev.androidnews.data.mapper.toArticles
 import vtsen.hashnode.dev.androidnews.data.remote.ArticleFeed
 import vtsen.hashnode.dev.androidnews.data.remote.FeedParser
 import vtsen.hashnode.dev.androidnews.data.remote.WebService
-import vtsen.hashnode.dev.androidnews.data.remote.asArticleEntities
+import vtsen.hashnode.dev.androidnews.data.mapper.toArticleEntities
 import vtsen.hashnode.dev.androidnews.domain.model.Article
 import vtsen.hashnode.dev.androidnews.domain.repository.ArticlesRepository
 import vtsen.hashnode.dev.androidnews.data.mapper.asArticleEntity
@@ -54,15 +54,15 @@ class ArticlesRepositoryImpl private constructor(
     }
 
     override val allArticles = database.selectAllArticles().map { articlesEntity ->
-        articlesEntity.asArticles()
+        articlesEntity.toArticles()
     }
 
     override val unreadArticles = database.selectUnreadArticles().map { articleEntity ->
-        articleEntity.asArticles()
+        articleEntity.toArticles()
     }
 
     override val bookmarkArticles = database.selectBookmarkedArticles().map { articleEntity ->
-        articleEntity.asArticles()
+        articleEntity.toArticles()
     }
 
     override suspend fun refresh(): ArticlesRepositoryStatus = withContext(Dispatchers.IO) {
@@ -72,7 +72,7 @@ class ArticlesRepositoryImpl private constructor(
 
         try {
             val articlesFeed = fetchArticlesFeed()
-            updateDatabase(articlesFeed.asArticleEntities())
+            updateDatabase(articlesFeed.toArticleEntities())
             _status = ArticlesRepositoryStatus.Success(newArticlesFound)
 
         } catch(e: Exception) {
@@ -88,22 +88,22 @@ class ArticlesRepositoryImpl private constructor(
     }
 
     override fun getArticle(id: Int) = database.selectArticleById(id).map { articlesEntity ->
-        articlesEntity.asArticle()
+        articlesEntity.toArticle()
     }
 
     override fun getAllArticlesByTitle(title: String)
         = database.selectAllArticlesByTitle(title).map { articlesEntity ->
-            articlesEntity.asArticles()
+            articlesEntity.toArticles()
         }
 
     override fun getUnreadArticlesByTitle(title: String)
         = database.selectUnreadArticlesByTitle(title).map { articlesEntity ->
-            articlesEntity.asArticles()
+            articlesEntity.toArticles()
         }
 
     override fun getBookmarkedArticlesByTitle(title: String)
         = database.selectBookmarkedArticlesByTitle(title).map { articlesEntity ->
-            articlesEntity.asArticles()
+            articlesEntity.toArticles()
         }
 
     private suspend fun fetchArticlesFeed() : List<ArticleFeed> = coroutineScope {

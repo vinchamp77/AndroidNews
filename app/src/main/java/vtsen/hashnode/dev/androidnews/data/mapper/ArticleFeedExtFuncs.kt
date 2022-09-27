@@ -1,15 +1,16 @@
-package vtsen.hashnode.dev.androidnews.data.remote
+package vtsen.hashnode.dev.androidnews.data.mapper
 
 import vtsen.hashnode.dev.androidnews.data.local.ArticleEntity
+import vtsen.hashnode.dev.androidnews.data.remote.ArticleFeed
 import vtsen.hashnode.dev.androidnews.utils.Utils
 
-fun List<ArticleFeed>.asArticleEntities() : List<ArticleEntity> {
+fun List<ArticleFeed>.toArticleEntities() : List<ArticleEntity> {
     return map { feedItem ->
-        feedItem.asArticleEntity()
+        feedItem.toArticleEntity()
     }
 }
 
-fun ArticleFeed.asArticleEntity() : ArticleEntity {
+fun ArticleFeed.toArticleEntity() : ArticleEntity {
     return ArticleEntity(
         id = 0,
         title = feedItem.title,

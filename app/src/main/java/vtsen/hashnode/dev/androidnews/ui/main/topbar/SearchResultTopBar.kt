@@ -1,4 +1,4 @@
-package vtsen.hashnode.dev.androidnews.ui.screens.main.topbar
+package vtsen.hashnode.dev.androidnews.ui.main.topbar
 
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar

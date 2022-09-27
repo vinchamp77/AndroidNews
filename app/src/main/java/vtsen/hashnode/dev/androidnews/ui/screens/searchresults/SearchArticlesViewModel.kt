@@ -5,7 +5,7 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.stateIn
 import vtsen.hashnode.dev.androidnews.R
 import vtsen.hashnode.dev.androidnews.domain.repository.ArticlesRepository
-import vtsen.hashnode.dev.androidnews.ui.viewmodel.ArticlesViewModel
+import vtsen.hashnode.dev.androidnews.ui.main.viewmodel.ArticlesViewModel
 
 class SearchArticlesViewModel(
     repository: ArticlesRepository,

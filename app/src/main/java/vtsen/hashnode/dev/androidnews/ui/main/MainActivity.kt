@@ -1,4 +1,4 @@
-package vtsen.hashnode.dev.androidnews.ui
+package vtsen.hashnode.dev.androidnews.ui.main
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -7,9 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import vtsen.hashnode.dev.androidnews.data.repository.ArticlesRepositoryImpl
-import vtsen.hashnode.dev.androidnews.ui.screens.main.MainScreen
-import vtsen.hashnode.dev.androidnews.ui.screens.main.MainScreenPreview
-import vtsen.hashnode.dev.androidnews.ui.viewmodel.factory.ArticlesViewModelFactory
+import vtsen.hashnode.dev.androidnews.ui.main.viewmodel.ArticlesViewModelFactory
 
 class MainActivity : ComponentActivity() {
 
@@ -29,7 +27,7 @@ class MainActivity : ComponentActivity() {
 
 @Preview(showBackground = true)
 @Composable
-private fun DefaultPreview() {
+private fun MainActivityPreview() {
     MainScreenPreview()
 }
 

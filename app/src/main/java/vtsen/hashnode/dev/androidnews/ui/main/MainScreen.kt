@@ -1,4 +1,4 @@
-package vtsen.hashnode.dev.androidnews.ui.screens.main
+package vtsen.hashnode.dev.androidnews.ui.main
 
 import android.annotation.SuppressLint
 import androidx.compose.material.*
@@ -10,9 +10,8 @@ import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.rememberNavController
 import vtsen.hashnode.dev.androidnews.data.repository.ArticlesRepositoryImpl
-import vtsen.hashnode.dev.androidnews.ui.screens.common.SnackBar
-import vtsen.hashnode.dev.androidnews.ui.screens.main.navigation.BottomBarNav
-import vtsen.hashnode.dev.androidnews.ui.screens.main.navigation.NavGraph
+import vtsen.hashnode.dev.androidnews.ui.main.navigation.BottomBarNav
+import vtsen.hashnode.dev.androidnews.ui.main.navigation.NavGraph
 import vtsen.hashnode.dev.androidnews.ui.screens.main.navigation.TopBar
 import vtsen.hashnode.dev.androidnews.ui.theme.AndroidNewsTheme
 import vtsen.hashnode.dev.androidnews.ui.viewmodel.UiState

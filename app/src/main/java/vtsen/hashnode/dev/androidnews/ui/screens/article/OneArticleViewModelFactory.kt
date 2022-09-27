@@ -1,22 +1,20 @@
-package vtsen.hashnode.dev.androidnews.ui.viewmodel.factory
+package vtsen.hashnode.dev.androidnews.ui.screens.article
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import vtsen.hashnode.dev.androidnews.domain.repository.ArticlesRepository
-import vtsen.hashnode.dev.androidnews.ui.screens.searchresults.SearchArticlesViewModel
 
 @Suppress("UNCHECKED_CAST")
-class SearchArticlesViewModelFactory(
+class OneArticleViewModelFactory(
     private val repository: ArticlesRepository,
-    private val titleResId: Int,
-    private val query: String,
+    private val articleId: Int,
 )
     : ViewModelProvider.NewInstanceFactory() {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
 
-        if (modelClass.isAssignableFrom(SearchArticlesViewModel::class.java)) {
-            return SearchArticlesViewModel(repository, titleResId, query) as T
+        if (modelClass.isAssignableFrom(OneArticleViewModel::class.java)) {
+            return OneArticleViewModel(repository, articleId) as T
         }
 
         throw IllegalArgumentException("Unknown ViewModel class")

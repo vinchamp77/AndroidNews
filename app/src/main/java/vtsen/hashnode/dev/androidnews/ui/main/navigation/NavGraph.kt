@@ -1,4 +1,4 @@
-package vtsen.hashnode.dev.androidnews.ui.screens.main.navigation
+package vtsen.hashnode.dev.androidnews.ui.main.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
@@ -20,9 +20,9 @@ import vtsen.hashnode.dev.androidnews.ui.screens.searchresults.SearchArticlesVie
 import vtsen.hashnode.dev.androidnews.ui.screens.searchresults.SearchResultsScreen
 import vtsen.hashnode.dev.androidnews.ui.screens.unread.UnreadArticlesViewModel
 import vtsen.hashnode.dev.androidnews.ui.screens.unread.UnreadScreen
-import vtsen.hashnode.dev.androidnews.ui.viewmodel.factory.ArticlesViewModelFactory
-import vtsen.hashnode.dev.androidnews.ui.viewmodel.factory.OneArticleViewModelFactory
-import vtsen.hashnode.dev.androidnews.ui.viewmodel.factory.SearchArticlesViewModelFactory
+import vtsen.hashnode.dev.androidnews.ui.main.viewmodel.ArticlesViewModelFactory
+import vtsen.hashnode.dev.androidnews.ui.screens.article.OneArticleViewModelFactory
+import vtsen.hashnode.dev.androidnews.ui.screens.searchresults.SearchArticlesViewModelFactory
 
 @Composable
 fun NavGraph(navHostController: NavHostController) {
@@ -122,7 +122,8 @@ private fun addSearchResultsScreen(
 ) {
     navGraphBuilder.composable(
         route = NavRoute.SearchResults.withArgsFormat(
-            NavRoute.SearchResults.titleResId, NavRoute.SearchResults.query),
+            NavRoute.SearchResults.titleResId, NavRoute.SearchResults.query
+        ),
         arguments = listOf(
             navArgument(NavRoute.SearchResults.titleResId) {
                 type = NavType.IntType
@@ -140,7 +141,8 @@ private fun addSearchResultsScreen(
         val repository = ArticlesRepositoryImpl.getInstance(LocalContext.current.applicationContext)
         val viewModel: SearchArticlesViewModel = viewModel(
             factory = SearchArticlesViewModelFactory(
-                repository, titleResId, query))
+                repository, titleResId, query)
+        )
 
         SearchResultsScreen(
             viewModel,

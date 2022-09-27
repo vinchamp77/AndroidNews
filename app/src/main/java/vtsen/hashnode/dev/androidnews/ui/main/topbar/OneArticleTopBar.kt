@@ -1,4 +1,4 @@
-package vtsen.hashnode.dev.androidnews.ui.screens.main.topbar
+package vtsen.hashnode.dev.androidnews.ui.main.topbar
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -21,7 +21,7 @@ import androidx.navigation.compose.rememberNavController
 import vtsen.hashnode.dev.androidnews.R
 import vtsen.hashnode.dev.androidnews.data.repository.ArticlesRepositoryImpl
 import vtsen.hashnode.dev.androidnews.ui.screens.common.ArticleIconButton
-import vtsen.hashnode.dev.androidnews.ui.viewmodel.ArticlesViewModel
+import vtsen.hashnode.dev.androidnews.ui.main.viewmodel.ArticlesViewModel
 
 @OptIn(ExperimentalLifecycleComposeApi::class)
 @Composable

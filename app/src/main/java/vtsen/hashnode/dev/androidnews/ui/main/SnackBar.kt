@@ -1,8 +1,6 @@
-package vtsen.hashnode.dev.androidnews.ui.screens.common
+package vtsen.hashnode.dev.androidnews.ui.main
 
 import androidx.compose.material.ScaffoldState
-import androidx.compose.material.SnackbarDuration
-import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.res.stringResource

@@ -1,4 +1,4 @@
-package vtsen.hashnode.dev.androidnews.ui.screens.main.navigation
+package vtsen.hashnode.dev.androidnews.ui.main.navigation
 
 sealed class NavRoute(val path: String) {
 

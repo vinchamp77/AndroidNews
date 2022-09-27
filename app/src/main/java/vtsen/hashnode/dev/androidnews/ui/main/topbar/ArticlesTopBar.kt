@@ -1,4 +1,4 @@
-package vtsen.hashnode.dev.androidnews.ui.screens.main.topbar
+package vtsen.hashnode.dev.androidnews.ui.main.topbar
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.PaddingValues
@@ -24,7 +24,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import vtsen.hashnode.dev.androidnews.R
-import vtsen.hashnode.dev.androidnews.ui.screens.main.navigation.NavRoute
+import vtsen.hashnode.dev.androidnews.ui.main.navigation.NavRoute
 import vtsen.hashnode.dev.androidnews.ui.theme.PaddingSmall
 
 @OptIn(ExperimentalComposeUiApi::class)
@@ -59,7 +59,8 @@ fun ArticlesTopBar(
             ),
             keyboardActions = KeyboardActions(
                 onSearch = {
-                    navHostController.navigate(NavRoute.SearchResults.withArgs(
+                    navHostController.navigate(
+                        NavRoute.SearchResults.withArgs(
                         searchTitleResId.toString(),
                         searchQuery))
                     keyboardController!!.hide()

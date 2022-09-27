@@ -7,13 +7,14 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import vtsen.hashnode.dev.androidnews.data.repository.ArticlesRepositoryImpl
-import vtsen.hashnode.dev.androidnews.ui.screens.main.topbar.OneArticleTopBar
-import vtsen.hashnode.dev.androidnews.ui.screens.main.topbar.BookmarkedArticlesTopBar
-import vtsen.hashnode.dev.androidnews.ui.screens.main.topbar.AllArticlesTopBar
-import vtsen.hashnode.dev.androidnews.ui.screens.main.topbar.SearchResultsTopBar
-import vtsen.hashnode.dev.androidnews.ui.screens.main.topbar.UnreadArticlesTopBar
-import vtsen.hashnode.dev.androidnews.ui.viewmodel.ArticlesViewModel
-import vtsen.hashnode.dev.androidnews.ui.viewmodel.factory.ArticlesViewModelFactory
+import vtsen.hashnode.dev.androidnews.ui.main.navigation.NavRoute
+import vtsen.hashnode.dev.androidnews.ui.main.topbar.OneArticleTopBar
+import vtsen.hashnode.dev.androidnews.ui.main.topbar.BookmarkedArticlesTopBar
+import vtsen.hashnode.dev.androidnews.ui.main.topbar.AllArticlesTopBar
+import vtsen.hashnode.dev.androidnews.ui.main.topbar.SearchResultsTopBar
+import vtsen.hashnode.dev.androidnews.ui.main.topbar.UnreadArticlesTopBar
+import vtsen.hashnode.dev.androidnews.ui.main.viewmodel.ArticlesViewModel
+import vtsen.hashnode.dev.androidnews.ui.main.viewmodel.ArticlesViewModelFactory
 
 @Composable
 fun TopBar(navHostController: NavHostController) {

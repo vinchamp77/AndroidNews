@@ -15,7 +15,7 @@ import androidx.work.WorkerParameters
 import vtsen.hashnode.dev.androidnews.R
 import vtsen.hashnode.dev.androidnews.data.repository.ArticlesRepositoryImpl
 import vtsen.hashnode.dev.androidnews.domain.repository.ArticlesRepositoryStatus
-import vtsen.hashnode.dev.androidnews.ui.MainActivity
+import vtsen.hashnode.dev.androidnews.ui.main.MainActivity
 
 class SyncWorker(appContext: Context, params: WorkerParameters)
     : CoroutineWorker(appContext, params) {

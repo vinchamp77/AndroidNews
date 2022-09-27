@@ -1,4 +1,4 @@
-package vtsen.hashnode.dev.androidnews.ui
+package vtsen.hashnode.dev.androidnews.ui.main
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -6,12 +6,8 @@ import androidx.activity.compose.setContent
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
-import vtsen.hashnode.dev.androidnews.data.local.ArticlesDatabase
-import vtsen.hashnode.dev.androidnews.data.remote.WebService
 import vtsen.hashnode.dev.androidnews.data.repository.ArticlesRepositoryImpl
-import vtsen.hashnode.dev.androidnews.ui.screens.MainScreen
-import vtsen.hashnode.dev.androidnews.ui.screens.MainScreenPreview
-import vtsen.hashnode.dev.androidnews.ui.viewmodel.MainViewModelFactory
+import vtsen.hashnode.dev.androidnews.ui.main.viewmodel.ArticlesViewModelFactory
 
 class MainActivity : ComponentActivity() {
 
@@ -23,7 +19,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             MainScreen(
-                viewModel(factory = MainViewModelFactory(repository)),
+                viewModel(factory = ArticlesViewModelFactory(repository)),
                 useSystemUIController = true)
         }
     }
@@ -31,7 +27,7 @@ class MainActivity : ComponentActivity() {
 
 @Preview(showBackground = true)
 @Composable
-private fun DefaultPreview() {
+private fun MainActivityPreview() {
     MainScreenPreview()
 }
 

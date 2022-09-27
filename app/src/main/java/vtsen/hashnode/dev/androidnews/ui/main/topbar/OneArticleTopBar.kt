@@ -1,4 +1,4 @@
-package vtsen.hashnode.dev.androidnews.ui.screens.article
+package vtsen.hashnode.dev.androidnews.ui.main.topbar
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -9,21 +9,31 @@ import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import vtsen.hashnode.dev.androidnews.R
-import vtsen.hashnode.dev.androidnews.data.local.ArticlesDatabase
-import vtsen.hashnode.dev.androidnews.data.remote.WebService
 import vtsen.hashnode.dev.androidnews.data.repository.ArticlesRepositoryImpl
 import vtsen.hashnode.dev.androidnews.ui.screens.common.ArticleIconButton
-import vtsen.hashnode.dev.androidnews.ui.viewmodel.MainViewModel
+import vtsen.hashnode.dev.androidnews.ui.main.viewmodel.ArticlesViewModel
 
+@OptIn(ExperimentalLifecycleComposeApi::class)
 @Composable
-fun ArticleTopBar(navHostController: NavHostController, viewModel: MainViewModel) {
+fun OneArticleTopBar(
+    navHostController: NavHostController,
+    viewModel: ArticlesViewModel,
+    articleId: Int) {
+
+    val article by viewModel.getArticle(articleId).collectAsStateWithLifecycle(null)
+
+    if (article == null) return
+
     TopAppBar {
 
         Row(
@@ -41,21 +51,20 @@ fun ArticleTopBar(navHostController: NavHostController, viewModel: MainViewModel
 
             Row {
 
-                val article = viewModel.currentArticle
-                article?.run {
+                article!!.run {
                     ArticleIconButton(
-                        article = article,
+                        article = article!!,
                         onIconClick = viewModel::onReadClick,
-                        iconPainter = if (article.read)
+                        iconPainter = if (article!!.read)
                             painterResource(R.drawable.ic_check_circle)
                         else
                             painterResource(R.drawable.ic_radio_button_unchecked)
                     )
 
                     ArticleIconButton(
-                        article = article,
+                        article = article!!,
                         onIconClick = viewModel::onBookmarkClick,
-                        iconPainter = if (article.bookmarked)
+                        iconPainter = if (article!!.bookmarked)
                             painterResource(R.drawable.ic_bookmarked)
                         else
                             painterResource(R.drawable.ic_bookmark_border),
@@ -70,11 +79,12 @@ fun ArticleTopBar(navHostController: NavHostController, viewModel: MainViewModel
 private fun DefaultPreview() {
 
     val repository = ArticlesRepositoryImpl.getInstance(LocalContext.current)
-    val viewModel = MainViewModel(repository, useFakeData = true)
+    val viewModel = ArticlesViewModel(repository)
     val navHostController = rememberNavController()
 
-    ArticleTopBar(
+    OneArticleTopBar(
         navHostController,
         viewModel,
+        0
     )
 }

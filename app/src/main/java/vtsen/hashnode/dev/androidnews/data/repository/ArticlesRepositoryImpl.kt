@@ -46,22 +46,22 @@ class ArticlesRepositoryImpl private constructor(
 
     private var newArticlesFound: Boolean = false
     private var _status: ArticlesRepositoryStatus = ArticlesRepositoryStatus.Invalid
-    override val statusFlow: Flow<ArticlesRepositoryStatus> = flow {
+    override val status: Flow<ArticlesRepositoryStatus> = flow {
         while(true) {
             delay(500)
             emit(_status)
         }
     }
 
-    override val articlesFlow = database.selectAllArticles().map { articlesEntity ->
+    override val allArticles = database.selectAllArticles().map { articlesEntity ->
         articlesEntity.asArticles()
     }
 
-    override val unreadArticlesFlow = database.selectUnreadArticles().map { articleEntity ->
+    override val unreadArticles = database.selectUnreadArticles().map { articleEntity ->
         articleEntity.asArticles()
     }
 
-    override val bookmarkedArticlesFlow = database.selectBookmarkedArticles().map { articleEntity ->
+    override val bookmarkArticles = database.selectBookmarkedArticles().map { articleEntity ->
         articleEntity.asArticles()
     }
 
@@ -87,21 +87,24 @@ class ArticlesRepositoryImpl private constructor(
         database.updateArticle(article.asArticleEntity())
     }
 
-    override suspend fun getArticle(id: Int) = withContext(Dispatchers.IO) {
-        database.selectArticleById(id).asArticle()
+    override fun getArticle(id: Int) = database.selectArticleById(id).map { articlesEntity ->
+        articlesEntity.asArticle()
     }
 
-    override suspend fun getAllArticlesByTitle(title: String): List<Article> = withContext(Dispatchers.IO) {
-        return@withContext database.selectAllArticlesByTitle(title).asArticles()
-    }
+    override fun getAllArticlesByTitle(title: String)
+        = database.selectAllArticlesByTitle(title).map { articlesEntity ->
+            articlesEntity.asArticles()
+        }
 
-    override suspend fun getUnreadArticlesByTitle(title: String): List<Article> = withContext(Dispatchers.IO) {
-        return@withContext database.selectUnreadArticlesByTitle(title).asArticles()
-    }
+    override fun getUnreadArticlesByTitle(title: String)
+        = database.selectUnreadArticlesByTitle(title).map { articlesEntity ->
+            articlesEntity.asArticles()
+        }
 
-    override suspend fun getBookmarkedArticlesByTitle(title: String): List<Article> = withContext(Dispatchers.IO) {
-        return@withContext database.selectBookmarkedArticlesByTitle(title).asArticles()
-    }
+    override fun getBookmarkedArticlesByTitle(title: String)
+        = database.selectBookmarkedArticlesByTitle(title).map { articlesEntity ->
+            articlesEntity.asArticles()
+        }
 
     private suspend fun fetchArticlesFeed() : List<ArticleFeed> = coroutineScope {
         val results = mutableListOf<ArticleFeed>()

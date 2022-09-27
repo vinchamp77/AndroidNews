@@ -1,4 +1,4 @@
-package vtsen.hashnode.dev.androidnews.ui.screens.home
+package vtsen.hashnode.dev.androidnews.ui.main.topbar
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.PaddingValues
@@ -10,32 +10,32 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import vtsen.hashnode.dev.androidnews.data.local.ArticlesDatabase
-import vtsen.hashnode.dev.androidnews.data.remote.WebService
-import vtsen.hashnode.dev.androidnews.data.repository.ArticlesRepositoryImpl
-import vtsen.hashnode.dev.androidnews.ui.screens.navigation.NavRoute
+import vtsen.hashnode.dev.androidnews.R
+import vtsen.hashnode.dev.androidnews.ui.main.navigation.NavRoute
 import vtsen.hashnode.dev.androidnews.ui.theme.PaddingSmall
-import vtsen.hashnode.dev.androidnews.ui.viewmodel.MainViewModel
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun ArticlesTopBar(
     navHostController: NavHostController,
-    viewModel: MainViewModel,
-    onArticlesSearch: () -> Unit,
+    searchTitleResId: Int,
 ) {
     val keyboardController = LocalSoftwareKeyboardController.current
-    viewModel.clearSearchQuery()
+
+    var searchQuery by rememberSaveable { mutableStateOf("") }
 
     TopAppBar(
         contentPadding = PaddingValues(PaddingSmall)
@@ -47,8 +47,10 @@ fun ArticlesTopBar(
                 .background(color = MaterialTheme.colors.background)
 
             ,
-            value = viewModel.searchQuery,
-            onValueChange = viewModel::onSearchQueryChanged,
+            value = searchQuery,
+            onValueChange = { value ->
+                searchQuery = value
+            },
 
             label = { Text(text = "Search") },
             leadingIcon = { Icon(Icons.Filled.Search, contentDescription = "") },
@@ -57,8 +59,10 @@ fun ArticlesTopBar(
             ),
             keyboardActions = KeyboardActions(
                 onSearch = {
-                    onArticlesSearch()
-                    navHostController.navigate(NavRoute.SearchResults.path)
+                    navHostController.navigate(
+                        NavRoute.SearchResults.withArgs(
+                        searchTitleResId.toString(),
+                        searchQuery))
                     keyboardController!!.hide()
                 },
             ),
@@ -73,13 +77,7 @@ fun ArticlesTopBar(
 @Composable
 private fun DefaultPreview() {
 
-    val repository = ArticlesRepositoryImpl.getInstance(LocalContext.current)
-    val viewModel = MainViewModel(repository, useFakeData = true)
     val navHostController = rememberNavController()
 
-    ArticlesTopBar(
-        navHostController,
-        viewModel,
-        viewModel::onAllArticlesSearch
-    )
+    ArticlesTopBar(navHostController, R.string.all_articles)
 }

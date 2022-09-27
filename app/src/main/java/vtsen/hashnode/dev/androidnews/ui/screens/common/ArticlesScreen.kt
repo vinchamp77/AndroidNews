@@ -17,20 +17,20 @@ import androidx.core.content.ContextCompat
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import vtsen.hashnode.dev.androidnews.R
-import vtsen.hashnode.dev.androidnews.data.local.ArticlesDatabase
-import vtsen.hashnode.dev.androidnews.data.remote.WebService
-import vtsen.hashnode.dev.androidnews.data.repository.ArticlesRepositoryImpl
+import vtsen.hashnode.dev.androidnews.domain.model.Article
 import vtsen.hashnode.dev.androidnews.ui.screens.home.ArticleCard
 import vtsen.hashnode.dev.androidnews.ui.theme.PaddingSmall
-import vtsen.hashnode.dev.androidnews.domain.model.Article
-import vtsen.hashnode.dev.androidnews.ui.viewmodel.MainViewModel
+import vtsen.hashnode.dev.androidnews.utils.Utils.makeFakeArticles
 
 @Composable
 fun ArticlesScreen(
-    viewModel: MainViewModel,
     articles: List<Article>,
-    navigateToArticle: (Int) -> Unit,
     noArticlesDescStrResId: Int,
+    isRefreshing: Boolean,
+    navigateToArticle: (Article) -> Unit,
+    onRefresh: () -> Unit,
+    onBookmarkClick: (Article) -> Unit,
+    onReadClick: (Article) -> Unit,
 ) {
     if (articles.isEmpty()) {
         NoArticlesScreen(noArticlesDescStrResId)
@@ -38,8 +38,8 @@ fun ArticlesScreen(
     }
 
     SwipeRefresh(
-        state = rememberSwipeRefreshState(viewModel.isRefreshing),
-        onRefresh = { viewModel.refresh() }
+        state = rememberSwipeRefreshState(isRefreshing),
+        onRefresh = { onRefresh() }
     ) {
         val context = LocalContext.current
         LazyColumn(
@@ -50,11 +50,11 @@ fun ArticlesScreen(
                 ArticleCard(
                     article = article,
                     onArticleCardClick = navigateToArticle,
-                    onBookmarkClick = viewModel::onBookmarkClick,
-                    onShareClick = {
-                        shareArticle(context, article.link)
+                    onBookmarkClick = onBookmarkClick,
+                    onShareClick = { _article ->
+                        shareArticle(context, _article.link)
                     },
-                    onReadClick = viewModel::onReadClick
+                    onReadClick = onReadClick,
                 )
             }
         }
@@ -92,15 +92,15 @@ private fun shareArticle(context: Context, link: String) {
 
 @Preview(showBackground = true)
 @Composable
-private fun DefaultPreview() {
-
-    val repository = ArticlesRepositoryImpl.getInstance(LocalContext.current)
-    val viewModel = MainViewModel(repository, useFakeData = true)
+private fun ArticlesScreenPreview() {
 
     ArticlesScreen(
-        viewModel = viewModel,
-        articles = viewModel.allArticles!!,
-        navigateToArticle = {},
+        articles = makeFakeArticles() ,
         noArticlesDescStrResId = R.string.no_articles_desc,
+        isRefreshing = false,
+        navigateToArticle = {},
+        onRefresh = {},
+        onBookmarkClick = {},
+        onReadClick = {},
     )
 }

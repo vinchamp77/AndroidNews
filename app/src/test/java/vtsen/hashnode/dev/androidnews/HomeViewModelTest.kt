@@ -1,47 +1,40 @@
 package vtsen.hashnode.dev.androidnews
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.test.runTest
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import vtsen.hashnode.dev.androidnews.data.local.ArticlesDatabase
-import vtsen.hashnode.dev.androidnews.data.remote.WebService
-import vtsen.hashnode.dev.androidnews.data.repository.ArticlesRepositoryImpl
-import vtsen.hashnode.dev.androidnews.ui.viewmodel.MainViewModel
+import vtsen.hashnode.dev.androidnews.data.repository.FakeArticlesRepositoryImpl
+import vtsen.hashnode.dev.androidnews.ui.screens.home.AllArticlesViewModel
 
+@OptIn(ExperimentalCoroutinesApi::class)
 @RunWith(AndroidJUnit4::class)
 class HomeViewModelTest {
 
-    private lateinit var viewModel: MainViewModel
-    private lateinit var mockViewModel: MainViewModel
+    private lateinit var viewModel: AllArticlesViewModel
 
     @get:Rule
     var instantExecutorRule = InstantTaskExecutorRule()
 
     @Before
     fun setupViewModel() {
-        val repository = ArticlesRepositoryImpl(
-            ArticlesDatabase.getInstance(ApplicationProvider.getApplicationContext()),
-            WebService(),
-        )
-        viewModel = MainViewModel(repository)
-        mockViewModel = MainViewModel(repository, useFakeData = true)
+        val repository = FakeArticlesRepositoryImpl()
+        viewModel = AllArticlesViewModel(repository)
     }
 
     @Test
-    fun allArticles_areNotNull() {
+    fun allArticles_areNotNull() = runTest {
 
-        Assert.assertNotEquals(null, mockViewModel.allArticles)
+        Assert.assertNotEquals(null, viewModel.articles.first())
 
-        runBlocking {
-            delay(1000)
-            Assert.assertNotEquals(null, viewModel.allArticles)
-        }
+        delay(1000)
+        Assert.assertNotEquals(null, viewModel.articles)
     }
 }

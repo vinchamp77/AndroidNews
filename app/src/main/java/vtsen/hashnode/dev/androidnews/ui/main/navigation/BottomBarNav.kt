@@ -1,4 +1,4 @@
-package vtsen.hashnode.dev.androidnews.ui.screens.navigation
+package vtsen.hashnode.dev.androidnews.ui.main.navigation
 
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material.BottomNavigation

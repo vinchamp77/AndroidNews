@@ -7,6 +7,14 @@ import java.util.*
 
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 object Utils {
+    fun makeFakeArticles(): List<Article> {
+        val articles: MutableList<Article> = mutableListOf()
+        repeat(10) {
+            articles.add(createArticle())
+        }
+        return articles
+    }
+
     fun createArticle(bookmarked: Boolean = false, read: Boolean = false) : Article {
         return Article(
             id = 0,

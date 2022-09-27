@@ -10,8 +10,6 @@ import vtsen.hashnode.dev.androidnews.R
 import vtsen.hashnode.dev.androidnews.data.repository.ArticlesRepositoryImpl
 import vtsen.hashnode.dev.androidnews.domain.model.Article
 import vtsen.hashnode.dev.androidnews.ui.screens.common.ArticlesScreen
-import vtsen.hashnode.dev.androidnews.ui.screens.home.AllArticlesViewModel
-import vtsen.hashnode.dev.androidnews.ui.viewmodel.MainViewModel
 import vtsen.hashnode.dev.androidnews.ui.viewmodel.UiState
 
 @OptIn(ExperimentalLifecycleComposeApi::class)
@@ -22,19 +20,20 @@ fun UnreadScreen(
 ) {
     val articles by viewModel.articlesStateFlow.collectAsStateWithLifecycle()
 
-    if(articles == null) return
+    if(articles != null) {
 
-    val uiState: UiState by viewModel.uiStateFlow.collectAsStateWithLifecycle()
+        val uiState: UiState by viewModel.uiState.collectAsStateWithLifecycle()
 
-    ArticlesScreen(
-        articles = articles!! ,
-        noArticlesDescStrResId = R.string.no_articles_desc,
-        isRefreshing = (uiState is UiState.Loading),
-        navigateToArticle = navigateToArticle,
-        onRefresh = viewModel::refresh,
-        onBookmarkClick = viewModel::onBookmarkClick,
-        onReadClick = viewModel::onReadClick,
-    )
+        ArticlesScreen(
+            articles = articles!!,
+            noArticlesDescStrResId = R.string.no_articles_desc,
+            isRefreshing = (uiState is UiState.Loading),
+            navigateToArticle = navigateToArticle,
+            onRefresh = viewModel::refresh,
+            onBookmarkClick = viewModel::onBookmarkClick,
+            onReadClick = viewModel::onReadClick,
+        )
+    }
 }
 
 @Preview(showBackground = true)

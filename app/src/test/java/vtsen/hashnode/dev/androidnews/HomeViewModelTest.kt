@@ -10,17 +10,13 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.robolectric.RuntimeEnvironment.application
-import vtsen.hashnode.dev.androidnews.data.local.ArticlesDatabase
-import vtsen.hashnode.dev.androidnews.data.remote.WebService
 import vtsen.hashnode.dev.androidnews.data.repository.ArticlesRepositoryImpl
-import vtsen.hashnode.dev.androidnews.ui.viewmodel.MainViewModel
+import vtsen.hashnode.dev.androidnews.ui.screens.home.AllArticlesViewModel
 
 @RunWith(AndroidJUnit4::class)
 class HomeViewModelTest {
 
-    private lateinit var viewModel: MainViewModel
-    private lateinit var mockViewModel: MainViewModel
+    private lateinit var viewModel: AllArticlesViewModel
 
     @get:Rule
     var instantExecutorRule = InstantTaskExecutorRule()
@@ -28,18 +24,17 @@ class HomeViewModelTest {
     @Before
     fun setupViewModel() {
         val repository = ArticlesRepositoryImpl.getInstance(ApplicationProvider.getApplicationContext())
-        viewModel = MainViewModel(repository)
-        mockViewModel = MainViewModel(repository, useFakeData = true)
+        viewModel = AllArticlesViewModel(repository)
     }
 
     @Test
     fun allArticles_areNotNull() {
 
-        Assert.assertNotEquals(null, mockViewModel.allArticles)
+        Assert.assertNotEquals(null, viewModel.articles)
 
         runBlocking {
             delay(1000)
-            Assert.assertNotEquals(null, viewModel.allArticles)
+            Assert.assertNotEquals(null, viewModel.articles)
         }
     }
 }

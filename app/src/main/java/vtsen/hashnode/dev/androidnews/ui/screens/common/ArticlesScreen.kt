@@ -16,14 +16,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.content.ContextCompat
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
-import kotlinx.coroutines.Job
 import vtsen.hashnode.dev.androidnews.R
-import vtsen.hashnode.dev.androidnews.data.repository.ArticlesRepositoryImpl
+import vtsen.hashnode.dev.androidnews.domain.model.Article
 import vtsen.hashnode.dev.androidnews.ui.screens.home.ArticleCard
 import vtsen.hashnode.dev.androidnews.ui.theme.PaddingSmall
-import vtsen.hashnode.dev.androidnews.domain.model.Article
-import vtsen.hashnode.dev.androidnews.ui.viewmodel.MainViewModel
-import kotlin.reflect.KFunction1
+import vtsen.hashnode.dev.androidnews.utils.Utils.makeFakeArticles
 
 @Composable
 fun ArticlesScreen(
@@ -54,8 +51,8 @@ fun ArticlesScreen(
                     article = article,
                     onArticleCardClick = navigateToArticle,
                     onBookmarkClick = onBookmarkClick,
-                    onShareClick = { article ->
-                        shareArticle(context, article.link)
+                    onShareClick = { _article ->
+                        shareArticle(context, _article.link)
                     },
                     onReadClick = onReadClick,
                 )
@@ -97,16 +94,13 @@ private fun shareArticle(context: Context, link: String) {
 @Composable
 private fun DefaultPreview() {
 
-    val repository = ArticlesRepositoryImpl.getInstance(LocalContext.current)
-    val viewModel = MainViewModel(repository, useFakeData = true)
-
     ArticlesScreen(
-        articles = viewModel.allArticles!! ,
+        articles = makeFakeArticles() ,
         noArticlesDescStrResId = R.string.no_articles_desc,
-        isRefreshing = viewModel.isRefreshing,
+        isRefreshing = false,
         navigateToArticle = {},
-        onRefresh = viewModel::refresh,
-        onBookmarkClick = viewModel::onBookmarkClick,
-        onReadClick = viewModel::onReadClick,
+        onRefresh = {},
+        onBookmarkClick = {},
+        onReadClick = {},
     )
 }

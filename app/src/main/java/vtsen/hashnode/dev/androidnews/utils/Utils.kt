@@ -7,11 +7,10 @@ import java.util.*
 
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 object Utils {
-
-    private fun makeFakeArticles(): List<Article> {
-        var articles: MutableList<Article> = mutableListOf()
+    fun makeFakeArticles(): List<Article> {
+        val articles: MutableList<Article> = mutableListOf()
         repeat(10) {
-            articles.add(Utils.createArticle())
+            articles.add(createArticle())
         }
         return articles
     }

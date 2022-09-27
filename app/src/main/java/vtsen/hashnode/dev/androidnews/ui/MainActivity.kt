@@ -9,7 +9,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import vtsen.hashnode.dev.androidnews.data.repository.ArticlesRepositoryImpl
 import vtsen.hashnode.dev.androidnews.ui.screens.main.MainScreen
 import vtsen.hashnode.dev.androidnews.ui.screens.main.MainScreenPreview
-import vtsen.hashnode.dev.androidnews.ui.viewmodel.ArticlesViewModelFactory
+import vtsen.hashnode.dev.androidnews.ui.viewmodel.factory.ArticlesViewModelFactory
 
 class MainActivity : ComponentActivity() {
 
@@ -21,7 +21,6 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             MainScreen(
-                viewModel(factory = ArticlesViewModelFactory(repository)),
                 viewModel(factory = ArticlesViewModelFactory(repository)),
                 useSystemUIController = true)
         }

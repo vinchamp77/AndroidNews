@@ -10,21 +10,22 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import vtsen.hashnode.dev.androidnews.data.repository.ArticlesRepositoryImpl
-import vtsen.hashnode.dev.androidnews.ui.screens.ArticleScreen
-import vtsen.hashnode.dev.androidnews.ui.screens.article.ArticleViewModel
+import vtsen.hashnode.dev.androidnews.ui.screens.article.ArticleScreen
+import vtsen.hashnode.dev.androidnews.ui.screens.article.OneArticleViewModel
 import vtsen.hashnode.dev.androidnews.ui.screens.bookmarks.BookmarkArticlesViewModel
 import vtsen.hashnode.dev.androidnews.ui.screens.bookmarks.BookmarksScreen
 import vtsen.hashnode.dev.androidnews.ui.screens.home.HomeScreen
 import vtsen.hashnode.dev.androidnews.ui.screens.home.AllArticlesViewModel
+import vtsen.hashnode.dev.androidnews.ui.screens.searchresults.SearchArticlesViewModel
 import vtsen.hashnode.dev.androidnews.ui.screens.searchresults.SearchResultsScreen
 import vtsen.hashnode.dev.androidnews.ui.screens.unread.UnreadArticlesViewModel
 import vtsen.hashnode.dev.androidnews.ui.screens.unread.UnreadScreen
-import vtsen.hashnode.dev.androidnews.ui.viewmodel.ArticleViewModelFactory
-import vtsen.hashnode.dev.androidnews.ui.viewmodel.MainViewModel
-import vtsen.hashnode.dev.androidnews.ui.viewmodel.ArticlesViewModelFactory
+import vtsen.hashnode.dev.androidnews.ui.viewmodel.factory.ArticlesViewModelFactory
+import vtsen.hashnode.dev.androidnews.ui.viewmodel.factory.OneArticleViewModelFactory
+import vtsen.hashnode.dev.androidnews.ui.viewmodel.factory.SearchArticlesViewModelFactory
 
 @Composable
-fun NavGraph(viewModel: MainViewModel, navHostController: NavHostController) {
+fun NavGraph(navHostController: NavHostController) {
 
     NavHost(
         navController = navHostController,
@@ -35,7 +36,7 @@ fun NavGraph(viewModel: MainViewModel, navHostController: NavHostController) {
         addUnreadScreen(navHostController, navGraphBuilder)
         addBookmarksScreen(navHostController, navGraphBuilder)
         addArticleScreen(navGraphBuilder)
-        addSearchResultsScreen(navHostController,navGraphBuilder, viewModel)
+        addSearchResultsScreen(navHostController, navGraphBuilder)
     }
 }
 
@@ -109,7 +110,7 @@ private fun addArticleScreen(
         val id = args?.getInt(NavRoute.Article.id)!!
 
         val repository = ArticlesRepositoryImpl.getInstance(LocalContext.current.applicationContext)
-        val viewModel: ArticleViewModel = viewModel(factory = ArticleViewModelFactory(repository, id))
+        val viewModel: OneArticleViewModel = viewModel(factory = OneArticleViewModelFactory(repository, id))
 
         ArticleScreen(viewModel)
     }
@@ -118,11 +119,28 @@ private fun addArticleScreen(
 private fun addSearchResultsScreen(
     navHostController: NavHostController,
     navGraphBuilder: NavGraphBuilder,
-    viewModel: MainViewModel
 ) {
     navGraphBuilder.composable(
-        route = NavRoute.SearchResults.path
-    ) {
+        route = NavRoute.SearchResults.withArgsFormat(
+            NavRoute.SearchResults.titleResId, NavRoute.SearchResults.query),
+        arguments = listOf(
+            navArgument(NavRoute.SearchResults.titleResId) {
+                type = NavType.IntType
+            },
+            navArgument(NavRoute.SearchResults.query) {
+                type = NavType.StringType
+            }
+        )
+    ) { navBackStackEntry ->
+
+        val args = navBackStackEntry.arguments
+        val titleResId = args!!.getInt(NavRoute.SearchResults.titleResId)
+        val query = args.getString(NavRoute.SearchResults.query)!!
+
+        val repository = ArticlesRepositoryImpl.getInstance(LocalContext.current.applicationContext)
+        val viewModel: SearchArticlesViewModel = viewModel(
+            factory = SearchArticlesViewModelFactory(
+                repository, titleResId, query))
 
         SearchResultsScreen(
             viewModel,

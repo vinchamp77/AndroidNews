@@ -13,6 +13,7 @@ sealed class NavRoute(val path: String) {
     }
 
     object SearchResults: NavRoute("search_results") {
+        val titleResId = "title"
         val query = "query"
     }
 

@@ -6,20 +6,19 @@ import kotlinx.coroutines.flow.*
 import vtsen.hashnode.dev.androidnews.R
 import vtsen.hashnode.dev.androidnews.domain.repository.ArticlesRepository
 import vtsen.hashnode.dev.androidnews.domain.repository.ArticlesRepositoryStatus
-import vtsen.hashnode.dev.androidnews.ui.viewmodel.UiState
 
 open class UiStateViewModel(protected val repository: ArticlesRepository) : ViewModel() {
 
-    private val uiFlow = repository.statusFlow.map { repositoryStatus ->
+    val uiState = repository.status.map { repositoryStatus ->
         transformRepositoryStatus(repositoryStatus)
-    }
-    val uiStateFlow: StateFlow<UiState> = uiFlow.stateIn(
+    }.stateIn(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(),
-        initialValue = UiState.Loading
+        initialValue = UiState.Success
     )
 
-    private fun transformRepositoryStatus(repositoryStatus: ArticlesRepositoryStatus): UiState {
+    private fun transformRepositoryStatus(
+        repositoryStatus: ArticlesRepositoryStatus): UiState {
 
         return when(repositoryStatus) {
             is ArticlesRepositoryStatus.Invalid,
@@ -28,4 +27,10 @@ open class UiStateViewModel(protected val repository: ArticlesRepository) : View
             is ArticlesRepositoryStatus.Fail -> UiState.Error(R.string.no_internet)
         }
     }
+}
+
+sealed interface UiState {
+    object Loading : UiState
+    data class Error(val msgResId: Int) : UiState
+    object Success : UiState
 }

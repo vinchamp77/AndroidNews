@@ -11,32 +11,32 @@ import vtsen.hashnode.dev.androidnews.utils.Utils
 class FakeArticlesRepositoryImpl() : ArticlesRepository {
 
     private var _status: ArticlesRepositoryStatus = ArticlesRepositoryStatus.Invalid
-    override val statusFlow: Flow<ArticlesRepositoryStatus> = flow {
+    override val status: Flow<ArticlesRepositoryStatus> = flow {
         while(true) {
             delay(1000)
             emit(_status)
         }
     }
 
-    private var allArticles: MutableList<Article> = mutableListOf()
+    private var _allArticles: MutableList<Article> = mutableListOf()
 
-    override val articlesFlow = flow {
+    override val allArticles = flow {
         while(true){
-            emit(allArticles)
+            emit(_allArticles)
             delay(5000)
         }
     }
 
-    private var unreadArticles: MutableList<Article> = mutableListOf()
-    override val unreadArticlesFlow = flow {
+    private var _unreadArticles: MutableList<Article> = mutableListOf()
+    override val unreadArticles = flow {
         while(true){
-            emit(unreadArticles)
+            emit(_unreadArticles)
             delay(5000)
         }
     }
 
     private var bookmarkedArticles: MutableList<Article> = mutableListOf()
-    override val bookmarkedArticlesFlow = flow {
+    override val bookmarkArticles = flow {
         while(true){
             emit(bookmarkedArticles)
             delay(5000)
@@ -53,33 +53,44 @@ class FakeArticlesRepositoryImpl() : ArticlesRepository {
 
     override suspend fun updateArticle(article: Article) {}
 
-    override suspend fun getArticle(id: Int): Article {
-        val article = allArticles.find { article ->
+    override fun getArticle(id: Int): Flow<Article> {
+        val article = _allArticles.find { article ->
             article.id == id
         }
 
-        return article!!
+        val flow = flow {
+            emit(article!!)
+        }
+
+        return flow
     }
 
-    override suspend fun getAllArticlesByTitle(title: String): List<Article>  {
-        val articles = allArticles.filter{ article ->
+    override  fun getAllArticlesByTitle(title: String): Flow<List<Article>>  {
+        val articles = _allArticles.filter{ article ->
             article.title.contains(title)
         }
-        return articles
+
+        return flow {
+            emit(articles)
+        }
     }
 
-    override suspend fun getUnreadArticlesByTitle(title: String): List<Article>  {
-        val articles = unreadArticles.filter{ article ->
+    override fun getUnreadArticlesByTitle(title: String): Flow<List<Article>> {
+        val articles = _unreadArticles.filter{ article ->
             article.title.contains(title)
         }
-        return articles
+        return flow {
+            emit(articles)
+        }
     }
 
-    override suspend fun getBookmarkedArticlesByTitle(title: String): List<Article>  {
+    override fun getBookmarkedArticlesByTitle(title: String): Flow<List<Article>>  {
         val articles = bookmarkedArticles.filter{ article ->
             article.title.contains(title)
         }
-        return articles
+        return flow {
+            emit(articles)
+        }
     }
 
     private fun makeFakeArticles() {
@@ -87,7 +98,7 @@ class FakeArticlesRepositoryImpl() : ArticlesRepository {
         repeat(10) {
             articles.add(Utils.createArticle())
         }
-        allArticles = articles
+        _allArticles = articles
 
         articles = mutableListOf()
         repeat(10) {
@@ -95,6 +106,6 @@ class FakeArticlesRepositoryImpl() : ArticlesRepository {
         }
         bookmarkedArticles = articles
 
-        unreadArticles = articles
+        _unreadArticles = articles
     }
 }

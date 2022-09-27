@@ -1,4 +1,4 @@
-package vtsen.hashnode.dev.androidnews.ui.screens
+package vtsen.hashnode.dev.androidnews.ui.screens.article
 
 import android.webkit.WebChromeClient
 import android.webkit.WebView
@@ -11,18 +11,16 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import vtsen.hashnode.dev.androidnews.domain.model.Article
-import vtsen.hashnode.dev.androidnews.ui.screens.article.ArticleViewModel
 
 @OptIn(ExperimentalLifecycleComposeApi::class)
 @Composable
-fun ArticleScreen(viewModel: ArticleViewModel) {
+fun ArticleScreen(viewModel: OneArticleViewModel) {
 
-    val articles by viewModel.articleStateFlow.collectAsStateWithLifecycle()
+    val article by viewModel.article.collectAsStateWithLifecycle()
 
-    if (articles == null) return
-
-    ArticleWebView(url = articles!![0].link)
+    if (article != null) {
+        ArticleWebView(url = article!!.link)
+    }
 }
 
 @Composable

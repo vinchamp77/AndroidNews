@@ -5,23 +5,23 @@ import vtsen.hashnode.dev.androidnews.domain.model.Article
 
 interface ArticlesRepository {
 
-    val statusFlow: Flow<ArticlesRepositoryStatus>
+    val status: Flow<ArticlesRepositoryStatus>
 
-    val articlesFlow: Flow<List<Article>>
+    val allArticles: Flow<List<Article>>
 
-    val unreadArticlesFlow: Flow<List<Article>>
+    val unreadArticles: Flow<List<Article>>
 
-    val bookmarkedArticlesFlow: Flow<List<Article>>
+    val bookmarkArticles: Flow<List<Article>>
+
+    fun getArticle(id: Int) : Flow<Article>
 
     suspend fun refresh(): ArticlesRepositoryStatus
 
     suspend fun updateArticle(article: Article)
 
-    suspend fun getArticle(id: Int) : Article
+    fun getAllArticlesByTitle(title: String): Flow<List<Article>>
 
-    suspend fun getAllArticlesByTitle(title: String): List<Article>
+    fun getUnreadArticlesByTitle(title: String): Flow<List<Article>>
 
-    suspend fun getUnreadArticlesByTitle(title: String): List<Article>
-
-    suspend fun getBookmarkedArticlesByTitle(title: String): List<Article>
+    fun getBookmarkedArticlesByTitle(title: String): Flow<List<Article>>
 }

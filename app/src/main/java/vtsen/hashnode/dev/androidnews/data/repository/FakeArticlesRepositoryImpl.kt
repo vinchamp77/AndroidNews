@@ -19,7 +19,6 @@ class FakeArticlesRepositoryImpl() : ArticlesRepository {
     }
 
     private var _allArticles: MutableList<Article> = mutableListOf()
-
     override val allArticles = flow {
         while(true){
             emit(_allArticles)

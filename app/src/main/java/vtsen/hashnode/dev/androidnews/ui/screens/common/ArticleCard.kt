@@ -1,6 +1,5 @@
 package vtsen.hashnode.dev.androidnews.ui.screens.home
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Divider
@@ -16,14 +15,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import coil.compose.rememberImagePainter
 import coil.request.ImageRequest
 import vtsen.hashnode.dev.androidnews.R
+import vtsen.hashnode.dev.androidnews.domain.model.Article
 import vtsen.hashnode.dev.androidnews.ui.screens.common.ArticleIconButton
 import vtsen.hashnode.dev.androidnews.ui.theme.PaddingMedium
 import vtsen.hashnode.dev.androidnews.ui.theme.PaddingSmall
 import vtsen.hashnode.dev.androidnews.utils.Utils
-import vtsen.hashnode.dev.androidnews.domain.model.Article
 
 @Composable
 fun ArticleCard(
@@ -144,7 +142,7 @@ private fun ArticleBottomRow(
 
 @Preview(showBackground = true)
 @Composable
-private fun DefaultPreview() {
+private fun ArticleCardPreview() {
     ArticleCard(
         article = Utils.createArticle(),
         onArticleCardClick = {},

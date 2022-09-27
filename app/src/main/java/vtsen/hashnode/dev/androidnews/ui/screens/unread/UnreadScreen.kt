@@ -2,12 +2,9 @@ package vtsen.hashnode.dev.androidnews.ui.screens.unread
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import vtsen.hashnode.dev.androidnews.R
-import vtsen.hashnode.dev.androidnews.data.repository.ArticlesRepositoryImpl
 import vtsen.hashnode.dev.androidnews.domain.model.Article
 import vtsen.hashnode.dev.androidnews.ui.screens.common.ArticlesScreen
 import vtsen.hashnode.dev.androidnews.ui.viewmodel.UiState
@@ -34,16 +31,4 @@ fun UnreadScreen(
             onReadClick = viewModel::onReadClick,
         )
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-private fun DefaultPreview() {
-
-    val repository = ArticlesRepositoryImpl.getInstance(LocalContext.current)
-    val viewModel = UnreadArticlesViewModel(repository)
-
-    UnreadScreen(
-        viewModel,
-        navigateToArticle = {})
 }

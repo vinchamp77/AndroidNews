@@ -1,15 +1,15 @@
 package vtsen.hashnode.dev.androidnews.ui.main
 
 import android.annotation.SuppressLint
-import androidx.compose.material.*
+import androidx.compose.material.Scaffold
+import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.rememberNavController
-import vtsen.hashnode.dev.androidnews.data.repository.ArticlesRepositoryImpl
+import vtsen.hashnode.dev.androidnews.data.repository.FakeArticlesRepositoryImpl
 import vtsen.hashnode.dev.androidnews.ui.main.navigation.BottomBarNav
 import vtsen.hashnode.dev.androidnews.ui.main.navigation.NavGraph
 import vtsen.hashnode.dev.androidnews.ui.screens.main.navigation.TopBar
@@ -48,7 +48,7 @@ fun MainScreen(
 @Composable
 fun MainScreenPreview() {
 
-    val repository = ArticlesRepositoryImpl.getInstance(LocalContext.current)
+    val repository = FakeArticlesRepositoryImpl()
     val viewModel = UiStateViewModel(repository)
     MainScreen(
         viewModel,

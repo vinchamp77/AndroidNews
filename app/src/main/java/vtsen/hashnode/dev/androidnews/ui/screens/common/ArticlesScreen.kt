@@ -92,7 +92,7 @@ private fun shareArticle(context: Context, link: String) {
 
 @Preview(showBackground = true)
 @Composable
-private fun DefaultPreview() {
+private fun ArticlesScreenPreview() {
 
     ArticlesScreen(
         articles = makeFakeArticles() ,

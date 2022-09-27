@@ -2,10 +2,9 @@ package vtsen.hashnode.dev.androidnews
 
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithText
-import androidx.compose.ui.test.performClick
 import org.junit.Rule
 import org.junit.Test
-import vtsen.hashnode.dev.androidnews.ui.MainActivity
+import vtsen.hashnode.dev.androidnews.ui.main.MainActivity
 
 class ComposeTest {
 

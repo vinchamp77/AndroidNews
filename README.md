@@ -1,4 +1,4 @@
-# Android Kotlin Weekly - Simple RSS Feed Reader
+# Simple RSS Feed Reader (Android Kotlin Weekly)
 
 This is a simple RSS feed reader app that currently reads my blog (Android Kotlin Weekly)'s feed - [rss.xml](https://vtsen.hashnode.dev/rss.xml). It is written in Kotlin and Jetpack Compose.
 

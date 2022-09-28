@@ -1,10 +1,12 @@
 package vtsen.hashnode.dev.androidnews.ui.main
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -34,8 +36,12 @@ fun MainScreen(
             scaffoldState = scaffoldState,
             topBar = { TopBar(navHostController) },
             bottomBar = { BottomBarNav(navHostController) }
-        ) {
-            NavGraph(navHostController)
+        ) { paddingValues ->
+
+            NavGraph(
+                modifier = Modifier.padding(bottom = paddingValues.calculateBottomPadding()),
+                navHostController = navHostController,
+            )
         }
 
         if(uiState is UiState.Error) {

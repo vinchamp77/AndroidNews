@@ -1,6 +1,7 @@
 package vtsen.hashnode.dev.androidnews.ui.main.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavGraphBuilder
@@ -25,9 +26,10 @@ import vtsen.hashnode.dev.androidnews.ui.screens.article.OneArticleViewModelFact
 import vtsen.hashnode.dev.androidnews.ui.screens.searchresults.SearchArticlesViewModelFactory
 
 @Composable
-fun NavGraph(navHostController: NavHostController) {
+fun NavGraph(modifier: Modifier = Modifier, navHostController: NavHostController) {
 
     NavHost(
+        modifier = modifier,
         navController = navHostController,
         startDestination = NavRoute.Home.path
     ) {

@@ -67,22 +67,28 @@ class ArticlesRepositoryImpl private constructor(
 
     override suspend fun refresh(): ArticlesRepositoryStatus = withContext(Dispatchers.IO) {
 
-        newArticlesFound = false
-        _status = ArticlesRepositoryStatus.IsLoading
+        if(_status != ArticlesRepositoryStatus.IsLoading) {
 
-        try {
-            val articlesFeed = fetchArticlesFeed()
-            updateDatabase(articlesFeed.toArticleEntities())
-            _status = ArticlesRepositoryStatus.Success(newArticlesFound)
+            newArticlesFound = false
+            _status = ArticlesRepositoryStatus.IsLoading
 
-        } catch(e: Exception) {
-            e.printStackTrace()
-            _status = ArticlesRepositoryStatus.Fail
+            try {
+                val articlesFeed = fetchArticlesFeed()
+                updateDatabase(articlesFeed.toArticleEntities())
+                _status = ArticlesRepositoryStatus.Success(newArticlesFound)
+
+            } catch (e: Exception) {
+                e.printStackTrace()
+                _status = ArticlesRepositoryStatus.Fail
+            }
         }
 
         return@withContext _status
     }
 
+    override fun clearStatus() {
+        _status = ArticlesRepositoryStatus.Invalid
+    }
     override suspend fun updateArticle(article: Article) = withContext(Dispatchers.IO) {
         database.updateArticle(article.asArticleEntity())
     }

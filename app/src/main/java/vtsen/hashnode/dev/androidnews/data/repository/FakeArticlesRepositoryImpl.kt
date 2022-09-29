@@ -50,6 +50,10 @@ class FakeArticlesRepositoryImpl() : ArticlesRepository {
         return ArticlesRepositoryStatus.Success(true)
     }
 
+    override fun clearStatus() {
+        _status = ArticlesRepositoryStatus.Invalid
+    }
+
     override suspend fun updateArticle(article: Article) {}
 
     override fun getArticle(id: Int): Flow<Article> {

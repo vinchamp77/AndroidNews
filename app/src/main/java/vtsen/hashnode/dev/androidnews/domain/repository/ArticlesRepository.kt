@@ -17,6 +17,8 @@ interface ArticlesRepository {
 
     suspend fun refresh(): ArticlesRepositoryStatus
 
+    fun clearStatus()
+
     suspend fun updateArticle(article: Article)
 
     fun getAllArticlesByTitle(title: String): Flow<List<Article>>

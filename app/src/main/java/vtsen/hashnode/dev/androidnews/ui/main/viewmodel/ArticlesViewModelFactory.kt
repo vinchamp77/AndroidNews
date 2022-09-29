@@ -6,7 +6,6 @@ import vtsen.hashnode.dev.androidnews.domain.repository.ArticlesRepository
 import vtsen.hashnode.dev.androidnews.ui.screens.bookmarks.BookmarkArticlesViewModel
 import vtsen.hashnode.dev.androidnews.ui.screens.home.AllArticlesViewModel
 import vtsen.hashnode.dev.androidnews.ui.screens.unread.UnreadArticlesViewModel
-import vtsen.hashnode.dev.androidnews.ui.viewmodel.UiStateViewModel
 
 @Suppress("UNCHECKED_CAST")
 class ArticlesViewModelFactory(
@@ -16,10 +15,7 @@ class ArticlesViewModelFactory(
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
 
-        if (modelClass.isAssignableFrom(UiStateViewModel::class.java)) {
-            return UiStateViewModel(repository) as T
-        }
-        else if (modelClass.isAssignableFrom(ArticlesViewModel::class.java)) {
+        if (modelClass.isAssignableFrom(ArticlesViewModel::class.java)) {
             return ArticlesViewModel(repository) as T
         }
         else if (modelClass.isAssignableFrom(AllArticlesViewModel::class.java)) {

@@ -1,4 +1,4 @@
-# Android Kotlin Weekly - Simple RSS Feed Reader
+# Simple RSS Feed Reader (Android Kotlin Weekly)
 
 This is a simple RSS feed reader app that currently reads my blog (Android Kotlin Weekly)'s feed - [rss.xml](https://vtsen.hashnode.dev/rss.xml). It is written in Kotlin and Jetpack Compose.
 
@@ -33,5 +33,6 @@ This is a simple RSS feed reader app that currently reads my blog (Android Kotli
 - [Convert View Model to Use Hilt Dependency Injection](https://vtsen.hashnode.dev/convert-view-model-to-use-hilt-dependency-injection)
 
 ## Branches
-- [master](https://github.com/vinchamp77/AndroidNews)
-- [hilt](https://github.com/vinchamp77/AndroidNews/tree/hilt) - convert view model to use hilt ([diff](https://github.com/vinchamp77/AndroidNews/compare/129e75036178fa2427e7283a605ada6e7fa27325..a23b2dfc36447be82339fb26d9a3e1a36108fb4a)) 
+- [master](https://github.com/vinchamp77/AndroidNews) - multiple view models (use recommended way to collect flow)
+- [master_org](https://github.com/vinchamp77/AndroidNews/tree/master_org) - single view model (previous implementation)
+- [master_org_hilt](https://github.com/vinchamp77/AndroidNews/tree/master_org_hilt) - convert view model to use hilt ([diff](https://github.com/vinchamp77/AndroidNews/compare/129e75036178fa2427e7283a605ada6e7fa27325..a23b2dfc36447be82339fb26d9a3e1a36108fb4a)) 

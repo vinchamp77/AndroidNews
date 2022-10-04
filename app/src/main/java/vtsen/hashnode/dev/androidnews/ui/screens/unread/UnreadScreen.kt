@@ -23,7 +23,7 @@ fun UnreadScreen(
 
         ArticlesScreen(
             articles = articles!!,
-            noArticlesDescStrResId = R.string.no_articles_desc,
+            noArticlesDescStrResId = R.string.no_unread_articles_desc,
             isRefreshing = (uiState is ArticlesUiState.Loading),
             navigateToArticle = navigateToArticle,
             onRefresh = viewModel::refresh,

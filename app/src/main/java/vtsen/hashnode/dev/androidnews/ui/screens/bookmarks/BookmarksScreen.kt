@@ -23,7 +23,7 @@ fun BookmarksScreen(
 
         ArticlesScreen(
             articles = articles!!,
-            noArticlesDescStrResId = R.string.no_articles_desc,
+            noArticlesDescStrResId = R.string.no_bookmarked_articles_desc,
             isRefreshing = (uiState is ArticlesUiState.Loading),
             navigateToArticle = navigateToArticle,
             onRefresh = viewModel::refresh,

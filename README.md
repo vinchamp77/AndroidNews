@@ -23,7 +23,7 @@ This is a simple RSS feed reader app that currently reads my blog (Android Kotli
 - [Compose Navigation](https://vtsen.hashnode.dev/simple-jetpack-compose-navigation-example)
 - Scaffold (Top/Bottom Bar)
 - Webview
-- [Coroutines](https://vtsen.hashnode.dev/kotlin-coroutines-basics-simple-android-app-demo) & Flow
+- [Coroutines](https://vtsen.hashnode.dev/kotlin-coroutines-basics-simple-android-app-demo) & Flow & State Flow
 - Accompanist (System UI & Swipe Refresh)
 - Work Manager
 - Notification

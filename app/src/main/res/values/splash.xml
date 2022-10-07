@@ -1,0 +1,7 @@
+<resources>
+    <style name="Theme.App.Starting" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">#ff616161</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_android_kotlin_weekly</item>
+        <item name="postSplashScreenTheme">@android:style/Theme.Material.Light.NoActionBar</item>
+    </style>
+</resources>

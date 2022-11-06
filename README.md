@@ -14,8 +14,8 @@ This is a simple RSS feed reader app that currently reads my blog (Android Kotli
 - Android Studio Dolphin or later
 
 ## Tech Stack
-- MVVM Architecture
 - Jetpack Compose
+- MVVM Architecture
 - Ktor Client
 - Room Database
 - Coil

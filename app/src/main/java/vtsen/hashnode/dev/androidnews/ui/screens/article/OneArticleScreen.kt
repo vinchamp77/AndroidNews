@@ -36,6 +36,7 @@ private fun ArticleWebView(url: String) {
             WebView(it).apply {
                 webViewClient = WebViewClient()
                 settings.javaScriptEnabled = true
+                settings.javaScriptCanOpenWindowsAutomatically = true
                 loadUrl(url)
             }
         })

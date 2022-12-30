@@ -14,16 +14,16 @@ This is a simple RSS feed reader app that currently reads my blog (Android Kotli
 - Android Studio Dolphin or later
 
 ## Tech Stack
-- [MVVM Architecture](https://vtsen.hashnode.dev/mvc-vs-mvp-vs-mvvm-design-patterns)
 - Jetpack Compose
+- MVVM Architecture
 - Ktor Client
 - Room Database
 - Coil
 - XmlPullParser
-- [Compose Navigation](https://vtsen.hashnode.dev/simple-jetpack-compose-navigation-example)
+- Compose Navigation
 - Scaffold (Top/Bottom Bar)
 - Webview
-- [Coroutines](https://vtsen.hashnode.dev/kotlin-coroutines-basics-simple-android-app-demo) & Flow & State Flow
+- Coroutines & Flow & State Flow
 - Accompanist (System UI & Swipe Refresh)
 - Work Manager
 - Notification

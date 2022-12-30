@@ -35,6 +35,7 @@ private fun ArticleWebView(url: String) {
         AndroidView(factory = {
             WebView(it).apply {
                 webViewClient = WebViewClient()
+                settings.javaScriptEnabled = true
                 loadUrl(url)
             }
         })

@@ -2,7 +2,6 @@ package vtsen.hashnode.dev.androidnews.ui.main
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.os.Build
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
 import androidx.compose.material.rememberScaffoldState
@@ -20,6 +19,7 @@ import vtsen.hashnode.dev.androidnews.ui.main.viewmodel.ArticlesViewModel
 import vtsen.hashnode.dev.androidnews.ui.screens.common.PermissionsDialog
 import vtsen.hashnode.dev.androidnews.ui.screens.main.navigation.TopBar
 import vtsen.hashnode.dev.androidnews.ui.theme.AndroidNewsTheme
+import vtsen.hashnode.dev.buildutils.BuildExt
 
 @OptIn(ExperimentalLifecycleComposeApi::class)
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
@@ -56,7 +56,7 @@ fun MainScreen(
             )
         }
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+        if (BuildExt.VERSION.isRuntimePermissionSupported()) {
             PermissionsDialog(
                 permission = Manifest.permission.POST_NOTIFICATIONS,
                 onPermissionGranted = {},

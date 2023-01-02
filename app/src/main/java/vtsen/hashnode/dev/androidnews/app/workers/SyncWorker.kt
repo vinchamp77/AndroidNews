@@ -6,7 +6,6 @@ import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
-import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
@@ -16,6 +15,7 @@ import vtsen.hashnode.dev.androidnews.R
 import vtsen.hashnode.dev.androidnews.data.repository.ArticlesRepositoryImpl
 import vtsen.hashnode.dev.androidnews.domain.repository.ArticlesRepositoryStatus
 import vtsen.hashnode.dev.androidnews.ui.main.MainActivity
+import vtsen.hashnode.dev.buildutils.BuildExt
 
 class SyncWorker(appContext: Context, params: WorkerParameters)
     : CoroutineWorker(appContext, params) {
@@ -45,7 +45,7 @@ class SyncWorker(appContext: Context, params: WorkerParameters)
 
         val mainActivityIntent = Intent(applicationContext, MainActivity::class.java)
 
-        val pendingIntentFlag = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        val pendingIntentFlag = if (BuildExt.VERSION.isFlagImmutableSupported()) {
             PendingIntent.FLAG_IMMUTABLE
         } else {
             PendingIntent.FLAG_UPDATE_CURRENT
@@ -67,7 +67,7 @@ class SyncWorker(appContext: Context, params: WorkerParameters)
 
     private fun createNotificationChannel()
     {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        if (BuildExt.VERSION.isNotificationChannelSupported()) {
 
             val notificationChannel = NotificationChannel(
                 notificationChannelId,

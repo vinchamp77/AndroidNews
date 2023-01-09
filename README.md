@@ -4,6 +4,8 @@ This is a simple RSS feed reader app that currently reads my blog (Android Kotli
 
 ![](screenshots/Android_News_Overview.gif)
 
+[![google-play-badge.png](https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png)](https://play.google.com/store/apps/details?id=vtsen.hashnode.dev.androidnews)
+
 ## Features
 - Bookmark article
 - Share article

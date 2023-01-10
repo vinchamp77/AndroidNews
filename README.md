@@ -24,7 +24,8 @@ This is a simple RSS feed reader app that currently reads my blog (Android Kotli
 - Scaffold (Top/Bottom Bar)
 - Webview
 - Coroutines & Flow & State Flow
-- Accompanist (System UI & Swipe Refresh)
+- Accompanist System UI
+- Pull Referesh (Migrated from Accompanist Swipe Refresh)
 - Work Manager
 - Notification
 - BuildUtils (Own Library)

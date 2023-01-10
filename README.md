@@ -25,10 +25,10 @@ This is a simple RSS feed reader app that currently reads my blog (Android Kotli
 - Webview
 - Coroutines & Flow & State Flow
 - Accompanist System UI
-- Pull Referesh (Migrated from Accompanist Swipe Refresh)
+- Pull Referesh (migrated from Accompanist Swipe Refresh)
 - Work Manager
 - Notification
-- BuildUtils (Own Library)
+- BuildUtils (own library)
 
 ## Articles
 - [Simple RSS Feed Reader - Jetpack Compose](https://vtsen.hashnode.dev/simple-rss-feed-reader-jetpack-compose)

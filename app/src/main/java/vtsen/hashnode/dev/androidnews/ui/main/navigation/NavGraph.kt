@@ -1,15 +1,13 @@
 package vtsen.hashnode.dev.androidnews.ui.main.navigation
 
+import android.content.Intent
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavGraphBuilder
-import androidx.navigation.NavHostController
-import androidx.navigation.NavType
+import androidx.navigation.*
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.navArgument
 import vtsen.hashnode.dev.androidnews.data.repository.ArticlesRepositoryImpl
 import vtsen.hashnode.dev.androidnews.ui.screens.article.ArticleScreen
 import vtsen.hashnode.dev.androidnews.ui.screens.article.OneArticleViewModel
@@ -46,8 +44,15 @@ private fun addHomeScreen(
     navHostController: NavHostController,
     navGraphBuilder: NavGraphBuilder,
 ) {
-    navGraphBuilder.composable(route = NavRoute.Home.path) {
-
+    navGraphBuilder.composable(
+        route = NavRoute.Home.path,
+        deepLinks = listOf(
+            navDeepLink {
+                uriPattern = "https://vtsen.hashnode.dev"
+                action = Intent.ACTION_VIEW
+            }
+        ),
+    ) {
         val repository = ArticlesRepositoryImpl.getInstance(LocalContext.current.applicationContext)
         val viewModel: AllArticlesViewModel = viewModel(factory = ArticlesViewModelFactory(repository))
 
@@ -82,7 +87,9 @@ private fun addBookmarksScreen(
     navHostController: NavHostController,
     navGraphBuilder: NavGraphBuilder,
 ) {
-    navGraphBuilder.composable(route = NavRoute.Bookmarks.path) {
+    navGraphBuilder.composable(
+        route = NavRoute.Bookmarks.path,
+    ) {
 
         val repository = ArticlesRepositoryImpl.getInstance(LocalContext.current.applicationContext)
         val viewModel: BookmarkArticlesViewModel = viewModel(factory = ArticlesViewModelFactory(repository))
@@ -101,6 +108,13 @@ private fun addArticleScreen(
 ) {
     navGraphBuilder.composable(
         route = NavRoute.Article.withArgsFormat(NavRoute.Article.id),
+        /*TODO: Deep link support for Article
+        deepLinks = listOf(
+            navDeepLink {
+                uriPattern = "https://vtsen.hashnode.dev/{id}"
+                action = Intent.ACTION_VIEW
+            }
+        ),*/
         arguments = listOf(
             navArgument(NavRoute.Article.id) {
                 type = NavType.IntType

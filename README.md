@@ -24,10 +24,11 @@ This is a simple RSS feed reader app that currently reads my blog (Android Kotli
 - Scaffold (Top/Bottom Bar)
 - Webview
 - Coroutines & Flow & State Flow
-- Accompanist (System UI & Swipe Refresh)
+- Accompanist System UI
+- Pull Referesh (migrated from Accompanist Swipe Refresh)
 - Work Manager
 - Notification
-- BuildUtils (Own Library)
+- BuildUtils (own library)
 
 ## Articles
 - [Simple RSS Feed Reader - Jetpack Compose](https://vtsen.hashnode.dev/simple-rss-feed-reader-jetpack-compose)
@@ -37,3 +38,5 @@ This is a simple RSS feed reader app that currently reads my blog (Android Kotli
 - [master](https://github.com/vinchamp77/AndroidNews) - multiple view models (use recommended way to collect flow)
 - [master_org](https://github.com/vinchamp77/AndroidNews/tree/master_org) - single view model (previous implementation)
 - [master_org_hilt](https://github.com/vinchamp77/AndroidNews/tree/master_org_hilt) - convert view model to use hilt ([diff](https://github.com/vinchamp77/AndroidNews/compare/129e75036178fa2427e7283a605ada6e7fa27325..a23b2dfc36447be82339fb26d9a3e1a36108fb4a)) 
+
+[![google-play-badge.png](https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png)](https://play.google.com/store/apps/details?id=vtsen.hashnode.dev.androidnews)

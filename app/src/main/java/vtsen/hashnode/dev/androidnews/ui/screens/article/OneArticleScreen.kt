@@ -9,10 +9,8 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.viewinterop.AndroidView
-import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 
-@OptIn(ExperimentalLifecycleComposeApi::class)
 @Composable
 fun ArticleScreen(viewModel: OneArticleViewModel) {
 

@@ -2,14 +2,12 @@ package vtsen.hashnode.dev.androidnews.ui.screens.home
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import vtsen.hashnode.dev.androidnews.R
 import vtsen.hashnode.dev.androidnews.domain.model.Article
 import vtsen.hashnode.dev.androidnews.ui.screens.common.ArticlesScreen
 import vtsen.hashnode.dev.androidnews.ui.main.viewmodel.ArticlesUiState
 
-@OptIn(ExperimentalLifecycleComposeApi::class)
 @Composable
 fun HomeScreen(
     viewModel: AllArticlesViewModel,

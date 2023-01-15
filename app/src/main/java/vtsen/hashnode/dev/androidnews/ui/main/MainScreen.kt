@@ -8,7 +8,6 @@ import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.rememberNavController
 import vtsen.hashnode.dev.androidnews.data.repository.FakeArticlesRepositoryImpl
@@ -21,7 +20,6 @@ import vtsen.hashnode.dev.androidnews.ui.screens.main.navigation.TopBar
 import vtsen.hashnode.dev.androidnews.ui.theme.AndroidNewsTheme
 import vtsen.hashnode.dev.buildutils.BuildExt
 
-@OptIn(ExperimentalLifecycleComposeApi::class)
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun MainScreen(

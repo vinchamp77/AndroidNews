@@ -16,7 +16,7 @@ This is a simple RSS feed reader app that currently reads my blog (Android Kotli
 ## Tech Stack
 - Jetpack Compose
 - MVVM Architecture
-- Ktor Client
+- OkHttp (Replace Ktor Client which crashes on API 21)
 - Room Database
 - Coil
 - XmlPullParser

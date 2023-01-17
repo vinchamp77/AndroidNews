@@ -12,6 +12,7 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import vtsen.hashnode.dev.androidnews.data.repository.FakeArticlesRepositoryImpl
+import vtsen.hashnode.dev.androidnews.domain.usecase.*
 import vtsen.hashnode.dev.androidnews.ui.screens.home.AllArticlesViewModel
 
 @OptIn(ExperimentalCoroutinesApi::class)
@@ -26,7 +27,14 @@ class HomeViewModelTest {
     @Before
     fun setupViewModel() {
         val repository = FakeArticlesRepositoryImpl()
-        viewModel = AllArticlesViewModel(repository)
+        viewModel = AllArticlesViewModel(
+            GetAllArticlesUseCase(repository),
+            GetArticleStatusUseCase(repository),
+            RefreshArticlesStatusUseCase(repository),
+            ClearArticlesStatusUseCase(repository),
+            UpdateArticleUseCase(repository),
+            GetArticleUseCase(repository),
+        )
     }
 
     @Test

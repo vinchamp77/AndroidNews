@@ -4,19 +4,32 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.stateIn
 import vtsen.hashnode.dev.androidnews.R
-import vtsen.hashnode.dev.androidnews.domain.repository.ArticlesRepository
+import vtsen.hashnode.dev.androidnews.domain.usecase.*
 import vtsen.hashnode.dev.androidnews.ui.main.viewmodel.ArticlesViewModel
 
 class SearchArticlesViewModel(
-    repository: ArticlesRepository,
+    getAllArticlesUseCase: GetAllArticlesUseCase,
+    getBookmarkArticlesUseCase: GetBookmarkArticlesUseCase,
+    getUnreadArticlesUseCase: GetUnreadArticlesUseCase,
+    getArticleStatusUseCase: GetArticleStatusUseCase,
+    refreshArticlesStatusUseCase: RefreshArticlesStatusUseCase,
+    clearArticlesStatusUseCase: ClearArticlesStatusUseCase,
+    updateArticleUseCase: UpdateArticleUseCase,
+    getArticleUseCase: GetArticleUseCase,
     titleResId: Int,
     query: String,
-) : ArticlesViewModel(repository) {
+) : ArticlesViewModel(
+        getArticleStatusUseCase,
+        refreshArticlesStatusUseCase,
+        clearArticlesStatusUseCase,
+        updateArticleUseCase,
+        getArticleUseCase,
+) {
 
     val articles = when (titleResId) {
 
         R.string.all_articles -> {
-            repository.getAllArticlesByTitle(query)
+            getAllArticlesUseCase(query)
                 .stateIn(
                     scope = viewModelScope,
                     started = SharingStarted.WhileSubscribed(),
@@ -25,7 +38,7 @@ class SearchArticlesViewModel(
         }
 
         R.string.unread_articles -> {
-            repository.getUnreadArticlesByTitle(query)
+            getUnreadArticlesUseCase(query)
                 .stateIn(
                     scope = viewModelScope,
                     started = SharingStarted.WhileSubscribed(),
@@ -34,7 +47,7 @@ class SearchArticlesViewModel(
         }
 
         R.string.bookmarked_articles -> {
-            repository.getBookmarkedArticlesByTitle(query)
+            getBookmarkArticlesUseCase(query)
                 .stateIn(
                     scope = viewModelScope,
                     started = SharingStarted.WhileSubscribed(),

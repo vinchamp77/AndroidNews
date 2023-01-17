@@ -12,7 +12,7 @@ import vtsen.hashnode.dev.androidnews.data.mapper.toArticles
 import vtsen.hashnode.dev.androidnews.data.mapper.toArticleEntities
 import vtsen.hashnode.dev.androidnews.domain.model.Article
 import vtsen.hashnode.dev.androidnews.domain.repository.ArticlesRepository
-import vtsen.hashnode.dev.androidnews.data.mapper.asArticleEntity
+import vtsen.hashnode.dev.androidnews.data.mapper.toArticleEntity
 import vtsen.hashnode.dev.androidnews.data.remote.*
 import vtsen.hashnode.dev.androidnews.domain.repository.ArticlesRepositoryStatus
 
@@ -88,7 +88,7 @@ class ArticlesRepositoryImpl private constructor(
         _status = ArticlesRepositoryStatus.Invalid
     }
     override suspend fun updateArticle(article: Article) = withContext(Dispatchers.IO) {
-        database.updateArticle(article.asArticleEntity())
+        database.updateArticle(article.toArticleEntity())
     }
 
     override fun getArticle(id: Int) = database.selectArticleById(id).map { articlesEntity ->

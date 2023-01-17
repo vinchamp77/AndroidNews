@@ -11,6 +11,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.rememberNavController
 import vtsen.hashnode.dev.androidnews.data.repository.FakeArticlesRepositoryImpl
+import vtsen.hashnode.dev.androidnews.domain.usecase.*
 import vtsen.hashnode.dev.androidnews.ui.main.navigation.BottomBarNav
 import vtsen.hashnode.dev.androidnews.ui.main.navigation.NavGraph
 import vtsen.hashnode.dev.androidnews.ui.main.viewmodel.ArticlesUiState
@@ -69,10 +70,15 @@ fun MainScreen(
 fun MainScreenPreview() {
 
     val repository = FakeArticlesRepositoryImpl()
-    val viewModel = ArticlesViewModel(repository)
+    val viewModel = ArticlesViewModel(
+        GetArticleStatusUseCase(repository),
+        RefreshArticlesStatusUseCase(repository),
+        ClearArticlesStatusUseCase(repository),
+        UpdateArticleUseCase(repository),
+        GetArticleUseCase(repository),
+    )
     MainScreen(
         viewModel,
         useSystemUIController = false,
     )
 }
-

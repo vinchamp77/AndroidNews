@@ -42,7 +42,7 @@ abstract class ArticlesDatabase : RoomDatabase() {
     fun selectUnreadArticles() = dao.selectUnreadArticles()
     fun selectUnreadArticlesByTitle(title: String) = dao.selectUnreadArticlesByTitle("%$title%")
 
-    fun selectArticleByLink(link: String) = dao.selectArticleByLink(link)
+    fun getArticleById(link: String) = dao.getArticleById(link)
     fun selectArticleById(id: String) = dao.selectArticleById(id)
 
     fun insertArticle(article: ArticleEntity) = dao.insertArticle(article)

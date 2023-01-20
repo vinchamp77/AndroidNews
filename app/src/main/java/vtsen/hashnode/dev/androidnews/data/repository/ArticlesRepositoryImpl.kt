@@ -132,7 +132,8 @@ class ArticlesRepositoryImpl private constructor(
     private suspend fun updateDatabase(articleEntities: List<ArticleEntity>) = coroutineScope  {
         for(articleEntity in articleEntities) {
             launch{
-                val articleFound = database.selectArticleByLink(articleEntity.link)
+                val articleFound = database.getArticleById(articleEntity.id)
+
                 if(articleFound == null) {
                     database.insertArticle(articleEntity)
                     newArticlesFound = true

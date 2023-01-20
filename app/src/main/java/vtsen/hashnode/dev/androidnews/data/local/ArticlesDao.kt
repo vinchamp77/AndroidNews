@@ -26,8 +26,8 @@ interface ArticlesDao {
     @Query("SELECT * FROM ${DatabaseConstants.ARTICLE_TABLE_NAME} WHERE id = :id")
     fun selectArticleById(id: String): Flow<ArticleEntity>
 
-    @Query("SELECT * FROM ${DatabaseConstants.ARTICLE_TABLE_NAME} WHERE link= :link")
-    fun selectArticleByLink(link: String): ArticleEntity?
+    @Query("SELECT * FROM ${DatabaseConstants.ARTICLE_TABLE_NAME} WHERE id= :id")
+    fun getArticleById(id: String): ArticleEntity?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertArticle(article: ArticleEntity)

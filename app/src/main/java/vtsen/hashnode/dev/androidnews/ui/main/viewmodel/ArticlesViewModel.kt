@@ -11,7 +11,7 @@ import vtsen.hashnode.dev.androidnews.domain.usecase.*
 import vtsen.hashnode.dev.androidnews.ui.main.mapper.toArticlesUiState
 
 open class ArticlesViewModel(
-    getArticleStatusUseCase: GetArticleStatusUseCase,
+    protected val getArticleStatusUseCase: GetArticleStatusUseCase,
     protected val refreshArticlesStatusUseCase: RefreshArticlesStatusUseCase,
     protected val clearArticlesStatusUseCase: ClearArticlesStatusUseCase,
     protected val updateArticleUseCase: UpdateArticleUseCase,

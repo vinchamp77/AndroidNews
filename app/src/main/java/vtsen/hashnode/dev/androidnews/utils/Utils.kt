@@ -17,7 +17,7 @@ object Utils {
 
     fun createArticle(bookmarked: Boolean = false, read: Boolean = false) : Article {
         return Article(
-            id = 0,
+            id = "how-to-implement-hilt-in-android-app",
             title = "How to Implement Hilt in Android App?",
             link = "https://vtsen.hashnode.dev/how-to-implement-hilt-in-android-app",
             pubDate = Date().time,

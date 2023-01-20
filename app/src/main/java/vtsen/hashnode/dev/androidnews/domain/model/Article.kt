@@ -1,7 +1,7 @@
 package vtsen.hashnode.dev.androidnews.domain.model
 
 data class Article(
-    val id: Int,
+    val id: String,
     val title: String,
     val link: String,
     val author: String,

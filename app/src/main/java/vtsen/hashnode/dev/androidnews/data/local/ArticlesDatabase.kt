@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 @Database(
-    version = 1,
+    version = 2,
     entities = [ArticleEntity::class]
 )
 abstract class ArticlesDatabase : RoomDatabase() {
@@ -43,7 +43,7 @@ abstract class ArticlesDatabase : RoomDatabase() {
     fun selectUnreadArticlesByTitle(title: String) = dao.selectUnreadArticlesByTitle("%$title%")
 
     fun selectArticleByLink(link: String) = dao.selectArticleByLink(link)
-    fun selectArticleById(id: Int) = dao.selectArticleById(id)
+    fun selectArticleById(id: String) = dao.selectArticleById(id)
 
     fun insertArticle(article: ArticleEntity) = dao.insertArticle(article)
     fun updateArticle(article: ArticleEntity) = dao.updateArticle(article)

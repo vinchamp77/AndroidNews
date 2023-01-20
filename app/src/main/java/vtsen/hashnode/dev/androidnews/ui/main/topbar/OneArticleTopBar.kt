@@ -27,7 +27,7 @@ import vtsen.hashnode.dev.androidnews.ui.main.viewmodel.ArticlesViewModel
 fun OneArticleTopBar(
     navHostController: NavHostController,
     viewModel: ArticlesViewModel,
-    articleId: Int) {
+    articleId: String) {
 
     val article by viewModel.getArticle(articleId).collectAsStateWithLifecycle(null)
 
@@ -90,6 +90,6 @@ private fun DefaultPreview() {
     OneArticleTopBar(
         navHostController,
         viewModel,
-        0
+        "",
     )
 }

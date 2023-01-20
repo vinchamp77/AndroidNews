@@ -12,7 +12,7 @@ class OneArticleViewModel(
     clearArticlesStatusUseCase: ClearArticlesStatusUseCase,
     updateArticleUseCase: UpdateArticleUseCase,
     getArticleUseCase: GetArticleUseCase,
-    articleId: Int,
+    articleId: String,
 ) : ArticlesViewModel(
         getArticleStatusUseCase,
         refreshArticlesStatusUseCase,

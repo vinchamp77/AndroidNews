@@ -56,7 +56,7 @@ class FakeArticlesRepositoryImpl() : ArticlesRepository {
 
     override suspend fun updateArticle(article: Article) {}
 
-    override fun getArticle(id: Int): Flow<Article> {
+    override fun getArticle(id: String): Flow<Article> {
         val article = _allArticles.find { article ->
             article.id == id
         }

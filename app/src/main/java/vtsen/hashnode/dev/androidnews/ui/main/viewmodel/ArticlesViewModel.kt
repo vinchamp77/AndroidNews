@@ -40,6 +40,6 @@ open class ArticlesViewModel(
         updateArticleUseCase(article.copy(bookmarked = !article.bookmarked))
     }
 
-    fun getArticle(articleId: Int) = getArticleUseCase(articleId)
+    fun getArticle(articleId: String) = getArticleUseCase(articleId)
 }
 

@@ -8,7 +8,7 @@ import vtsen.hashnode.dev.androidnews.domain.usecase.*
 @Suppress("UNCHECKED_CAST")
 class OneArticleViewModelFactory(
     private val repository: ArticlesRepository,
-    private val articleId: Int,
+    private val articleId: String,
 )
     : ViewModelProvider.NewInstanceFactory() {
 

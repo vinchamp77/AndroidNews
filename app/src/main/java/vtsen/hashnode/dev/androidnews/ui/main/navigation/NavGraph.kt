@@ -59,7 +59,7 @@ private fun addHomeScreen(
         HomeScreen(
             viewModel,
             navigateToArticle = { article ->
-                navHostController.navigate(NavRoute.Article.withArgs(article.id.toString()))
+                navHostController.navigate(NavRoute.Article.withArgs(article.id))
             },
         )
     }
@@ -77,7 +77,7 @@ private fun addUnreadScreen(
         UnreadScreen(
             viewModel,
             navigateToArticle = { article ->
-                navHostController.navigate(NavRoute.Article.withArgs(article.id.toString()))
+                navHostController.navigate(NavRoute.Article.withArgs(article.id))
             },
         )
     }
@@ -97,7 +97,7 @@ private fun addBookmarksScreen(
         BookmarksScreen(
             viewModel,
             navigateToArticle = { article ->
-                navHostController.navigate(NavRoute.Article.withArgs(article.id.toString()))
+                navHostController.navigate(NavRoute.Article.withArgs(article.id))
             },
         )
     }
@@ -117,13 +117,13 @@ private fun addArticleScreen(
         ),*/
         arguments = listOf(
             navArgument(NavRoute.Article.id) {
-                type = NavType.IntType
+                type = NavType.StringType
             }
         )
     ) { navBackStackEntry ->
 
         val args = navBackStackEntry.arguments
-        val id = args?.getInt(NavRoute.Article.id)!!
+        val id = args?.getString(NavRoute.Article.id)!!
 
         val repository = ArticlesRepositoryImpl.getInstance(LocalContext.current.applicationContext)
         val viewModel: OneArticleViewModel = viewModel(factory = OneArticleViewModelFactory(repository, id))
@@ -163,7 +163,7 @@ private fun addSearchResultsScreen(
         SearchResultsScreen(
             viewModel,
             navigateToArticle = { article ->
-                navHostController.navigate(NavRoute.Article.withArgs(article.id.toString()))
+                navHostController.navigate(NavRoute.Article.withArgs(article.id))
             },
         )
     }

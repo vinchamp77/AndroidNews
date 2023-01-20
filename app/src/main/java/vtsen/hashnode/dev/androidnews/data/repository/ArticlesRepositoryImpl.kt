@@ -91,7 +91,7 @@ class ArticlesRepositoryImpl private constructor(
         database.updateArticle(article.toArticleEntity())
     }
 
-    override fun getArticle(id: Int) = database.selectArticleById(id).map { articlesEntity ->
+    override fun getArticle(id: String) = database.selectArticleById(id).map { articlesEntity ->
         articlesEntity.toArticle()
     }
 

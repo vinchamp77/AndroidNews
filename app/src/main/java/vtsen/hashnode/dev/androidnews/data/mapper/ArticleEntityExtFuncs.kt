@@ -11,7 +11,7 @@ fun List<ArticleEntity>.toArticles() : List<Article> {
 
 fun ArticleEntity.toArticle(): Article {
     return Article(
-        id = id,
+        id = link.toUrlPath(),
         title = title,
         link = link,
         author = author,

@@ -12,7 +12,7 @@ fun List<ArticleFeed>.toArticleEntities() : List<ArticleEntity> {
 
 fun ArticleFeed.toArticleEntity() : ArticleEntity {
     return ArticleEntity(
-        id = 0,
+        id = feedItem.link.toUrlPath(),
         title = feedItem.title,
         link = feedItem.link,
         author = feedItem.author,

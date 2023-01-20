@@ -47,7 +47,7 @@ fun TopBar(navHostController: NavHostController) {
     // One article
     } else if (currentNavRoutePath.contains(NavRoute.Article.path)) {
         val args = navBackStackEntry?.arguments
-        val articleId = args?.getInt(NavRoute.Article.id)
+        val articleId = args?.getString(NavRoute.Article.id)
 
         OneArticleTopBar(navHostController, viewModel, articleId!!)
 

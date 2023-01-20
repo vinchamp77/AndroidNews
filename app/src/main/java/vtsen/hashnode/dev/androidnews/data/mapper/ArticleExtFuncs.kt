@@ -7,8 +7,9 @@ fun Article.toArticleEntity(
     bookmarked: Boolean? = null,
     read: Boolean? = null,
 ) : ArticleEntity {
+
     return ArticleEntity(
-        id = id,
+        id = link.toUrlPath(),
         title = title,
         link = link,
         author = author,

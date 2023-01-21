@@ -13,7 +13,7 @@ interface ArticlesRepository {
 
     val bookmarkArticles: Flow<List<Article>>
 
-    fun getArticle(id: String) : Flow<Article>
+    fun selectArticleById(id: String) : Flow<Article?>
 
     suspend fun refresh(): ArticlesRepositoryStatus
 

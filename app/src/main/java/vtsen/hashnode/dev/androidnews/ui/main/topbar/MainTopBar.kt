@@ -49,7 +49,11 @@ fun TopBar(navHostController: NavHostController) {
         val args = navBackStackEntry?.arguments
         val articleId = args?.getString(NavRoute.Article.id)
 
-        OneArticleTopBar(navHostController, viewModel, articleId!!)
+        // articleId is null when deep link is https://vtsen.hashnode.dev
+        // we navigate back to the home screen. See NavGraph.kt
+        if(articleId != null) {
+            OneArticleTopBar(navHostController, viewModel, articleId)
+        }
 
     } else {
         throw Exception("Invalid navigation path!")

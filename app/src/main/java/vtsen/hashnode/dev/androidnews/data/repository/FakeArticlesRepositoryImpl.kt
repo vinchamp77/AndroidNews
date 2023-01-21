@@ -8,7 +8,7 @@ import vtsen.hashnode.dev.androidnews.domain.repository.ArticlesRepository
 import vtsen.hashnode.dev.androidnews.domain.repository.ArticlesRepositoryStatus
 import vtsen.hashnode.dev.androidnews.utils.Utils
 
-class FakeArticlesRepositoryImpl() : ArticlesRepository {
+class FakeArticlesRepositoryImpl : ArticlesRepository {
 
     private var _status: ArticlesRepositoryStatus = ArticlesRepositoryStatus.Invalid
     override val status: Flow<ArticlesRepositoryStatus> = flow {
@@ -56,13 +56,13 @@ class FakeArticlesRepositoryImpl() : ArticlesRepository {
 
     override suspend fun updateArticle(article: Article) {}
 
-    override fun getArticle(id: String): Flow<Article> {
+    override fun selectArticleById(id: String): Flow<Article?> {
         val article = _allArticles.find { article ->
             article.id == id
         }
 
         val flow = flow {
-            emit(article!!)
+            emit(article)
         }
 
         return flow

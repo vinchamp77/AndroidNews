@@ -35,7 +35,7 @@ fun NavGraph(modifier: Modifier = Modifier, navHostController: NavHostController
         addHomeScreen(navHostController, navGraphBuilder)
         addUnreadScreen(navHostController, navGraphBuilder)
         addBookmarksScreen(navHostController, navGraphBuilder)
-        addArticleScreen(navGraphBuilder)
+        addArticleScreen(navHostController, navGraphBuilder)
         addSearchResultsScreen(navHostController, navGraphBuilder)
     }
 }
@@ -46,12 +46,6 @@ private fun addHomeScreen(
 ) {
     navGraphBuilder.composable(
         route = NavRoute.Home.path,
-        deepLinks = listOf(
-            navDeepLink {
-                uriPattern = "https://vtsen.hashnode.dev"
-                action = Intent.ACTION_VIEW
-            }
-        ),
     ) {
         val repository = ArticlesRepositoryImpl.getInstance(LocalContext.current.applicationContext)
         val viewModel: AllArticlesViewModel = viewModel(factory = ArticlesViewModelFactory(repository))
@@ -104,17 +98,17 @@ private fun addBookmarksScreen(
 }
 
 private fun addArticleScreen(
+    navHostController: NavHostController,
     navGraphBuilder: NavGraphBuilder,
 ) {
     navGraphBuilder.composable(
         route = NavRoute.Article.withArgsFormat(NavRoute.Article.id),
-        /*TODO: Deep link support for Article
         deepLinks = listOf(
             navDeepLink {
-                uriPattern = "https://vtsen.hashnode.dev/{id}"
+                uriPattern = "https://vtsen.hashnode.dev/{${NavRoute.Article.id}}"
                 action = Intent.ACTION_VIEW
             }
-        ),*/
+        ),
         arguments = listOf(
             navArgument(NavRoute.Article.id) {
                 type = NavType.StringType
@@ -123,12 +117,20 @@ private fun addArticleScreen(
     ) { navBackStackEntry ->
 
         val args = navBackStackEntry.arguments
-        val id = args?.getString(NavRoute.Article.id)!!
 
-        val repository = ArticlesRepositoryImpl.getInstance(LocalContext.current.applicationContext)
-        val viewModel: OneArticleViewModel = viewModel(factory = OneArticleViewModelFactory(repository, id))
+        val id = args?.getString(NavRoute.Article.id)
 
-        ArticleScreen(viewModel)
+        if(id != null) {
+            val repository =
+                ArticlesRepositoryImpl.getInstance(LocalContext.current.applicationContext)
+            val viewModel: OneArticleViewModel =
+                viewModel(factory = OneArticleViewModelFactory(repository, id))
+
+            ArticleScreen(viewModel)
+        // articleId is null when deep link is https://vtsen.hashnode.dev
+        } else {
+            navHostController.navigateUp()
+        }
     }
 }
 

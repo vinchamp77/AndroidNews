@@ -30,7 +30,7 @@ This is a simple RSS feed reader app that currently reads my blog (Android Kotli
 - Pull Referesh (migrated from Accompanist Swipe Refresh)
 - Work Manager
 - Notification
-- Deep Link
+- Deep Link (not verified)
 - BuildUtils (own library)
 
 ## Articles

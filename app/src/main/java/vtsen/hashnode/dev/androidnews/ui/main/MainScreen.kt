@@ -17,7 +17,7 @@ import vtsen.hashnode.dev.androidnews.ui.main.navigation.NavGraph
 import vtsen.hashnode.dev.androidnews.ui.main.viewmodel.ArticlesUiState
 import vtsen.hashnode.dev.androidnews.ui.main.viewmodel.ArticlesViewModel
 import vtsen.hashnode.dev.androidnews.ui.screens.common.PermissionsDialog
-import vtsen.hashnode.dev.androidnews.ui.screens.main.navigation.TopBar
+import vtsen.hashnode.dev.androidnews.ui.main.topbar.TopBar
 import vtsen.hashnode.dev.androidnews.ui.theme.AndroidNewsTheme
 import vtsen.hashnode.dev.buildutils.BuildExt
 

@@ -20,7 +20,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.content.ContextCompat
 import vtsen.hashnode.dev.androidnews.R
 import vtsen.hashnode.dev.androidnews.domain.model.Article
-import vtsen.hashnode.dev.androidnews.ui.screens.home.ArticleCard
 import vtsen.hashnode.dev.androidnews.ui.theme.PaddingSmall
 import vtsen.hashnode.dev.androidnews.utils.Utils.makeFakeArticles
 

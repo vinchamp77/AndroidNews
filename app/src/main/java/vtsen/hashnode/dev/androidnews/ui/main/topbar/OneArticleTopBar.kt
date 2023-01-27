@@ -20,16 +20,16 @@ import androidx.navigation.compose.rememberNavController
 import vtsen.hashnode.dev.androidnews.R
 import vtsen.hashnode.dev.androidnews.data.repository.ArticlesRepositoryImpl
 import vtsen.hashnode.dev.androidnews.domain.usecase.*
+import vtsen.hashnode.dev.androidnews.ui.screens.article.OneArticleViewModel
 import vtsen.hashnode.dev.androidnews.ui.screens.common.ArticleIconButton
-import vtsen.hashnode.dev.androidnews.ui.main.viewmodel.ArticlesViewModel
 
 @Composable
 fun OneArticleTopBar(
     navHostController: NavHostController,
-    viewModel: ArticlesViewModel,
-    articleId: String) {
+    viewModel: OneArticleViewModel,
+) {
 
-    val article by viewModel.getArticle(articleId).collectAsStateWithLifecycle(null)
+    val article by viewModel.article.collectAsStateWithLifecycle(null)
 
     if (article == null) return
 
@@ -69,6 +69,8 @@ fun OneArticleTopBar(
                             painterResource(R.drawable.ic_bookmark_border),
                     )
                 }
+
+                TopBarDropDownMenu(navHostController = navHostController)
             }
         }
     }
@@ -78,18 +80,18 @@ fun OneArticleTopBar(
 private fun DefaultPreview() {
 
     val repository = ArticlesRepositoryImpl.getInstance(LocalContext.current)
-    val viewModel = ArticlesViewModel(
+    val viewModel = OneArticleViewModel(
         GetArticleStatusUseCase(repository),
         RefreshArticlesStatusUseCase(repository),
         ClearArticlesStatusUseCase(repository),
         UpdateArticleUseCase(repository),
         GetArticleUseCase(repository),
+        articleId = "",
     )
     val navHostController = rememberNavController()
 
     OneArticleTopBar(
         navHostController,
-        viewModel,
-        "",
+        viewModel
     )
 }

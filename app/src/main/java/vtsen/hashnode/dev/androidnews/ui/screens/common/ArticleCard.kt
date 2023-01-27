@@ -1,4 +1,4 @@
-package vtsen.hashnode.dev.androidnews.ui.screens.home
+package vtsen.hashnode.dev.androidnews.ui.screens.common
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -18,7 +18,6 @@ import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import vtsen.hashnode.dev.androidnews.R
 import vtsen.hashnode.dev.androidnews.domain.model.Article
-import vtsen.hashnode.dev.androidnews.ui.screens.common.ArticleIconButton
 import vtsen.hashnode.dev.androidnews.ui.theme.PaddingMedium
 import vtsen.hashnode.dev.androidnews.ui.theme.PaddingSmall
 import vtsen.hashnode.dev.androidnews.utils.Utils

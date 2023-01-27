@@ -20,6 +20,7 @@ import vtsen.hashnode.dev.androidnews.ui.screens.searchresults.SearchResultsScre
 import vtsen.hashnode.dev.androidnews.ui.screens.unread.UnreadArticlesViewModel
 import vtsen.hashnode.dev.androidnews.ui.screens.unread.UnreadScreen
 import vtsen.hashnode.dev.androidnews.ui.main.viewmodel.ArticlesViewModelFactory
+import vtsen.hashnode.dev.androidnews.ui.screens.about.AboutScreen
 import vtsen.hashnode.dev.androidnews.ui.screens.article.OneArticleViewModelFactory
 import vtsen.hashnode.dev.androidnews.ui.screens.searchresults.SearchArticlesViewModelFactory
 
@@ -37,6 +38,7 @@ fun NavGraph(modifier: Modifier = Modifier, navHostController: NavHostController
         addBookmarksScreen(navHostController, navGraphBuilder)
         addArticleScreen(navHostController, navGraphBuilder)
         addSearchResultsScreen(navHostController, navGraphBuilder)
+        addAboutScreen(navHostController, navGraphBuilder)
     }
 }
 
@@ -170,3 +172,22 @@ private fun addSearchResultsScreen(
         )
     }
 }
+
+private fun addAboutScreen(
+    navHostController: NavHostController,
+    navGraphBuilder: NavGraphBuilder,
+) {
+    navGraphBuilder.composable(
+        route = NavRoute.About.path,
+        deepLinks = listOf(
+            navDeepLink {
+                uriPattern = "https://vtsen.hashnode.dev/about"
+                action = Intent.ACTION_VIEW
+            }
+        ),
+    ) { navBackStackEntry ->
+
+        AboutScreen()
+    }
+}
+

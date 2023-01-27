@@ -12,6 +12,8 @@ sealed class NavRoute(val path: String) {
         val id = "id"
     }
 
+    object About: NavRoute("about")
+
     object SearchResults: NavRoute("search_results") {
         val titleResId = "title"
         val query = "query"

@@ -1,4 +1,4 @@
-package vtsen.hashnode.dev.androidnews.ui.screens.main.navigation
+package vtsen.hashnode.dev.androidnews.ui.main.topbar
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -8,13 +8,10 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import vtsen.hashnode.dev.androidnews.data.repository.ArticlesRepositoryImpl
 import vtsen.hashnode.dev.androidnews.ui.main.navigation.NavRoute
-import vtsen.hashnode.dev.androidnews.ui.main.topbar.OneArticleTopBar
-import vtsen.hashnode.dev.androidnews.ui.main.topbar.BookmarkedArticlesTopBar
-import vtsen.hashnode.dev.androidnews.ui.main.topbar.AllArticlesTopBar
-import vtsen.hashnode.dev.androidnews.ui.main.topbar.SearchResultsTopBar
-import vtsen.hashnode.dev.androidnews.ui.main.topbar.UnreadArticlesTopBar
 import vtsen.hashnode.dev.androidnews.ui.main.viewmodel.ArticlesViewModel
 import vtsen.hashnode.dev.androidnews.ui.main.viewmodel.ArticlesViewModelFactory
+import vtsen.hashnode.dev.androidnews.ui.screens.article.OneArticleViewModel
+import vtsen.hashnode.dev.androidnews.ui.screens.article.OneArticleViewModelFactory
 
 @Composable
 fun TopBar(navHostController: NavHostController) {
@@ -52,8 +49,14 @@ fun TopBar(navHostController: NavHostController) {
         // articleId is null when deep link is https://vtsen.hashnode.dev
         // we navigate back to the home screen. See NavGraph.kt
         if(articleId != null) {
-            OneArticleTopBar(navHostController, viewModel, articleId)
+
+            val viewModel: OneArticleViewModel =
+                viewModel(factory = OneArticleViewModelFactory(repository, articleId))
+            OneArticleTopBar(navHostController, viewModel)
         }
+
+    } else if (currentNavRoutePath.contains(NavRoute.About.path)) {
+        AboutTopBar(navHostController)
 
     } else {
         throw Exception("Invalid navigation path!")

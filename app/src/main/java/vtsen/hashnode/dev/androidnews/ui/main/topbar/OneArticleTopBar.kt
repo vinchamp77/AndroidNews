@@ -31,8 +31,6 @@ fun OneArticleTopBar(
 
     val article by viewModel.article.collectAsStateWithLifecycle(null)
 
-    if (article == null) return
-
     TopAppBar {
 
         Row(
@@ -50,7 +48,7 @@ fun OneArticleTopBar(
 
             Row {
 
-                article!!.run {
+                article?.run {
                     ArticleIconButton(
                         article = article!!,
                         onIconClick = viewModel::onReadClick,

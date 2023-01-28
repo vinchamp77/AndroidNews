@@ -11,7 +11,7 @@ android {
         applicationId "vtsen.hashnode.dev.androidnews"
         minSdk 21
         targetSdk 33
-        versionCode 3
+        versionCode 4
         versionName "3.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"

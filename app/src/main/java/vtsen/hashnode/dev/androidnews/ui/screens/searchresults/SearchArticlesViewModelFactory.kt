@@ -8,7 +8,7 @@ import vtsen.hashnode.dev.androidnews.domain.usecase.*
 @Suppress("UNCHECKED_CAST")
 class SearchArticlesViewModelFactory(
     private val repository: ArticlesRepository,
-    private val titleResId: Int,
+    private val searchResultTitleResId: Int,
     private val query: String,
 )
     : ViewModelProvider.NewInstanceFactory() {
@@ -25,7 +25,7 @@ class SearchArticlesViewModelFactory(
                 ClearArticlesStatusUseCase(repository),
                 UpdateArticleUseCase(repository),
                 GetArticleUseCase(repository),
-                titleResId,
+                searchResultTitleResId,
                 query) as T
         }
 

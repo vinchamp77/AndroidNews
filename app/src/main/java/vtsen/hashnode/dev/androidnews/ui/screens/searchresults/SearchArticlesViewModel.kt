@@ -16,7 +16,7 @@ class SearchArticlesViewModel(
     clearArticlesStatusUseCase: ClearArticlesStatusUseCase,
     updateArticleUseCase: UpdateArticleUseCase,
     getArticleUseCase: GetArticleUseCase,
-    titleResId: Int,
+    searchResultTitleResId: Int,
     query: String,
 ) : ArticlesViewModel(
         getArticleStatusUseCase,
@@ -26,7 +26,7 @@ class SearchArticlesViewModel(
         getArticleUseCase,
 ) {
 
-    val articles = when (titleResId) {
+    val articles = when (searchResultTitleResId) {
 
         R.string.all_articles -> {
             getAllArticlesUseCase(query)
@@ -56,7 +56,7 @@ class SearchArticlesViewModel(
         }
 
         else -> {
-            throw Exception("Unexpected titleResId: $titleResId")
+            throw Exception("Unexpected titleResId: $searchResultTitleResId")
         }
     }
 }

@@ -155,13 +155,13 @@ private fun addSearchResultsScreen(
     ) { navBackStackEntry ->
 
         val args = navBackStackEntry.arguments
-        val titleResId = args!!.getInt(NavRoute.SearchResults.titleResId)
+        val searchResultTitleResId = args!!.getInt(NavRoute.SearchResults.titleResId)
         val query = args.getString(NavRoute.SearchResults.query)!!
 
         val repository = ArticlesRepositoryImpl.getInstance(LocalContext.current.applicationContext)
         val viewModel: SearchArticlesViewModel = viewModel(
             factory = SearchArticlesViewModelFactory(
-                repository, titleResId, query)
+                repository, searchResultTitleResId, query)
         )
 
         SearchResultsScreen(

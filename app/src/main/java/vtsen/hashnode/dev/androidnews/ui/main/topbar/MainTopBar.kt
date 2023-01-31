@@ -8,8 +8,6 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import vtsen.hashnode.dev.androidnews.data.repository.ArticlesRepositoryImpl
 import vtsen.hashnode.dev.androidnews.ui.main.navigation.NavRoute
-import vtsen.hashnode.dev.androidnews.ui.main.viewmodel.ArticlesViewModel
-import vtsen.hashnode.dev.androidnews.ui.main.viewmodel.ArticlesViewModelFactory
 import vtsen.hashnode.dev.androidnews.ui.screens.article.OneArticleViewModel
 import vtsen.hashnode.dev.androidnews.ui.screens.article.OneArticleViewModelFactory
 
@@ -20,7 +18,6 @@ fun TopBar(navHostController: NavHostController) {
     val currentNavRoutePath = navBackStackEntry?.destination?.route ?: return
 
     val repository = ArticlesRepositoryImpl.getInstance(LocalContext.current.applicationContext)
-    val viewModel: ArticlesViewModel = viewModel(factory = ArticlesViewModelFactory(repository))
 
     // All articles
     if (currentNavRoutePath.contains(NavRoute.Home.path)) {

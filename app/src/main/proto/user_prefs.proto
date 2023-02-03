@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+option java_package = "vtsen.hashnode.dev.androidnews";
+option java_multiple_files = true;
+
+message UserPreferences {
+  // Each map is used to store a set of string IDs. The bool has no meaning, but proto3 doesn't
+  // have a Set type so this is the closest we can get to a Set.
+  map<string, bool> bookmarked_article_ids = 1;
+  map<string, bool> read_articles_ids = 2;
+}

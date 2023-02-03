@@ -13,7 +13,7 @@ This is a simple RSS feed reader app that currently reads my blog (Android Kotli
 - Search articles
 
 ## Requirements
-- Android Studio Dolphin or later
+- Android Studio Electric Eel or later
 
 ## Tech Stack
 - Jetpack Compose

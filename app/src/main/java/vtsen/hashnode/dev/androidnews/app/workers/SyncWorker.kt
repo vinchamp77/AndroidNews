@@ -1,11 +1,14 @@
 package vtsen.hashnode.dev.androidnews.app.workers
 
+import android.Manifest
 import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
+import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
@@ -17,7 +20,7 @@ import vtsen.hashnode.dev.androidnews.domain.repository.ArticlesRepositoryStatus
 import vtsen.hashnode.dev.androidnews.ui.main.MainActivity
 import vtsen.hashnode.dev.buildutils.BuildExt
 
-class SyncWorker(appContext: Context, params: WorkerParameters)
+class SyncWorker(private val appContext: Context, params: WorkerParameters)
     : CoroutineWorker(appContext, params) {
 
     private val notificationChannelId = "AndroidNewsNotificationChannelId"
@@ -28,9 +31,15 @@ class SyncWorker(appContext: Context, params: WorkerParameters)
 
         if (status is ArticlesRepositoryStatus.Success) {
 
-            if(status.withNewArticles) {
-                with(NotificationManagerCompat.from(applicationContext)) {
-                    notify(0, createNotification())
+            if (ActivityCompat.checkSelfPermission(
+                    appContext,
+                    Manifest.permission.POST_NOTIFICATIONS)
+                == PackageManager.PERMISSION_GRANTED
+            ) {
+                if (status.withNewArticles) {
+                    with(NotificationManagerCompat.from(applicationContext)) {
+                        notify(0, createNotification())
+                    }
                 }
             }
 

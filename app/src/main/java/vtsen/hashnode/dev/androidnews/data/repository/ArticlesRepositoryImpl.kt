@@ -32,7 +32,7 @@ class ArticlesRepositoryImpl private constructor(
             synchronized(this) {
                 if(!::instance.isInitialized) {
                     instance = ArticlesRepositoryImpl(
-                        ArticlesDatabase.getInstance(context),
+                        ArticlesDatabase.getInstance(context.applicationContext),
                         OkHttpWebService()
                     )
                 }

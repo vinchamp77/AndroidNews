@@ -9,6 +9,7 @@ import androidx.navigation.*
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import vtsen.hashnode.dev.androidnews.data.repository.ArticlesRepositoryImpl
+import vtsen.hashnode.dev.androidnews.data.repository.UserPreferencesRepositoryImpl
 import vtsen.hashnode.dev.androidnews.ui.screens.article.ArticleScreen
 import vtsen.hashnode.dev.androidnews.ui.screens.article.OneArticleViewModel
 import vtsen.hashnode.dev.androidnews.ui.screens.bookmarks.BookmarkArticlesViewModel
@@ -49,8 +50,11 @@ private fun addHomeScreen(
     navGraphBuilder.composable(
         route = NavRoute.Home.path,
     ) {
-        val repository = ArticlesRepositoryImpl.getInstance(LocalContext.current.applicationContext)
-        val viewModel: AllArticlesViewModel = viewModel(factory = ArticlesViewModelFactory(repository))
+        val articlesRepository = ArticlesRepositoryImpl.getInstance(LocalContext.current)
+        val userPrefsRepository = UserPreferencesRepositoryImpl.getInstance(LocalContext.current)
+        val viewModel: AllArticlesViewModel = viewModel(
+            factory = ArticlesViewModelFactory(articlesRepository, userPrefsRepository)
+        )
 
         HomeScreen(
             viewModel,
@@ -67,8 +71,11 @@ private fun addUnreadScreen(
 ) {
     navGraphBuilder.composable(route = NavRoute.Unread.path) {
 
-        val repository = ArticlesRepositoryImpl.getInstance(LocalContext.current.applicationContext)
-        val viewModel: UnreadArticlesViewModel = viewModel(factory = ArticlesViewModelFactory(repository))
+        val articlesRepository = ArticlesRepositoryImpl.getInstance(LocalContext.current)
+        val userPrefsRepository = UserPreferencesRepositoryImpl.getInstance(LocalContext.current)
+        val viewModel: UnreadArticlesViewModel = viewModel(
+            factory = ArticlesViewModelFactory(articlesRepository, userPrefsRepository)
+        )
 
         UnreadScreen(
             viewModel,
@@ -87,8 +94,11 @@ private fun addBookmarksScreen(
         route = NavRoute.Bookmarks.path,
     ) {
 
-        val repository = ArticlesRepositoryImpl.getInstance(LocalContext.current.applicationContext)
-        val viewModel: BookmarkArticlesViewModel = viewModel(factory = ArticlesViewModelFactory(repository))
+        val articlesRepository = ArticlesRepositoryImpl.getInstance(LocalContext.current)
+        val userPrefsRepository = UserPreferencesRepositoryImpl.getInstance(LocalContext.current)
+        val viewModel: BookmarkArticlesViewModel = viewModel(
+            factory = ArticlesViewModelFactory(articlesRepository, userPrefsRepository)
+        )
 
         BookmarksScreen(
             viewModel,
@@ -124,7 +134,7 @@ private fun addArticleScreen(
 
         if(id != null) {
             val repository =
-                ArticlesRepositoryImpl.getInstance(LocalContext.current.applicationContext)
+                ArticlesRepositoryImpl.getInstance(LocalContext.current)
             val viewModel: OneArticleViewModel =
                 viewModel(factory = OneArticleViewModelFactory(repository, id))
 
@@ -158,7 +168,7 @@ private fun addSearchResultsScreen(
         val searchResultTitleResId = args!!.getInt(NavRoute.SearchResults.titleResId)
         val query = args.getString(NavRoute.SearchResults.query)!!
 
-        val repository = ArticlesRepositoryImpl.getInstance(LocalContext.current.applicationContext)
+        val repository = ArticlesRepositoryImpl.getInstance(LocalContext.current)
         val viewModel: SearchArticlesViewModel = viewModel(
             factory = SearchArticlesViewModelFactory(
                 repository, searchResultTitleResId, query)

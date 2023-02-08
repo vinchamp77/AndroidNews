@@ -12,19 +12,25 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import kotlinx.coroutines.launch
 import vtsen.hashnode.dev.androidnews.data.repository.ArticlesRepositoryImpl
+import vtsen.hashnode.dev.androidnews.data.repository.UserPreferencesRepositoryImpl
 import vtsen.hashnode.dev.androidnews.ui.main.viewmodel.ArticlesUiState
 import vtsen.hashnode.dev.androidnews.ui.main.viewmodel.ArticlesViewModel
 import vtsen.hashnode.dev.androidnews.ui.main.viewmodel.ArticlesViewModelFactory
 
 class MainActivity : ComponentActivity() {
 
-    private val repository by lazy {
+    private val articlesRepository by lazy {
         ArticlesRepositoryImpl.getInstance(application)
     }
 
-    private val viewModel: ArticlesViewModel by viewModels {
-        ArticlesViewModelFactory(repository)
+    private val userPrefsRepository by lazy {
+        UserPreferencesRepositoryImpl.getInstance(application)
     }
+
+    private val viewModel: ArticlesViewModel by viewModels {
+        ArticlesViewModelFactory(articlesRepository, userPrefsRepository)
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
 

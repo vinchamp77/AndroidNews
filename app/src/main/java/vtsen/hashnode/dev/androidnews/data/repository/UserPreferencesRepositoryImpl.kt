@@ -31,7 +31,7 @@ class UserPreferencesRepositoryImpl private constructor(
             synchronized(this) {
                 if(!::instance.isInitialized) {
                     instance = UserPreferencesRepositoryImpl(
-                        context.userPreferencesStore
+                        context.applicationContext.userPreferencesStore
                     )
                 }
                 return instance

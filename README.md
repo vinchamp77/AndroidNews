@@ -20,7 +20,7 @@ This is a simple RSS feed reader app that currently reads my blog (Android Kotli
 - Recommended App Architecture (UI, domain and data layers)
 - OkHttp (replace Ktor Client which crashes on API 21)
 - Room Database (cached articles)
-- Proto DataStore (user preferences - e.g. bookmarked)
+- Proto DataStore (user preferences - e.g. bookmarked articles)
 - Coil (image loading)
 - XmlPullParser
 - Compose Navigation
@@ -31,7 +31,7 @@ This is a simple RSS feed reader app that currently reads my blog (Android Kotli
 - Pull Referesh (migrated from Accompanist Swipe Refresh)
 - Work Manager
 - Notification
-- Deep Link (not verified)
+- Deep Link (link is not verified due to website limitation)
 - [BuildUtils](https://github.com/vinchamp77/buildutils) (own library)
 
 ## Articles

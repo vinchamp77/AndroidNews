@@ -19,7 +19,8 @@ This is a simple RSS feed reader app that currently reads my blog (Android Kotli
 - Jetpack Compose
 - Recommended App Architecture (UI, domain and data layers)
 - OkHttp (Replace Ktor Client which crashes on API 21)
-- Room Database
+- Room Database (cached articles)
+- Proto DataStore (user preferences - e.g. bookmarked)
 - Coil
 - XmlPullParser
 - Compose Navigation

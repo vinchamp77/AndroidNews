@@ -11,6 +11,7 @@ This is a simple RSS feed reader app that currently reads my blog (Android Kotli
 - Share article
 - Mark article as read / unread
 - Search articles
+- New article notification
 
 ## Requirements
 - Android Studio Electric Eel or later

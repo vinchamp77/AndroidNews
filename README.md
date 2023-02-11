@@ -11,6 +11,7 @@ This is a simple RSS feed reader app that currently reads my blog (Android Kotli
 - Share article
 - Mark article as read / unread
 - Search articles
+- New article notification
 
 ## Requirements
 - Android Studio Electric Eel or later
@@ -18,9 +19,10 @@ This is a simple RSS feed reader app that currently reads my blog (Android Kotli
 ## Tech Stack
 - Jetpack Compose
 - Recommended App Architecture (UI, domain and data layers)
-- OkHttp (Replace Ktor Client which crashes on API 21)
-- Room Database
-- Coil
+- OkHttp (replace Ktor Client which crashes on API 21)
+- Room Database (cached articles)
+- Proto DataStore (user preferences - e.g. bookmarked articles)
+- Coil (image loading)
 - XmlPullParser
 - Compose Navigation
 - Scaffold (Top/Bottom Bar)
@@ -30,13 +32,14 @@ This is a simple RSS feed reader app that currently reads my blog (Android Kotli
 - Pull Referesh (migrated from Accompanist Swipe Refresh)
 - Work Manager
 - Notification
-- Deep Link (not verified)
+- Deep Link (link is not verified due to website limitation)
 - [BuildUtils](https://github.com/vinchamp77/buildutils) (own library)
 
 ## Articles
 - [Simple RSS Feed Reader - Jetpack Compose](https://vtsen.hashnode.dev/simple-rss-feed-reader-jetpack-compose)
 - [Convert View Model to Use Hilt Dependency Injection](https://vtsen.hashnode.dev/convert-view-model-to-use-hilt-dependency-injection)
 - [Implement Default Splash Screen Prior to Android 12](https://vtsen.hashnode.dev/implement-default-splash-screen-prior-to-android-12)
+- [Simple Example to Use WorkManager and Notification](https://vtsen.hashnode.dev/simple-example-to-use-workmanager-and-notification)
 
 ## Branches
 - [master](https://github.com/vinchamp77/AndroidNews) - multiple view models (use recommended way to collect flow)

@@ -49,7 +49,7 @@ class ArticlesViewModelFactory(
         }
         else if (modelClass.isAssignableFrom(BookmarkArticlesViewModel::class.java)) {
             return BookmarkArticlesViewModel(
-                GetBookmarkArticlesUseCase(articlesRepository),
+                GetBookmarkArticlesUseCase(articlesRepository, userPrefsRepository),
                 GetArticleStatusUseCase(articlesRepository),
                 RefreshArticlesStatusUseCase(articlesRepository),
                 ClearArticlesStatusUseCase(articlesRepository),

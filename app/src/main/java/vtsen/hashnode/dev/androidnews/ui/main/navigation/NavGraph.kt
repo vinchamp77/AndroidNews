@@ -168,10 +168,12 @@ private fun addSearchResultsScreen(
         val searchResultTitleResId = args!!.getInt(NavRoute.SearchResults.titleResId)
         val query = args.getString(NavRoute.SearchResults.query)!!
 
-        val repository = ArticlesRepositoryImpl.getInstance(LocalContext.current)
+        val articlesRepository = ArticlesRepositoryImpl.getInstance(LocalContext.current)
+        val userPrefsRepository = UserPreferencesRepositoryImpl.getInstance(LocalContext.current)
+
         val viewModel: SearchArticlesViewModel = viewModel(
             factory = SearchArticlesViewModelFactory(
-                repository, searchResultTitleResId, query)
+                articlesRepository, userPrefsRepository, searchResultTitleResId, query)
         )
 
         SearchResultsScreen(

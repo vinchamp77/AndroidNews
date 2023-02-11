@@ -39,7 +39,7 @@ class UserPreferencesRepositoryImpl private constructor(
         }
     }
 
-    val userPreferencesFlow: Flow<UserPreferences> = dataStore.data
+    override val userPreferencesFlow: Flow<UserPreferences> = dataStore.data
         .catch { exception ->
             // dataStore.data throws an IOException when an error is encountered when reading data
             if (exception is IOException) {

@@ -3,11 +3,13 @@ package vtsen.hashnode.dev.androidnews.ui.screens.searchresults
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import vtsen.hashnode.dev.androidnews.domain.repository.ArticlesRepository
+import vtsen.hashnode.dev.androidnews.domain.repository.UserPreferencesRepository
 import vtsen.hashnode.dev.androidnews.domain.usecase.*
 
 @Suppress("UNCHECKED_CAST")
 class SearchArticlesViewModelFactory(
-    private val repository: ArticlesRepository,
+    private val articlesRepository: ArticlesRepository,
+    private val userPrefsRepository: UserPreferencesRepository,
     private val searchResultTitleResId: Int,
     private val query: String,
 )
@@ -17,14 +19,14 @@ class SearchArticlesViewModelFactory(
 
         if (modelClass.isAssignableFrom(SearchArticlesViewModel::class.java)) {
             return SearchArticlesViewModel(
-                GetAllArticlesUseCase(repository),
-                GetBookmarkArticlesUseCase(repository),
-                GetUnreadArticlesUseCase(repository),
-                GetArticleStatusUseCase(repository),
-                RefreshArticlesStatusUseCase(repository),
-                ClearArticlesStatusUseCase(repository),
-                UpdateArticleUseCase(repository),
-                GetArticleUseCase(repository),
+                GetAllArticlesUseCase(articlesRepository),
+                GetBookmarkArticlesUseCase(articlesRepository, userPrefsRepository),
+                GetUnreadArticlesUseCase(articlesRepository),
+                GetArticleStatusUseCase(articlesRepository),
+                RefreshArticlesStatusUseCase(articlesRepository),
+                ClearArticlesStatusUseCase(articlesRepository),
+                UpdateArticleUseCase(articlesRepository),
+                GetArticleUseCase(articlesRepository),
                 searchResultTitleResId,
                 query) as T
         }

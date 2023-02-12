@@ -26,7 +26,7 @@ This is a simple RSS feed reader app that currently reads my blog (Android Kotli
 | [Proto DataStore](https://developer.android.com/topic/libraries/architecture/datastore) | Store user preferences - e.g. bookmarked articles, read articles |
 | [Coil](https://github.com/coil-kt/coil) | Load images from URL |
 | [XmlPullParser](https://developer.android.com/reference/org/xmlpull/v1/XmlPullParser) | Parse the rss.xml |
-| [Compose Navigation](https://developer.android.com/jetpack/compose/navigation) | Navigate to different sereens in the app |
+| [Compose Navigation](https://developer.android.com/jetpack/compose/navigation) | Navigate to different screens in the app |
 | [Scaffold](https://developer.android.com/reference/kotlin/androidx/compose/material/package-summary#scaffold) | Implement top, bottom and snack bars based on material design layout<br/>Implement navigation graph |
 | [AndroidView](https://developer.android.com/reference/kotlin/androidx/compose/ui/viewinterop/package-summary#AndroidView) & [WebView](https://developer.android.com/reference/android/webkit/WebView) | Embed the web browser into the app |
 | [Coroutines](https://kotlinlang.org/docs/coroutines-overview.html) & [Flow](https://kotlinlang.org/docs/flow.html) & [StateFlow](https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-state-flow/) | Implement asynchronous flow in the app</br>Expose `Flow` in data layer</br>Expose `StateFlow` in `ViewModel`<br/>Collect `StateFlow` using `LifeCycle.RepeatOnLlifeCycle()` in UI layer |

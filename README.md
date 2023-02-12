@@ -17,10 +17,11 @@ This is a simple RSS feed reader app that currently reads my blog (Android Kotli
 - Android Studio Electric Eel or later
 
 ## Tech Stack
-| Tech Stack | High-level Implementation |
+| Tech Stack | High-level Implementation and Purpose |
 | --- | --- |
 | [Jetpack Compose](https://developer.android.com/jetpack/compose) | Implement reacctive UI using composable functions | 
 | [Recommended App Architecture ](https://developer.android.com/topic/architecture) | Seperate the app into UI, domain and data layers |
+| [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) | Act as state holder in UI layer (expose state as `StateFlow`)<br/>Survive through configuration changes |
 | [OkHttp](https://square.github.io/okhttp/) |Fetch rss.xml<br/>Replace Ktor Client which crashes on API 21 |
 | [Room Database](https://developer.android.com/training/data-storage/room) | Cache the article data from the rss.xml |
 | [Proto DataStore](https://developer.android.com/topic/libraries/architecture/datastore) | Store user preferences - e.g. bookmarked articles, read articles |
@@ -34,7 +35,7 @@ This is a simple RSS feed reader app that currently reads my blog (Android Kotli
 | [PullRefresh](https://developer.android.com/reference/kotlin/androidx/compose/material/pullrefresh/package-summary) | Show article referesh indicator (was migrated from Accompanist `SwipeRefresh`) |
 | [WorkManager](https://developer.android.com/topic/libraries/architecture/workmanager) & [Notification](https://developer.android.com/develop/ui/views/notifications) | Schecule backgraound tasks to fetch rss.xml and post the new article arrived notification |
 | [Deep Link](https://developer.android.com/training/app-links/deep-linking) | Add main blog, article and about URL deep links into the app</br>Implement partial deep links(link is not verified due to website limitation) |
-| [BuildUtils](https://github.com/vinchamp77/buildutils) (own library) | Avoid hardcoding build version to improve code readability |
+| [BuildUtils](https://github.com/vinchamp77/buildutils) (own library) | Avoid hardcoding build version code (API level) to improve code readability |
 
 ## Articles
 - [Simple RSS Feed Reader - Jetpack Compose](https://vtsen.hashnode.dev/simple-rss-feed-reader-jetpack-compose)

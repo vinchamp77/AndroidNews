@@ -4,7 +4,7 @@ This is a simple RSS feed reader app that currently reads my blog (Android Kotli
 
 ![](screenshots/Android_News_Overview.gif)
 
-> This app is work in progress and may be over-engineered to showcase the recommended app architecture and diverse array of technologies.
+> This app is work in progress and may be over-engineered to showcase the best pratices and diverse array of technologies.
 
 ## Features
 - Bookmark article

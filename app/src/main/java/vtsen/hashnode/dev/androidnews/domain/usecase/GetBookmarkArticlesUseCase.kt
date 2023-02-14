@@ -12,7 +12,7 @@ class GetBookmarkArticlesUseCase(
 ) {
     operator fun invoke(title: String? = null): Flow<List<Article>> {
 
-        val combineFlow = articlesRepository.allArticles.combine(
+        val combineFlow = articlesRepository.getAllArticles().combine(
             userPrefsRepository.getBookmarkArticles()) { allArticles, bookmarkArticleIds ->
 
             var bookmarkedArticles = mutableListOf<Article>()

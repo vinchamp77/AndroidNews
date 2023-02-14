@@ -55,9 +55,10 @@ class ArticlesRepositoryImpl private constructor(
         }
     }
 
-    override val allArticles = database.selectAllArticles().map { articlesEntity ->
-        articlesEntity.toArticles()
-    }
+    override fun getAllArticles(): Flow<List<Article>> =
+        database.selectAllArticles().map { articlesEntity ->
+            articlesEntity.toArticles()
+        }
 
     override val unreadArticles = database.selectUnreadArticles().map { articleEntity ->
         articleEntity.toArticles()

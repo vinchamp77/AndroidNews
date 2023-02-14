@@ -8,7 +8,7 @@ class GetAllArticlesUseCase(private val repository: ArticlesRepository) {
     operator fun invoke(title: String? = null): Flow<List<Article>> {
 
         if (title.isNullOrEmpty()) {
-            return repository.allArticles
+            return repository.getAllArticles()
         }
 
         return repository.getAllArticlesByTitle(title)

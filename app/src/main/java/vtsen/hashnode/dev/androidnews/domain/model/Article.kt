@@ -7,8 +7,7 @@ data class Article(
     val author: String,
     val pubDate: Long,
     val image: String,
+    val feedTitle: String,
     val bookmarked: Boolean,
     val read: Boolean,
-
-    val feedTitle: String,
 )

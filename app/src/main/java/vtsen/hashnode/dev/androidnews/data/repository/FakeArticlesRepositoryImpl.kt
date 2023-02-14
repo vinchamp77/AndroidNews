@@ -1,6 +1,6 @@
 package vtsen.hashnode.dev.androidnews.data.repository
 
-import kotlinx.coroutines.*
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import vtsen.hashnode.dev.androidnews.domain.model.Article
@@ -20,10 +20,12 @@ class FakeArticlesRepositoryImpl : ArticlesRepository {
 
 
     private var _allArticles: MutableList<Article> = mutableListOf()
-    override val allArticles = flow {
-        while(true){
-            emit(_allArticles)
-            delay(5000)
+    override fun getAllArticles(): Flow<List<Article>> {
+        return flow {
+            while(true){
+                emit(_allArticles)
+                delay(5000)
+            }
         }
     }
 

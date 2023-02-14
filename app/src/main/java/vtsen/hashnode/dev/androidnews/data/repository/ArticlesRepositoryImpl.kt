@@ -44,11 +44,14 @@ class ArticlesRepositoryImpl private constructor(
     )
 
     private var newArticlesFound: Boolean = false
+
     private var _status: ArticlesRepoStatus = ArticlesRepoStatus.Invalid
-    override val status: Flow<ArticlesRepoStatus> = flow {
-        while(true) {
-            delay(500)
-            emit(_status)
+    override fun getStatus(): Flow<ArticlesRepoStatus> {
+        return flow {
+            while (true) {
+                delay(500)
+                emit(_status)
+            }
         }
     }
 

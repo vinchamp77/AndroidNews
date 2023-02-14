@@ -12,6 +12,7 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import vtsen.hashnode.dev.androidnews.data.repository.FakeArticlesRepositoryImpl
+import vtsen.hashnode.dev.androidnews.data.repository.FakeUserPreferencesRepositoryImpl
 import vtsen.hashnode.dev.androidnews.domain.usecase.*
 import vtsen.hashnode.dev.androidnews.ui.screens.home.AllArticlesViewModel
 
@@ -26,14 +27,18 @@ class HomeViewModelTest {
 
     @Before
     fun setupViewModel() {
-        val repository = FakeArticlesRepositoryImpl()
+        val articlesRepository = FakeArticlesRepositoryImpl()
+        val userPrefsRepository = FakeUserPreferencesRepositoryImpl()
         viewModel = AllArticlesViewModel(
-            GetAllArticlesUseCase(repository),
-            GetArticleStatusUseCase(repository),
-            RefreshArticlesStatusUseCase(repository),
-            ClearArticlesStatusUseCase(repository),
-            UpdateArticleUseCase(repository),
-            GetArticleUseCase(repository),
+            GetAllArticlesUseCase(articlesRepository),
+            GetArticleStatusUseCase(articlesRepository),
+            RefreshArticlesStatusUseCase(articlesRepository),
+            ClearArticlesStatusUseCase(articlesRepository),
+            AddBookmarkArticlesUseCase(userPrefsRepository),
+            RemoveBookmarkArticlesUseCase(userPrefsRepository),
+            AddReadArticlesUseCase(userPrefsRepository),
+            RemoveReadArticlesUseCase(userPrefsRepository),
+            GetArticleUseCase(articlesRepository),
         )
     }
 

@@ -13,15 +13,14 @@ class GetBookmarkArticlesUseCase(
     operator fun invoke(title: String? = null): Flow<List<Article>> {
 
         val combineFlow = articlesRepository.allArticles.combine(
-            userPrefsRepository.userPreferencesFlow) { allArticles, userPrefs ->
+            userPrefsRepository.getBookmarkArticles()) { allArticles, bookmarkArticleIds ->
 
             var bookmarkedArticles = mutableListOf<Article>()
 
-            for (bookmarkElement in userPrefs.bookmarkedArticleIdsMap) {
-                val bookmarkedArticleId = bookmarkElement.key
+            for (bookmarkArticleId in bookmarkArticleIds) {
 
                 val bookmarkedArticle = allArticles.find { article ->
-                    article.id == bookmarkedArticleId
+                    article.id == bookmarkArticleId
                 }
 
                 bookmarkedArticle?.run {

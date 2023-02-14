@@ -6,6 +6,7 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.dataStore
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.map
 import vtsen.hashnode.dev.androidnews.UserPreferences
 import vtsen.hashnode.dev.androidnews.data.local.UserPreferencesSerializer
 import java.io.IOException
@@ -38,7 +39,7 @@ class UserPreferencesRepositoryImpl private constructor(
         }
     }
 
-    override val userPreferencesFlow: Flow<UserPreferences> = dataStore.data
+    private val userPreferencesFlow: Flow<UserPreferences> = dataStore.data
         .catch { exception ->
             // dataStore.data throws an IOException when an error is encountered when reading data
             if (exception is IOException) {
@@ -49,6 +50,12 @@ class UserPreferencesRepositoryImpl private constructor(
             }
         }
 
+    override fun getBookmarkArticles(): Flow<List<String>> {
+        return userPreferencesFlow.map { userPreferences ->
+            userPreferences.bookmarkedArticleIdsMap.keys.toList()
+        }
+    }
+
     override suspend fun addBookmarkArticle(articleId: String) {
         dataStore.updateData { preferences ->
             preferences.toBuilder().putBookmarkedArticleIds(articleId, true).build()
@@ -58,6 +65,12 @@ class UserPreferencesRepositoryImpl private constructor(
     override suspend fun removeBookmarkArticle(articleId: String) {
         dataStore.updateData { preferences ->
             preferences.toBuilder().removeBookmarkedArticleIds(articleId).build()
+        }
+    }
+
+    override fun getReadArticles(): Flow<List<String>> {
+        return userPreferencesFlow.map { userPreferences ->
+            userPreferences.readArticlesIdsMap.keys.toList()
         }
     }
 

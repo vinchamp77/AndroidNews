@@ -5,5 +5,5 @@ import vtsen.hashnode.dev.androidnews.data.repository.ArticlesRepository
 import vtsen.hashnode.dev.androidnews.data.repository.ArticlesRepoStatus
 
 class GetArticleStatusUseCase(private val repository: ArticlesRepository) {
-    operator fun invoke(): Flow<ArticlesRepoStatus> = repository.status
+    operator fun invoke(): Flow<ArticlesRepoStatus> = repository.getStatus()
 }

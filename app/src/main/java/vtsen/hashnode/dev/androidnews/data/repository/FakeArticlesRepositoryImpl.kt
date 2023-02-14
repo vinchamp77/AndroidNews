@@ -9,12 +9,15 @@ import vtsen.hashnode.dev.androidnews.utils.Utils
 class FakeArticlesRepositoryImpl : ArticlesRepository {
 
     private var _status: ArticlesRepoStatus = ArticlesRepoStatus.Invalid
-    override val status: Flow<ArticlesRepoStatus> = flow {
-        while(true) {
-            delay(1000)
-            emit(_status)
+    override fun getStatus(): Flow<ArticlesRepoStatus> {
+        return flow {
+            while (true) {
+                delay(500)
+                emit(_status)
+            }
         }
     }
+
 
     private var _allArticles: MutableList<Article> = mutableListOf()
     override val allArticles = flow {

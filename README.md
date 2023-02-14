@@ -4,7 +4,7 @@ This is a simple RSS feed reader app that currently reads my blog (Android Kotli
 
 ![](screenshots/Android_News_Overview.gif)
 
-> This app is work in progress and may be over-engineered just to demonstrate the recommended app architecture.
+> This app is work in progress and may be over-engineered to showcase the best pratices and diverse array of technologies.
 
 ## Features
 - Bookmark article
@@ -17,23 +17,25 @@ This is a simple RSS feed reader app that currently reads my blog (Android Kotli
 - Android Studio Electric Eel or later
 
 ## Tech Stack
-- Jetpack Compose
-- Recommended App Architecture (UI, domain and data layers)
-- OkHttp (replace Ktor Client which crashes on API 21)
-- Room Database (cached articles)
-- Proto DataStore (user preferences - e.g. bookmarked articles)
-- Coil (image loading)
-- XmlPullParser
-- Compose Navigation
-- Scaffold (Top/Bottom Bar)
-- Webview
-- Coroutines & Flow & State Flow
-- Accompanist System UI
-- Pull Referesh (migrated from Accompanist Swipe Refresh)
-- Work Manager
-- Notification
-- Deep Link (link is not verified due to website limitation)
-- [BuildUtils](https://github.com/vinchamp77/buildutils) (own library)
+| Tech Stack | High-level Implementation and Purpose |
+| --- | --- |
+| [Jetpack Compose](https://developer.android.com/jetpack/compose) | Implement reacctive UI using composable functions | 
+| [Recommended App Architecture ](https://developer.android.com/topic/architecture) | Seperate the app into UI, domain and data layers |
+| [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) | Act as state holder in UI layer (expose state as `StateFlow`)<br/>Survive through configuration changes |
+| [OkHttp](https://square.github.io/okhttp/) |Fetch rss.xml<br/>Replace Ktor Client which crashes on API 21 |
+| [Room Database](https://developer.android.com/training/data-storage/room) | Cache the article data from the rss.xml |
+| [Proto DataStore](https://developer.android.com/topic/libraries/architecture/datastore) | Store user preferences - e.g. bookmarked articles, read articles |
+| [Coil](https://github.com/coil-kt/coil) | Load images from URL |
+| [XmlPullParser](https://developer.android.com/reference/org/xmlpull/v1/XmlPullParser) | Parse the rss.xml |
+| [Compose Navigation](https://developer.android.com/jetpack/compose/navigation) | Navigate to different screens in the app |
+| [Scaffold](https://developer.android.com/reference/kotlin/androidx/compose/material/package-summary#scaffold) | Implement top, bottom and snack bars based on material design layout<br/>Implement navigation graph |
+| [AndroidView](https://developer.android.com/reference/kotlin/androidx/compose/ui/viewinterop/package-summary#AndroidView) & [WebView](https://developer.android.com/reference/android/webkit/WebView) | Embed the web browser into the app |
+| [Coroutines](https://kotlinlang.org/docs/coroutines-overview.html) & [Flow](https://kotlinlang.org/docs/flow.html) & [StateFlow](https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-state-flow/) | Implement asynchronous flow in the app</br>Expose `Flow` in data layer</br>Expose `StateFlow` in `ViewModel`<br/>Collect `StateFlow` using `LifeCycle.RepeatOnLlifeCycle()` in UI layer |
+| [Accompanist System UI Controller](https://google.github.io/accompanist/systemuicontroller) | Set system bars color |
+| [PullRefresh](https://developer.android.com/reference/kotlin/androidx/compose/material/pullrefresh/package-summary) | Show article referesh indicator (was migrated from Accompanist `SwipeRefresh`) |
+| [WorkManager](https://developer.android.com/topic/libraries/architecture/workmanager) & [Notification](https://developer.android.com/develop/ui/views/notifications) | Schecule backgraound tasks to fetch rss.xml and post the new article arrived notification |
+| [Deep Link](https://developer.android.com/training/app-links/deep-linking) | Add main blog, article and about URL deep links into the app</br>Implement partial deep links(link is not verified due to website limitation) |
+| [BuildUtils](https://github.com/vinchamp77/buildutils) (own library) | Avoid hardcoding build version code (API level) to improve code readability |
 
 ## Articles
 - [Simple RSS Feed Reader - Jetpack Compose](https://vtsen.hashnode.dev/simple-rss-feed-reader-jetpack-compose)

@@ -13,7 +13,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import kotlinx.coroutines.launch
 import vtsen.hashnode.dev.androidnews.data.repository.ArticlesRepositoryImpl
 import vtsen.hashnode.dev.androidnews.data.repository.UserPreferencesRepositoryImpl
-import vtsen.hashnode.dev.androidnews.ui.main.viewmodel.ArticlesUiState
+import vtsen.hashnode.dev.androidnews.domain.model.ArticlesUiState
 import vtsen.hashnode.dev.androidnews.ui.main.viewmodel.ArticlesViewModel
 import vtsen.hashnode.dev.androidnews.ui.main.viewmodel.ArticlesViewModelFactory
 

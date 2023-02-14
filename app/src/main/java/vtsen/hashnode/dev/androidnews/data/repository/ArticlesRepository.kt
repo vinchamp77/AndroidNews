@@ -1,11 +1,11 @@
-package vtsen.hashnode.dev.androidnews.domain.repository
+package vtsen.hashnode.dev.androidnews.data.repository
 
 import kotlinx.coroutines.flow.Flow
 import vtsen.hashnode.dev.androidnews.domain.model.Article
 
 interface ArticlesRepository {
 
-    val status: Flow<ArticlesRepositoryStatus>
+    val status: Flow<ArticlesRepoStatus>
 
     val allArticles: Flow<List<Article>>
 
@@ -15,7 +15,7 @@ interface ArticlesRepository {
 
     fun selectArticleById(id: String) : Flow<Article?>
 
-    suspend fun refresh(): ArticlesRepositoryStatus
+    suspend fun refresh(): ArticlesRepoStatus
 
     fun clearStatus()
 

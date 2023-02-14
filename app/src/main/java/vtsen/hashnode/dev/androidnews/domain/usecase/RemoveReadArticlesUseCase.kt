@@ -1,6 +1,6 @@
 package vtsen.hashnode.dev.androidnews.domain.usecase
 
-import vtsen.hashnode.dev.androidnews.domain.repository.UserPreferencesRepository
+import vtsen.hashnode.dev.androidnews.data.repository.UserPreferencesRepository
 
 class RemoveReadArticlesUseCase(
     private val userPrefsRepository: UserPreferencesRepository

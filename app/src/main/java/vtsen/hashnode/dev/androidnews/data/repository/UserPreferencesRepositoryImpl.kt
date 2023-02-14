@@ -8,7 +8,6 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import vtsen.hashnode.dev.androidnews.UserPreferences
 import vtsen.hashnode.dev.androidnews.data.local.UserPreferencesSerializer
-import vtsen.hashnode.dev.androidnews.domain.repository.UserPreferencesRepository
 import java.io.IOException
 
 private const val DATA_STORE_FILE_NAME = "user_prefs.pb"

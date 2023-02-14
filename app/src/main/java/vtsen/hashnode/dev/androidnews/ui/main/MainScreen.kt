@@ -7,14 +7,16 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.rememberNavController
 import vtsen.hashnode.dev.androidnews.data.repository.FakeArticlesRepositoryImpl
+import vtsen.hashnode.dev.androidnews.data.repository.UserPreferencesRepositoryImpl
 import vtsen.hashnode.dev.androidnews.domain.usecase.*
 import vtsen.hashnode.dev.androidnews.ui.main.navigation.BottomBarNav
 import vtsen.hashnode.dev.androidnews.ui.main.navigation.NavGraph
-import vtsen.hashnode.dev.androidnews.ui.main.viewmodel.ArticlesUiState
+import vtsen.hashnode.dev.androidnews.domain.model.ArticlesUiState
 import vtsen.hashnode.dev.androidnews.ui.main.viewmodel.ArticlesViewModel
 import vtsen.hashnode.dev.androidnews.ui.screens.common.PermissionsDialog
 import vtsen.hashnode.dev.androidnews.ui.main.topbar.TopBar
@@ -69,13 +71,17 @@ fun MainScreen(
 @Composable
 fun MainScreenPreview() {
 
-    val repository = FakeArticlesRepositoryImpl()
+    val articlesRepository = FakeArticlesRepositoryImpl()
+    val userPrefsRepository = UserPreferencesRepositoryImpl.getInstance(LocalContext.current)
     val viewModel = ArticlesViewModel(
-        GetArticleStatusUseCase(repository),
-        RefreshArticlesStatusUseCase(repository),
-        ClearArticlesStatusUseCase(repository),
-        UpdateArticleUseCase(repository),
-        GetArticleUseCase(repository),
+        GetArticleStatusUseCase(articlesRepository),
+        RefreshArticlesStatusUseCase(articlesRepository),
+        ClearArticlesStatusUseCase(articlesRepository),
+        AddBookmarkArticlesUseCase(userPrefsRepository),
+        RemoveBookmarkArticlesUseCase(userPrefsRepository),
+        AddReadArticlesUseCase(userPrefsRepository),
+        RemoveReadArticlesUseCase(userPrefsRepository),
+        GetArticleUseCase(articlesRepository),
     )
     MainScreen(
         viewModel,

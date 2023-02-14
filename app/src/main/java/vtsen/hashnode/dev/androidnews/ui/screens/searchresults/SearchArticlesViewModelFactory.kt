@@ -2,8 +2,8 @@ package vtsen.hashnode.dev.androidnews.ui.screens.searchresults
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import vtsen.hashnode.dev.androidnews.domain.repository.ArticlesRepository
-import vtsen.hashnode.dev.androidnews.domain.repository.UserPreferencesRepository
+import vtsen.hashnode.dev.androidnews.data.repository.ArticlesRepository
+import vtsen.hashnode.dev.androidnews.data.repository.UserPreferencesRepository
 import vtsen.hashnode.dev.androidnews.domain.usecase.*
 
 @Suppress("UNCHECKED_CAST")
@@ -25,7 +25,10 @@ class SearchArticlesViewModelFactory(
                 GetArticleStatusUseCase(articlesRepository),
                 RefreshArticlesStatusUseCase(articlesRepository),
                 ClearArticlesStatusUseCase(articlesRepository),
-                UpdateArticleUseCase(articlesRepository),
+                AddBookmarkArticlesUseCase(userPrefsRepository),
+                RemoveBookmarkArticlesUseCase(userPrefsRepository),
+                AddReadArticlesUseCase(userPrefsRepository),
+                RemoveReadArticlesUseCase(userPrefsRepository),
                 GetArticleUseCase(articlesRepository),
                 searchResultTitleResId,
                 query) as T

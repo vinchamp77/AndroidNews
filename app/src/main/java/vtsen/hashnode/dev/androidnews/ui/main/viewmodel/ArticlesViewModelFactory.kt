@@ -2,8 +2,8 @@ package vtsen.hashnode.dev.androidnews.ui.main.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import vtsen.hashnode.dev.androidnews.domain.repository.ArticlesRepository
-import vtsen.hashnode.dev.androidnews.domain.repository.UserPreferencesRepository
+import vtsen.hashnode.dev.androidnews.data.repository.ArticlesRepository
+import vtsen.hashnode.dev.androidnews.data.repository.UserPreferencesRepository
 import vtsen.hashnode.dev.androidnews.domain.usecase.*
 import vtsen.hashnode.dev.androidnews.ui.screens.bookmarks.BookmarkArticlesViewModel
 import vtsen.hashnode.dev.androidnews.ui.screens.home.AllArticlesViewModel
@@ -23,7 +23,10 @@ class ArticlesViewModelFactory(
                 GetArticleStatusUseCase(articlesRepository),
                 RefreshArticlesStatusUseCase(articlesRepository),
                 ClearArticlesStatusUseCase(articlesRepository),
-                UpdateArticleUseCase(articlesRepository),
+                AddBookmarkArticlesUseCase(userPrefsRepository),
+                RemoveBookmarkArticlesUseCase(userPrefsRepository),
+                AddReadArticlesUseCase(userPrefsRepository),
+                RemoveReadArticlesUseCase(userPrefsRepository),
                 GetArticleUseCase(articlesRepository),
             ) as T
         }
@@ -33,7 +36,10 @@ class ArticlesViewModelFactory(
                 GetArticleStatusUseCase(articlesRepository),
                 RefreshArticlesStatusUseCase(articlesRepository),
                 ClearArticlesStatusUseCase(articlesRepository),
-                UpdateArticleUseCase(articlesRepository),
+                AddBookmarkArticlesUseCase(userPrefsRepository),
+                RemoveBookmarkArticlesUseCase(userPrefsRepository),
+                AddReadArticlesUseCase(userPrefsRepository),
+                RemoveReadArticlesUseCase(userPrefsRepository),
                 GetArticleUseCase(articlesRepository),
             ) as T
         }
@@ -43,7 +49,10 @@ class ArticlesViewModelFactory(
                 GetArticleStatusUseCase(articlesRepository),
                 RefreshArticlesStatusUseCase(articlesRepository),
                 ClearArticlesStatusUseCase(articlesRepository),
-                UpdateArticleUseCase(articlesRepository),
+                AddBookmarkArticlesUseCase(userPrefsRepository),
+                RemoveBookmarkArticlesUseCase(userPrefsRepository),
+                AddReadArticlesUseCase(userPrefsRepository),
+                RemoveReadArticlesUseCase(userPrefsRepository),
                 GetArticleUseCase(articlesRepository),
             ) as T
         }
@@ -53,7 +62,10 @@ class ArticlesViewModelFactory(
                 GetArticleStatusUseCase(articlesRepository),
                 RefreshArticlesStatusUseCase(articlesRepository),
                 ClearArticlesStatusUseCase(articlesRepository),
-                UpdateArticleUseCase(articlesRepository),
+                AddBookmarkArticlesUseCase(userPrefsRepository),
+                RemoveBookmarkArticlesUseCase(userPrefsRepository),
+                AddReadArticlesUseCase(userPrefsRepository),
+                RemoveReadArticlesUseCase(userPrefsRepository),
                 GetArticleUseCase(articlesRepository),
             ) as T
         }

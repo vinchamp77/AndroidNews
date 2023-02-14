@@ -133,10 +133,13 @@ private fun addArticleScreen(
         val id = args?.getString(NavRoute.Article.id)
 
         if(id != null) {
-            val repository =
+            val articlesRepository =
                 ArticlesRepositoryImpl.getInstance(LocalContext.current)
+            val userPrefsRepository =
+                UserPreferencesRepositoryImpl.getInstance(LocalContext.current)
+
             val viewModel: OneArticleViewModel =
-                viewModel(factory = OneArticleViewModelFactory(repository, id))
+                viewModel(factory = OneArticleViewModelFactory(articlesRepository, userPrefsRepository, id))
 
             ArticleScreen(viewModel)
         // articleId is null when deep link is https://vtsen.hashnode.dev

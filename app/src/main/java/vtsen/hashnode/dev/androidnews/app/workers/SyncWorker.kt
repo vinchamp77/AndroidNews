@@ -16,7 +16,7 @@ import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import vtsen.hashnode.dev.androidnews.R
 import vtsen.hashnode.dev.androidnews.data.repository.ArticlesRepositoryImpl
-import vtsen.hashnode.dev.androidnews.domain.repository.ArticlesRepositoryStatus
+import vtsen.hashnode.dev.androidnews.data.repository.ArticlesRepoStatus
 import vtsen.hashnode.dev.androidnews.ui.main.MainActivity
 import vtsen.hashnode.dev.buildutils.BuildExt
 
@@ -29,7 +29,7 @@ class SyncWorker(private val appContext: Context, params: WorkerParameters)
         val repository = ArticlesRepositoryImpl.getInstance(applicationContext)
         val status = repository.refresh()
 
-        if (status is ArticlesRepositoryStatus.Success) {
+        if (status is ArticlesRepoStatus.Success) {
 
             if (ActivityCompat.checkSelfPermission(
                     appContext,

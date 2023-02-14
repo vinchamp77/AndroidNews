@@ -3,8 +3,8 @@ package vtsen.hashnode.dev.androidnews.domain.usecase
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 import vtsen.hashnode.dev.androidnews.domain.model.Article
-import vtsen.hashnode.dev.androidnews.domain.repository.ArticlesRepository
-import vtsen.hashnode.dev.androidnews.domain.repository.UserPreferencesRepository
+import vtsen.hashnode.dev.androidnews.data.repository.ArticlesRepository
+import vtsen.hashnode.dev.androidnews.data.repository.UserPreferencesRepository
 
 class GetBookmarkArticlesUseCase(
     private val articlesRepository: ArticlesRepository,

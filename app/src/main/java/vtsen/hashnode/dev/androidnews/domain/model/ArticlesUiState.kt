@@ -1,4 +1,4 @@
-package vtsen.hashnode.dev.androidnews.ui.main.viewmodel
+package vtsen.hashnode.dev.androidnews.domain.model
 
 sealed interface ArticlesUiState {
     object Invalid: ArticlesUiState

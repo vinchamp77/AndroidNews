@@ -6,7 +6,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import vtsen.hashnode.dev.androidnews.R
 import vtsen.hashnode.dev.androidnews.domain.model.Article
 import vtsen.hashnode.dev.androidnews.ui.screens.common.ArticlesScreen
-import vtsen.hashnode.dev.androidnews.ui.main.viewmodel.ArticlesUiState
+import vtsen.hashnode.dev.androidnews.domain.model.ArticlesUiState
 
 @Composable
 fun UnreadScreen(

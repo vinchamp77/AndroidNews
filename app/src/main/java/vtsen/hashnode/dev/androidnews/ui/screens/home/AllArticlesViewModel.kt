@@ -11,13 +11,19 @@ class AllArticlesViewModel(
     getArticleStatusUseCase: GetArticleStatusUseCase,
     refreshArticlesStatusUseCase: RefreshArticlesStatusUseCase,
     clearArticlesStatusUseCase: ClearArticlesStatusUseCase,
-    updateArticleUseCase: UpdateArticleUseCase,
+    addBookmarkArticlesUseCase: AddBookmarkArticlesUseCase,
+    removeBookmarkArticlesUseCase: RemoveBookmarkArticlesUseCase,
+    addReadArticlesUseCase: AddReadArticlesUseCase,
+    removeReadArticlesUseCase: RemoveReadArticlesUseCase,
     getArticleUseCase: GetArticleUseCase,
 ) : ArticlesViewModel(
         getArticleStatusUseCase,
         refreshArticlesStatusUseCase,
         clearArticlesStatusUseCase,
-        updateArticleUseCase,
+        addBookmarkArticlesUseCase,
+        removeBookmarkArticlesUseCase,
+        addReadArticlesUseCase,
+        removeReadArticlesUseCase,
         getArticleUseCase,
 ) {
 

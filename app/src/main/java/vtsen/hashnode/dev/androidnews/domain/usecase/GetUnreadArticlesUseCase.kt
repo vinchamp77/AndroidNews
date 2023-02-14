@@ -2,7 +2,7 @@ package vtsen.hashnode.dev.androidnews.domain.usecase
 
 import kotlinx.coroutines.flow.Flow
 import vtsen.hashnode.dev.androidnews.domain.model.Article
-import vtsen.hashnode.dev.androidnews.domain.repository.ArticlesRepository
+import vtsen.hashnode.dev.androidnews.data.repository.ArticlesRepository
 
 class GetUnreadArticlesUseCase(private val repository: ArticlesRepository) {
 

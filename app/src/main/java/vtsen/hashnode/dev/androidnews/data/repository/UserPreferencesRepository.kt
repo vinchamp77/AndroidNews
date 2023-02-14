@@ -1,4 +1,4 @@
-package vtsen.hashnode.dev.androidnews.domain.repository
+package vtsen.hashnode.dev.androidnews.data.repository
 
 import kotlinx.coroutines.flow.Flow
 import vtsen.hashnode.dev.androidnews.UserPreferences

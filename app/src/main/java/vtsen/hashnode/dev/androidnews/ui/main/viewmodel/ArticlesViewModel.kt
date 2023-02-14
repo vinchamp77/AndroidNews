@@ -8,13 +8,17 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import vtsen.hashnode.dev.androidnews.domain.model.Article
 import vtsen.hashnode.dev.androidnews.domain.usecase.*
-import vtsen.hashnode.dev.androidnews.ui.main.mapper.toArticlesUiState
+import vtsen.hashnode.dev.androidnews.domain.mapper.toArticlesUiState
+import vtsen.hashnode.dev.androidnews.domain.model.ArticlesUiState
 
 open class ArticlesViewModel(
     protected val getArticleStatusUseCase: GetArticleStatusUseCase,
     protected val refreshArticlesStatusUseCase: RefreshArticlesStatusUseCase,
     protected val clearArticlesStatusUseCase: ClearArticlesStatusUseCase,
-    protected val updateArticleUseCase: UpdateArticleUseCase,
+    protected val addBookmarkArticlesUseCase: AddBookmarkArticlesUseCase,
+    protected val removeBookmarkArticlesUseCase: RemoveBookmarkArticlesUseCase,
+    protected val addReadArticlesUseCase: AddReadArticlesUseCase,
+    protected val removeReadArticlesUseCase: RemoveReadArticlesUseCase,
     protected val getArticleUseCase: GetArticleUseCase,
 ) : ViewModel() {
 
@@ -33,11 +37,19 @@ open class ArticlesViewModel(
     fun clearStatus() = clearArticlesStatusUseCase()
 
     fun onReadClick(article: Article) = viewModelScope.launch {
-        updateArticleUseCase(article.copy(read = !article.read))
+        if(article.read) {
+            removeReadArticlesUseCase(article.id)
+        } else {
+            addReadArticlesUseCase(article.id)
+        }
     }
 
     fun onBookmarkClick(article: Article) = viewModelScope.launch {
-        updateArticleUseCase(article.copy(bookmarked = !article.bookmarked))
+        if(article.bookmarked) {
+            removeBookmarkArticlesUseCase(article.id)
+        } else {
+            addBookmarkArticlesUseCase(article.id)
+        }
     }
 
     fun getArticle(articleId: String) = getArticleUseCase(articleId)

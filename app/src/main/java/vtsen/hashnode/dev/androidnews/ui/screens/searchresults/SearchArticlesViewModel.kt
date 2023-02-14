@@ -14,7 +14,10 @@ class SearchArticlesViewModel(
     getArticleStatusUseCase: GetArticleStatusUseCase,
     refreshArticlesStatusUseCase: RefreshArticlesStatusUseCase,
     clearArticlesStatusUseCase: ClearArticlesStatusUseCase,
-    updateArticleUseCase: UpdateArticleUseCase,
+    addBookmarkArticlesUseCase: AddBookmarkArticlesUseCase,
+    removeBookmarkArticlesUseCase: RemoveBookmarkArticlesUseCase,
+    addReadArticlesUseCase: AddReadArticlesUseCase,
+    removeReadArticlesUseCase: RemoveReadArticlesUseCase,
     getArticleUseCase: GetArticleUseCase,
     searchResultTitleResId: Int,
     query: String,
@@ -22,7 +25,10 @@ class SearchArticlesViewModel(
         getArticleStatusUseCase,
         refreshArticlesStatusUseCase,
         clearArticlesStatusUseCase,
-        updateArticleUseCase,
+        addBookmarkArticlesUseCase,
+        removeBookmarkArticlesUseCase,
+        addReadArticlesUseCase,
+        removeReadArticlesUseCase,
         getArticleUseCase,
 ) {
 

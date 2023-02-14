@@ -19,6 +19,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import vtsen.hashnode.dev.androidnews.R
 import vtsen.hashnode.dev.androidnews.data.repository.ArticlesRepositoryImpl
+import vtsen.hashnode.dev.androidnews.data.repository.UserPreferencesRepositoryImpl
 import vtsen.hashnode.dev.androidnews.domain.usecase.*
 import vtsen.hashnode.dev.androidnews.ui.screens.article.OneArticleViewModel
 import vtsen.hashnode.dev.androidnews.ui.screens.common.ArticleIconButton
@@ -77,15 +78,20 @@ fun OneArticleTopBar(
 @Composable
 private fun DefaultPreview() {
 
-    val repository = ArticlesRepositoryImpl.getInstance(LocalContext.current)
+    val articlesRepository = ArticlesRepositoryImpl.getInstance(LocalContext.current)
+    val userPrefsRepository = UserPreferencesRepositoryImpl.getInstance(LocalContext.current)
     val viewModel = OneArticleViewModel(
-        GetArticleStatusUseCase(repository),
-        RefreshArticlesStatusUseCase(repository),
-        ClearArticlesStatusUseCase(repository),
-        UpdateArticleUseCase(repository),
-        GetArticleUseCase(repository),
+        GetArticleStatusUseCase(articlesRepository),
+        RefreshArticlesStatusUseCase(articlesRepository),
+        ClearArticlesStatusUseCase(articlesRepository),
+        AddBookmarkArticlesUseCase(userPrefsRepository),
+        RemoveBookmarkArticlesUseCase(userPrefsRepository),
+        AddReadArticlesUseCase(userPrefsRepository),
+        RemoveReadArticlesUseCase(userPrefsRepository),
+        GetArticleUseCase(articlesRepository),
         articleId = "",
     )
+
     val navHostController = rememberNavController()
 
     OneArticleTopBar(

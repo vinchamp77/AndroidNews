@@ -4,14 +4,12 @@ import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import vtsen.hashnode.dev.androidnews.domain.model.Article
-import vtsen.hashnode.dev.androidnews.domain.repository.ArticlesRepository
-import vtsen.hashnode.dev.androidnews.domain.repository.ArticlesRepositoryStatus
 import vtsen.hashnode.dev.androidnews.utils.Utils
 
 class FakeArticlesRepositoryImpl : ArticlesRepository {
 
-    private var _status: ArticlesRepositoryStatus = ArticlesRepositoryStatus.Invalid
-    override val status: Flow<ArticlesRepositoryStatus> = flow {
+    private var _status: ArticlesRepoStatus = ArticlesRepoStatus.Invalid
+    override val status: Flow<ArticlesRepoStatus> = flow {
         while(true) {
             delay(1000)
             emit(_status)
@@ -46,12 +44,12 @@ class FakeArticlesRepositoryImpl : ArticlesRepository {
         makeFakeArticles()
     }
 
-    override suspend fun refresh() : ArticlesRepositoryStatus {
-        return ArticlesRepositoryStatus.Success(true)
+    override suspend fun refresh() : ArticlesRepoStatus {
+        return ArticlesRepoStatus.Success(true)
     }
 
     override fun clearStatus() {
-        _status = ArticlesRepositoryStatus.Invalid
+        _status = ArticlesRepoStatus.Invalid
     }
 
     override suspend fun updateArticle(article: Article) {}

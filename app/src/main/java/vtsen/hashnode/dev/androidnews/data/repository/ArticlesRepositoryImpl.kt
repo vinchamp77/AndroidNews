@@ -16,8 +16,6 @@ import vtsen.hashnode.dev.androidnews.data.remote.FeedParser
 import vtsen.hashnode.dev.androidnews.data.remote.OkHttpWebService
 import vtsen.hashnode.dev.androidnews.data.remote.WebService
 import vtsen.hashnode.dev.androidnews.domain.model.Article
-import vtsen.hashnode.dev.androidnews.domain.repository.ArticlesRepository
-import vtsen.hashnode.dev.androidnews.domain.repository.ArticlesRepositoryStatus
 
 class ArticlesRepositoryImpl private constructor(
     private val database: ArticlesDatabase,
@@ -46,8 +44,8 @@ class ArticlesRepositoryImpl private constructor(
     )
 
     private var newArticlesFound: Boolean = false
-    private var _status: ArticlesRepositoryStatus = ArticlesRepositoryStatus.Invalid
-    override val status: Flow<ArticlesRepositoryStatus> = flow {
+    private var _status: ArticlesRepoStatus = ArticlesRepoStatus.Invalid
+    override val status: Flow<ArticlesRepoStatus> = flow {
         while(true) {
             delay(500)
             emit(_status)
@@ -66,21 +64,21 @@ class ArticlesRepositoryImpl private constructor(
         articleEntity.toArticles()
     }
 
-    override suspend fun refresh(): ArticlesRepositoryStatus = withContext(Dispatchers.IO) {
+    override suspend fun refresh(): ArticlesRepoStatus = withContext(Dispatchers.IO) {
 
-        if(_status != ArticlesRepositoryStatus.IsLoading) {
+        if(_status != ArticlesRepoStatus.IsLoading) {
 
             newArticlesFound = false
-            _status = ArticlesRepositoryStatus.IsLoading
+            _status = ArticlesRepoStatus.IsLoading
 
             try {
                 val articlesFeed = fetchArticlesFeed()
                 updateDatabase(articlesFeed.toArticleEntities())
-                _status = ArticlesRepositoryStatus.Success(newArticlesFound)
+                _status = ArticlesRepoStatus.Success(newArticlesFound)
 
             } catch (e: Exception) {
                 e.printStackTrace()
-                _status = ArticlesRepositoryStatus.Fail
+                _status = ArticlesRepoStatus.Fail
             }
         }
 
@@ -88,7 +86,7 @@ class ArticlesRepositoryImpl private constructor(
     }
 
     override fun clearStatus() {
-        _status = ArticlesRepositoryStatus.Invalid
+        _status = ArticlesRepoStatus.Invalid
     }
     override suspend fun updateArticle(article: Article) = withContext(Dispatchers.IO) {
         database.updateArticle(article.toArticleEntity())

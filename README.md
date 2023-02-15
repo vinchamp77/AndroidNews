@@ -14,6 +14,11 @@ This is a simple RSS feed reader app that currently reads my blog (Android Kotli
 - Search articles
 - New article arrived notification
 
+## Current Status
+- Break the `ArticlesRepository` into `ArticlesRepository` (room database) and `UserPreferencesRepository` (proto datastore)
+- Implement `ArticleRepo` data - model for repository and `Article` data - model for the UI
+- Read / bookmarked articles are currently broken
+
 ## Requirements
 - Android Studio Electric Eel or later
 

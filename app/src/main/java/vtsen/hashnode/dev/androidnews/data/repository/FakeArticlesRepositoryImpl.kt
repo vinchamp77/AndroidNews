@@ -29,22 +29,6 @@ class FakeArticlesRepositoryImpl : ArticlesRepository {
         }
     }
 
-    private var _unreadArticles: MutableList<Article> = mutableListOf()
-    override val unreadArticles = flow {
-        while(true){
-            emit(_unreadArticles)
-            delay(5000)
-        }
-    }
-
-    private var bookmarkedArticles: MutableList<Article> = mutableListOf()
-    override val bookmarkArticles = flow {
-        while(true){
-            emit(bookmarkedArticles)
-            delay(5000)
-        }
-    }
-
     init {
         makeFakeArticles()
     }
@@ -81,24 +65,6 @@ class FakeArticlesRepositoryImpl : ArticlesRepository {
         }
     }
 
-    override fun getUnreadArticlesByTitle(title: String): Flow<List<Article>> {
-        val articles = _unreadArticles.filter{ article ->
-            article.title.contains(title)
-        }
-        return flow {
-            emit(articles)
-        }
-    }
-
-    override fun getBookmarkedArticlesByTitle(title: String): Flow<List<Article>>  {
-        val articles = bookmarkedArticles.filter{ article ->
-            article.title.contains(title)
-        }
-        return flow {
-            emit(articles)
-        }
-    }
-
     private fun makeFakeArticles() {
         var articles: MutableList<Article> = mutableListOf()
         repeat(10) {
@@ -110,8 +76,5 @@ class FakeArticlesRepositoryImpl : ArticlesRepository {
         repeat(10) {
             articles.add(Utils.createArticle(bookmarked = true, read = true))
         }
-        bookmarkedArticles = articles
-
-        _unreadArticles = articles
     }
 }

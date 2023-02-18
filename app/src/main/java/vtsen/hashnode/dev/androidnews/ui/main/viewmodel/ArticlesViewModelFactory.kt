@@ -45,7 +45,7 @@ class ArticlesViewModelFactory(
         }
         else if (modelClass.isAssignableFrom(UnreadArticlesViewModel::class.java)) {
             return UnreadArticlesViewModel(
-                GetUnreadArticlesUseCase(articlesRepository),
+                GetUnreadArticlesUseCase(articlesRepository, userPrefsRepository),
                 GetArticleStatusUseCase(articlesRepository),
                 RefreshArticlesStatusUseCase(articlesRepository),
                 ClearArticlesStatusUseCase(articlesRepository),

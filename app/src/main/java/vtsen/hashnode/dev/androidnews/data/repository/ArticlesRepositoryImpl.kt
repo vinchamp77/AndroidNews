@@ -60,14 +60,6 @@ class ArticlesRepositoryImpl private constructor(
             articlesEntity.toArticles()
         }
 
-    override val unreadArticles = database.selectUnreadArticles().map { articleEntity ->
-        articleEntity.toArticles()
-    }
-
-    override val bookmarkArticles = database.selectBookmarkedArticles().map { articleEntity ->
-        articleEntity.toArticles()
-    }
-
     override suspend fun refresh(): ArticlesRepoStatus = withContext(Dispatchers.IO) {
 
         if(_status != ArticlesRepoStatus.IsLoading) {
@@ -102,16 +94,6 @@ class ArticlesRepositoryImpl private constructor(
 
     override fun getAllArticlesByTitle(title: String)
         = database.selectAllArticlesByTitle(title).map { articlesEntity ->
-            articlesEntity.toArticles()
-        }
-
-    override fun getUnreadArticlesByTitle(title: String)
-        = database.selectUnreadArticlesByTitle(title).map { articlesEntity ->
-            articlesEntity.toArticles()
-        }
-
-    override fun getBookmarkedArticlesByTitle(title: String)
-        = database.selectBookmarkedArticlesByTitle(title).map { articlesEntity ->
             articlesEntity.toArticles()
         }
 

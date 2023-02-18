@@ -21,7 +21,7 @@ class SearchArticlesViewModelFactory(
             return SearchArticlesViewModel(
                 GetAllArticlesUseCase(articlesRepository),
                 GetBookmarkArticlesUseCase(articlesRepository, userPrefsRepository),
-                GetUnreadArticlesUseCase(articlesRepository),
+                GetUnreadArticlesUseCase(articlesRepository, userPrefsRepository),
                 GetArticleStatusUseCase(articlesRepository),
                 RefreshArticlesStatusUseCase(articlesRepository),
                 ClearArticlesStatusUseCase(articlesRepository),

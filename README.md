@@ -23,7 +23,7 @@ This is a simple RSS feed reader app that currently reads my blog (Android Kotli
 - Android Studio Electric Eel or later
 
 ## Tech Stack
-| Tech Stack | High-level Implementation and Purpose |
+| Tech Stack | High-level Implementation Description |
 | --- | --- |
 | [Jetpack Compose](https://developer.android.com/jetpack/compose) | Implement reactive UI using composable functions | 
 | [Recommended App Architecture ](https://developer.android.com/topic/architecture) | Seperate the app into UI, domain and data layers |

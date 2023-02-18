@@ -14,11 +14,16 @@ This is a simple RSS feed reader app that currently reads my blog (Android Kotli
 - Search articles
 - New article arrived notification
 
+## Current Status
+- Break the `ArticlesRepository` into `ArticlesRepository` (room database) and `UserPreferencesRepository` (proto datastore)
+- Implement `ArticleRepo` data - model for repository and `Article` data - model for the UI
+- Read / bookmarked articles are currently broken
+
 ## Requirements
 - Android Studio Electric Eel or later
 
 ## Tech Stack
-| Tech Stack | High-level Implementation and Purpose |
+| Tech Stack | High-level Implementation Description |
 | --- | --- |
 | [Jetpack Compose](https://developer.android.com/jetpack/compose) | Implement reactive UI using composable functions | 
 | [Recommended App Architecture ](https://developer.android.com/topic/architecture) | Seperate the app into UI, domain and data layers |

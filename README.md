@@ -13,6 +13,7 @@ This is a simple RSS feed reader app that currently reads my blog (Android Kotli
 - Mark articles as read / unread
 - Search articles
 - New article arrived notification
+- Deep link support for all article URLs
 
 ## Current Status
 - Break the `ArticlesRepository` into `ArticlesRepository` (room database) and `UserPreferencesRepository` (proto datastore)
@@ -41,13 +42,14 @@ This is a simple RSS feed reader app that currently reads my blog (Android Kotli
 | [StateFlow](https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-state-flow/) | Expose `StateFlow` in `ViewModel` |
 | [Accompanist System UI Controller](https://google.github.io/accompanist/systemuicontroller) | Set system bars color |
 | [PullRefresh](https://developer.android.com/reference/kotlin/androidx/compose/material/pullrefresh/package-summary) | Show article referesh indicator (was migrated from Accompanist `SwipeRefresh`) |
-| [WorkManager](https://developer.android.com/topic/libraries/architecture/workmanager) | Schecule backgraound tasks to fetch articles from rss.xml |
+| [WorkManager](https://developer.android.com/topic/libraries/architecture/workmanager) | Schedule background tasks to fetch articles from rss.xml |
 | [Notification](https://developer.android.com/develop/ui/views/notifications) | Post new article arrived notification |
 | [Deep Link](https://developer.android.com/training/app-links/deep-linking) | Add main blog, article and about URL deep links into the app</br>Implement partial deep links(link is not verified due to website limitation) |
 | [BuildUtils](https://github.com/vinchamp77/buildutils) (own library) | Avoid hardcoding build version code (API level) to improve code readability |
 
 ## Articles
 - [Simple RSS Feed Reader - Jetpack Compose](https://vtsen.hashnode.dev/simple-rss-feed-reader-jetpack-compose)
+- [Simple Jetpack Compose Navigation Example](https://vtsen.hashnode.dev/simple-jetpack-compose-navigation-example)
 - [Convert View Model to Use Hilt Dependency Injection](https://vtsen.hashnode.dev/convert-view-model-to-use-hilt-dependency-injection)
 - [Implement Default Splash Screen Prior to Android 12](https://vtsen.hashnode.dev/implement-default-splash-screen-prior-to-android-12)
 - [Simple Example to Use WorkManager and Notification](https://vtsen.hashnode.dev/simple-example-to-use-workmanager-and-notification)

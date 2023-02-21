@@ -13,6 +13,7 @@ This is a simple RSS feed reader app that currently reads my blog (Android Kotli
 - Mark articles as read / unread
 - Search articles
 - New article arrived notification
+- Deep link support for all article URLs
 
 ## Current Status
 - Break the `ArticlesRepository` into `ArticlesRepository` (room database) and `UserPreferencesRepository` (proto datastore)

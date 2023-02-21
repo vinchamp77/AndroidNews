@@ -19,22 +19,22 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.content.ContextCompat
 import vtsen.hashnode.dev.androidnews.R
-import vtsen.hashnode.dev.androidnews.domain.model.Article
+import vtsen.hashnode.dev.androidnews.domain.model.ArticleUi
+import vtsen.hashnode.dev.androidnews.domain.utils.ArticleUiUtils
 import vtsen.hashnode.dev.androidnews.ui.theme.PaddingSmall
-import vtsen.hashnode.dev.androidnews.utils.Utils.makeFakeArticles
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun ArticlesScreen(
-    articles: List<Article>,
+    articleUis: List<ArticleUi>,
     noArticlesDescStrResId: Int,
     isRefreshing: Boolean,
-    navigateToArticle: (Article) -> Unit,
+    navigateToArticle: (ArticleUi) -> Unit,
     onRefresh: () -> Unit,
-    onBookmarkClick: (Article) -> Unit,
-    onReadClick: (Article) -> Unit,
+    onBookmarkClick: (ArticleUi) -> Unit,
+    onReadClick: (ArticleUi) -> Unit,
 ) {
-    if (articles.isEmpty()) {
+    if (articleUis.isEmpty()) {
         NoArticlesScreen(noArticlesDescStrResId)
         return
     }
@@ -48,9 +48,9 @@ fun ArticlesScreen(
                 .fillMaxSize(),
         ) {
 
-            items(items = articles) { article ->
+            items(items = articleUis) { article ->
                 ArticleCard(
-                    article = article,
+                    articleUi = article,
                     onArticleCardClick = navigateToArticle,
                     onBookmarkClick = onBookmarkClick,
                     onShareClick = { _article ->
@@ -99,7 +99,7 @@ private fun shareArticle(context: Context, link: String) {
 private fun ArticlesScreenPreview() {
 
     ArticlesScreen(
-        articles = makeFakeArticles() ,
+        articleUis = ArticleUiUtils.makeFakeArticles() ,
         noArticlesDescStrResId = R.string.no_articles_desc,
         isRefreshing = false,
         navigateToArticle = {},

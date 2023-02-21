@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
-import vtsen.hashnode.dev.androidnews.domain.model.Article
+import vtsen.hashnode.dev.androidnews.domain.model.ArticleUi
 import vtsen.hashnode.dev.androidnews.domain.usecase.*
 import vtsen.hashnode.dev.androidnews.domain.mapper.toArticlesUiState
 import vtsen.hashnode.dev.androidnews.domain.model.ArticlesUiState
@@ -36,19 +36,19 @@ open class ArticlesViewModel(
 
     fun clearStatus() = clearArticlesStatusUseCase()
 
-    fun onReadClick(article: Article) = viewModelScope.launch {
-        if(article.read) {
-            removeReadArticlesUseCase(article.id)
+    fun onReadClick(articleUi: ArticleUi) = viewModelScope.launch {
+        if(articleUi.read) {
+            removeReadArticlesUseCase(articleUi.id)
         } else {
-            addReadArticlesUseCase(article.id)
+            addReadArticlesUseCase(articleUi.id)
         }
     }
 
-    fun onBookmarkClick(article: Article) = viewModelScope.launch {
-        if(article.bookmarked) {
-            removeBookmarkArticlesUseCase(article.id)
+    fun onBookmarkClick(articleUi: ArticleUi) = viewModelScope.launch {
+        if(articleUi.bookmarked) {
+            removeBookmarkArticlesUseCase(articleUi.id)
         } else {
-            addBookmarkArticlesUseCase(article.id)
+            addBookmarkArticlesUseCase(articleUi.id)
         }
     }
 

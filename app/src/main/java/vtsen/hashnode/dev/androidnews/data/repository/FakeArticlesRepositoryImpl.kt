@@ -3,8 +3,7 @@ package vtsen.hashnode.dev.androidnews.data.repository
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import vtsen.hashnode.dev.androidnews.domain.model.Article
-import vtsen.hashnode.dev.androidnews.utils.Utils
+import vtsen.hashnode.dev.androidnews.data.utils.ArticleRepoUtils
 
 class FakeArticlesRepositoryImpl : ArticlesRepository {
 
@@ -19,8 +18,8 @@ class FakeArticlesRepositoryImpl : ArticlesRepository {
     }
 
 
-    private var _allArticles: MutableList<Article> = mutableListOf()
-    override fun getAllArticles(): Flow<List<Article>> {
+    private var _allArticles: MutableList<ArticleRepo> = mutableListOf()
+    override fun getAllArticles(): Flow<List<ArticleRepo>> {
         return flow {
             while(true){
                 emit(_allArticles)
@@ -41,9 +40,9 @@ class FakeArticlesRepositoryImpl : ArticlesRepository {
         _status = ArticlesRepoStatus.Invalid
     }
 
-    override suspend fun updateArticle(article: Article) {}
+    override suspend fun updateArticle(article: ArticleRepo) {}
 
-    override fun selectArticleById(id: String): Flow<Article?> {
+    override fun selectArticleById(id: String): Flow<ArticleRepo?> {
         val article = _allArticles.find { article ->
             article.id == id
         }
@@ -55,7 +54,7 @@ class FakeArticlesRepositoryImpl : ArticlesRepository {
         return flow
     }
 
-    override  fun getAllArticlesByTitle(title: String): Flow<List<Article>>  {
+    override  fun getAllArticlesByTitle(title: String): Flow<List<ArticleRepo>>  {
         val articles = _allArticles.filter{ article ->
             article.title.contains(title)
         }
@@ -66,15 +65,15 @@ class FakeArticlesRepositoryImpl : ArticlesRepository {
     }
 
     private fun makeFakeArticles() {
-        var articles: MutableList<Article> = mutableListOf()
+        var articles: MutableList<ArticleRepo> = mutableListOf()
         repeat(10) {
-            articles.add(Utils.createArticle())
+            articles.add(ArticleRepoUtils.createArticle())
         }
         _allArticles = articles
 
         articles = mutableListOf()
         repeat(10) {
-            articles.add(Utils.createArticle(bookmarked = true, read = true))
+            articles.add(ArticleRepoUtils.createArticle())
         }
     }
 }

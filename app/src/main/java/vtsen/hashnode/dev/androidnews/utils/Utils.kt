@@ -1,34 +1,11 @@
 package vtsen.hashnode.dev.androidnews.utils
 
-import vtsen.hashnode.dev.androidnews.domain.model.Article
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 object Utils {
-    fun makeFakeArticles(): List<Article> {
-        val articles: MutableList<Article> = mutableListOf()
-        repeat(10) {
-            articles.add(createArticle())
-        }
-        return articles
-    }
-
-    fun createArticle(bookmarked: Boolean = false, read: Boolean = false) : Article {
-        return Article(
-            id = "how-to-implement-hilt-in-android-app",
-            title = "How to Implement Hilt in Android App?",
-            link = "https://vtsen.hashnode.dev/how-to-implement-hilt-in-android-app",
-            pubDate = Date().time,
-            image = "https://cdn.hashnode.com/res/hashnode/image/upload/v1643788167289/tf0hGfYSO.jpeg",
-            bookmarked = bookmarked,
-            read = read,
-
-            feedTitle = "Android Kotlin Weekly",
-            author = "Vincent Tsen",
-        )
-    }
 
     private val pubDateFormats = listOf(
         "EEE, dd MMM yyyy HH:mm:ss zzz",

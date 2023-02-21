@@ -1,11 +1,9 @@
 package vtsen.hashnode.dev.androidnews.data.mapper
 
 import vtsen.hashnode.dev.androidnews.data.local.ArticleEntity
-import vtsen.hashnode.dev.androidnews.domain.model.Article
+import vtsen.hashnode.dev.androidnews.data.repository.ArticleRepo
 
-fun Article.toArticleEntity(
-    bookmarked: Boolean? = null,
-    read: Boolean? = null,
+fun ArticleRepo.toArticleEntity(
 ) : ArticleEntity {
 
     return ArticleEntity(
@@ -15,9 +13,8 @@ fun Article.toArticleEntity(
         author = author,
         pubDate = pubDate,
         image = image,
-        bookmarked = bookmarked ?: this.bookmarked,
-        read = read ?: this.read,
-
         feedTitle = feedTitle,
+        read = false,
+        bookmarked = false,
     )
 }

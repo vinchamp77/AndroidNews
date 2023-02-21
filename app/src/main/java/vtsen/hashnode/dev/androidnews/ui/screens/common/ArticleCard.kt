@@ -17,28 +17,29 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import vtsen.hashnode.dev.androidnews.R
-import vtsen.hashnode.dev.androidnews.domain.model.Article
+import vtsen.hashnode.dev.androidnews.domain.model.ArticleUi
+import vtsen.hashnode.dev.androidnews.domain.utils.ArticleUiUtils
 import vtsen.hashnode.dev.androidnews.ui.theme.PaddingMedium
 import vtsen.hashnode.dev.androidnews.ui.theme.PaddingSmall
 import vtsen.hashnode.dev.androidnews.utils.Utils
 
 @Composable
 fun ArticleCard(
-    article: Article,
-    onArticleCardClick: (Article) -> Unit,
-    onBookmarkClick: (Article) -> Unit,
-    onShareClick: (Article) -> Unit,
-    onReadClick: (Article) -> Unit,
+    articleUi: ArticleUi,
+    onArticleCardClick: (ArticleUi) -> Unit,
+    onBookmarkClick: (ArticleUi) -> Unit,
+    onShareClick: (ArticleUi) -> Unit,
+    onReadClick: (ArticleUi) -> Unit,
 ) {
     Column (
         modifier = Modifier
             .fillMaxWidth()
             .padding(PaddingMedium)
     ) {
-        ArticleRow(article, onArticleCardClick)
+        ArticleRow(articleUi, onArticleCardClick)
         Spacer(Modifier.padding(PaddingSmall))
 
-        ArticleBottomRow(article, onBookmarkClick, onShareClick, onReadClick)
+        ArticleBottomRow(articleUi, onBookmarkClick, onShareClick, onReadClick)
         Spacer(Modifier.padding(PaddingSmall))
 
         Divider(thickness = 2.dp)
@@ -47,48 +48,48 @@ fun ArticleCard(
 
 @Composable
 private fun ArticleRow(
-    article: Article,
-    onArticleCardClick: (Article) -> Unit
+    articleUi: ArticleUi,
+    onArticleCardClick: (ArticleUi) -> Unit
 ) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .clickable {
-                onArticleCardClick(article)
+                onArticleCardClick(articleUi)
             }
         ,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
-        ArticleContent(article)
-        ArticleImage(article)
+        ArticleContent(articleUi)
+        ArticleImage(articleUi)
     }
 }
 
 @Composable
-private fun ArticleContent(article: Article) {
+private fun ArticleContent(articleUi: ArticleUi) {
     Column(
         modifier = Modifier
             .width(200.dp)
             .padding(end = PaddingSmall)
     ) {
 
-        Text(text = article.title, fontWeight = FontWeight.SemiBold)
+        Text(text = articleUi.title, fontWeight = FontWeight.SemiBold)
         Spacer(Modifier.padding(PaddingSmall))
 
-        Text(text = article.feedTitle)
-        Text(text = article.author)
+        Text(text = articleUi.feedTitle)
+        Text(text = articleUi.author)
 
         Spacer(Modifier.padding(PaddingMedium))
-        Text(text = Utils.parseDateLongToElapsedTime(article.pubDate))
+        Text(text = Utils.parseDateLongToElapsedTime(articleUi.pubDate))
     }
 
 }
 
 @Composable
-private fun ArticleImage(article: Article) {
+private fun ArticleImage(articleUi: ArticleUi) {
     AsyncImage(
         model = ImageRequest.Builder(LocalContext.current)
-            .data(article.image)
+            .data(articleUi.image)
             .placeholder(R.drawable.loading_animation)
             .build(),
         contentScale = ContentScale.Crop,
@@ -101,10 +102,10 @@ private fun ArticleImage(article: Article) {
 
 @Composable
 private fun ArticleBottomRow(
-    article: Article,
-    onBookmarkClick: (Article) -> Unit,
-    onShareClick: (Article) -> Unit,
-    onReadClick: (Article) -> Unit,
+    articleUi: ArticleUi,
+    onBookmarkClick: (ArticleUi) -> Unit,
+    onShareClick: (ArticleUi) -> Unit,
+    onReadClick: (ArticleUi) -> Unit,
 ) {
     Row(
         modifier = Modifier
@@ -113,24 +114,24 @@ private fun ArticleBottomRow(
         horizontalArrangement = Arrangement.SpaceEvenly
     ) {
         ArticleIconButton(
-            article = article,
+            articleUi = articleUi,
             onIconClick = onBookmarkClick,
-            iconPainter = if (article.bookmarked)
+            iconPainter = if (articleUi.bookmarked)
                 painterResource(R.drawable.ic_bookmarked)
             else
                 painterResource(R.drawable.ic_bookmark_border),
         )
 
         ArticleIconButton(
-            article = article,
+            articleUi = articleUi,
             onIconClick = onShareClick,
             iconPainter = painterResource(R.drawable.ic_share),
         )
 
         ArticleIconButton(
-            article = article,
+            articleUi = articleUi,
             onIconClick = onReadClick,
-            iconPainter = if (article.read)
+            iconPainter = if (articleUi.read)
                 painterResource(R.drawable.ic_check_circle)
             else
                 painterResource(R.drawable.ic_radio_button_unchecked)
@@ -143,7 +144,7 @@ private fun ArticleBottomRow(
 @Composable
 private fun ArticleCardPreview() {
     ArticleCard(
-        article = Utils.createArticle(),
+        articleUi = ArticleUiUtils.createArticle(),
         onArticleCardClick = {},
         onBookmarkClick = {},
         onShareClick = {},

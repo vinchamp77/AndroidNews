@@ -32,7 +32,7 @@ class ArticlesViewModelFactory(
         }
         else if (modelClass.isAssignableFrom(AllArticlesViewModel::class.java)) {
             return AllArticlesViewModel(
-                GetAllArticlesUseCase(articlesRepository),
+                GetAllArticlesUseCase(articlesRepository, userPrefsRepository),
                 GetArticleStatusUseCase(articlesRepository),
                 RefreshArticlesStatusUseCase(articlesRepository),
                 ClearArticlesStatusUseCase(articlesRepository),

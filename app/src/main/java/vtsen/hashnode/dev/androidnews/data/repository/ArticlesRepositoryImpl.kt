@@ -7,15 +7,11 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import vtsen.hashnode.dev.androidnews.data.local.ArticleEntity
 import vtsen.hashnode.dev.androidnews.data.local.ArticlesDatabase
-import vtsen.hashnode.dev.androidnews.data.mapper.toArticle
-import vtsen.hashnode.dev.androidnews.data.mapper.toArticleEntities
-import vtsen.hashnode.dev.androidnews.data.mapper.toArticleEntity
-import vtsen.hashnode.dev.androidnews.data.mapper.toArticles
+import vtsen.hashnode.dev.androidnews.data.mapper.*
 import vtsen.hashnode.dev.androidnews.data.remote.ArticleFeed
 import vtsen.hashnode.dev.androidnews.data.remote.FeedParser
 import vtsen.hashnode.dev.androidnews.data.remote.OkHttpWebService
 import vtsen.hashnode.dev.androidnews.data.remote.WebService
-import vtsen.hashnode.dev.androidnews.domain.model.Article
 
 class ArticlesRepositoryImpl private constructor(
     private val database: ArticlesDatabase,
@@ -55,9 +51,9 @@ class ArticlesRepositoryImpl private constructor(
         }
     }
 
-    override fun getAllArticles(): Flow<List<Article>> =
+    override fun getAllArticles(): Flow<List<ArticleRepo>> =
         database.selectAllArticles().map { articlesEntity ->
-            articlesEntity.toArticles()
+            articlesEntity.toArticleRepoList()
         }
 
     override suspend fun refresh(): ArticlesRepoStatus = withContext(Dispatchers.IO) {
@@ -84,17 +80,17 @@ class ArticlesRepositoryImpl private constructor(
     override fun clearStatus() {
         _status = ArticlesRepoStatus.Invalid
     }
-    override suspend fun updateArticle(article: Article) = withContext(Dispatchers.IO) {
+    override suspend fun updateArticle(article: ArticleRepo) = withContext(Dispatchers.IO) {
         database.updateArticle(article.toArticleEntity())
     }
 
     override fun selectArticleById(id: String) = database.selectArticleById(id).map { articlesEntity ->
-        articlesEntity?.toArticle()
+        articlesEntity?.toArticleRepo()
     }
 
     override fun getAllArticlesByTitle(title: String)
         = database.selectAllArticlesByTitle(title).map { articlesEntity ->
-            articlesEntity.toArticles()
+            articlesEntity.toArticleRepoList()
         }
 
     private suspend fun fetchArticlesFeed() : List<ArticleFeed> = coroutineScope {

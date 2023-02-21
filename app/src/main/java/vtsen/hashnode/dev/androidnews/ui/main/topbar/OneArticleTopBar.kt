@@ -51,7 +51,7 @@ fun OneArticleTopBar(
 
                 article?.run {
                     ArticleIconButton(
-                        article = article!!,
+                        articleUi = article!!,
                         onIconClick = viewModel::onReadClick,
                         iconPainter = if (article!!.read)
                             painterResource(R.drawable.ic_check_circle)
@@ -60,7 +60,7 @@ fun OneArticleTopBar(
                     )
 
                     ArticleIconButton(
-                        article = article!!,
+                        articleUi = article!!,
                         onIconClick = viewModel::onBookmarkClick,
                         iconPainter = if (article!!.bookmarked)
                             painterResource(R.drawable.ic_bookmarked)

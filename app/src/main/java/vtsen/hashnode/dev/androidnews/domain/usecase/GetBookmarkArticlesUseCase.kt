@@ -2,20 +2,27 @@ package vtsen.hashnode.dev.androidnews.domain.usecase
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
-import vtsen.hashnode.dev.androidnews.domain.model.Article
+import kotlinx.coroutines.flow.map
+import vtsen.hashnode.dev.androidnews.domain.model.ArticleUi
 import vtsen.hashnode.dev.androidnews.data.repository.ArticlesRepository
 import vtsen.hashnode.dev.androidnews.data.repository.UserPreferencesRepository
+import vtsen.hashnode.dev.androidnews.domain.mapper.toArticleUiList
 
 class GetBookmarkArticlesUseCase(
     private val articlesRepository: ArticlesRepository,
     private val userPrefsRepository: UserPreferencesRepository
 ) {
-    operator fun invoke(title: String? = null): Flow<List<Article>> {
+    operator fun invoke(title: String? = null): Flow<List<ArticleUi>> {
 
-        val combineFlow = articlesRepository.getAllArticles().combine(
+        val flow =  articlesRepository.getAllArticles()
+        val allArticlesFlow = flow.map { articleRepoList ->
+            articleRepoList.toArticleUiList()
+        }
+
+        val combineFlow = allArticlesFlow.combine(
             userPrefsRepository.getBookmarkArticles()) { allArticles, bookmarkArticleIds ->
 
-            var bookmarkedArticles = mutableListOf<Article>()
+            var bookmarkedArticleUis = mutableListOf<ArticleUi>()
 
             for (bookmarkArticleId in bookmarkArticleIds) {
 
@@ -24,19 +31,19 @@ class GetBookmarkArticlesUseCase(
                 }
 
                 bookmarkedArticle?.run {
-                    bookmarkedArticles.add(bookmarkedArticle)
+                    bookmarkedArticleUis.add(bookmarkedArticle)
                 }
             }
 
             if(!title.isNullOrEmpty()) {
-                val filteredBookmarkArticles = bookmarkedArticles.filter {article ->
+                val filteredBookmarkArticles = bookmarkedArticleUis.filter { article ->
                     article.title.contains(title)
                 }
 
-                bookmarkedArticles = filteredBookmarkArticles.toMutableList()
+                bookmarkedArticleUis = filteredBookmarkArticles.toMutableList()
             }
 
-            bookmarkedArticles.toList()
+            bookmarkedArticleUis.toList()
         }
 
         return combineFlow

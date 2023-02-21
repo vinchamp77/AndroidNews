@@ -19,7 +19,7 @@ class SearchArticlesViewModelFactory(
 
         if (modelClass.isAssignableFrom(SearchArticlesViewModel::class.java)) {
             return SearchArticlesViewModel(
-                GetAllArticlesUseCase(articlesRepository),
+                GetAllArticlesUseCase(articlesRepository, userPrefsRepository),
                 GetBookmarkArticlesUseCase(articlesRepository, userPrefsRepository),
                 GetUnreadArticlesUseCase(articlesRepository, userPrefsRepository),
                 GetArticleStatusUseCase(articlesRepository),

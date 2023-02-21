@@ -11,6 +11,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.rememberNavController
+import com.github.vinchamp77.buildutils.BuildExt
 import vtsen.hashnode.dev.androidnews.data.repository.FakeArticlesRepositoryImpl
 import vtsen.hashnode.dev.androidnews.data.repository.UserPreferencesRepositoryImpl
 import vtsen.hashnode.dev.androidnews.domain.usecase.*
@@ -21,7 +22,6 @@ import vtsen.hashnode.dev.androidnews.ui.main.viewmodel.ArticlesViewModel
 import vtsen.hashnode.dev.androidnews.ui.screens.common.PermissionsDialog
 import vtsen.hashnode.dev.androidnews.ui.main.topbar.TopBar
 import vtsen.hashnode.dev.androidnews.ui.theme.AndroidNewsTheme
-import vtsen.hashnode.dev.buildutils.BuildExt
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable

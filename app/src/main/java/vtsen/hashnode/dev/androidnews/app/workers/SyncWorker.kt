@@ -14,11 +14,11 @@ import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
+import com.github.vinchamp77.buildutils.BuildExt
 import vtsen.hashnode.dev.androidnews.R
 import vtsen.hashnode.dev.androidnews.data.repository.ArticlesRepositoryImpl
 import vtsen.hashnode.dev.androidnews.data.repository.ArticlesRepoStatus
 import vtsen.hashnode.dev.androidnews.ui.main.MainActivity
-import vtsen.hashnode.dev.buildutils.BuildExt
 
 class SyncWorker(private val appContext: Context, params: WorkerParameters)
     : CoroutineWorker(appContext, params) {

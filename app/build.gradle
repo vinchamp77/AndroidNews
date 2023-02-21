@@ -92,7 +92,7 @@ dependencies {
     implementation  "androidx.datastore:datastore:1.0.0"
     implementation  "com.google.protobuf:protobuf-javalite:3.21.12"
 
-    implementation "com.github.vinchamp77:buildutils:0.0.5"
+    implementation "com.github.vinchamp77:buildutils:0.0.6"
 
     testImplementation 'junit:junit:4.13.2'
     testImplementation "androidx.test:core-ktx:1.5.0"

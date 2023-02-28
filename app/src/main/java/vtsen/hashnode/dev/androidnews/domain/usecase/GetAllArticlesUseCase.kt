@@ -2,10 +2,9 @@ package vtsen.hashnode.dev.androidnews.domain.usecase
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.map
 import vtsen.hashnode.dev.androidnews.data.repository.ArticlesRepository
 import vtsen.hashnode.dev.androidnews.data.repository.UserPreferencesRepository
-import vtsen.hashnode.dev.androidnews.domain.mapper.toArticleUiList
+import vtsen.hashnode.dev.androidnews.domain.mapper.toArticleUi
 import vtsen.hashnode.dev.androidnews.domain.model.ArticleUi
 
 class GetAllArticlesUseCase(
@@ -14,7 +13,7 @@ class GetAllArticlesUseCase(
 ) {
     operator fun invoke(title: String? = null): Flow<List<ArticleUi>> {
 
-        val flow =
+        val allArticlesFlow =
             if (title.isNullOrEmpty()) {
                 articlesRepository.getAllArticles()
             }
@@ -22,9 +21,6 @@ class GetAllArticlesUseCase(
                 articlesRepository.getAllArticlesByTitle(title)
             }
 
-        val allArticlesFlow = flow.map { articleRepoList ->
-            articleRepoList.toArticleUiList()
-        }
         val readArticlesFlow = userPreferencesRepository.getReadArticles()
         val bookmarkArticlesFlow = userPreferencesRepository.getBookmarkArticles()
 
@@ -39,7 +35,8 @@ class GetAllArticlesUseCase(
 
                 val isArticleRead = readArticleIds.contains(article.id)
                 val isArticleBookmarked = bookmarkArticleIds.contains(article.id)
-                allArticleUis.add(article.copy(read = isArticleRead, bookmarked = isArticleBookmarked))
+                val articleUi = article.toArticleUi(isArticleBookmarked, isArticleRead)
+                allArticleUis.add(articleUi)
             }
 
             allArticleUis.toList()

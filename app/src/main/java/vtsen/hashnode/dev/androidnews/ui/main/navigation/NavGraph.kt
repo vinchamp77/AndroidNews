@@ -10,8 +10,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import vtsen.hashnode.dev.androidnews.data.repository.ArticlesRepositoryImpl
 import vtsen.hashnode.dev.androidnews.data.repository.UserPreferencesRepositoryImpl
-import vtsen.hashnode.dev.androidnews.ui.screens.article.ArticleScreen
-import vtsen.hashnode.dev.androidnews.ui.screens.article.OneArticleViewModel
+import vtsen.hashnode.dev.androidnews.ui.screens.onearticle.ArticleScreen
+import vtsen.hashnode.dev.androidnews.ui.screens.onearticle.OneArticleViewModel
 import vtsen.hashnode.dev.androidnews.ui.screens.bookmarks.BookmarkArticlesViewModel
 import vtsen.hashnode.dev.androidnews.ui.screens.bookmarks.BookmarksScreen
 import vtsen.hashnode.dev.androidnews.ui.screens.home.HomeScreen
@@ -22,7 +22,7 @@ import vtsen.hashnode.dev.androidnews.ui.screens.unread.UnreadArticlesViewModel
 import vtsen.hashnode.dev.androidnews.ui.screens.unread.UnreadScreen
 import vtsen.hashnode.dev.androidnews.ui.main.viewmodel.ArticlesViewModelFactory
 import vtsen.hashnode.dev.androidnews.ui.screens.about.AboutScreen
-import vtsen.hashnode.dev.androidnews.ui.screens.article.OneArticleViewModelFactory
+import vtsen.hashnode.dev.androidnews.ui.screens.onearticle.OneArticleViewModelFactory
 import vtsen.hashnode.dev.androidnews.ui.screens.searchresults.SearchArticlesViewModelFactory
 
 @Composable

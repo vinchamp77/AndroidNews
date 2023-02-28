@@ -30,7 +30,7 @@ class HomeViewModelTest {
         val articlesRepository = FakeArticlesRepositoryImpl()
         val userPrefsRepository = FakeUserPreferencesRepositoryImpl()
         viewModel = AllArticlesViewModel(
-            GetAllArticlesUseCase(articlesRepository),
+            GetAllArticlesUseCase(articlesRepository, userPrefsRepository),
             GetArticleStatusUseCase(articlesRepository),
             RefreshArticlesStatusUseCase(articlesRepository),
             ClearArticlesStatusUseCase(articlesRepository),
@@ -38,7 +38,7 @@ class HomeViewModelTest {
             RemoveBookmarkArticlesUseCase(userPrefsRepository),
             AddReadArticlesUseCase(userPrefsRepository),
             RemoveReadArticlesUseCase(userPrefsRepository),
-            GetArticleUseCase(articlesRepository),
+            GetOneArticleUseCase(articlesRepository, userPrefsRepository),
         )
     }
 

@@ -1,4 +1,4 @@
-package vtsen.hashnode.dev.androidnews.ui.screens.article
+package vtsen.hashnode.dev.androidnews.ui.screens.onearticle
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -25,7 +25,7 @@ class OneArticleViewModelFactory(
                 RemoveBookmarkArticlesUseCase(userPrefsRepository),
                 AddReadArticlesUseCase(userPrefsRepository),
                 RemoveReadArticlesUseCase(userPrefsRepository),
-                GetArticleUseCase(articlesRepository),
+                GetOneArticleUseCase(articlesRepository, userPrefsRepository),
                 articleId,
             ) as T
         }

@@ -81,7 +81,7 @@ fun MainScreenPreview() {
         RemoveBookmarkArticlesUseCase(userPrefsRepository),
         AddReadArticlesUseCase(userPrefsRepository),
         RemoveReadArticlesUseCase(userPrefsRepository),
-        GetArticleUseCase(articlesRepository),
+        GetOneArticleUseCase(articlesRepository, userPrefsRepository),
     )
     MainScreen(
         viewModel,

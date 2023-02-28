@@ -18,7 +18,7 @@ class SearchArticlesViewModel(
     removeBookmarkArticlesUseCase: RemoveBookmarkArticlesUseCase,
     addReadArticlesUseCase: AddReadArticlesUseCase,
     removeReadArticlesUseCase: RemoveReadArticlesUseCase,
-    getArticleUseCase: GetArticleUseCase,
+    getOneArticleUseCase: GetOneArticleUseCase,
     searchResultTitleResId: Int,
     query: String,
 ) : ArticlesViewModel(
@@ -29,7 +29,7 @@ class SearchArticlesViewModel(
         removeBookmarkArticlesUseCase,
         addReadArticlesUseCase,
         removeReadArticlesUseCase,
-        getArticleUseCase,
+        getOneArticleUseCase,
 ) {
 
     val articles = when (searchResultTitleResId) {

@@ -1,4 +1,4 @@
-package vtsen.hashnode.dev.androidnews.ui.screens.article
+package vtsen.hashnode.dev.androidnews.ui.screens.onearticle
 
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.SharingStarted
@@ -14,7 +14,7 @@ class OneArticleViewModel(
     removeBookmarkArticlesUseCase: RemoveBookmarkArticlesUseCase,
     addReadArticlesUseCase: AddReadArticlesUseCase,
     removeReadArticlesUseCase: RemoveReadArticlesUseCase,
-    getArticleUseCase: GetArticleUseCase,
+    getOneArticleUseCase: GetOneArticleUseCase,
     articleId: String,
 ) : ArticlesViewModel(
         getArticleStatusUseCase,
@@ -24,7 +24,7 @@ class OneArticleViewModel(
         removeBookmarkArticlesUseCase,
         addReadArticlesUseCase,
         removeReadArticlesUseCase,
-        getArticleUseCase,
+        getOneArticleUseCase,
 ) {
 
     val article = getArticle(articleId)

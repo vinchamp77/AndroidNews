@@ -21,7 +21,7 @@ import vtsen.hashnode.dev.androidnews.R
 import vtsen.hashnode.dev.androidnews.data.repository.ArticlesRepositoryImpl
 import vtsen.hashnode.dev.androidnews.data.repository.UserPreferencesRepositoryImpl
 import vtsen.hashnode.dev.androidnews.domain.usecase.*
-import vtsen.hashnode.dev.androidnews.ui.screens.article.OneArticleViewModel
+import vtsen.hashnode.dev.androidnews.ui.screens.onearticle.OneArticleViewModel
 import vtsen.hashnode.dev.androidnews.ui.screens.common.ArticleIconButton
 
 @Composable
@@ -88,7 +88,7 @@ private fun DefaultPreview() {
         RemoveBookmarkArticlesUseCase(userPrefsRepository),
         AddReadArticlesUseCase(userPrefsRepository),
         RemoveReadArticlesUseCase(userPrefsRepository),
-        GetArticleUseCase(articlesRepository),
+        GetOneArticleUseCase(articlesRepository, userPrefsRepository),
         articleId = "",
     )
 

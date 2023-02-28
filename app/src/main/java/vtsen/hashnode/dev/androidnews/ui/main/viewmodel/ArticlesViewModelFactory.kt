@@ -27,7 +27,7 @@ class ArticlesViewModelFactory(
                 RemoveBookmarkArticlesUseCase(userPrefsRepository),
                 AddReadArticlesUseCase(userPrefsRepository),
                 RemoveReadArticlesUseCase(userPrefsRepository),
-                GetArticleUseCase(articlesRepository),
+                GetOneArticleUseCase(articlesRepository, userPrefsRepository),
             ) as T
         }
         else if (modelClass.isAssignableFrom(AllArticlesViewModel::class.java)) {
@@ -40,7 +40,7 @@ class ArticlesViewModelFactory(
                 RemoveBookmarkArticlesUseCase(userPrefsRepository),
                 AddReadArticlesUseCase(userPrefsRepository),
                 RemoveReadArticlesUseCase(userPrefsRepository),
-                GetArticleUseCase(articlesRepository),
+                GetOneArticleUseCase(articlesRepository, userPrefsRepository),
             ) as T
         }
         else if (modelClass.isAssignableFrom(UnreadArticlesViewModel::class.java)) {
@@ -53,7 +53,7 @@ class ArticlesViewModelFactory(
                 RemoveBookmarkArticlesUseCase(userPrefsRepository),
                 AddReadArticlesUseCase(userPrefsRepository),
                 RemoveReadArticlesUseCase(userPrefsRepository),
-                GetArticleUseCase(articlesRepository),
+                GetOneArticleUseCase(articlesRepository, userPrefsRepository),
             ) as T
         }
         else if (modelClass.isAssignableFrom(BookmarkArticlesViewModel::class.java)) {
@@ -66,7 +66,7 @@ class ArticlesViewModelFactory(
                 RemoveBookmarkArticlesUseCase(userPrefsRepository),
                 AddReadArticlesUseCase(userPrefsRepository),
                 RemoveReadArticlesUseCase(userPrefsRepository),
-                GetArticleUseCase(articlesRepository),
+                GetOneArticleUseCase(articlesRepository, userPrefsRepository),
             ) as T
         }
 

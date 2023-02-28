@@ -29,7 +29,7 @@ class SearchArticlesViewModelFactory(
                 RemoveBookmarkArticlesUseCase(userPrefsRepository),
                 AddReadArticlesUseCase(userPrefsRepository),
                 RemoveReadArticlesUseCase(userPrefsRepository),
-                GetArticleUseCase(articlesRepository),
+                GetOneArticleUseCase(articlesRepository, userPrefsRepository),
                 searchResultTitleResId,
                 query) as T
         }

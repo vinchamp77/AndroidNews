@@ -19,7 +19,7 @@ open class ArticlesViewModel(
     protected val removeBookmarkArticlesUseCase: RemoveBookmarkArticlesUseCase,
     protected val addReadArticlesUseCase: AddReadArticlesUseCase,
     protected val removeReadArticlesUseCase: RemoveReadArticlesUseCase,
-    protected val getArticleUseCase: GetArticleUseCase,
+    protected val getOneArticleUseCase: GetOneArticleUseCase,
 ) : ViewModel() {
 
     val uiState = getArticleStatusUseCase().map { repositoryStatus ->
@@ -52,6 +52,6 @@ open class ArticlesViewModel(
         }
     }
 
-    fun getArticle(articleId: String) = getArticleUseCase(articleId)
+    fun getArticle(articleId: String) = getOneArticleUseCase(articleId)
 }
 

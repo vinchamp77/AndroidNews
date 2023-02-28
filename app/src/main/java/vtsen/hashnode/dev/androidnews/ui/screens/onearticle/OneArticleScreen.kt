@@ -1,4 +1,4 @@
-package vtsen.hashnode.dev.androidnews.ui.screens.article
+package vtsen.hashnode.dev.androidnews.ui.screens.onearticle
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue

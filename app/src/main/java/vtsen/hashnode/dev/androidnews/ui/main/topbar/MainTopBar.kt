@@ -9,8 +9,8 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import vtsen.hashnode.dev.androidnews.data.repository.ArticlesRepositoryImpl
 import vtsen.hashnode.dev.androidnews.data.repository.UserPreferencesRepositoryImpl
 import vtsen.hashnode.dev.androidnews.ui.main.navigation.NavRoute
-import vtsen.hashnode.dev.androidnews.ui.screens.article.OneArticleViewModel
-import vtsen.hashnode.dev.androidnews.ui.screens.article.OneArticleViewModelFactory
+import vtsen.hashnode.dev.androidnews.ui.screens.onearticle.OneArticleViewModel
+import vtsen.hashnode.dev.androidnews.ui.screens.onearticle.OneArticleViewModelFactory
 
 @Composable
 fun TopBar(navHostController: NavHostController) {

@@ -1,30 +1,44 @@
 package vtsen.hashnode.dev.androidnews.data.repository
 
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 
 class FakeUserPreferencesRepositoryImpl : UserPreferencesRepository {
 
+    private val bookmarkArticleIds = mutableListOf<String>()
+    private val readArticleIds = mutableListOf<String>()
+
+    init {
+
+    }
+
     override fun getBookmarkArticles(): Flow<List<String>> {
-        TODO("Not yet implemented")
+        return flow {
+            emit(bookmarkArticleIds)
+        }
     }
 
     override suspend fun addBookmarkArticle(articleId: String) {
-        TODO("Not yet implemented")
+        if(!bookmarkArticleIds.contains(articleId))
+            bookmarkArticleIds.add(articleId)
     }
 
     override suspend fun removeBookmarkArticle(articleId: String) {
-        TODO("Not yet implemented")
+        bookmarkArticleIds.remove(articleId)
     }
 
     override fun getReadArticles(): Flow<List<String>> {
-        TODO("Not yet implemented")
+        return flow {
+            emit(readArticleIds)
+        }
     }
 
     override suspend fun addReadArticle(articleId: String) {
-        TODO("Not yet implemented")
+        if(!readArticleIds.contains(articleId))
+            readArticleIds.add(articleId)
     }
 
     override suspend fun removeReadArticle(articleId: String) {
-        TODO("Not yet implemented")
+        readArticleIds.remove(articleId)
     }
 }

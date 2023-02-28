@@ -3,13 +3,11 @@ package vtsen.hashnode.dev.androidnews.ui.main.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import vtsen.hashnode.dev.androidnews.domain.model.ArticleUi
-import vtsen.hashnode.dev.androidnews.domain.usecase.*
-import vtsen.hashnode.dev.androidnews.domain.mapper.toArticlesUiState
 import vtsen.hashnode.dev.androidnews.domain.model.ArticlesUiState
+import vtsen.hashnode.dev.androidnews.domain.usecase.*
 
 open class ArticlesViewModel(
     protected val getArticleStatusUseCase: GetArticleStatusUseCase,
@@ -22,9 +20,7 @@ open class ArticlesViewModel(
     protected val getOneArticleUseCase: GetOneArticleUseCase,
 ) : ViewModel() {
 
-    val uiState = getArticleStatusUseCase().map { repositoryStatus ->
-        repositoryStatus.toArticlesUiState()
-    }.stateIn(
+    val uiState = getArticleStatusUseCase().stateIn(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(),
         initialValue = ArticlesUiState.Success

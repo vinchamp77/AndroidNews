@@ -12,16 +12,17 @@ class SearchArticlesViewModelFactory(
     private val userPrefsRepository: UserPreferencesRepository,
     private val searchResultTitleResId: Int,
     private val query: String,
-)
-    : ViewModelProvider.NewInstanceFactory() {
+) : ViewModelProvider.NewInstanceFactory() {
+
+    private val getAllArticlesUseCase = GetAllArticlesUseCase(articlesRepository, userPrefsRepository)
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
 
         if (modelClass.isAssignableFrom(SearchArticlesViewModel::class.java)) {
             return SearchArticlesViewModel(
-                GetAllArticlesUseCase(articlesRepository, userPrefsRepository),
-                GetBookmarkArticlesUseCase(articlesRepository, userPrefsRepository),
-                GetUnreadArticlesUseCase(articlesRepository, userPrefsRepository),
+                getAllArticlesUseCase,
+                GetBookmarkArticlesUseCase(getAllArticlesUseCase),
+                GetUnreadArticlesUseCase(getAllArticlesUseCase),
                 GetArticleStatusUseCase(articlesRepository),
                 RefreshArticlesStatusUseCase(articlesRepository),
                 ClearArticlesStatusUseCase(articlesRepository),
@@ -29,7 +30,7 @@ class SearchArticlesViewModelFactory(
                 RemoveBookmarkArticlesUseCase(userPrefsRepository),
                 AddReadArticlesUseCase(userPrefsRepository),
                 RemoveReadArticlesUseCase(userPrefsRepository),
-                GetOneArticleUseCase(articlesRepository, userPrefsRepository),
+                GetOneArticleUseCase(getAllArticlesUseCase),
                 searchResultTitleResId,
                 query) as T
         }

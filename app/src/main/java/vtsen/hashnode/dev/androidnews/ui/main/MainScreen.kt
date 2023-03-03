@@ -73,6 +73,8 @@ fun MainScreenPreview() {
 
     val articlesRepository = FakeArticlesRepositoryImpl()
     val userPrefsRepository = UserPreferencesRepositoryImpl.getInstance(LocalContext.current)
+    val getAllArticlesUseCase = GetAllArticlesUseCase(articlesRepository, userPrefsRepository)
+
     val viewModel = ArticlesViewModel(
         GetArticleStatusUseCase(articlesRepository),
         RefreshArticlesStatusUseCase(articlesRepository),
@@ -81,7 +83,7 @@ fun MainScreenPreview() {
         RemoveBookmarkArticlesUseCase(userPrefsRepository),
         AddReadArticlesUseCase(userPrefsRepository),
         RemoveReadArticlesUseCase(userPrefsRepository),
-        GetOneArticleUseCase(articlesRepository, userPrefsRepository),
+        GetOneArticleUseCase(getAllArticlesUseCase),
     )
     MainScreen(
         viewModel,

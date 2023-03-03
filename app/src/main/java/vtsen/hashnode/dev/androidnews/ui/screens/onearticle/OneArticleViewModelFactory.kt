@@ -11,9 +11,9 @@ class OneArticleViewModelFactory(
     private val articlesRepository: ArticlesRepository,
     private val userPrefsRepository: UserPreferencesRepository,
     private val articleId: String,
-)
-    : ViewModelProvider.NewInstanceFactory() {
+) : ViewModelProvider.NewInstanceFactory() {
 
+    private val getAllArticlesUseCase = GetAllArticlesUseCase(articlesRepository, userPrefsRepository)
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
 
         if (modelClass.isAssignableFrom(OneArticleViewModel::class.java)) {
@@ -25,7 +25,7 @@ class OneArticleViewModelFactory(
                 RemoveBookmarkArticlesUseCase(userPrefsRepository),
                 AddReadArticlesUseCase(userPrefsRepository),
                 RemoveReadArticlesUseCase(userPrefsRepository),
-                GetOneArticleUseCase(articlesRepository, userPrefsRepository),
+                GetOneArticleUseCase(getAllArticlesUseCase),
                 articleId,
             ) as T
         }

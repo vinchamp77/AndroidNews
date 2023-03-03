@@ -13,8 +13,9 @@ import vtsen.hashnode.dev.androidnews.ui.screens.unread.UnreadArticlesViewModel
 class ArticlesViewModelFactory(
     private val articlesRepository: ArticlesRepository,
     private val userPrefsRepository: UserPreferencesRepository,
-)
-    : ViewModelProvider.NewInstanceFactory() {
+) : ViewModelProvider.NewInstanceFactory() {
+
+    private val getAllArticlesUseCase = GetAllArticlesUseCase(articlesRepository, userPrefsRepository)
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
 
@@ -27,12 +28,12 @@ class ArticlesViewModelFactory(
                 RemoveBookmarkArticlesUseCase(userPrefsRepository),
                 AddReadArticlesUseCase(userPrefsRepository),
                 RemoveReadArticlesUseCase(userPrefsRepository),
-                GetOneArticleUseCase(articlesRepository, userPrefsRepository),
+                GetOneArticleUseCase(getAllArticlesUseCase),
             ) as T
         }
         else if (modelClass.isAssignableFrom(AllArticlesViewModel::class.java)) {
             return AllArticlesViewModel(
-                GetAllArticlesUseCase(articlesRepository, userPrefsRepository),
+                getAllArticlesUseCase,
                 GetArticleStatusUseCase(articlesRepository),
                 RefreshArticlesStatusUseCase(articlesRepository),
                 ClearArticlesStatusUseCase(articlesRepository),
@@ -40,12 +41,12 @@ class ArticlesViewModelFactory(
                 RemoveBookmarkArticlesUseCase(userPrefsRepository),
                 AddReadArticlesUseCase(userPrefsRepository),
                 RemoveReadArticlesUseCase(userPrefsRepository),
-                GetOneArticleUseCase(articlesRepository, userPrefsRepository),
+                GetOneArticleUseCase(getAllArticlesUseCase),
             ) as T
         }
         else if (modelClass.isAssignableFrom(UnreadArticlesViewModel::class.java)) {
             return UnreadArticlesViewModel(
-                GetUnreadArticlesUseCase(articlesRepository, userPrefsRepository),
+                GetUnreadArticlesUseCase(getAllArticlesUseCase),
                 GetArticleStatusUseCase(articlesRepository),
                 RefreshArticlesStatusUseCase(articlesRepository),
                 ClearArticlesStatusUseCase(articlesRepository),
@@ -53,12 +54,12 @@ class ArticlesViewModelFactory(
                 RemoveBookmarkArticlesUseCase(userPrefsRepository),
                 AddReadArticlesUseCase(userPrefsRepository),
                 RemoveReadArticlesUseCase(userPrefsRepository),
-                GetOneArticleUseCase(articlesRepository, userPrefsRepository),
+                GetOneArticleUseCase(getAllArticlesUseCase),
             ) as T
         }
         else if (modelClass.isAssignableFrom(BookmarkArticlesViewModel::class.java)) {
             return BookmarkArticlesViewModel(
-                GetBookmarkArticlesUseCase(articlesRepository, userPrefsRepository),
+                GetBookmarkArticlesUseCase(getAllArticlesUseCase),
                 GetArticleStatusUseCase(articlesRepository),
                 RefreshArticlesStatusUseCase(articlesRepository),
                 ClearArticlesStatusUseCase(articlesRepository),
@@ -66,7 +67,7 @@ class ArticlesViewModelFactory(
                 RemoveBookmarkArticlesUseCase(userPrefsRepository),
                 AddReadArticlesUseCase(userPrefsRepository),
                 RemoveReadArticlesUseCase(userPrefsRepository),
-                GetOneArticleUseCase(articlesRepository, userPrefsRepository),
+                GetOneArticleUseCase(getAllArticlesUseCase),
             ) as T
         }
 

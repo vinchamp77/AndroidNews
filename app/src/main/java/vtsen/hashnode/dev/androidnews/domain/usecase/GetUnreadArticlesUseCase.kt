@@ -1,51 +1,27 @@
 package vtsen.hashnode.dev.androidnews.domain.usecase
 
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
 import vtsen.hashnode.dev.androidnews.domain.model.ArticleUi
-import vtsen.hashnode.dev.androidnews.data.repository.ArticlesRepository
-import vtsen.hashnode.dev.androidnews.data.repository.UserPreferencesRepository
-import vtsen.hashnode.dev.androidnews.domain.mapper.toArticleUiList
 
 class GetUnreadArticlesUseCase(
-    private val articlesRepository: ArticlesRepository,
-    private val userPrefsRepository: UserPreferencesRepository
+    private val getAllArticlesUseCase: GetAllArticlesUseCase,
 ) {
     operator fun invoke(title: String? = null): Flow<List<ArticleUi>> {
 
-        val flow =  articlesRepository.getAllArticles()
-        val allArticlesFlow = flow.map { articleRepoList ->
-            articleRepoList.toArticleUiList()
-        }
+        val allArticlesFlow = getAllArticlesUseCase()
 
-        val combineFlow = allArticlesFlow.combine(
-            userPrefsRepository.getReadArticles()) { allArticles, readArticleIds ->
+        val unreadArticlesFlow = allArticlesFlow.map { articleUiList ->
+            articleUiList.filter { articleUi ->
 
-            var unreadArticleUis = mutableListOf<ArticleUi>()
-
-            for (readArticleId in readArticleIds) {
-
-                val unreadArticle = allArticles.find { article ->
-                    article.id != readArticleId
-                }
-
-                unreadArticle?.run {
-                    unreadArticleUis.add(unreadArticle)
+                if (title.isNullOrEmpty()) {
+                    !articleUi.read
+                } else {
+                    !articleUi.read && articleUi.title.contains(title)
                 }
             }
-
-            if(!title.isNullOrEmpty()) {
-                val filteredUnreadArticles = unreadArticleUis.filter { article ->
-                    article.title.contains(title)
-                }
-
-                unreadArticleUis = filteredUnreadArticles.toMutableList()
-            }
-
-            unreadArticleUis.toList()
         }
 
-        return combineFlow
+        return unreadArticlesFlow
     }
 }

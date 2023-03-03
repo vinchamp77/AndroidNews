@@ -6,9 +6,9 @@ import vtsen.hashnode.dev.androidnews.data.repository.ArticlesRepository
 import vtsen.hashnode.dev.androidnews.domain.mapper.toArticlesUiState
 import vtsen.hashnode.dev.androidnews.domain.model.ArticlesUiState
 
-class GetArticleStatusUseCase(private val repository: ArticlesRepository) {
+class GetArticleStatusUseCase(private val articlesRepository: ArticlesRepository) {
     operator fun invoke(): Flow<ArticlesUiState> {
-        return repository.getStatus().map { articlesRepoStatus ->
+        return articlesRepository.getStatus().map { articlesRepoStatus ->
             articlesRepoStatus.toArticlesUiState()
         }
     }

@@ -1,28 +1,25 @@
 package vtsen.hashnode.dev.androidnews.domain.usecase
 
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.combine
-import vtsen.hashnode.dev.androidnews.data.repository.ArticlesRepository
-import vtsen.hashnode.dev.androidnews.data.repository.UserPreferencesRepository
-import vtsen.hashnode.dev.androidnews.domain.mapper.toArticleUi
+import kotlinx.coroutines.flow.map
 import vtsen.hashnode.dev.androidnews.domain.model.ArticleUi
 
 class GetOneArticleUseCase(
-    private val articlesRepository: ArticlesRepository,
-    private val userPreferencesRepository: UserPreferencesRepository,
+    private val getAllArticlesUseCase: GetAllArticlesUseCase
 ) {
     operator fun invoke(id: String) : Flow<ArticleUi> {
-        val articleFlow = articlesRepository.selectArticleById(id)
-        val readArticlesFlow = userPreferencesRepository.getReadArticles()
-        val bookmarkArticlesFlow = userPreferencesRepository.getBookmarkArticles()
+        val allArticlesFlow = getAllArticlesUseCase()
 
-        val combineFlow = combine(articleFlow, readArticlesFlow, bookmarkArticlesFlow) { article, readArticleIds, bookmarkArticlesId ->
+        val oneArticleFlow = allArticlesFlow
+            .map { articleUiList ->
+                articleUiList.filter { articleUi ->
+                    articleUi.id == id
+                 }
+            }
+            .map {
+                it.first()
+            }
 
-            val read = readArticleIds.contains(article!!.id)
-            val bookmark = bookmarkArticlesId.contains(article.id)
-            article.toArticleUi(bookmark, read)
-        }
-
-        return combineFlow
+        return oneArticleFlow
     }
 }

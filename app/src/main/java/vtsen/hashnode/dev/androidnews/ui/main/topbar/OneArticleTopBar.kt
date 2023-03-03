@@ -80,6 +80,8 @@ private fun DefaultPreview() {
 
     val articlesRepository = ArticlesRepositoryImpl.getInstance(LocalContext.current)
     val userPrefsRepository = UserPreferencesRepositoryImpl.getInstance(LocalContext.current)
+    val getAllArticlesUseCase = GetAllArticlesUseCase(articlesRepository, userPrefsRepository)
+
     val viewModel = OneArticleViewModel(
         GetArticleStatusUseCase(articlesRepository),
         RefreshArticlesStatusUseCase(articlesRepository),
@@ -88,7 +90,7 @@ private fun DefaultPreview() {
         RemoveBookmarkArticlesUseCase(userPrefsRepository),
         AddReadArticlesUseCase(userPrefsRepository),
         RemoveReadArticlesUseCase(userPrefsRepository),
-        GetOneArticleUseCase(articlesRepository, userPrefsRepository),
+        GetOneArticleUseCase(getAllArticlesUseCase),
         articleId = "",
     )
 

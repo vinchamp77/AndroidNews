@@ -27,7 +27,7 @@ This is a simple RSS feed reader app that currently reads my blog (Android Kotli
 | [Jetpack Compose](https://developer.android.com/jetpack/compose) | Implement reactive UI using composable functions | 
 | [Recommended App Architecture ](https://developer.android.com/topic/architecture) | Seperate the app into UI, domain and data layers |
 | [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) | Act as state holder in UI layer (expose state as `StateFlow`)<br/>Survive through configuration changes |
-| [OkHttp](https://square.github.io/okhttp/) |Fetch rss.xml<br/>Replace Ktor Client which crashes on API 21 |
+| [OkHttp](https://square.github.io/okhttp/) |Fetch rss.xml<br/>Replace [Ktor Client](https://ktor.io/docs/getting-started-ktor-client.html) which crashes on API 21 |
 | [Room Database](https://developer.android.com/training/data-storage/room) | Cache the article data from the rss.xml |
 | [Proto DataStore](https://developer.android.com/topic/libraries/architecture/datastore) | Store user preferences - e.g. bookmarked articles, read articles |
 | [Coil](https://github.com/coil-kt/coil) | Load images from URL |

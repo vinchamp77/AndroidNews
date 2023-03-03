@@ -16,9 +16,7 @@ This is a simple RSS feed reader app that currently reads my blog (Android Kotli
 - Deep link support for all article URLs
 
 ## Current Status
-- Break the `ArticlesRepository` into `ArticlesRepository` (room database) and `UserPreferencesRepository` (proto datastore)
-- Implement `ArticleRepo` data - model for repository and `Article` data - model for the UI
-- Read / bookmarked articles are currently broken
+- Get rid of search screen, implement real-time articles filter
 
 ## Requirements
 - Android Studio Electric Eel or later

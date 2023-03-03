@@ -15,6 +15,9 @@ This is a simple RSS feed reader app that currently reads my blog (Android Kotli
 - New article arrived notification
 - Deep link support for all article URLs
 
+## Current Status
+- Get rid of search screen, implement real-time articles filter
+
 ## Requirements
 - Android Studio Electric Eel or later
 

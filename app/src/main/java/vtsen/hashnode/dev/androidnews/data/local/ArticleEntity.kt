@@ -12,8 +12,6 @@ data class ArticleEntity(
     val author: String,
     val pubDate: Long,
     val image: String,
-    val bookmarked: Boolean,
-    val read: Boolean,
 
     val feedTitle: String,
 )

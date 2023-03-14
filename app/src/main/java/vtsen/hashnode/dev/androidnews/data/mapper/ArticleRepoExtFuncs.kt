@@ -14,7 +14,5 @@ fun ArticleRepo.toArticleEntity(
         pubDate = pubDate,
         image = image,
         feedTitle = feedTitle,
-        read = false,
-        bookmarked = false,
     )
 }

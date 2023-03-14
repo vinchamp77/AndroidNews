@@ -121,15 +121,7 @@ class ArticlesRepositoryImpl private constructor(
                     database.insertArticle(articleEntity)
                     newArticlesFound = true
                 } else {
-                    //Important Note:
-                    // (1) articleEntity.id is different than the one in articleFound.id (database)
-                    // (2) We want to keep the saved bookmarked and read articles, do not want to overwrites it
-                    val data = articleEntity.copy(
-                        id = articleFound.id,
-                        bookmarked = articleFound.bookmarked,
-                        read = articleFound.read,
-                    )
-                    database.updateArticle(data)
+                    database.updateArticle(articleEntity)
                 }
             }
         }

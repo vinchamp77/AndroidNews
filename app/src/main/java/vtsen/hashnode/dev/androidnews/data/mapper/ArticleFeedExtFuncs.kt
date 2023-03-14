@@ -18,8 +18,6 @@ fun ArticleFeed.toArticleEntity() : ArticleEntity {
         author = feedItem.author,
         pubDate = Utils.parsePubDateStringToLong(feedItem.pubDate),
         image = feedItem.image,
-        bookmarked = false,
-        read = false,
 
         feedTitle = feedTitle,
     )

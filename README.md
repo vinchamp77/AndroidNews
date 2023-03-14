@@ -42,7 +42,7 @@ This is a simple RSS feed reader app that currently reads my blog (Android Kotli
 | [PullRefresh](https://developer.android.com/reference/kotlin/androidx/compose/material/pullrefresh/package-summary) | Show article referesh indicator (was migrated from Accompanist `SwipeRefresh`) |
 | [WorkManager](https://developer.android.com/topic/libraries/architecture/workmanager) | Schedule background tasks to fetch articles from rss.xml |
 | [Notification](https://developer.android.com/develop/ui/views/notifications) | Post new article arrived notification |
-| [Deep Link](https://developer.android.com/training/app-links/deep-linking) | Add main blog, article and about URL deep links into the app</br>Implement partial deep links(link is not verified due to website limitation) |
+| [Deep Link](https://developer.android.com/training/app-links/deep-linking) | Add main blog, article and about URL deep links into the app</br>Implement partial deep links(link is not verified due to I don't own the blog's domain) |
 | [BuildUtils](https://github.com/vinchamp77/buildutils) (own library) | Avoid hardcoding build version code (API level) to improve code readability |
 | [New Splash Screen](https://developer.android.com/develop/ui/views/launch/splash-screen) | Implement new splach screen based on API >= that works on all previous API levels |
 

@@ -21,7 +21,7 @@ class AndroidNewsApplication: Application() {
         val workManager = WorkManager.getInstance(this)
         workManager.enqueueUniquePeriodicWork(
             "SyncWorker",
-            ExistingPeriodicWorkPolicy.REPLACE,
+            ExistingPeriodicWorkPolicy.UPDATE,
             syncWorkRequest)
     }
 }

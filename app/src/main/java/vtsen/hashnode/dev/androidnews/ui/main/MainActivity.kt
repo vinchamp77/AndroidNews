@@ -16,6 +16,7 @@ import vtsen.hashnode.dev.androidnews.data.repository.UserPreferencesRepositoryI
 import vtsen.hashnode.dev.androidnews.domain.model.ArticlesUiState
 import vtsen.hashnode.dev.androidnews.ui.main.viewmodel.ArticlesViewModel
 import vtsen.hashnode.dev.androidnews.ui.main.viewmodel.ArticlesViewModelFactory
+import vtsen.hashnode.dev.androidnews.ui.theme.AndroidNewsTheme
 
 class MainActivity : ComponentActivity() {
 
@@ -39,9 +40,9 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            MainScreen(
-                viewModel,
-                useSystemUIController = true)
+            AndroidNewsTheme(useSystemUIController = true) {
+                MainScreen()
+            }
         }
     }
 

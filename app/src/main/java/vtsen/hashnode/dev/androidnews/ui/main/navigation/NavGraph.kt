@@ -20,13 +20,18 @@ import vtsen.hashnode.dev.androidnews.ui.screens.searchresults.SearchArticlesVie
 import vtsen.hashnode.dev.androidnews.ui.screens.searchresults.SearchResultsScreen
 import vtsen.hashnode.dev.androidnews.ui.screens.unread.UnreadArticlesViewModel
 import vtsen.hashnode.dev.androidnews.ui.screens.unread.UnreadScreen
-import vtsen.hashnode.dev.androidnews.ui.main.viewmodel.ArticlesViewModelFactory
 import vtsen.hashnode.dev.androidnews.ui.screens.about.AboutScreen
 import vtsen.hashnode.dev.androidnews.ui.screens.onearticle.OneArticleViewModelFactory
 import vtsen.hashnode.dev.androidnews.ui.screens.searchresults.SearchArticlesViewModelFactory
 
 @Composable
-fun NavGraph(modifier: Modifier = Modifier, navHostController: NavHostController) {
+fun NavGraph(
+    modifier: Modifier = Modifier,
+    navHostController: NavHostController,
+    allArticlesViewModel: AllArticlesViewModel,
+    unreadArticlesViewModel: UnreadArticlesViewModel,
+    bookmarkArticlesViewModel: BookmarkArticlesViewModel,
+) {
 
     NavHost(
         modifier = modifier,
@@ -34,9 +39,9 @@ fun NavGraph(modifier: Modifier = Modifier, navHostController: NavHostController
         startDestination = NavRoute.Home.path
     ) {
         val navGraphBuilder = this
-        addHomeScreen(navHostController, navGraphBuilder)
-        addUnreadScreen(navHostController, navGraphBuilder)
-        addBookmarksScreen(navHostController, navGraphBuilder)
+        addHomeScreen(navHostController, navGraphBuilder, allArticlesViewModel)
+        addUnreadScreen(navHostController, navGraphBuilder, unreadArticlesViewModel)
+        addBookmarksScreen(navHostController, navGraphBuilder, bookmarkArticlesViewModel)
         addArticleScreen(navHostController, navGraphBuilder)
         addSearchResultsScreen(navHostController, navGraphBuilder)
         addAboutScreen(navHostController, navGraphBuilder)
@@ -46,16 +51,11 @@ fun NavGraph(modifier: Modifier = Modifier, navHostController: NavHostController
 private fun addHomeScreen(
     navHostController: NavHostController,
     navGraphBuilder: NavGraphBuilder,
+    viewModel: AllArticlesViewModel
 ) {
     navGraphBuilder.composable(
         route = NavRoute.Home.path,
     ) {
-        val articlesRepository = ArticlesRepositoryImpl.getInstance(LocalContext.current)
-        val userPrefsRepository = UserPreferencesRepositoryImpl.getInstance(LocalContext.current)
-        val viewModel: AllArticlesViewModel = viewModel(
-            factory = ArticlesViewModelFactory(articlesRepository, userPrefsRepository)
-        )
-
         HomeScreen(
             viewModel,
             navigateToArticle = { article ->
@@ -68,14 +68,9 @@ private fun addHomeScreen(
 private fun addUnreadScreen(
     navHostController: NavHostController,
     navGraphBuilder: NavGraphBuilder,
+    viewModel: UnreadArticlesViewModel
 ) {
     navGraphBuilder.composable(route = NavRoute.Unread.path) {
-
-        val articlesRepository = ArticlesRepositoryImpl.getInstance(LocalContext.current)
-        val userPrefsRepository = UserPreferencesRepositoryImpl.getInstance(LocalContext.current)
-        val viewModel: UnreadArticlesViewModel = viewModel(
-            factory = ArticlesViewModelFactory(articlesRepository, userPrefsRepository)
-        )
 
         UnreadScreen(
             viewModel,
@@ -89,16 +84,11 @@ private fun addUnreadScreen(
 private fun addBookmarksScreen(
     navHostController: NavHostController,
     navGraphBuilder: NavGraphBuilder,
+    viewModel: BookmarkArticlesViewModel
 ) {
     navGraphBuilder.composable(
         route = NavRoute.Bookmarks.path,
     ) {
-
-        val articlesRepository = ArticlesRepositoryImpl.getInstance(LocalContext.current)
-        val userPrefsRepository = UserPreferencesRepositoryImpl.getInstance(LocalContext.current)
-        val viewModel: BookmarkArticlesViewModel = viewModel(
-            factory = ArticlesViewModelFactory(articlesRepository, userPrefsRepository)
-        )
 
         BookmarksScreen(
             viewModel,

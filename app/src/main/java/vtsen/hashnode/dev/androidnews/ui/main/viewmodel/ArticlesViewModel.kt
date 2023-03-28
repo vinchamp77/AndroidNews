@@ -2,22 +2,20 @@ package vtsen.hashnode.dev.androidnews.ui.main.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import vtsen.hashnode.dev.androidnews.domain.model.ArticleUi
 import vtsen.hashnode.dev.androidnews.domain.model.ArticlesUiState
 import vtsen.hashnode.dev.androidnews.domain.usecase.*
 
-open class ArticlesViewModel(
-    protected val getArticleStatusUseCase: GetArticleStatusUseCase,
+abstract class ArticlesViewModel(
+    getArticleStatusUseCase: GetArticleStatusUseCase,
     protected val refreshArticlesStatusUseCase: RefreshArticlesStatusUseCase,
     protected val clearArticlesStatusUseCase: ClearArticlesStatusUseCase,
     protected val addBookmarkArticlesUseCase: AddBookmarkArticlesUseCase,
     protected val removeBookmarkArticlesUseCase: RemoveBookmarkArticlesUseCase,
     protected val addReadArticlesUseCase: AddReadArticlesUseCase,
     protected val removeReadArticlesUseCase: RemoveReadArticlesUseCase,
-    protected val getOneArticleUseCase: GetOneArticleUseCase,
 ) : ViewModel() {
 
     val uiState = getArticleStatusUseCase().stateIn(
@@ -47,7 +45,5 @@ open class ArticlesViewModel(
             addBookmarkArticlesUseCase(articleUi.id)
         }
     }
-
-    fun getArticle(articleId: String) = getOneArticleUseCase(articleId)
 }
 

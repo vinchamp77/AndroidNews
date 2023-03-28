@@ -8,9 +8,9 @@ import vtsen.hashnode.dev.androidnews.domain.usecase.*
 import vtsen.hashnode.dev.androidnews.ui.main.viewmodel.ArticlesViewModel
 
 class SearchArticlesViewModel(
-    getAllArticlesUseCase: GetAllArticlesUseCase,
-    getBookmarkArticlesUseCase: GetBookmarkArticlesUseCase,
-    getUnreadArticlesUseCase: GetUnreadArticlesUseCase,
+    private val getAllArticlesUseCase: GetAllArticlesUseCase,
+    private val getBookmarkArticlesUseCase: GetBookmarkArticlesUseCase,
+    private val getUnreadArticlesUseCase: GetUnreadArticlesUseCase,
     getArticleStatusUseCase: GetArticleStatusUseCase,
     refreshArticlesStatusUseCase: RefreshArticlesStatusUseCase,
     clearArticlesStatusUseCase: ClearArticlesStatusUseCase,
@@ -18,9 +18,8 @@ class SearchArticlesViewModel(
     removeBookmarkArticlesUseCase: RemoveBookmarkArticlesUseCase,
     addReadArticlesUseCase: AddReadArticlesUseCase,
     removeReadArticlesUseCase: RemoveReadArticlesUseCase,
-    getOneArticleUseCase: GetOneArticleUseCase,
-    searchResultTitleResId: Int,
-    query: String,
+    private val searchResultTitleResId: Int,
+    private val query: String,
 ) : ArticlesViewModel(
         getArticleStatusUseCase,
         refreshArticlesStatusUseCase,
@@ -29,36 +28,25 @@ class SearchArticlesViewModel(
         removeBookmarkArticlesUseCase,
         addReadArticlesUseCase,
         removeReadArticlesUseCase,
-        getOneArticleUseCase,
 ) {
 
-    val articles = when (searchResultTitleResId) {
+    val articles = getArticlesFlow().stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.WhileSubscribed(),
+        initialValue = null
+    )
+    private fun getArticlesFlow() = when (searchResultTitleResId) {
 
         R.string.all_articles -> {
             getAllArticlesUseCase(query)
-                .stateIn(
-                    scope = viewModelScope,
-                    started = SharingStarted.WhileSubscribed(),
-                    initialValue = null
-                )
         }
 
         R.string.unread_articles -> {
             getUnreadArticlesUseCase(query)
-                .stateIn(
-                    scope = viewModelScope,
-                    started = SharingStarted.WhileSubscribed(),
-                    initialValue = null
-                )
         }
 
         R.string.bookmarked_articles -> {
             getBookmarkArticlesUseCase(query)
-                .stateIn(
-                    scope = viewModelScope,
-                    started = SharingStarted.WhileSubscribed(),
-                    initialValue = null
-                )
         }
 
         else -> {

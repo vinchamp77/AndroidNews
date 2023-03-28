@@ -49,7 +49,12 @@ fun MainScreen() {
 
     Scaffold(
         scaffoldState = scaffoldState,
-        topBar = { TopBar(navHostController) },
+        topBar = { TopBar(
+            navHostController,
+            allArticlesViewModel,
+            unreadArticlesViewModel,
+            bookmarkArticlesViewModel
+        )},
         bottomBar = { BottomBarNav(navHostController) }
     ) { paddingValues ->
 

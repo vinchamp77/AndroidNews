@@ -24,10 +24,9 @@ class OneArticleViewModel(
         removeBookmarkArticlesUseCase,
         addReadArticlesUseCase,
         removeReadArticlesUseCase,
-        getOneArticleUseCase,
 ) {
 
-    val article = getArticle(articleId)
+    val article = getOneArticleUseCase(articleId)
         .stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(),

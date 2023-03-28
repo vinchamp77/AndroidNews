@@ -15,7 +15,6 @@ class AllArticlesViewModel(
     removeBookmarkArticlesUseCase: RemoveBookmarkArticlesUseCase,
     addReadArticlesUseCase: AddReadArticlesUseCase,
     removeReadArticlesUseCase: RemoveReadArticlesUseCase,
-    getOneArticleUseCase: GetOneArticleUseCase,
 ) : ArticlesViewModel(
         getArticleStatusUseCase,
         refreshArticlesStatusUseCase,
@@ -24,7 +23,6 @@ class AllArticlesViewModel(
         removeBookmarkArticlesUseCase,
         addReadArticlesUseCase,
         removeReadArticlesUseCase,
-        getOneArticleUseCase,
 ) {
 
     val articles = getAllArticlesUseCase().stateIn(

@@ -13,7 +13,7 @@ fun UnreadScreen(
     viewModel: UnreadArticlesViewModel,
     navigateToArticle: (ArticleUi) -> Unit,
 ) {
-    val articles by viewModel.articlesStateFlow.collectAsStateWithLifecycle()
+    val articles by viewModel.articles.collectAsStateWithLifecycle()
 
     if(articles != null) {
 

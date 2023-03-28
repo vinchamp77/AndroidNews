@@ -15,7 +15,6 @@ class UnreadArticlesViewModel(
     removeBookmarkArticlesUseCase: RemoveBookmarkArticlesUseCase,
     addReadArticlesUseCase: AddReadArticlesUseCase,
     removeReadArticlesUseCase: RemoveReadArticlesUseCase,
-    getOneArticleUseCase: GetOneArticleUseCase,
 ) : ArticlesViewModel(
         getArticleStatusUseCase,
         refreshArticlesStatusUseCase,
@@ -24,13 +23,11 @@ class UnreadArticlesViewModel(
         removeBookmarkArticlesUseCase,
         addReadArticlesUseCase,
         removeReadArticlesUseCase,
-        getOneArticleUseCase,
 ) {
 
-    val articlesStateFlow = getUnreadArticlesUseCase()
-        .stateIn(
-            scope = viewModelScope,
-            started = SharingStarted.WhileSubscribed(),
-            initialValue = null
-         )
+    val articles = getUnreadArticlesUseCase().stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.WhileSubscribed(),
+        initialValue = null
+    )
 }

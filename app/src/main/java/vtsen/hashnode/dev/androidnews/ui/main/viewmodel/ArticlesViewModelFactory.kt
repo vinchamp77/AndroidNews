@@ -19,19 +19,7 @@ class ArticlesViewModelFactory(
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
 
-        if (modelClass.isAssignableFrom(ArticlesViewModel::class.java)) {
-            return ArticlesViewModel(
-                GetArticleStatusUseCase(articlesRepository),
-                RefreshArticlesStatusUseCase(articlesRepository),
-                ClearArticlesStatusUseCase(articlesRepository),
-                AddBookmarkArticlesUseCase(userPrefsRepository),
-                RemoveBookmarkArticlesUseCase(userPrefsRepository),
-                AddReadArticlesUseCase(userPrefsRepository),
-                RemoveReadArticlesUseCase(userPrefsRepository),
-                GetOneArticleUseCase(getAllArticlesUseCase),
-            ) as T
-        }
-        else if (modelClass.isAssignableFrom(AllArticlesViewModel::class.java)) {
+        if (modelClass.isAssignableFrom(AllArticlesViewModel::class.java)) {
             return AllArticlesViewModel(
                 getAllArticlesUseCase,
                 GetArticleStatusUseCase(articlesRepository),
@@ -41,7 +29,6 @@ class ArticlesViewModelFactory(
                 RemoveBookmarkArticlesUseCase(userPrefsRepository),
                 AddReadArticlesUseCase(userPrefsRepository),
                 RemoveReadArticlesUseCase(userPrefsRepository),
-                GetOneArticleUseCase(getAllArticlesUseCase),
             ) as T
         }
         else if (modelClass.isAssignableFrom(UnreadArticlesViewModel::class.java)) {
@@ -54,7 +41,6 @@ class ArticlesViewModelFactory(
                 RemoveBookmarkArticlesUseCase(userPrefsRepository),
                 AddReadArticlesUseCase(userPrefsRepository),
                 RemoveReadArticlesUseCase(userPrefsRepository),
-                GetOneArticleUseCase(getAllArticlesUseCase),
             ) as T
         }
         else if (modelClass.isAssignableFrom(BookmarkArticlesViewModel::class.java)) {
@@ -67,7 +53,6 @@ class ArticlesViewModelFactory(
                 RemoveBookmarkArticlesUseCase(userPrefsRepository),
                 AddReadArticlesUseCase(userPrefsRepository),
                 RemoveReadArticlesUseCase(userPrefsRepository),
-                GetOneArticleUseCase(getAllArticlesUseCase),
             ) as T
         }
 

@@ -15,7 +15,6 @@ class BookmarkArticlesViewModel(
     removeBookmarkArticlesUseCase: RemoveBookmarkArticlesUseCase,
     addReadArticlesUseCase: AddReadArticlesUseCase,
     removeReadArticlesUseCase: RemoveReadArticlesUseCase,
-    getOneArticleUseCase: GetOneArticleUseCase,
 ) : ArticlesViewModel(
         getArticleStatusUseCase,
         refreshArticlesStatusUseCase,
@@ -24,13 +23,11 @@ class BookmarkArticlesViewModel(
         removeBookmarkArticlesUseCase,
         addReadArticlesUseCase,
         removeReadArticlesUseCase,
-        getOneArticleUseCase,
 ) {
-    val articles = getBookmarkArticlesUseCase()
-        .stateIn(
-            scope = viewModelScope,
-            started = SharingStarted.WhileSubscribed(),
-            initialValue = null
-         )
 
+    val articles = getBookmarkArticlesUseCase().stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.WhileSubscribed(),
+        initialValue = null
+    )
 }

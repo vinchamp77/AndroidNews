@@ -14,6 +14,8 @@ import vtsen.hashnode.dev.androidnews.ui.theme.PaddingSmall
 fun ArticlesTopBar(
     navHostController: NavHostController,
     searchResultTitleResId: Int,
+    searchQuery: String,
+    onSearchQuery: (String) -> Unit,
 ) {
     TopAppBar(
         contentPadding = PaddingValues(PaddingSmall)
@@ -21,7 +23,10 @@ fun ArticlesTopBar(
         TopBarSearchTextField(
             modifier = Modifier.weight(0.9f),
             navHostController = navHostController,
-            searchResultTitle = searchResultTitleResId.toString())
+            searchResultTitle = searchResultTitleResId.toString(),
+            searchQuery = searchQuery,
+            onSearchQuery = onSearchQuery,
+        )
 
         TopBarDropDownMenu(
             modifier = Modifier.weight(0.1f),
@@ -37,5 +42,5 @@ private fun DefaultPreview() {
 
     val navHostController = rememberNavController()
 
-    ArticlesTopBar(navHostController, R.string.all_articles)
+    ArticlesTopBar(navHostController, R.string.all_articles, searchQuery = "", onSearchQuery = {})
 }

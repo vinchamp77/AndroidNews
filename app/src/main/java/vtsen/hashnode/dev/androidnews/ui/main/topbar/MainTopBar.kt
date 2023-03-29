@@ -36,11 +36,11 @@ fun TopBar(
 
     // Unread articles
     } else if (currentNavRoutePath.contains(NavRoute.Unread.path)) {
-        UnreadArticlesTopBar(navHostController)
+        UnreadArticlesTopBar(navHostController, unreadArticlesViewModel)
 
     // Bookmarked articles
     } else if (currentNavRoutePath.contains(NavRoute.Bookmarks.path)) {
-        BookmarkedArticlesTopBar(navHostController)
+        BookmarkedArticlesTopBar(navHostController, bookmarkArticlesViewModel)
 
     // Search results articles
     } else if (currentNavRoutePath.contains(NavRoute.SearchResults.path)) {

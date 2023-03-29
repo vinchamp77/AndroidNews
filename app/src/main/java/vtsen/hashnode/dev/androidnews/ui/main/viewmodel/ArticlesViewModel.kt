@@ -24,6 +24,14 @@ abstract class ArticlesViewModel(
         initialValue = ArticlesUiState.Success
     )
 
+    private val _searchQuery = MutableStateFlow("")
+    val searchQuery = _searchQuery.asStateFlow()
+
+    fun onSearchQuery(query: String)
+    {
+        _searchQuery.value = query
+    }
+
     fun refresh() = viewModelScope.launch {
         refreshArticlesStatusUseCase()
     }

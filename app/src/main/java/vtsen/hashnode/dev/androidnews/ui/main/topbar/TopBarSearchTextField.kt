@@ -1,10 +1,6 @@
 package vtsen.hashnode.dev.androidnews.ui.main.topbar
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
@@ -17,17 +13,15 @@ fun TopBarSearchTextField(
     modifier: Modifier = Modifier,
     navHostController: NavHostController,
     searchResultTitle: String,
+    searchQuery: String,
+    onSearchQuery: (String) -> Unit,
 ) {
     val keyboardController = LocalSoftwareKeyboardController.current
-
-    var searchQuery by rememberSaveable { mutableStateOf("") }
 
     SearchTextField(
         modifier = modifier,
         searchQuery = searchQuery,
-        onValueChange = { value ->
-            searchQuery = value
-        },
+        onValueChange = onSearchQuery,
         onSearch = {
             navHostController.navigate(
                 NavRoute.SearchResults.withArgs(

@@ -14,11 +14,6 @@ sealed class NavRoute(val path: String) {
 
     object About: NavRoute("about")
 
-    object SearchResults: NavRoute("search_results") {
-        val titleResId = "title"
-        val query = "query"
-    }
-
     fun withArgs(vararg args: String): String {
         return buildString {
             append(path)

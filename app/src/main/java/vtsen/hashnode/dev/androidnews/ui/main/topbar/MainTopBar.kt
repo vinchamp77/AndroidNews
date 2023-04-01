@@ -42,13 +42,6 @@ fun TopBar(
     } else if (currentNavRoutePath.contains(NavRoute.Bookmarks.path)) {
         BookmarkedArticlesTopBar(navHostController, bookmarkArticlesViewModel)
 
-    // Search results articles
-    } else if (currentNavRoutePath.contains(NavRoute.SearchResults.path)) {
-        val args = navBackStackEntry?.arguments
-        val titleResId = args?.getInt(NavRoute.SearchResults.titleResId)!!
-
-        SearchResultsTopBar(titleResId)
-
     // One article
     } else if (currentNavRoutePath.contains(NavRoute.Article.path)) {
         val args = navBackStackEntry?.arguments

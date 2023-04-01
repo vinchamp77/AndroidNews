@@ -30,6 +30,7 @@ fun ArticlesScreen(
     articleUis: List<ArticleUi>,
     noArticlesDescStrResId: Int,
     isRefreshing: Boolean,
+    searchQuery: String,
     isSearching: Boolean,
     navigateToArticle: (ArticleUi) -> Unit,
     onRefresh: () -> Unit,
@@ -37,7 +38,12 @@ fun ArticlesScreen(
     onReadClick: (ArticleUi) -> Unit,
 ) {
     if (articleUis.isEmpty()) {
-        NoArticlesScreen(noArticlesDescStrResId)
+        if(searchQuery.isBlank()) {
+            NoArticlesScreen(noArticlesDescStrResId)
+        }
+        else {
+            NoArticlesScreen(R.string.no_search_articles_desc)
+        }
         return
     }
 
@@ -111,6 +117,7 @@ private fun ArticlesScreenPreview() {
     ArticlesScreen(
         articleUis = ArticleUiUtils.makeFakeArticles() ,
         noArticlesDescStrResId = R.string.no_articles_desc,
+        searchQuery = "",
         isRefreshing = false,
         isSearching = false,
         navigateToArticle = {},

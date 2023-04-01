@@ -4,7 +4,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
-import vtsen.hashnode.dev.androidnews.R
 import vtsen.hashnode.dev.androidnews.ui.screens.home.AllArticlesViewModel
 
 @Composable
@@ -14,7 +13,6 @@ fun AllArticlesTopBar(navHostController: NavHostController, allArticlesViewModel
 
     ArticlesTopBar(
         navHostController,
-        R.string.all_articles,
         searchQuery,
         allArticlesViewModel::onSearchQuery
     )

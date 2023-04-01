@@ -7,13 +7,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import vtsen.hashnode.dev.androidnews.R
 import vtsen.hashnode.dev.androidnews.ui.theme.PaddingSmall
 
 @Composable
 fun ArticlesTopBar(
     navHostController: NavHostController,
-    searchResultTitleResId: Int,
     searchQuery: String,
     onSearchQuery: (String) -> Unit,
 ) {
@@ -22,8 +20,6 @@ fun ArticlesTopBar(
     ) {
         TopBarSearchTextField(
             modifier = Modifier.weight(0.9f),
-            navHostController = navHostController,
-            searchResultTitle = searchResultTitleResId.toString(),
             searchQuery = searchQuery,
             onSearchQuery = onSearchQuery,
         )
@@ -42,5 +38,5 @@ private fun DefaultPreview() {
 
     val navHostController = rememberNavController()
 
-    ArticlesTopBar(navHostController, R.string.all_articles, searchQuery = "", onSearchQuery = {})
+    ArticlesTopBar(navHostController, searchQuery = "", onSearchQuery = {})
 }

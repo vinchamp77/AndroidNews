@@ -13,6 +13,7 @@ fun UnreadScreen(
     viewModel: UnreadArticlesViewModel,
     navigateToArticle: (ArticleUi) -> Unit,
 ) {
+    val searchQuery by viewModel.searchQuery.collectAsStateWithLifecycle()
     val isSearching by viewModel.isSearching.collectAsStateWithLifecycle()
 
     val articles by viewModel.articles.collectAsStateWithLifecycle()
@@ -24,6 +25,7 @@ fun UnreadScreen(
             articleUis = articles!!,
             noArticlesDescStrResId = R.string.no_unread_articles_desc,
             isRefreshing = (uiState is ArticlesUiState.Loading),
+            searchQuery = searchQuery,
             isSearching = isSearching,
             navigateToArticle = navigateToArticle,
             onRefresh = viewModel::refresh,

@@ -16,13 +16,10 @@ import vtsen.hashnode.dev.androidnews.ui.screens.bookmarks.BookmarkArticlesViewM
 import vtsen.hashnode.dev.androidnews.ui.screens.bookmarks.BookmarksScreen
 import vtsen.hashnode.dev.androidnews.ui.screens.home.HomeScreen
 import vtsen.hashnode.dev.androidnews.ui.screens.home.AllArticlesViewModel
-import vtsen.hashnode.dev.androidnews.ui.screens.searchresults.SearchArticlesViewModel
-import vtsen.hashnode.dev.androidnews.ui.screens.searchresults.SearchResultsScreen
 import vtsen.hashnode.dev.androidnews.ui.screens.unread.UnreadArticlesViewModel
 import vtsen.hashnode.dev.androidnews.ui.screens.unread.UnreadScreen
 import vtsen.hashnode.dev.androidnews.ui.screens.about.AboutScreen
 import vtsen.hashnode.dev.androidnews.ui.screens.onearticle.OneArticleViewModelFactory
-import vtsen.hashnode.dev.androidnews.ui.screens.searchresults.SearchArticlesViewModelFactory
 
 @Composable
 fun NavGraph(
@@ -43,7 +40,6 @@ fun NavGraph(
         addUnreadScreen(navHostController, navGraphBuilder, unreadArticlesViewModel)
         addBookmarksScreen(navHostController, navGraphBuilder, bookmarkArticlesViewModel)
         addArticleScreen(navHostController, navGraphBuilder)
-        addSearchResultsScreen(navHostController, navGraphBuilder)
         addAboutScreen(navHostController, navGraphBuilder)
     }
 }
@@ -136,45 +132,6 @@ private fun addArticleScreen(
         } else {
             navHostController.navigateUp()
         }
-    }
-}
-
-private fun addSearchResultsScreen(
-    navHostController: NavHostController,
-    navGraphBuilder: NavGraphBuilder,
-) {
-    navGraphBuilder.composable(
-        route = NavRoute.SearchResults.withArgsFormat(
-            NavRoute.SearchResults.titleResId, NavRoute.SearchResults.query
-        ),
-        arguments = listOf(
-            navArgument(NavRoute.SearchResults.titleResId) {
-                type = NavType.IntType
-            },
-            navArgument(NavRoute.SearchResults.query) {
-                type = NavType.StringType
-            }
-        )
-    ) { navBackStackEntry ->
-
-        val args = navBackStackEntry.arguments
-        val searchResultTitleResId = args!!.getInt(NavRoute.SearchResults.titleResId)
-        val query = args.getString(NavRoute.SearchResults.query)!!
-
-        val articlesRepository = ArticlesRepositoryImpl.getInstance(LocalContext.current)
-        val userPrefsRepository = UserPreferencesRepositoryImpl.getInstance(LocalContext.current)
-
-        val viewModel: SearchArticlesViewModel = viewModel(
-            factory = SearchArticlesViewModelFactory(
-                articlesRepository, userPrefsRepository, searchResultTitleResId, query)
-        )
-
-        SearchResultsScreen(
-            viewModel,
-            navigateToArticle = { article ->
-                navHostController.navigate(NavRoute.Article.withArgs(article.id))
-            },
-        )
     }
 }
 

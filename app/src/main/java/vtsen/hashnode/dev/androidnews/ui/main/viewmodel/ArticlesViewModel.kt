@@ -20,12 +20,15 @@ abstract class ArticlesViewModel(
 
     val uiState = getArticleStatusUseCase().stateIn(
         scope = viewModelScope,
-        started = SharingStarted.WhileSubscribed(),
+        started = SharingStarted.WhileSubscribed(5000),
         initialValue = ArticlesUiState.Success
     )
 
     private val _searchQuery = MutableStateFlow("")
     val searchQuery = _searchQuery.asStateFlow()
+
+    private val _isSearching = MutableStateFlow(false)
+    val isSearching = _isSearching.asStateFlow()
 
     fun onSearchQuery(query: String)
     {

@@ -32,7 +32,7 @@ class SearchArticlesViewModel(
 
     val articles = getArticlesFlow().stateIn(
         scope = viewModelScope,
-        started = SharingStarted.WhileSubscribed(),
+        started = SharingStarted.WhileSubscribed(5000),
         initialValue = null
     )
     private fun getArticlesFlow() = when (searchResultTitleResId) {

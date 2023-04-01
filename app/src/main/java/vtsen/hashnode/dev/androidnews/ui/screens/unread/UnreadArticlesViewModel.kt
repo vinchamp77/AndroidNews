@@ -27,7 +27,7 @@ class UnreadArticlesViewModel(
 
     val articles = getUnreadArticlesUseCase().stateIn(
         scope = viewModelScope,
-        started = SharingStarted.WhileSubscribed(),
+        started = SharingStarted.WhileSubscribed(5000),
         initialValue = null
     )
 }

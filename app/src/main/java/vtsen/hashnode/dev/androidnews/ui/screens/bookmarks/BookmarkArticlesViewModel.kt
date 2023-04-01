@@ -27,7 +27,7 @@ class BookmarkArticlesViewModel(
 
     val articles = getBookmarkArticlesUseCase().stateIn(
         scope = viewModelScope,
-        started = SharingStarted.WhileSubscribed(),
+        started = SharingStarted.WhileSubscribed(5000),
         initialValue = null
     )
 }

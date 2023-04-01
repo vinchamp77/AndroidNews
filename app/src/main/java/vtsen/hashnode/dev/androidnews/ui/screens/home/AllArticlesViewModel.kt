@@ -2,6 +2,7 @@ package vtsen.hashnode.dev.androidnews.ui.screens.home
 
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import vtsen.hashnode.dev.androidnews.domain.usecase.*
 import vtsen.hashnode.dev.androidnews.ui.main.viewmodel.ArticlesViewModel
@@ -25,10 +26,19 @@ class AllArticlesViewModel(
         removeReadArticlesUseCase,
 ) {
 
-    val articles = getAllArticlesUseCase().stateIn(
-        scope = viewModelScope,
-        started = SharingStarted.WhileSubscribed(),
-        initialValue = null
-    )
+    val articles = getAllArticlesUseCase()
+        .combine(searchQuery) { articles, searchQuery ->
+            if(searchQuery.isBlank()) {
+                articles
+            } else {
+                articles.filter { articleUi ->  
+                    articleUi.title.contains(searchQuery)
+                }
+            }
+        }
+        .stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5000),
+            initialValue = null)
 }
 

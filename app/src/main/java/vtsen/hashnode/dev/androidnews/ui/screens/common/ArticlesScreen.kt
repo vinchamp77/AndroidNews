@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -29,6 +30,7 @@ fun ArticlesScreen(
     articleUis: List<ArticleUi>,
     noArticlesDescStrResId: Int,
     isRefreshing: Boolean,
+    isSearching: Boolean,
     navigateToArticle: (ArticleUi) -> Unit,
     onRefresh: () -> Unit,
     onBookmarkClick: (ArticleUi) -> Unit,
@@ -62,6 +64,14 @@ fun ArticlesScreen(
         }
 
         PullRefreshIndicator(isRefreshing, pullRefreshState, Modifier.align(Alignment.TopCenter))
+    }
+
+    if(isSearching) {
+        Box(modifier = Modifier.fillMaxSize()) {
+            CircularProgressIndicator(
+                modifier = Modifier.align(Alignment.Center)
+            )
+        }
     }
 }
 
@@ -102,6 +112,7 @@ private fun ArticlesScreenPreview() {
         articleUis = ArticleUiUtils.makeFakeArticles() ,
         noArticlesDescStrResId = R.string.no_articles_desc,
         isRefreshing = false,
+        isSearching = false,
         navigateToArticle = {},
         onRefresh = {},
         onBookmarkClick = {},

@@ -13,6 +13,7 @@ fun SearchResultsScreen(
     viewModel: SearchArticlesViewModel,
     navigateToArticle: (ArticleUi) -> Unit,
 ) {
+    val isSearching by viewModel.isSearching.collectAsStateWithLifecycle()
     val articles by viewModel.articles.collectAsStateWithLifecycle()
 
     if(articles != null) {
@@ -23,6 +24,7 @@ fun SearchResultsScreen(
             articleUis = articles!!,
             noArticlesDescStrResId = R.string.no_search_articles_desc,
             isRefreshing = (uiState is ArticlesUiState.Loading),
+            isSearching = isSearching,
             navigateToArticle = navigateToArticle,
             onRefresh = viewModel::refresh,
             onBookmarkClick = viewModel::onBookmarkClick,

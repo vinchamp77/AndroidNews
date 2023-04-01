@@ -24,10 +24,10 @@ abstract class ArticlesViewModel(
         initialValue = ArticlesUiState.Success
     )
 
-    private val _searchQuery = MutableStateFlow("")
+    protected val _searchQuery = MutableStateFlow("")
     val searchQuery = _searchQuery.asStateFlow()
 
-    private val _isSearching = MutableStateFlow(false)
+    protected val _isSearching = MutableStateFlow(false)
     val isSearching = _isSearching.asStateFlow()
 
     fun onSearchQuery(query: String)

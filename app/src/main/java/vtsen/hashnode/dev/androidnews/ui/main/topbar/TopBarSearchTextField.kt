@@ -5,7 +5,6 @@ import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.navigation.NavHostController
-import vtsen.hashnode.dev.androidnews.ui.main.navigation.NavRoute
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
@@ -23,12 +22,13 @@ fun TopBarSearchTextField(
         searchQuery = searchQuery,
         onValueChange = onSearchQuery,
         onSearch = {
+            /* TODO: remove search result screen (we don't need this any more
             navHostController.navigate(
                 NavRoute.SearchResults.withArgs(
                     searchResultTitle,
                     searchQuery
                 )
-            )
+            )*/
             keyboardController!!.hide()
         },
     )

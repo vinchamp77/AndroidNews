@@ -36,7 +36,7 @@ This is a simple RSS feed reader app that currently reads my blog (Android Kotli
 | [Scaffold](https://developer.android.com/reference/kotlin/androidx/compose/material/package-summary#scaffold) | Implement top, bottom and snack bars based on material design layout<br/>Implement navigation graph |
 | [AndroidView](https://developer.android.com/reference/kotlin/androidx/compose/ui/viewinterop/package-summary#AndroidView) & [WebView](https://developer.android.com/reference/android/webkit/WebView) | Embed the web browser into the app |
 | [Coroutines](https://kotlinlang.org/docs/coroutines-overview.html) | Implement asynchronous flow in the app |
-| [Flow](https://kotlinlang.org/docs/flow.html) | Expose `Flow` in data layer |
+| [Flow](https://kotlinlang.org/docs/flow.html) | Expose `Flow` in data layer</br>Combine multiple flows (i.e. articles flow, user preferences flow and search query flow) into single flow|
 | [StateFlow](https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-state-flow/) | Expose `StateFlow` in `ViewModel` |
 | [Accompanist System UI Controller](https://google.github.io/accompanist/systemuicontroller) | Set system bars color |
 | [PullRefresh](https://developer.android.com/reference/kotlin/androidx/compose/material/pullrefresh/package-summary) | Show article referesh indicator (was migrated from Accompanist `SwipeRefresh`) |

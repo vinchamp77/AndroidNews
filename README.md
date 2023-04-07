@@ -45,7 +45,7 @@ This is a simple RSS feed reader app that currently reads my blog (Android Kotli
 | [Deep Link](https://developer.android.com/training/app-links/deep-linking) | Add main blog, article and about URL deep links into the app</br>Implement partial deep links(link is not verified due to I don't own the blog's domain) |
 | [BuildUtils](https://github.com/vinchamp77/buildutils) (own library) | Avoid hardcoding build version code (API level) to improve code readability |
 | [New Splash Screen](https://developer.android.com/develop/ui/views/launch/splash-screen) | Implement new splach screen based on API >= 31 that works on all previous API levels |
-
+| [Google Play In-App Reviews API](https://developer.android.com/guide/playcore/in-app-review) | Implement Google Play in-app rating & review dialog |
 
 ## Articles
 - [Simple RSS Feed Reader - Jetpack Compose](https://vtsen.hashnode.dev/simple-rss-feed-reader-jetpack-compose)

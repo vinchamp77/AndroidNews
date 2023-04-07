@@ -29,7 +29,7 @@ import vtsen.hashnode.dev.androidnews.ui.theme.AndroidNewsTheme
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun MainScreen() {
+fun MainScreen(showReviewDialog: () -> Unit,) {
     val scaffoldState = rememberScaffoldState()
     val navHostController = rememberNavController()
 
@@ -53,7 +53,8 @@ fun MainScreen() {
             navHostController,
             allArticlesViewModel,
             unreadArticlesViewModel,
-            bookmarkArticlesViewModel
+            bookmarkArticlesViewModel,
+            showReviewDialog
         )},
         bottomBar = { BottomBarNav(navHostController) }
     ) { paddingValues ->
@@ -91,6 +92,6 @@ fun MainScreen() {
 fun MainScreenPreview() {
 
     AndroidNewsTheme(useSystemUIController = false) {
-        MainScreen()
+        MainScreen(showReviewDialog = {})
     }
 }

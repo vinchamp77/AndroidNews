@@ -28,6 +28,7 @@ import vtsen.hashnode.dev.androidnews.ui.screens.common.ArticleIconButton
 fun OneArticleTopBar(
     navHostController: NavHostController,
     viewModel: OneArticleViewModel,
+    showReviewDialog: () -> Unit,
 ) {
 
     val article by viewModel.article.collectAsStateWithLifecycle(null)
@@ -69,7 +70,7 @@ fun OneArticleTopBar(
                     )
                 }
 
-                TopBarDropDownMenu(navHostController = navHostController)
+                TopBarDropDownMenu(navHostController = navHostController, showReviewDialog = showReviewDialog)
             }
         }
     }
@@ -98,6 +99,7 @@ private fun DefaultPreview() {
 
     OneArticleTopBar(
         navHostController,
-        viewModel
+        viewModel,
+        showReviewDialog = {}
     )
 }

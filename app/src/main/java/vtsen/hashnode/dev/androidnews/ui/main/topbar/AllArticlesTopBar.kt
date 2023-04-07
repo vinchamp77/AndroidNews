@@ -7,14 +7,19 @@ import androidx.navigation.NavHostController
 import vtsen.hashnode.dev.androidnews.ui.screens.home.AllArticlesViewModel
 
 @Composable
-fun AllArticlesTopBar(navHostController: NavHostController, allArticlesViewModel: AllArticlesViewModel) {
+fun AllArticlesTopBar(
+    navHostController: NavHostController,
+    allArticlesViewModel: AllArticlesViewModel,
+    showReviewDialog: () -> Unit,
+) {
 
     val searchQuery by allArticlesViewModel.searchQuery.collectAsStateWithLifecycle()
 
     ArticlesTopBar(
         navHostController,
         searchQuery,
-        allArticlesViewModel::onSearchQuery
+        allArticlesViewModel::onSearchQuery,
+        showReviewDialog
     )
 
 }

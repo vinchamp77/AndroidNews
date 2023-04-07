@@ -10,6 +10,7 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import com.google.android.play.core.review.ReviewManagerFactory
 import kotlinx.coroutines.launch
 import vtsen.hashnode.dev.androidnews.data.repository.ArticlesRepositoryImpl
 import vtsen.hashnode.dev.androidnews.data.repository.UserPreferencesRepositoryImpl
@@ -32,6 +33,10 @@ class MainActivity : ComponentActivity() {
         ArticlesViewModelFactory(articlesRepository, userPrefsRepository)
     }
 
+    private val reviewManager by lazy {
+        ReviewManagerFactory.create(this)
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -41,7 +46,7 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             AndroidNewsTheme(useSystemUIController = true) {
-                MainScreen()
+                MainScreen(showReviewDialog = ::showReviewDialog)
             }
         }
     }
@@ -60,6 +65,16 @@ class MainActivity : ComponentActivity() {
 
         installSplashScreen().setKeepOnScreenCondition {
             keepSplashScreenOn
+        }
+    }
+
+    private fun showReviewDialog() {
+        val request = reviewManager.requestReviewFlow()
+        request.addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                val reviewInfo = task.result
+                reviewManager.launchReviewFlow(this, reviewInfo)
+            }
         }
     }
 }

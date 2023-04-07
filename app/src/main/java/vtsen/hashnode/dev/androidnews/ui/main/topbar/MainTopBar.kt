@@ -20,7 +20,8 @@ fun TopBar(
     navHostController: NavHostController,
     allArticlesViewModel: AllArticlesViewModel,
     unreadArticlesViewModel: UnreadArticlesViewModel,
-    bookmarkArticlesViewModel: BookmarkArticlesViewModel
+    bookmarkArticlesViewModel: BookmarkArticlesViewModel,
+    showReviewDialog: () -> Unit,
 ) {
 
     val navBackStackEntry by navHostController.currentBackStackEntryAsState()
@@ -32,15 +33,15 @@ fun TopBar(
 
     // All articles
     if (currentNavRoutePath.contains(NavRoute.Home.path)) {
-        AllArticlesTopBar(navHostController, allArticlesViewModel)
+        AllArticlesTopBar(navHostController, allArticlesViewModel, showReviewDialog)
 
     // Unread articles
     } else if (currentNavRoutePath.contains(NavRoute.Unread.path)) {
-        UnreadArticlesTopBar(navHostController, unreadArticlesViewModel)
+        UnreadArticlesTopBar(navHostController, unreadArticlesViewModel, showReviewDialog)
 
     // Bookmarked articles
     } else if (currentNavRoutePath.contains(NavRoute.Bookmarks.path)) {
-        BookmarkedArticlesTopBar(navHostController, bookmarkArticlesViewModel)
+        BookmarkedArticlesTopBar(navHostController, bookmarkArticlesViewModel, showReviewDialog)
 
     // One article
     } else if (currentNavRoutePath.contains(NavRoute.Article.path)) {
@@ -54,7 +55,7 @@ fun TopBar(
             val viewModel: OneArticleViewModel =
                 viewModel(factory = OneArticleViewModelFactory(
                     articlesRepository, userPrefsRepository, articleId))
-            OneArticleTopBar(navHostController, viewModel)
+            OneArticleTopBar(navHostController, viewModel, showReviewDialog)
         }
 
     } else if (currentNavRoutePath.contains(NavRoute.About.path)) {

@@ -9,13 +9,17 @@ import vtsen.hashnode.dev.androidnews.ui.screens.bookmarks.BookmarkArticlesViewM
 @Composable
 fun BookmarkedArticlesTopBar(
     navHostController: NavHostController,
-    bookmarkArticlesViewModel: BookmarkArticlesViewModel) {
+    bookmarkArticlesViewModel: BookmarkArticlesViewModel,
+    showReviewDialog: () -> Unit,
+) {
 
     val searchQuery by bookmarkArticlesViewModel.searchQuery.collectAsStateWithLifecycle()
 
     ArticlesTopBar(
         navHostController,
         searchQuery,
-        bookmarkArticlesViewModel::onSearchQuery)
+        bookmarkArticlesViewModel::onSearchQuery,
+        showReviewDialog
+    )
 
 }

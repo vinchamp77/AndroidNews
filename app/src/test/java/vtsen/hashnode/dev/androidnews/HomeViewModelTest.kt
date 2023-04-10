@@ -40,7 +40,6 @@ class HomeViewModelTest {
             RemoveBookmarkArticlesUseCase(userPrefsRepository),
             AddReadArticlesUseCase(userPrefsRepository),
             RemoveReadArticlesUseCase(userPrefsRepository),
-            GetOneArticleUseCase(getAllArticlesUseCase),
         )
     }
 

@@ -78,7 +78,7 @@ fun MainScreen(showReviewDialog: () -> Unit,) {
         )
     }
 
-    if (BuildExt.VERSION.isRuntimePermissionSupported()) {
+    if (BuildExt.VERSION.isNotificationRuntimePermissionNeeded()) {
         PermissionsDialog(
             permission = Manifest.permission.POST_NOTIFICATIONS,
             onPermissionGranted = {},

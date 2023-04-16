@@ -19,7 +19,7 @@ This is a simple RSS feed reader app that currently reads my blog (Android Kotli
 - Get rid of search screen, implement real-time articles filter
 
 ## Requirements
-- Android Studio Electric Eel or later
+- Android Studio Flamingo or later
 
 ## Tech Stack
 | Tech Stack | High-level Implementation Description |

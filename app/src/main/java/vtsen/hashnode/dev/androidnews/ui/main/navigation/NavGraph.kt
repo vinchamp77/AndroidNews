@@ -141,12 +141,6 @@ private fun addAboutScreen(
 ) {
     navGraphBuilder.composable(
         route = NavRoute.About.path,
-        deepLinks = listOf(
-            navDeepLink {
-                uriPattern = "https://vtsen.hashnode.dev/about"
-                action = Intent.ACTION_VIEW
-            }
-        ),
     ) { navBackStackEntry ->
 
         AboutScreen()

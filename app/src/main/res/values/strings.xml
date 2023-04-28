@@ -12,4 +12,7 @@
     <string name="no_unread_articles_desc">Congratulation! You have read all articles.</string>
     <string name="no_bookmarked_articles_desc">Bookmark an article and it will show up here.</string>
 
+    <string name="invalid_article">Invalid Article!</string>
+    <string name="invalid_article_desc">You probably want to back to home!</string>
+
 </resources>

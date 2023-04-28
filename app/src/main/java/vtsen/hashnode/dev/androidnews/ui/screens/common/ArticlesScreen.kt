@@ -7,8 +7,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
 import androidx.compose.material.pullrefresh.PullRefreshIndicator
 import androidx.compose.material.pullrefresh.pullRefresh
 import androidx.compose.material.pullrefresh.rememberPullRefreshState
@@ -16,13 +14,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.content.ContextCompat
 import vtsen.hashnode.dev.androidnews.R
 import vtsen.hashnode.dev.androidnews.domain.model.ArticleUi
 import vtsen.hashnode.dev.androidnews.domain.utils.ArticleUiUtils
-import vtsen.hashnode.dev.androidnews.ui.theme.PaddingSmall
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -39,10 +35,10 @@ fun ArticlesScreen(
 ) {
     if (articleUis.isEmpty()) {
         if(searchQuery.isBlank()) {
-            NoArticlesScreen(noArticlesDescStrResId)
+            NoArticlesScreen(R.string.no_articles, noArticlesDescStrResId)
         }
         else {
-            NoArticlesScreen(R.string.no_search_articles_desc)
+            NoArticlesScreen(R.string.no_articles, R.string.no_search_articles_desc)
         }
         return
     }
@@ -78,25 +74,6 @@ fun ArticlesScreen(
                 modifier = Modifier.align(Alignment.Center)
             )
         }
-    }
-}
-
-@Composable
-private fun NoArticlesScreen(noArticlesDescStrResId: Int) {
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
-        Text(
-            text = stringResource(R.string.no_articles),
-            style = MaterialTheme.typography.h4,
-        )
-
-        Spacer(Modifier.padding(PaddingSmall))
-        Text(
-            text = stringResource(noArticlesDescStrResId),
-        )
     }
 }
 

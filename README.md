@@ -16,7 +16,7 @@ This is a simple RSS feed reader app that currently reads my blog (Android Kotli
 - Deep link support for all article URLs
 
 ## Current Status
-- Get rid of search screen, implement real-time articles filter
+- Add login authentication
 
 ## Requirements
 - Android Studio Flamingo or later

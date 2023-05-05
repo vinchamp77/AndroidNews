@@ -16,7 +16,7 @@ This is a simple RSS feed reader app that currently reads my blog (Android Kotli
 - Deep link support for all article URLs
 
 ## Current Status
-- Get rid of search screen, implement real-time articles filter
+- Add login authentication
 
 ## Requirements
 - Android Studio Flamingo or later
@@ -53,6 +53,7 @@ This is a simple RSS feed reader app that currently reads my blog (Android Kotli
 - [Convert View Model to Use Hilt Dependency Injection](https://vtsen.hashnode.dev/convert-view-model-to-use-hilt-dependency-injection)
 - [Implement Default Splash Screen Prior to Android 12](https://vtsen.hashnode.dev/implement-default-splash-screen-prior-to-android-12)
 - [Simple Example to Use WorkManager and Notification](https://vtsen.hashnode.dev/simple-example-to-use-workmanager-and-notification)
+- [Kotlin Flow - Combine, Merge and Zip](https://vtsen.hashnode.dev/kotlin-flow-combine-merge-and-zip)
 
 ## Branches
 - [master](https://github.com/vinchamp77/AndroidNews) - multiple view models (use recommended way to collect flow)

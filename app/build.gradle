@@ -58,15 +58,15 @@ android {
 dependencies {
     implementation 'androidx.core:core-ktx:1.10.0'
     implementation 'androidx.lifecycle:lifecycle-runtime-compose:2.6.1'
-    implementation 'androidx.activity:activity-compose:1.7.0'
+    implementation 'androidx.activity:activity-compose:1.7.1'
 
     // required by "?attr/colorControlNormal" icon drawable vector xml
     implementation 'androidx.appcompat:appcompat:1.6.1'
 
     // https://developer.android.com/jetpack/androidx/releases/compose#versions
-    implementation "androidx.compose.material:material:1.4.1"
-    implementation "androidx.compose.ui:ui-tooling-preview:1.4.1"
-    debugImplementation "androidx.compose.ui:ui-tooling:1.4.1"
+    implementation "androidx.compose.material:material:1.4.2"
+    implementation "androidx.compose.ui:ui-tooling-preview:1.4.2"
+    debugImplementation "androidx.compose.ui:ui-tooling:1.4.2"
 
     implementation "androidx.navigation:navigation-compose:2.5.3"
 
@@ -88,7 +88,7 @@ dependencies {
     implementation "androidx.work:work-runtime-ktx:$work_version"
     implementation "androidx.work:work-runtime-ktx:$work_version"
 
-    implementation "androidx.core:core-splashscreen:1.0.0"
+    implementation "androidx.core:core-splashscreen:1.0.1"
 
     implementation  "androidx.datastore:datastore:1.0.0"
     implementation  "com.google.protobuf:protobuf-javalite:3.21.12"
@@ -107,7 +107,7 @@ dependencies {
 
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
-    androidTestImplementation "androidx.compose.ui:ui-test-junit4:1.4.1"
+    androidTestImplementation "androidx.compose.ui:ui-test-junit4:1.4.2"
 }
 
 protobuf {

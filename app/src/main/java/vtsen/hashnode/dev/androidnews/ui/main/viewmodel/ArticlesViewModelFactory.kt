@@ -13,7 +13,7 @@ import vtsen.hashnode.dev.androidnews.ui.screens.unread.UnreadArticlesViewModel
 class ArticlesViewModelFactory(
     private val articlesRepository: ArticlesRepository,
     private val userPrefsRepository: UserPreferencesRepository,
-) : ViewModelProvider.NewInstanceFactory() {
+) : ViewModelProvider.Factory {
 
     private val getAllArticlesUseCase = GetAllArticlesUseCase(articlesRepository, userPrefsRepository)
 

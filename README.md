@@ -14,6 +14,7 @@ This is a simple RSS feed reader app that currently reads my blog (Android Kotli
 - Search articles
 - New article arrived notification
 - Deep link support for all article URLs
+- Google Play in-app rating & review
 
 ## Current Status
 - Add login authentication

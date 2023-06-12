@@ -2,7 +2,8 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
-    id "com.google.protobuf" version '0.9.0'
+    //https://plugins.gradle.org/plugin/com.google.protobuf
+    id "com.google.protobuf" version '0.9.3'
 }
 
 android {
@@ -45,7 +46,7 @@ android {
         compose true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion '1.4.5'
+        kotlinCompilerExtensionVersion '1.4.7'
     }
     packagingOptions {
         resources {
@@ -56,19 +57,19 @@ android {
 }
 
 dependencies {
-    implementation 'androidx.core:core-ktx:1.10.0'
+    implementation 'androidx.core:core-ktx:1.10.1'
     implementation 'androidx.lifecycle:lifecycle-runtime-compose:2.6.1'
-    implementation 'androidx.activity:activity-compose:1.7.1'
+    implementation 'androidx.activity:activity-compose:1.7.2'
 
     // required by "?attr/colorControlNormal" icon drawable vector xml
     implementation 'androidx.appcompat:appcompat:1.6.1'
 
     // https://developer.android.com/jetpack/androidx/releases/compose#versions
-    implementation "androidx.compose.material:material:1.4.2"
-    implementation "androidx.compose.ui:ui-tooling-preview:1.4.2"
-    debugImplementation "androidx.compose.ui:ui-tooling:1.4.2"
+    implementation "androidx.compose.material:material:1.4.3"
+    implementation "androidx.compose.ui:ui-tooling-preview:1.4.3"
+    debugImplementation "androidx.compose.ui:ui-tooling:1.4.3"
 
-    implementation "androidx.navigation:navigation-compose:2.5.3"
+    implementation "androidx.navigation:navigation-compose:2.6.0"
 
     def accompanist_ver = "0.28.0"
     implementation "com.google.accompanist:accompanist-systemuicontroller:$accompanist_ver"
@@ -96,7 +97,7 @@ dependencies {
     implementation("com.google.android.play:review:2.0.1")
     implementation("com.google.android.play:review-ktx:2.0.1")
 
-    implementation "com.github.vinchamp77:buildutils:0.0.8"
+    implementation "com.github.vinchamp77:buildutils:0.0.11"
 
     testImplementation 'junit:junit:4.13.2'
     testImplementation "androidx.test:core-ktx:1.5.0"
@@ -107,12 +108,13 @@ dependencies {
 
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
-    androidTestImplementation "androidx.compose.ui:ui-test-junit4:1.4.2"
+    androidTestImplementation "androidx.compose.ui:ui-test-junit4:1.4.3"
 }
 
 protobuf {
     protoc {
-        artifact = "com.google.protobuf:protoc:3.19.4"
+        //https://mvnrepository.com/artifact/com.google.protobuf/protoc
+        artifact = "com.google.protobuf:protoc:3.23.2"
     }
 
     // Generates the java Protobuf-lite code for the Protobufs in this project. See

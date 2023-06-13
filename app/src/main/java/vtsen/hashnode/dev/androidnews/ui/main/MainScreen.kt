@@ -22,7 +22,7 @@ import vtsen.hashnode.dev.androidnews.ui.main.navigation.NavGraph
 import vtsen.hashnode.dev.androidnews.ui.main.topbar.TopBar
 import vtsen.hashnode.dev.androidnews.ui.main.viewmodel.ArticlesViewModelFactory
 import vtsen.hashnode.dev.androidnews.ui.screens.bookmarks.BookmarkArticlesViewModel
-import vtsen.hashnode.dev.androidnews.ui.screens.common.PermissionsDialog
+import vtsen.hashnode.dev.androidnews.ui.screens.common.PermissionDialog
 import vtsen.hashnode.dev.androidnews.ui.screens.home.AllArticlesViewModel
 import vtsen.hashnode.dev.androidnews.ui.screens.unread.UnreadArticlesViewModel
 import vtsen.hashnode.dev.androidnews.ui.theme.AndroidNewsTheme
@@ -79,11 +79,7 @@ fun MainScreen(showReviewDialog: () -> Unit,) {
     }
 
     if (BuildExt.VERSION.isNotificationRuntimePermissionNeeded()) {
-        PermissionsDialog(
-            permission = Manifest.permission.POST_NOTIFICATIONS,
-            onPermissionGranted = {},
-            onPermissionDenied = {},
-        )
+        PermissionDialog(Manifest.permission.POST_NOTIFICATIONS)
     }
 }
 

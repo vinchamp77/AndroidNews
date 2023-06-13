@@ -14,6 +14,7 @@ This is a simple RSS feed reader app that currently reads my blog (Android Kotli
 - Search articles
 - New article arrived notification
 - Deep link support for all article URLs
+- Google Play in-app rating & review
 
 ## Current Status
 - Add login authentication
@@ -39,6 +40,7 @@ This is a simple RSS feed reader app that currently reads my blog (Android Kotli
 | [Flow](https://kotlinlang.org/docs/flow.html) | Expose `Flow` in data layer</br>Combine multiple flows (i.e. articles flow, user preferences flow and search query flow) into single flow|
 | [StateFlow](https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-state-flow/) | Expose `StateFlow` in `ViewModel` |
 | [Accompanist System UI Controller](https://google.github.io/accompanist/systemuicontroller) | Set system bars color |
+| [Accompanist Permissions](https://google.github.io/accompanist/permissions) | Request post notification runtime permission |
 | [PullRefresh](https://developer.android.com/reference/kotlin/androidx/compose/material/pullrefresh/package-summary) | Show article referesh indicator (was migrated from Accompanist `SwipeRefresh`) |
 | [WorkManager](https://developer.android.com/topic/libraries/architecture/workmanager) | Schedule background tasks to fetch articles from rss.xml |
 | [Notification](https://developer.android.com/develop/ui/views/notifications) | Request notification runtime permission (API >=33)</br>Post new article arrived notification |

@@ -56,6 +56,7 @@ This is a simple RSS feed reader app that currently reads my blog (Android Kotli
 - [Implement Default Splash Screen Prior to Android 12](https://vtsen.hashnode.dev/implement-default-splash-screen-prior-to-android-12)
 - [Simple Example to Use WorkManager and Notification](https://vtsen.hashnode.dev/simple-example-to-use-workmanager-and-notification)
 - [Kotlin Flow - Combine, Merge and Zip](https://vtsen.hashnode.dev/kotlin-flow-combine-merge-and-zip)
+- [How to Request Android Runtime Permissions using Jetpack Compose?](https://vtsen.hashnode.dev/how-to-request-android-runtime-permissions-using-jetpack-compose)
 
 ## Branches
 - [master](https://github.com/vinchamp77/AndroidNews) - multiple view models (use recommended way to collect flow)

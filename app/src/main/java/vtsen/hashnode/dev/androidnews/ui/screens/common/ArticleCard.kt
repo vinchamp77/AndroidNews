@@ -1,7 +1,29 @@
+/*
+ * Copyright 2023 Vincent Tsen
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package vtsen.hashnode.dev.androidnews.ui.screens.common
 
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.Divider
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -31,10 +53,10 @@ fun ArticleCard(
     onShareClick: (ArticleUi) -> Unit,
     onReadClick: (ArticleUi) -> Unit,
 ) {
-    Column (
+    Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(PaddingMedium)
+            .padding(PaddingMedium),
     ) {
         ArticleRow(articleUi, onArticleCardClick)
         Spacer(Modifier.padding(PaddingSmall))
@@ -49,16 +71,15 @@ fun ArticleCard(
 @Composable
 private fun ArticleRow(
     articleUi: ArticleUi,
-    onArticleCardClick: (ArticleUi) -> Unit
+    onArticleCardClick: (ArticleUi) -> Unit,
 ) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .clickable {
                 onArticleCardClick(articleUi)
-            }
-        ,
-        horizontalArrangement = Arrangement.SpaceBetween
+            },
+        horizontalArrangement = Arrangement.SpaceBetween,
     ) {
         ArticleContent(articleUi)
         ArticleImage(articleUi)
@@ -70,9 +91,8 @@ private fun ArticleContent(articleUi: ArticleUi) {
     Column(
         modifier = Modifier
             .width(200.dp)
-            .padding(end = PaddingSmall)
+            .padding(end = PaddingSmall),
     ) {
-
         Text(text = articleUi.title, fontWeight = FontWeight.SemiBold)
         Spacer(Modifier.padding(PaddingSmall))
 
@@ -82,7 +102,6 @@ private fun ArticleContent(articleUi: ArticleUi) {
         Spacer(Modifier.padding(PaddingMedium))
         Text(text = Utils.parseDateLongToElapsedTime(articleUi.pubDate))
     }
-
 }
 
 @Composable
@@ -96,7 +115,7 @@ private fun ArticleImage(articleUi: ArticleUi) {
         contentDescription = "",
         modifier = Modifier
             .size(150.dp, 150.dp)
-            .clip(MaterialTheme.shapes.medium)
+            .clip(MaterialTheme.shapes.medium),
     )
 }
 
@@ -109,17 +128,17 @@ private fun ArticleBottomRow(
 ) {
     Row(
         modifier = Modifier
-            .fillMaxWidth()
-        ,
-        horizontalArrangement = Arrangement.SpaceEvenly
+            .fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceEvenly,
     ) {
         ArticleIconButton(
             articleUi = articleUi,
             onIconClick = onBookmarkClick,
-            iconPainter = if (articleUi.bookmarked)
+            iconPainter = if (articleUi.bookmarked) {
                 painterResource(R.drawable.ic_bookmarked)
-            else
-                painterResource(R.drawable.ic_bookmark_border),
+            } else {
+                painterResource(R.drawable.ic_bookmark_border)
+            },
         )
 
         ArticleIconButton(
@@ -131,12 +150,12 @@ private fun ArticleBottomRow(
         ArticleIconButton(
             articleUi = articleUi,
             onIconClick = onReadClick,
-            iconPainter = if (articleUi.read)
+            iconPainter = if (articleUi.read) {
                 painterResource(R.drawable.ic_check_circle)
-            else
+            } else {
                 painterResource(R.drawable.ic_radio_button_unchecked)
+            },
         )
-
     }
 }
 
@@ -151,5 +170,3 @@ private fun ArticleCardPreview() {
         onReadClick = {},
     )
 }
-
-

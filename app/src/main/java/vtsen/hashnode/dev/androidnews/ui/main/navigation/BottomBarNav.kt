@@ -1,3 +1,18 @@
+/*
+ * Copyright 2023 Vincent Tsen
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package vtsen.hashnode.dev.androidnews.ui.main.navigation
 
 import androidx.compose.foundation.layout.RowScope
@@ -15,9 +30,7 @@ import vtsen.hashnode.dev.androidnews.R
 
 @Composable
 fun BottomBarNav(navHostController: NavController) {
-
-    BottomNavigation(
-    ) {
+    BottomNavigation() {
         // Home
         BottomNavigationItem(
             rowScope = this,
@@ -51,8 +64,8 @@ private fun BottomNavigationItem(
     navHostController: NavController,
     drawableId: Int,
     targetNavRoutePath: String,
-    labelStringResourceId: Int) {
-
+    labelStringResourceId: Int,
+) {
     val navBackStackEntry by navHostController.currentBackStackEntryAsState()
     val currentNavRoutePath = navBackStackEntry?.destination?.route
 
@@ -61,12 +74,12 @@ private fun BottomNavigationItem(
         icon = {
             Icon(
                 painter = painterResource(drawableId),
-                contentDescription = stringResource(labelStringResourceId)
+                contentDescription = stringResource(labelStringResourceId),
             )
         },
         selected = selected,
         onClick = {
-            if(!selected) {
+            if (!selected) {
                 navHostController.navigate(targetNavRoutePath) {
                     popUpTo(NavRoute.Home.path) {
                         inclusive = (targetNavRoutePath == NavRoute.Home.path)
@@ -74,6 +87,6 @@ private fun BottomNavigationItem(
                 }
             }
         },
-        label = {Text(stringResource(labelStringResourceId))}
+        label = { Text(stringResource(labelStringResourceId)) },
     )
 }

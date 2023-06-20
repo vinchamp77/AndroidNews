@@ -1,8 +1,24 @@
+/*
+ * Copyright 2023 Vincent Tsen
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package vtsen.hashnode.dev.androidnews.ui.screens.common
 
 import android.content.Context
 import android.content.Intent
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.CircularProgressIndicator
@@ -34,10 +50,9 @@ fun ArticlesScreen(
     onReadClick: (ArticleUi) -> Unit,
 ) {
     if (articleUis.isEmpty()) {
-        if(searchQuery.isBlank()) {
+        if (searchQuery.isBlank()) {
             NoArticlesScreen(R.string.no_articles, noArticlesDescStrResId)
-        }
-        else {
+        } else {
             NoArticlesScreen(R.string.no_articles, R.string.no_search_articles_desc)
         }
         return
@@ -45,13 +60,11 @@ fun ArticlesScreen(
 
     val pullRefreshState = rememberPullRefreshState(isRefreshing, onRefresh)
     Box(Modifier.pullRefresh(pullRefreshState)) {
-
         val context = LocalContext.current
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize(),
         ) {
-
             items(items = articleUis) { article ->
                 ArticleCard(
                     articleUi = article,
@@ -68,10 +81,10 @@ fun ArticlesScreen(
         PullRefreshIndicator(isRefreshing, pullRefreshState, Modifier.align(Alignment.TopCenter))
     }
 
-    if(isSearching) {
+    if (isSearching) {
         Box(modifier = Modifier.fillMaxSize()) {
             CircularProgressIndicator(
-                modifier = Modifier.align(Alignment.Center)
+                modifier = Modifier.align(Alignment.Center),
             )
         }
     }
@@ -90,9 +103,8 @@ private fun shareArticle(context: Context, link: String) {
 @Preview(showBackground = true)
 @Composable
 private fun ArticlesScreenPreview() {
-
     ArticlesScreen(
-        articleUis = ArticleUiUtils.makeFakeArticles() ,
+        articleUis = ArticleUiUtils.makeFakeArticles(),
         noArticlesDescStrResId = R.string.no_articles_desc,
         searchQuery = "",
         isRefreshing = false,

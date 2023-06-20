@@ -1,8 +1,24 @@
+/*
+ * Copyright 2023 Vincent Tsen
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package vtsen.hashnode.dev.androidnews.utils
 
 import java.text.ParseException
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Date
+import java.util.Locale
 
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 object Utils {
@@ -10,11 +26,11 @@ object Utils {
     private val pubDateFormats = listOf(
         "EEE, dd MMM yyyy HH:mm:ss zzz",
         "EEE, dd MMM yyyy HH:mm zzz",
-        "EEE, dd MMM yyyy HH:mm zzz"
+        "EEE, dd MMM yyyy HH:mm zzz",
     )
 
     fun parsePubDateStringToLong(value: String) = parsePubDateStringToDate(value).time
-    private fun parsePubDateStringToDate(value: String) : Date {
+    private fun parsePubDateStringToDate(value: String): Date {
         for (dateFormat in pubDateFormats) {
             try {
                 val articleDateFormat = SimpleDateFormat(dateFormat, Locale.US)
@@ -26,7 +42,7 @@ object Utils {
         return Date()
     }
 
-    fun parseDateLongToElapsedTime(value: Long, shortOutput: Boolean = false) : String {
+    fun parseDateLongToElapsedTime(value: Long, shortOutput: Boolean = false): String {
         val diff = Date().time - value
         val time: String
         when {

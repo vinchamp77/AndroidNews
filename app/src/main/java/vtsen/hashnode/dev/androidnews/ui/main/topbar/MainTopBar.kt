@@ -1,3 +1,18 @@
+/*
+ * Copyright 2023 Vincent Tsen
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package vtsen.hashnode.dev.androidnews.ui.main.topbar
 
 import androidx.compose.runtime.Composable
@@ -23,7 +38,6 @@ fun TopBar(
     bookmarkArticlesViewModel: BookmarkArticlesViewModel,
     showReviewDialog: () -> Unit,
 ) {
-
     val navBackStackEntry by navHostController.currentBackStackEntryAsState()
     val currentNavRoutePath = navBackStackEntry?.destination?.route ?: return
 
@@ -35,32 +49,34 @@ fun TopBar(
     if (currentNavRoutePath.contains(NavRoute.Home.path)) {
         AllArticlesTopBar(navHostController, allArticlesViewModel, showReviewDialog)
 
-    // Unread articles
+        // Unread articles
     } else if (currentNavRoutePath.contains(NavRoute.Unread.path)) {
         UnreadArticlesTopBar(navHostController, unreadArticlesViewModel, showReviewDialog)
 
-    // Bookmarked articles
+        // Bookmarked articles
     } else if (currentNavRoutePath.contains(NavRoute.Bookmarks.path)) {
         BookmarkedArticlesTopBar(navHostController, bookmarkArticlesViewModel, showReviewDialog)
 
-    // One article
+        // One article
     } else if (currentNavRoutePath.contains(NavRoute.Article.path)) {
         val args = navBackStackEntry?.arguments
         val articleId = args?.getString(NavRoute.Article.id)
 
         // articleId is null when deep link is https://vtsen.hashnode.dev
         // we navigate back to the home screen. See NavGraph.kt
-        if(articleId != null) {
-
+        if (articleId != null) {
             val viewModel: OneArticleViewModel =
-                viewModel(factory = OneArticleViewModelFactory(
-                    articlesRepository, userPrefsRepository, articleId))
+                viewModel(
+                    factory = OneArticleViewModelFactory(
+                        articlesRepository,
+                        userPrefsRepository,
+                        articleId,
+                    ),
+                )
             OneArticleTopBar(navHostController, viewModel, showReviewDialog)
         }
-
     } else if (currentNavRoutePath.contains(NavRoute.About.path)) {
         AboutTopBar(navHostController)
-
     } else {
         throw Exception("Invalid navigation path!")
     }

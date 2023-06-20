@@ -1,3 +1,18 @@
+/*
+ * Copyright 2023 Vincent Tsen
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package vtsen.hashnode.dev.androidnews.ui.main
 
 import android.Manifest
@@ -5,7 +20,8 @@ import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
 import androidx.compose.material.rememberScaffoldState
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
@@ -16,7 +32,6 @@ import com.github.vinchamp77.buildutils.BuildExt
 import vtsen.hashnode.dev.androidnews.data.repository.ArticlesRepositoryImpl
 import vtsen.hashnode.dev.androidnews.data.repository.UserPreferencesRepositoryImpl
 import vtsen.hashnode.dev.androidnews.domain.model.ArticlesUiState
-import vtsen.hashnode.dev.androidnews.domain.usecase.*
 import vtsen.hashnode.dev.androidnews.ui.main.navigation.BottomBarNav
 import vtsen.hashnode.dev.androidnews.ui.main.navigation.NavGraph
 import vtsen.hashnode.dev.androidnews.ui.main.topbar.TopBar
@@ -29,34 +44,36 @@ import vtsen.hashnode.dev.androidnews.ui.theme.AndroidNewsTheme
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun MainScreen(showReviewDialog: () -> Unit,) {
+fun MainScreen(showReviewDialog: () -> Unit) {
     val scaffoldState = rememberScaffoldState()
     val navHostController = rememberNavController()
 
     val articlesRepository = ArticlesRepositoryImpl.getInstance(LocalContext.current)
     val userPrefsRepository = UserPreferencesRepositoryImpl.getInstance(LocalContext.current)
     val allArticlesViewModel: AllArticlesViewModel = viewModel(
-        factory = ArticlesViewModelFactory(articlesRepository, userPrefsRepository)
+        factory = ArticlesViewModelFactory(articlesRepository, userPrefsRepository),
     )
     val unreadArticlesViewModel: UnreadArticlesViewModel = viewModel(
-        factory = ArticlesViewModelFactory(articlesRepository, userPrefsRepository)
+        factory = ArticlesViewModelFactory(articlesRepository, userPrefsRepository),
     )
     val bookmarkArticlesViewModel: BookmarkArticlesViewModel = viewModel(
-        factory = ArticlesViewModelFactory(articlesRepository, userPrefsRepository)
+        factory = ArticlesViewModelFactory(articlesRepository, userPrefsRepository),
     )
 
     val uiState: ArticlesUiState by allArticlesViewModel.uiState.collectAsStateWithLifecycle()
 
     Scaffold(
         scaffoldState = scaffoldState,
-        topBar = { TopBar(
-            navHostController,
-            allArticlesViewModel,
-            unreadArticlesViewModel,
-            bookmarkArticlesViewModel,
-            showReviewDialog
-        )},
-        bottomBar = { BottomBarNav(navHostController) }
+        topBar = {
+            TopBar(
+                navHostController,
+                allArticlesViewModel,
+                unreadArticlesViewModel,
+                bookmarkArticlesViewModel,
+                showReviewDialog,
+            )
+        },
+        bottomBar = { BottomBarNav(navHostController) },
     ) { paddingValues ->
 
         NavGraph(
@@ -68,13 +85,13 @@ fun MainScreen(showReviewDialog: () -> Unit,) {
         )
     }
 
-    if(uiState is ArticlesUiState.Error) {
+    if (uiState is ArticlesUiState.Error) {
         SnackBar(
             scaffoldState,
             (uiState as ArticlesUiState.Error).msgResId,
             onDone = {
                 allArticlesViewModel.clearStatus()
-            }
+            },
         )
     }
 
@@ -86,7 +103,6 @@ fun MainScreen(showReviewDialog: () -> Unit,) {
 @Preview(showBackground = true)
 @Composable
 fun MainScreenPreview() {
-
     AndroidNewsTheme(useSystemUIController = false) {
         MainScreen(showReviewDialog = {})
     }

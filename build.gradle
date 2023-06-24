@@ -27,4 +27,10 @@ subprojects {
             greclipse()
         }
     }
+
+    afterEvaluate {
+        tasks.named("preBuild") {
+            dependsOn("spotlessApply")
+        }
+    }
 }

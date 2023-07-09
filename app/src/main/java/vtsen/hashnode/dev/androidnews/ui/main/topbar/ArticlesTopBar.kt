@@ -29,7 +29,6 @@ fun ArticlesTopBar(
     navHostController: NavHostController,
     searchQuery: String,
     onSearchQuery: (String) -> Unit,
-    showReviewDialog: () -> Unit,
 ) {
     TopAppBar(
         contentPadding = PaddingValues(PaddingSmall),
@@ -43,7 +42,6 @@ fun ArticlesTopBar(
         TopBarDropDownMenu(
             modifier = Modifier.weight(0.1f),
             navHostController = navHostController,
-            showReviewDialog = showReviewDialog,
         )
     }
 }
@@ -53,5 +51,5 @@ fun ArticlesTopBar(
 private fun DefaultPreview() {
     val navHostController = rememberNavController()
 
-    ArticlesTopBar(navHostController, searchQuery = "", onSearchQuery = {}, showReviewDialog = {})
+    ArticlesTopBar(navHostController, searchQuery = "", onSearchQuery = {})
 }

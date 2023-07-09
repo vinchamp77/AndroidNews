@@ -51,7 +51,6 @@ import vtsen.hashnode.dev.androidnews.ui.screens.onearticle.OneArticleViewModel
 fun OneArticleTopBar(
     navHostController: NavHostController,
     viewModel: OneArticleViewModel,
-    showReviewDialog: () -> Unit,
 ) {
     val article by viewModel.article.collectAsStateWithLifecycle(null)
 
@@ -91,7 +90,7 @@ fun OneArticleTopBar(
                     )
                 }
 
-                TopBarDropDownMenu(navHostController = navHostController, showReviewDialog = showReviewDialog)
+                TopBarDropDownMenu(navHostController = navHostController)
             }
         }
     }
@@ -121,6 +120,5 @@ private fun DefaultPreview() {
     OneArticleTopBar(
         navHostController,
         viewModel,
-        showReviewDialog = {},
     )
 }

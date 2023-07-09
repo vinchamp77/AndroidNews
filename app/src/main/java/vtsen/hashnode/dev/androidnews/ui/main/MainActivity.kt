@@ -15,6 +15,8 @@
  */
 package vtsen.hashnode.dev.androidnews.ui.main
 
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -59,9 +61,11 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             AndroidNewsTheme(useSystemUIController = true) {
-                MainScreen(showReviewDialog = ::showReviewDialog)
+                MainScreen()
             }
         }
+
+        showReviewDialog()
     }
 
     private fun setupSplashScreen() {
@@ -82,6 +86,19 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun showReviewDialog() {
+        val packageInfo = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            packageManager.getPackageInfo(packageName, PackageManager.PackageInfoFlags.of(0))
+        } else {
+            packageManager.getPackageInfo(packageName, 0)
+        }
+
+        val installTime = packageInfo.firstInstallTime
+        val currentTime = System.currentTimeMillis()
+        val durationInMillis = currentTime - installTime
+        val durationInDays = durationInMillis / (1000 * 60 * 60 * 24)
+
+        if (durationInDays < 7) return
+
         val request = reviewManager.requestReviewFlow()
         request.addOnCompleteListener { task ->
             if (task.isSuccessful) {

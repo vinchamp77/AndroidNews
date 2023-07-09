@@ -36,7 +36,6 @@ import vtsen.hashnode.dev.androidnews.ui.main.navigation.NavRoute
 fun TopBarDropDownMenu(
     modifier: Modifier = Modifier,
     navHostController: NavHostController,
-    showReviewDialog: () -> Unit,
 ) {
     var expandedDropDownMenu by remember { mutableStateOf(false) }
 
@@ -65,15 +64,6 @@ fun TopBarDropDownMenu(
                 },
             ) {
                 Text(text = "About")
-            }
-
-            DropdownMenuItem(
-                onClick = {
-                    expandedDropDownMenu = false
-                    showReviewDialog()
-                },
-            ) {
-                Text(text = "Rate Me")
             }
         }
     }

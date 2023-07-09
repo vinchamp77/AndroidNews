@@ -25,7 +25,6 @@ import vtsen.hashnode.dev.androidnews.ui.screens.bookmarks.BookmarkArticlesViewM
 fun BookmarkedArticlesTopBar(
     navHostController: NavHostController,
     bookmarkArticlesViewModel: BookmarkArticlesViewModel,
-    showReviewDialog: () -> Unit,
 ) {
     val searchQuery by bookmarkArticlesViewModel.searchQuery.collectAsStateWithLifecycle()
 
@@ -33,6 +32,5 @@ fun BookmarkedArticlesTopBar(
         navHostController,
         searchQuery,
         bookmarkArticlesViewModel::onSearchQuery,
-        showReviewDialog,
     )
 }

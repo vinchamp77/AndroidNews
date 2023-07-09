@@ -25,7 +25,6 @@ import vtsen.hashnode.dev.androidnews.ui.screens.home.AllArticlesViewModel
 fun AllArticlesTopBar(
     navHostController: NavHostController,
     allArticlesViewModel: AllArticlesViewModel,
-    showReviewDialog: () -> Unit,
 ) {
     val searchQuery by allArticlesViewModel.searchQuery.collectAsStateWithLifecycle()
 
@@ -33,6 +32,5 @@ fun AllArticlesTopBar(
         navHostController,
         searchQuery,
         allArticlesViewModel::onSearchQuery,
-        showReviewDialog,
     )
 }

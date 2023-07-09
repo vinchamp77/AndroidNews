@@ -25,7 +25,6 @@ import vtsen.hashnode.dev.androidnews.ui.screens.unread.UnreadArticlesViewModel
 fun UnreadArticlesTopBar(
     navHostController: NavHostController,
     unreadArticlesViewModel: UnreadArticlesViewModel,
-    showReviewDialog: () -> Unit,
 ) {
     val searchQuery by unreadArticlesViewModel.searchQuery.collectAsStateWithLifecycle()
 
@@ -33,6 +32,5 @@ fun UnreadArticlesTopBar(
         navHostController,
         searchQuery,
         unreadArticlesViewModel::onSearchQuery,
-        showReviewDialog,
     )
 }

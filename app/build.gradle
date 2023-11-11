@@ -23,20 +23,9 @@ android {
 			useSupportLibrary true
 		}
 
-		/*
-		 kapt {
-		 arguments {
-		 arg("room.schemaLocation", "$projectDir/schemas")
-		 }
-		 }
-		 */
-
-		//TODO: Change to KSP
-		///*
 		ksp {
 			arg("room.schemaLocation", "$projectDir/schemas")
 		}
-		//*/
 	}
 
 	buildTypes {

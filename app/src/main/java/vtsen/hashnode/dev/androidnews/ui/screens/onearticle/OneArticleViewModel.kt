@@ -39,19 +39,19 @@ class OneArticleViewModel(
     getOneArticleUseCase: GetOneArticleUseCase,
     articleId: String,
 ) : ArticlesViewModel(
-    getArticleStatusUseCase,
-    refreshArticlesStatusUseCase,
-    clearArticlesStatusUseCase,
-    addBookmarkArticlesUseCase,
-    removeBookmarkArticlesUseCase,
-    addReadArticlesUseCase,
-    removeReadArticlesUseCase,
-) {
-
-    val article = getOneArticleUseCase(articleId)
-        .stateIn(
-            scope = viewModelScope,
-            started = SharingStarted.WhileSubscribed(),
-            initialValue = null,
-        )
+        getArticleStatusUseCase,
+        refreshArticlesStatusUseCase,
+        clearArticlesStatusUseCase,
+        addBookmarkArticlesUseCase,
+        removeBookmarkArticlesUseCase,
+        addReadArticlesUseCase,
+        removeReadArticlesUseCase,
+    ) {
+    val article =
+        getOneArticleUseCase(articleId)
+            .stateIn(
+                scope = viewModelScope,
+                started = SharingStarted.WhileSubscribed(),
+                initialValue = null,
+            )
 }

@@ -37,7 +37,6 @@ import vtsen.hashnode.dev.androidnews.ui.main.MainActivity
 
 class SyncWorker(private val appContext: Context, params: WorkerParameters) :
     CoroutineWorker(appContext, params) {
-
     private val notificationChannelId = "AndroidNewsNotificationChannelId"
 
     override suspend fun doWork(): Result {
@@ -69,17 +68,19 @@ class SyncWorker(private val appContext: Context, params: WorkerParameters) :
 
         val mainActivityIntent = Intent(applicationContext, MainActivity::class.java)
 
-        val pendingIntentFlag = if (BuildExt.VERSION.isFlagImmutableSupported()) {
-            PendingIntent.FLAG_IMMUTABLE
-        } else {
-            PendingIntent.FLAG_UPDATE_CURRENT
-        }
-        val mainActivityPendingIntent = PendingIntent.getActivity(
-            applicationContext,
-            0,
-            mainActivityIntent,
-            pendingIntentFlag,
-        )
+        val pendingIntentFlag =
+            if (BuildExt.VERSION.isFlagImmutableSupported()) {
+                PendingIntent.FLAG_IMMUTABLE
+            } else {
+                PendingIntent.FLAG_UPDATE_CURRENT
+            }
+        val mainActivityPendingIntent =
+            PendingIntent.getActivity(
+                applicationContext,
+                0,
+                mainActivityIntent,
+                pendingIntentFlag,
+            )
 
         return NotificationCompat.Builder(applicationContext, notificationChannelId)
             .setSmallIcon(R.mipmap.ic_launcher)
@@ -91,11 +92,12 @@ class SyncWorker(private val appContext: Context, params: WorkerParameters) :
 
     private fun createNotificationChannel() {
         if (BuildExt.VERSION.isNotificationChannelSupported()) {
-            val notificationChannel = NotificationChannel(
-                notificationChannelId,
-                "Sync Articles",
-                NotificationManager.IMPORTANCE_DEFAULT,
-            )
+            val notificationChannel =
+                NotificationChannel(
+                    notificationChannelId,
+                    "Sync Articles",
+                    NotificationManager.IMPORTANCE_DEFAULT,
+                )
 
             val notificationManager: NotificationManager? =
                 ContextCompat.getSystemService(applicationContext, NotificationManager::class.java)

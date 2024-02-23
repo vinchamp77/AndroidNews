@@ -41,7 +41,6 @@ import vtsen.hashnode.dev.androidnews.ui.screens.home.AllArticlesViewModel
 @OptIn(ExperimentalCoroutinesApi::class)
 @RunWith(AndroidJUnit4::class)
 class HomeViewModelTest {
-
     private lateinit var viewModel: AllArticlesViewModel
 
     @get:Rule
@@ -53,23 +52,25 @@ class HomeViewModelTest {
         val userPrefsRepository = FakeUserPreferencesRepositoryImpl()
         val getAllArticlesUseCase = GetAllArticlesUseCase(articlesRepository, userPrefsRepository)
 
-        viewModel = AllArticlesViewModel(
-            getAllArticlesUseCase,
-            GetArticleStatusUseCase(articlesRepository),
-            RefreshArticlesStatusUseCase(articlesRepository),
-            ClearArticlesStatusUseCase(articlesRepository),
-            AddBookmarkArticlesUseCase(userPrefsRepository),
-            RemoveBookmarkArticlesUseCase(userPrefsRepository),
-            AddReadArticlesUseCase(userPrefsRepository),
-            RemoveReadArticlesUseCase(userPrefsRepository),
-        )
+        viewModel =
+            AllArticlesViewModel(
+                getAllArticlesUseCase,
+                GetArticleStatusUseCase(articlesRepository),
+                RefreshArticlesStatusUseCase(articlesRepository),
+                ClearArticlesStatusUseCase(articlesRepository),
+                AddBookmarkArticlesUseCase(userPrefsRepository),
+                RemoveBookmarkArticlesUseCase(userPrefsRepository),
+                AddReadArticlesUseCase(userPrefsRepository),
+                RemoveReadArticlesUseCase(userPrefsRepository),
+            )
     }
 
     @Test
-    fun allArticles_areNotNull() = runTest {
-        Assert.assertNotEquals(null, viewModel.articles.first())
+    fun allArticles_areNotNull() =
+        runTest {
+            Assert.assertNotEquals(null, viewModel.articles.first())
 
-        delay(1000)
-        Assert.assertNotEquals(null, viewModel.articles)
-    }
+            delay(1000)
+            Assert.assertNotEquals(null, viewModel.articles)
+        }
 }

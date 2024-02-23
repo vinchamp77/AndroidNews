@@ -25,7 +25,6 @@ import androidx.room.RoomDatabase
     entities = [ArticleEntity::class],
 )
 abstract class ArticlesDatabase : RoomDatabase() {
-
     protected abstract val dao: ArticlesDao
 
     companion object {
@@ -35,13 +34,14 @@ abstract class ArticlesDatabase : RoomDatabase() {
         fun getInstance(context: Context): ArticlesDatabase {
             synchronized(this) {
                 if (!::instance.isInitialized) {
-                    instance = Room.databaseBuilder(
-                        context.applicationContext,
-                        ArticlesDatabase::class.java,
-                        "articles.db",
-                    )
-                        .fallbackToDestructiveMigration()
-                        .build()
+                    instance =
+                        Room.databaseBuilder(
+                            context.applicationContext,
+                            ArticlesDatabase::class.java,
+                            "articles.db",
+                        )
+                            .fallbackToDestructiveMigration()
+                            .build()
                 }
 
                 return instance
@@ -50,13 +50,17 @@ abstract class ArticlesDatabase : RoomDatabase() {
     }
 
     fun selectAllArticles() = dao.selectAllArticles()
+
     fun selectAllArticlesByTitle(title: String) = dao.selectAllArticlesByTitle("%$title%")
 
     fun getArticleById(link: String) = dao.getArticleById(link)
+
     fun selectArticleById(id: String) = dao.selectArticleById(id)
 
     fun insertArticle(article: ArticleEntity) = dao.insertArticle(article)
+
     fun updateArticle(article: ArticleEntity) = dao.updateArticle(article)
+
     fun deleteAllArticles() {
         dao.deleteAllArticles()
         // reset auto increment of the primary key

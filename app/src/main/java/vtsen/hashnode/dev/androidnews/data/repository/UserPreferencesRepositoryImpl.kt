@@ -35,7 +35,6 @@ private val Context.userPreferencesStore: DataStore<UserPreferences> by dataStor
 class UserPreferencesRepositoryImpl private constructor(
     private val dataStore: DataStore<UserPreferences>,
 ) : UserPreferencesRepository {
-
     private val tag: String = "UserPrefsRepo"
 
     companion object {
@@ -45,25 +44,27 @@ class UserPreferencesRepositoryImpl private constructor(
         fun getInstance(context: Context): UserPreferencesRepository {
             synchronized(this) {
                 if (!::instance.isInitialized) {
-                    instance = UserPreferencesRepositoryImpl(
-                        context.applicationContext.userPreferencesStore,
-                    )
+                    instance =
+                        UserPreferencesRepositoryImpl(
+                            context.applicationContext.userPreferencesStore,
+                        )
                 }
                 return instance
             }
         }
     }
 
-    private val userPreferencesFlow: Flow<UserPreferences> = dataStore.data
-        .catch { exception ->
-            // dataStore.data throws an IOException when an error is encountered when reading data
-            if (exception is IOException) {
-                Log.e(tag, "Error reading sort order preferences.", exception)
-                emit(UserPreferences.getDefaultInstance())
-            } else {
-                throw exception
+    private val userPreferencesFlow: Flow<UserPreferences> =
+        dataStore.data
+            .catch { exception ->
+                // dataStore.data throws an IOException when an error is encountered when reading data
+                if (exception is IOException) {
+                    Log.e(tag, "Error reading sort order preferences.", exception)
+                    emit(UserPreferences.getDefaultInstance())
+                } else {
+                    throw exception
+                }
             }
-        }
 
     override fun getBookmarkArticles(): Flow<List<String>> {
         return userPreferencesFlow.map { userPreferences ->

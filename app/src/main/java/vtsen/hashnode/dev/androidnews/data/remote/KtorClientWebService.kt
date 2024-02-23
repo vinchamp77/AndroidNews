@@ -21,7 +21,6 @@ import io.ktor.client.request.request
 import io.ktor.client.statement.HttpResponse
 
 class KtorClientWebService : WebService {
-
     override suspend fun getXMlString(url: String): String {
         val client = HttpClient()
         /*

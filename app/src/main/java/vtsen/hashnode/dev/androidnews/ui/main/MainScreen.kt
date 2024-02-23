@@ -50,15 +50,18 @@ fun MainScreen() {
 
     val articlesRepository = ArticlesRepositoryImpl.getInstance(LocalContext.current)
     val userPrefsRepository = UserPreferencesRepositoryImpl.getInstance(LocalContext.current)
-    val allArticlesViewModel: AllArticlesViewModel = viewModel(
-        factory = ArticlesViewModelFactory(articlesRepository, userPrefsRepository),
-    )
-    val unreadArticlesViewModel: UnreadArticlesViewModel = viewModel(
-        factory = ArticlesViewModelFactory(articlesRepository, userPrefsRepository),
-    )
-    val bookmarkArticlesViewModel: BookmarkArticlesViewModel = viewModel(
-        factory = ArticlesViewModelFactory(articlesRepository, userPrefsRepository),
-    )
+    val allArticlesViewModel: AllArticlesViewModel =
+        viewModel(
+            factory = ArticlesViewModelFactory(articlesRepository, userPrefsRepository),
+        )
+    val unreadArticlesViewModel: UnreadArticlesViewModel =
+        viewModel(
+            factory = ArticlesViewModelFactory(articlesRepository, userPrefsRepository),
+        )
+    val bookmarkArticlesViewModel: BookmarkArticlesViewModel =
+        viewModel(
+            factory = ArticlesViewModelFactory(articlesRepository, userPrefsRepository),
+        )
 
     val uiState: ArticlesUiState by allArticlesViewModel.uiState.collectAsStateWithLifecycle()
 

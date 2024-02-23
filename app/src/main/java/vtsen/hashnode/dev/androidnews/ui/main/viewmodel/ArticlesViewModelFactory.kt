@@ -38,7 +38,6 @@ class ArticlesViewModelFactory(
     private val articlesRepository: ArticlesRepository,
     private val userPrefsRepository: UserPreferencesRepository,
 ) : ViewModelProvider.Factory {
-
     private val getAllArticlesUseCase = GetAllArticlesUseCase(articlesRepository, userPrefsRepository)
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {

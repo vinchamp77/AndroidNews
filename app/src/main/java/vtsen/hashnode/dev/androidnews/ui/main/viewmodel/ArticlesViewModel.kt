@@ -41,42 +41,49 @@ abstract class ArticlesViewModel(
     protected val addReadArticlesUseCase: AddReadArticlesUseCase,
     protected val removeReadArticlesUseCase: RemoveReadArticlesUseCase,
 ) : ViewModel() {
+    val uiState =
+        getArticleStatusUseCase().stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5000),
+            initialValue = ArticlesUiState.Success,
+        )
 
-    val uiState = getArticleStatusUseCase().stateIn(
-        scope = viewModelScope,
-        started = SharingStarted.WhileSubscribed(5000),
-        initialValue = ArticlesUiState.Success,
-    )
-
-    protected val _searchQuery = MutableStateFlow("")
+    private val _searchQuery = MutableStateFlow("")
     val searchQuery = _searchQuery.asStateFlow()
 
-    protected val _isSearching = MutableStateFlow(false)
+    private val _isSearching = MutableStateFlow(false)
     val isSearching = _isSearching.asStateFlow()
+
+    protected fun setIsSearching(value: Boolean) {
+        _isSearching.value = value
+    }
 
     fun onSearchQuery(query: String) {
         _searchQuery.value = query
     }
 
-    fun refresh() = viewModelScope.launch {
-        refreshArticlesStatusUseCase()
-    }
+    fun refresh() =
+        viewModelScope.launch {
+            refreshArticlesStatusUseCase()
+        }
 
     fun clearStatus() = clearArticlesStatusUseCase()
 
-    fun onReadClick(articleUi: ArticleUi) = viewModelScope.launch {
-        if (articleUi.read) {
-            removeReadArticlesUseCase(articleUi.id)
-        } else {
-            addReadArticlesUseCase(articleUi.id)
+    fun onReadClick(articleUi: ArticleUi) =
+        viewModelScope.launch {
+            if (articleUi.read) {
+                removeReadArticlesUseCase(articleUi.id)
+            } else {
+                addReadArticlesUseCase(articleUi.id)
+            }
         }
-    }
 
-    fun onBookmarkClick(articleUi: ArticleUi) = viewModelScope.launch {
-        if (articleUi.bookmarked) {
-            removeBookmarkArticlesUseCase(articleUi.id)
-        } else {
-            addBookmarkArticlesUseCase(articleUi.id)
+    fun onBookmarkClick(articleUi: ArticleUi) =
+        viewModelScope.launch {
+            if (articleUi.bookmarked) {
+                removeBookmarkArticlesUseCase(articleUi.id)
+            } else {
+                addBookmarkArticlesUseCase(articleUi.id)
+            }
         }
-    }
 }

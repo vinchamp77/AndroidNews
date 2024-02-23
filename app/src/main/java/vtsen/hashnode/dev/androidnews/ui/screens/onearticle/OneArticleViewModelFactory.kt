@@ -35,8 +35,8 @@ class OneArticleViewModelFactory(
     private val userPrefsRepository: UserPreferencesRepository,
     private val articleId: String,
 ) : ViewModelProvider.Factory {
-
     private val getAllArticlesUseCase = GetAllArticlesUseCase(articlesRepository, userPrefsRepository)
+
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(OneArticleViewModel::class.java)) {
             return OneArticleViewModel(

@@ -33,9 +33,10 @@ fun LaunchPermissionDialog(
 ) {
     val context = LocalContext.current
 
-    val permissionLabel = stringResource(
-        context.packageManager.getPermissionInfo(permission, 0).labelRes,
-    )
+    val permissionLabel =
+        stringResource(
+            context.packageManager.getPermissionInfo(permission, 0).labelRes,
+        )
     val dialogText = "\"$permissionLabel\" permission is required when new article arrives."
 
     AlertDialog(

@@ -37,23 +37,24 @@ class GetAllArticlesUseCase(
         val readArticlesFlow = userPreferencesRepository.getReadArticles()
         val bookmarkArticlesFlow = userPreferencesRepository.getBookmarkArticles()
 
-        val combineFlow = combine(
-            allArticlesFlow,
-            readArticlesFlow,
-            bookmarkArticlesFlow,
-        ) { allArticles, readArticleIds, bookmarkArticleIds ->
+        val combineFlow =
+            combine(
+                allArticlesFlow,
+                readArticlesFlow,
+                bookmarkArticlesFlow,
+            ) { allArticles, readArticleIds, bookmarkArticleIds ->
 
-            val allArticleUis = mutableListOf<ArticleUi>()
+                val allArticleUis = mutableListOf<ArticleUi>()
 
-            for (article in allArticles) {
-                val isArticleRead = readArticleIds.contains(article.id)
-                val isArticleBookmarked = bookmarkArticleIds.contains(article.id)
-                val articleUi = article.toArticleUi(isArticleBookmarked, isArticleRead)
-                allArticleUis.add(articleUi)
+                for (article in allArticles) {
+                    val isArticleRead = readArticleIds.contains(article.id)
+                    val isArticleBookmarked = bookmarkArticleIds.contains(article.id)
+                    val articleUi = article.toArticleUi(isArticleBookmarked, isArticleRead)
+                    allArticleUis.add(articleUi)
+                }
+
+                allArticleUis.toList()
             }
-
-            allArticleUis.toList()
-        }
 
         return combineFlow
     }

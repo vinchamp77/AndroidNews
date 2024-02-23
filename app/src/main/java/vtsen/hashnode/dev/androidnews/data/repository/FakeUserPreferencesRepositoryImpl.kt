@@ -19,7 +19,6 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
 class FakeUserPreferencesRepositoryImpl : UserPreferencesRepository {
-
     private val bookmarkArticleIds = mutableListOf<String>()
     private val readArticleIds = mutableListOf<String>()
 

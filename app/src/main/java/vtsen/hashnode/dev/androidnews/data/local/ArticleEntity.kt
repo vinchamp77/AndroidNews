@@ -27,6 +27,5 @@ data class ArticleEntity(
     val author: String,
     val pubDate: Long,
     val image: String,
-
     val feedTitle: String,
 )

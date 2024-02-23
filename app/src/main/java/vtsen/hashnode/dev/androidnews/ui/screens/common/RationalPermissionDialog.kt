@@ -32,9 +32,10 @@ fun RationalPermissionDialog(
     dismissCallback: () -> Unit,
 ) {
     val context = LocalContext.current
-    val permissionLabel = stringResource(
-        context.packageManager.getPermissionInfo(permission, 0).labelRes,
-    )
+    val permissionLabel =
+        stringResource(
+            context.packageManager.getPermissionInfo(permission, 0).labelRes,
+        )
     val dialogText = "\"$permissionLabel\" permission is required when new article arrives."
 
     AlertDialog(
@@ -43,10 +44,11 @@ fun RationalPermissionDialog(
         text = { Text(text = dialogText) },
         confirmButton = {
             Button(onClick = {
-                val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
-                    .apply {
-                        data = Uri.fromParts("package", context.packageName, null)
-                    }
+                val intent =
+                    Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+                        .apply {
+                            data = Uri.fromParts("package", context.packageName, null)
+                        }
                 ContextCompat.startActivity(context, intent, null)
             }) {
                 Text(text = "Go to settings")

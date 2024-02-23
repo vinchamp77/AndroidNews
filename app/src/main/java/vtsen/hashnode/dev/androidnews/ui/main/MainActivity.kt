@@ -37,7 +37,6 @@ import vtsen.hashnode.dev.androidnews.ui.main.viewmodel.ArticlesViewModelFactory
 import vtsen.hashnode.dev.androidnews.ui.theme.AndroidNewsTheme
 
 class MainActivity : ComponentActivity() {
-
     private val articlesRepository by lazy {
         ArticlesRepositoryImpl.getInstance(application)
     }
@@ -86,11 +85,12 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun showReviewDialog() {
-        val packageInfo = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            packageManager.getPackageInfo(packageName, PackageManager.PackageInfoFlags.of(0))
-        } else {
-            packageManager.getPackageInfo(packageName, 0)
-        }
+        val packageInfo =
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                packageManager.getPackageInfo(packageName, PackageManager.PackageInfoFlags.of(0))
+            } else {
+                packageManager.getPackageInfo(packageName, 0)
+            }
 
         val installTime = packageInfo.firstInstallTime
         val currentTime = System.currentTimeMillis()

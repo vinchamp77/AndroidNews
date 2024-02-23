@@ -21,7 +21,6 @@ import org.xmlpull.v1.XmlPullParserFactory
 private const val TAG = "FeedParser"
 
 class FeedParser {
-
     private val pullParserFactory = XmlPullParserFactory.newInstance()
     private val parser = pullParserFactory.newPullParser()
 
@@ -37,10 +36,11 @@ class FeedParser {
                 feedTitle = readText(parser)
             } else if (parser.eventType == XmlPullParser.START_TAG && parser.name == "item") {
                 val feedItem = readFeedItem(parser)
-                val articleFeed = ArticleFeed(
-                    feedItem = feedItem,
-                    feedTitle = feedTitle,
-                )
+                val articleFeed =
+                    ArticleFeed(
+                        feedItem = feedItem,
+                        feedTitle = feedTitle,
+                    )
                 articlesFeed.add(articleFeed)
             }
             parser.next()

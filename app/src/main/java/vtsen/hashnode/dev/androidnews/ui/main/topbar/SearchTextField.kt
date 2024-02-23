@@ -40,20 +40,22 @@ fun SearchTextField(
     onSearch: KeyboardActionScope.() -> Unit,
 ) {
     TextField(
-        modifier = modifier
-            .clip(RoundedCornerShape(20))
-            .background(color = MaterialTheme.colors.background),
+        modifier =
+            modifier
+                .clip(RoundedCornerShape(20))
+                .background(color = MaterialTheme.colors.background),
         value = searchQuery,
         onValueChange = onValueChange,
-
         label = { Text(text = "Search") },
         leadingIcon = { Icon(Icons.Filled.Search, contentDescription = "") },
-        keyboardOptions = KeyboardOptions(
-            imeAction = ImeAction.Search,
-        ),
-        keyboardActions = KeyboardActions(
-            onSearch = onSearch,
-        ),
+        keyboardOptions =
+            KeyboardOptions(
+                imeAction = ImeAction.Search,
+            ),
+        keyboardActions =
+            KeyboardActions(
+                onSearch = onSearch,
+            ),
         singleLine = true,
         textStyle = TextStyle(color = MaterialTheme.colors.onSurface),
     )

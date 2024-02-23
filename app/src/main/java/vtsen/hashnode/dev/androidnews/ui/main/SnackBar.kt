@@ -21,7 +21,11 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.res.stringResource
 
 @Composable
-fun SnackBar(scaffoldState: ScaffoldState, msgResId: Int, onDone: () -> Unit) {
+fun SnackBar(
+    scaffoldState: ScaffoldState,
+    msgResId: Int,
+    onDone: () -> Unit,
+) {
     val msg = stringResource(msgResId)
     LaunchedEffect(msg) {
         scaffoldState.snackbarHostState.showSnackbar(

@@ -19,7 +19,6 @@ import vtsen.hashnode.dev.androidnews.domain.model.ArticleUi
 import java.util.Date
 
 object ArticleUiUtils {
-
     fun makeFakeArticles(): List<ArticleUi> {
         val articles: MutableList<ArticleUi> = mutableListOf()
         repeat(10) {
@@ -28,7 +27,10 @@ object ArticleUiUtils {
         return articles
     }
 
-    fun createArticle(bookmarked: Boolean = false, read: Boolean = false): ArticleUi {
+    fun createArticle(
+        bookmarked: Boolean = false,
+        read: Boolean = false,
+    ): ArticleUi {
         return ArticleUi(
             id = "how-to-implement-hilt-in-android-app",
             title = "How to Implement Hilt in Android App?",

@@ -16,7 +16,6 @@
 package vtsen.hashnode.dev.androidnews.ui.main.navigation
 
 sealed class NavRoute(val path: String) {
-
     object Home : NavRoute("home")
 
     object Unread : NavRoute("unread")

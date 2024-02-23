@@ -29,7 +29,10 @@ import androidx.compose.ui.res.stringResource
 import vtsen.hashnode.dev.androidnews.ui.theme.PaddingSmall
 
 @Composable
-fun NoArticlesScreen(titleStrResId: Int, descStrResId: Int) {
+fun NoArticlesScreen(
+    titleStrResId: Int,
+    descStrResId: Int,
+) {
     Column(
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,

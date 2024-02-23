@@ -25,15 +25,16 @@ class GetBookmarkArticlesUseCase(
     operator fun invoke(title: String? = null): Flow<List<ArticleUi>> {
         val allArticlesFlow = getAllArticlesUseCase()
 
-        val bookmarkArticlesFlow = allArticlesFlow.map { articleUiList ->
-            articleUiList.filter { articleUi ->
-                if (title.isNullOrEmpty()) {
-                    articleUi.bookmarked
-                } else {
-                    articleUi.bookmarked && articleUi.title.contains(title)
+        val bookmarkArticlesFlow =
+            allArticlesFlow.map { articleUiList ->
+                articleUiList.filter { articleUi ->
+                    if (title.isNullOrEmpty()) {
+                        articleUi.bookmarked
+                    } else {
+                        articleUi.bookmarked && articleUi.title.contains(title)
+                    }
                 }
             }
-        }
 
         return bookmarkArticlesFlow
     }

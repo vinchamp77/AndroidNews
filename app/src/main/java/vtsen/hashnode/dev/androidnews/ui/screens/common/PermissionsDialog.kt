@@ -28,9 +28,7 @@ import com.google.accompanist.permissions.shouldShowRationale
 
 @OptIn(ExperimentalPermissionsApi::class)
 @Composable
-fun PermissionDialog(
-    permission: String,
-) {
+fun PermissionDialog(permission: String) {
     val permissionsState = rememberPermissionState(permission)
     var showRationale by remember { mutableStateOf(true) }
     var launchPermissionDialog by remember { mutableStateOf(true) }

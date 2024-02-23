@@ -22,7 +22,6 @@ import org.junit.Test
 import vtsen.hashnode.dev.androidnews.ui.main.MainActivity
 
 class ComposeTest {
-
     @get:Rule
     val composeTestRule = createAndroidComposeRule<MainActivity>()
 
@@ -40,8 +39,7 @@ class ComposeTest {
 
     @Test
     fun clickBookmarks_clearBookmarks_showsNoArticles() {
-        // This test is not done yet, work in progress
-        /*
+        /* This test is not done yet, work in progress
         var text = composeTestRule.activity.getString(R.string.bookmarks)
         composeTestRule.onNodeWithText(text).performClick()
          */

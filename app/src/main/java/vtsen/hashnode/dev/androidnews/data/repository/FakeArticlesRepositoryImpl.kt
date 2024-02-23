@@ -21,8 +21,8 @@ import kotlinx.coroutines.flow.flow
 import vtsen.hashnode.dev.androidnews.data.utils.ArticleRepoUtils
 
 class FakeArticlesRepositoryImpl : ArticlesRepository {
-
     private var _status: ArticlesRepoStatus = ArticlesRepoStatus.Invalid
+
     override fun getStatus(): Flow<ArticlesRepoStatus> {
         return flow {
             while (true) {
@@ -33,6 +33,7 @@ class FakeArticlesRepositoryImpl : ArticlesRepository {
     }
 
     private var _allArticles: MutableList<ArticleRepo> = mutableListOf()
+
     override fun getAllArticles(): Flow<List<ArticleRepo>> {
         return flow {
             while (true) {
@@ -57,21 +58,24 @@ class FakeArticlesRepositoryImpl : ArticlesRepository {
     override suspend fun updateArticle(article: ArticleRepo) {}
 
     override fun selectArticleById(id: String): Flow<ArticleRepo?> {
-        val article = _allArticles.find { article ->
-            article.id == id
-        }
+        val article =
+            _allArticles.find { article ->
+                article.id == id
+            }
 
-        val flow = flow {
-            emit(article)
-        }
+        val flow =
+            flow {
+                emit(article)
+            }
 
         return flow
     }
 
     override fun getAllArticlesByTitle(title: String): Flow<List<ArticleRepo>> {
-        val articles = _allArticles.filter { article ->
-            article.title.contains(title)
-        }
+        val articles =
+            _allArticles.filter { article ->
+                article.title.contains(title)
+            }
 
         return flow {
             emit(articles)

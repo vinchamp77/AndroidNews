@@ -62,8 +62,9 @@ fun ArticlesScreen(
     Box(Modifier.pullRefresh(pullRefreshState)) {
         val context = LocalContext.current
         LazyColumn(
-            modifier = Modifier
-                .fillMaxSize(),
+            modifier =
+                Modifier
+                    .fillMaxSize(),
         ) {
             items(items = articleUis) { article ->
                 ArticleCard(
@@ -90,12 +91,16 @@ fun ArticlesScreen(
     }
 }
 
-private fun shareArticle(context: Context, link: String) {
-    val sendIntent: Intent = Intent().apply {
-        action = Intent.ACTION_SEND
-        putExtra(Intent.EXTRA_TEXT, link)
-        type = "text/plain"
-    }
+private fun shareArticle(
+    context: Context,
+    link: String,
+) {
+    val sendIntent: Intent =
+        Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(Intent.EXTRA_TEXT, link)
+            type = "text/plain"
+        }
     val shareIntent = Intent.createChooser(sendIntent, null)
     ContextCompat.startActivity(context, shareIntent, null)
 }

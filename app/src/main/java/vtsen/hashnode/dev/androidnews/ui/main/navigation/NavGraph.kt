@@ -117,17 +117,19 @@ private fun addArticleScreen(
 ) {
     navGraphBuilder.composable(
         route = NavRoute.Article.withArgsFormat(NavRoute.Article.id),
-        deepLinks = listOf(
-            navDeepLink {
-                uriPattern = "https://vtsen.hashnode.dev/{${NavRoute.Article.id}}"
-                action = Intent.ACTION_VIEW
-            },
-        ),
-        arguments = listOf(
-            navArgument(NavRoute.Article.id) {
-                type = NavType.StringType
-            },
-        ),
+        deepLinks =
+            listOf(
+                navDeepLink {
+                    uriPattern = "https://vtsen.hashnode.dev/{${NavRoute.Article.id}}"
+                    action = Intent.ACTION_VIEW
+                },
+            ),
+        arguments =
+            listOf(
+                navArgument(NavRoute.Article.id) {
+                    type = NavType.StringType
+                },
+            ),
     ) { navBackStackEntry ->
 
         val args = navBackStackEntry.arguments

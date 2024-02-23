@@ -56,8 +56,9 @@ fun OneArticleTopBar(
 
     TopAppBar {
         Row(
-            modifier = Modifier
-                .fillMaxWidth(),
+            modifier =
+                Modifier
+                    .fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween,
         ) {
             IconButton(onClick = { navHostController.navigateUp() }) {
@@ -72,21 +73,23 @@ fun OneArticleTopBar(
                     ArticleIconButton(
                         articleUi = article!!,
                         onIconClick = viewModel::onReadClick,
-                        iconPainter = if (article!!.read) {
-                            painterResource(R.drawable.ic_check_circle)
-                        } else {
-                            painterResource(R.drawable.ic_radio_button_unchecked)
-                        },
+                        iconPainter =
+                            if (article!!.read) {
+                                painterResource(R.drawable.ic_check_circle)
+                            } else {
+                                painterResource(R.drawable.ic_radio_button_unchecked)
+                            },
                     )
 
                     ArticleIconButton(
                         articleUi = article!!,
                         onIconClick = viewModel::onBookmarkClick,
-                        iconPainter = if (article!!.bookmarked) {
-                            painterResource(R.drawable.ic_bookmarked)
-                        } else {
-                            painterResource(R.drawable.ic_bookmark_border)
-                        },
+                        iconPainter =
+                            if (article!!.bookmarked) {
+                                painterResource(R.drawable.ic_bookmarked)
+                            } else {
+                                painterResource(R.drawable.ic_bookmark_border)
+                            },
                     )
                 }
 
@@ -103,17 +106,18 @@ private fun DefaultPreview() {
     val userPrefsRepository = UserPreferencesRepositoryImpl.getInstance(LocalContext.current)
     val getAllArticlesUseCase = GetAllArticlesUseCase(articlesRepository, userPrefsRepository)
 
-    val viewModel = OneArticleViewModel(
-        GetArticleStatusUseCase(articlesRepository),
-        RefreshArticlesStatusUseCase(articlesRepository),
-        ClearArticlesStatusUseCase(articlesRepository),
-        AddBookmarkArticlesUseCase(userPrefsRepository),
-        RemoveBookmarkArticlesUseCase(userPrefsRepository),
-        AddReadArticlesUseCase(userPrefsRepository),
-        RemoveReadArticlesUseCase(userPrefsRepository),
-        GetOneArticleUseCase(getAllArticlesUseCase),
-        articleId = "",
-    )
+    val viewModel =
+        OneArticleViewModel(
+            GetArticleStatusUseCase(articlesRepository),
+            RefreshArticlesStatusUseCase(articlesRepository),
+            ClearArticlesStatusUseCase(articlesRepository),
+            AddBookmarkArticlesUseCase(userPrefsRepository),
+            RemoveBookmarkArticlesUseCase(userPrefsRepository),
+            AddReadArticlesUseCase(userPrefsRepository),
+            RemoveReadArticlesUseCase(userPrefsRepository),
+            GetOneArticleUseCase(getAllArticlesUseCase),
+            articleId = "",
+        )
 
     val navHostController = rememberNavController()
 

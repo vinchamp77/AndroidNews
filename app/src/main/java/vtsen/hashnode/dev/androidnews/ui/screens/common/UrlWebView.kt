@@ -45,7 +45,10 @@ fun UrlWebView(url: String) {
 // For offline-mode reference if it needs to be supported in future
 // it does not 100 % working correctly
 @Composable
-fun UrlWebView(title: String, html: String) {
+fun UrlWebView(
+    title: String,
+    html: String,
+) {
     if (html.isEmpty()) {
         return
     }

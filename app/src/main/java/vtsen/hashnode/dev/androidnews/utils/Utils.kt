@@ -22,14 +22,15 @@ import java.util.Locale
 
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 object Utils {
-
-    private val pubDateFormats = listOf(
-        "EEE, dd MMM yyyy HH:mm:ss zzz",
-        "EEE, dd MMM yyyy HH:mm zzz",
-        "EEE, dd MMM yyyy HH:mm zzz",
-    )
+    private val pubDateFormats =
+        listOf(
+            "EEE, dd MMM yyyy HH:mm:ss zzz",
+            "EEE, dd MMM yyyy HH:mm zzz",
+            "EEE, dd MMM yyyy HH:mm zzz",
+        )
 
     fun parsePubDateStringToLong(value: String) = parsePubDateStringToDate(value).time
+
     private fun parsePubDateStringToDate(value: String): Date {
         for (dateFormat in pubDateFormats) {
             try {
@@ -42,7 +43,10 @@ object Utils {
         return Date()
     }
 
-    fun parseDateLongToElapsedTime(value: Long, shortOutput: Boolean = false): String {
+    fun parseDateLongToElapsedTime(
+        value: Long,
+        shortOutput: Boolean = false,
+    ): String {
         val diff = Date().time - value
         val time: String
         when {

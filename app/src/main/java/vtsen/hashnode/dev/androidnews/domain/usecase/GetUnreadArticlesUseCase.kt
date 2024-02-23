@@ -25,16 +25,17 @@ class GetUnreadArticlesUseCase(
     operator fun invoke(title: String? = null): Flow<List<ArticleUi>> {
         val allArticlesFlow = getAllArticlesUseCase()
 
-        val unreadArticlesFlow = allArticlesFlow.map { articleUiList ->
-            articleUiList.filter { articleUi ->
+        val unreadArticlesFlow =
+            allArticlesFlow.map { articleUiList ->
+                articleUiList.filter { articleUi ->
 
-                if (title.isNullOrEmpty()) {
-                    !articleUi.read
-                } else {
-                    !articleUi.read && articleUi.title.contains(title)
+                    if (title.isNullOrEmpty()) {
+                        !articleUi.read
+                    } else {
+                        !articleUi.read && articleUi.title.contains(title)
+                    }
                 }
             }
-        }
 
         return unreadArticlesFlow
     }

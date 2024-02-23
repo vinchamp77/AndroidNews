@@ -25,16 +25,17 @@ class GetOneArticleUseCase(
     operator fun invoke(id: String): Flow<ArticleUi?> {
         val allArticlesFlow = getAllArticlesUseCase()
 
-        val oneArticleFlow = allArticlesFlow
-            .map { articleUiList ->
-                articleUiList.filter { articleUi ->
-                    articleUi.id == id
+        val oneArticleFlow =
+            allArticlesFlow
+                .map { articleUiList ->
+                    articleUiList.filter { articleUi ->
+                        articleUi.id == id
+                    }
                 }
-            }
-            .map {
-                val oneArticle = if (it.isEmpty()) null else it.first()
-                oneArticle
-            }
+                .map {
+                    val oneArticle = if (it.isEmpty()) null else it.first()
+                    oneArticle
+                }
 
         return oneArticleFlow
     }

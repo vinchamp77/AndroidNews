@@ -40,32 +40,32 @@ class AllArticlesViewModel(
     addReadArticlesUseCase: AddReadArticlesUseCase,
     removeReadArticlesUseCase: RemoveReadArticlesUseCase,
 ) : ArticlesViewModel(
-    getArticleStatusUseCase,
-    refreshArticlesStatusUseCase,
-    clearArticlesStatusUseCase,
-    addBookmarkArticlesUseCase,
-    removeBookmarkArticlesUseCase,
-    addReadArticlesUseCase,
-    removeReadArticlesUseCase,
-) {
-
-    val articles = searchQuery
-        // .debounce(1000) // required if it is network call
-        .onEach { _isSearching.value = true }
-        .combine(getAllArticlesUseCase()) { searchQuery, articles ->
-            if (searchQuery.isBlank()) {
-                articles
-            } else {
-                // delay(2000) // simulate network delay
-                articles.filter { articleUi ->
-                    articleUi.title.contains(searchQuery, ignoreCase = true)
+        getArticleStatusUseCase,
+        refreshArticlesStatusUseCase,
+        clearArticlesStatusUseCase,
+        addBookmarkArticlesUseCase,
+        removeBookmarkArticlesUseCase,
+        addReadArticlesUseCase,
+        removeReadArticlesUseCase,
+    ) {
+    val articles =
+        searchQuery
+            // .debounce(1000) // required if it is network call
+            .onEach { setIsSearching(true) }
+            .combine(getAllArticlesUseCase()) { searchQuery, articles ->
+                if (searchQuery.isBlank()) {
+                    articles
+                } else {
+                    // delay(2000) // simulate network delay
+                    articles.filter { articleUi ->
+                        articleUi.title.contains(searchQuery, ignoreCase = true)
+                    }
                 }
             }
-        }
-        .onEach { _isSearching.value = false }
-        .stateIn(
-            scope = viewModelScope,
-            started = SharingStarted.WhileSubscribed(5000),
-            initialValue = null,
-        )
+            .onEach { setIsSearching(false) }
+            .stateIn(
+                scope = viewModelScope,
+                started = SharingStarted.WhileSubscribed(5000),
+                initialValue = null,
+            )
 }

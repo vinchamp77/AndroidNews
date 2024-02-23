@@ -66,11 +66,12 @@ fun TopBar(
         if (articleId != null) {
             val viewModel: OneArticleViewModel =
                 viewModel(
-                    factory = OneArticleViewModelFactory(
-                        articlesRepository,
-                        userPrefsRepository,
-                        articleId,
-                    ),
+                    factory =
+                        OneArticleViewModelFactory(
+                            articlesRepository,
+                            userPrefsRepository,
+                            articleId,
+                        ),
                 )
             OneArticleTopBar(navHostController, viewModel)
         }

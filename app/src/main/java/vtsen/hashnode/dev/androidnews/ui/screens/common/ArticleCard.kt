@@ -54,9 +54,10 @@ fun ArticleCard(
     onReadClick: (ArticleUi) -> Unit,
 ) {
     Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(PaddingMedium),
+        modifier =
+            Modifier
+                .fillMaxWidth()
+                .padding(PaddingMedium),
     ) {
         ArticleRow(articleUi, onArticleCardClick)
         Spacer(Modifier.padding(PaddingSmall))
@@ -74,11 +75,12 @@ private fun ArticleRow(
     onArticleCardClick: (ArticleUi) -> Unit,
 ) {
     Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .clickable {
-                onArticleCardClick(articleUi)
-            },
+        modifier =
+            Modifier
+                .fillMaxWidth()
+                .clickable {
+                    onArticleCardClick(articleUi)
+                },
         horizontalArrangement = Arrangement.SpaceBetween,
     ) {
         ArticleContent(articleUi)
@@ -89,9 +91,10 @@ private fun ArticleRow(
 @Composable
 private fun ArticleContent(articleUi: ArticleUi) {
     Column(
-        modifier = Modifier
-            .width(200.dp)
-            .padding(end = PaddingSmall),
+        modifier =
+            Modifier
+                .width(200.dp)
+                .padding(end = PaddingSmall),
     ) {
         Text(text = articleUi.title, fontWeight = FontWeight.SemiBold)
         Spacer(Modifier.padding(PaddingSmall))
@@ -107,15 +110,17 @@ private fun ArticleContent(articleUi: ArticleUi) {
 @Composable
 private fun ArticleImage(articleUi: ArticleUi) {
     AsyncImage(
-        model = ImageRequest.Builder(LocalContext.current)
-            .data(articleUi.image)
-            .placeholder(R.drawable.loading_animation)
-            .build(),
+        model =
+            ImageRequest.Builder(LocalContext.current)
+                .data(articleUi.image)
+                .placeholder(R.drawable.loading_animation)
+                .build(),
         contentScale = ContentScale.Crop,
         contentDescription = "",
-        modifier = Modifier
-            .size(150.dp, 150.dp)
-            .clip(MaterialTheme.shapes.medium),
+        modifier =
+            Modifier
+                .size(150.dp, 150.dp)
+                .clip(MaterialTheme.shapes.medium),
     )
 }
 
@@ -127,18 +132,20 @@ private fun ArticleBottomRow(
     onReadClick: (ArticleUi) -> Unit,
 ) {
     Row(
-        modifier = Modifier
-            .fillMaxWidth(),
+        modifier =
+            Modifier
+                .fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceEvenly,
     ) {
         ArticleIconButton(
             articleUi = articleUi,
             onIconClick = onBookmarkClick,
-            iconPainter = if (articleUi.bookmarked) {
-                painterResource(R.drawable.ic_bookmarked)
-            } else {
-                painterResource(R.drawable.ic_bookmark_border)
-            },
+            iconPainter =
+                if (articleUi.bookmarked) {
+                    painterResource(R.drawable.ic_bookmarked)
+                } else {
+                    painterResource(R.drawable.ic_bookmark_border)
+                },
         )
 
         ArticleIconButton(
@@ -150,11 +157,12 @@ private fun ArticleBottomRow(
         ArticleIconButton(
             articleUi = articleUi,
             onIconClick = onReadClick,
-            iconPainter = if (articleUi.read) {
-                painterResource(R.drawable.ic_check_circle)
-            } else {
-                painterResource(R.drawable.ic_radio_button_unchecked)
-            },
+            iconPainter =
+                if (articleUi.read) {
+                    painterResource(R.drawable.ic_check_circle)
+                } else {
+                    painterResource(R.drawable.ic_radio_button_unchecked)
+                },
         )
     }
 }

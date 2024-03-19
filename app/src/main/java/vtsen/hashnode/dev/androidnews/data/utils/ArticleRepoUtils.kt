@@ -31,9 +31,9 @@ object ArticleRepoUtils {
         return ArticleRepo(
             id = "how-to-implement-hilt-in-android-app",
             title = "How to Implement Hilt in Android App?",
-            link = "https://vtsen.hashnode.dev/how-to-implement-hilt-in-android-app",
+            link = "",
             pubDate = Date().time,
-            image = "https://cdn.hashnode.com/res/hashnode/image/upload/v1643788167289/tf0hGfYSO.jpeg",
+            image = "",
             feedTitle = "Android Kotlin Weekly",
             author = "Vincent Tsen",
         )

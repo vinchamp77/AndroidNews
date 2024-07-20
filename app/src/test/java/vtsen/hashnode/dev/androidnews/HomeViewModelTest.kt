@@ -26,6 +26,7 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.robolectric.annotation.Config
 import vtsen.hashnode.dev.androidnews.data.repository.FakeArticlesRepositoryImpl
 import vtsen.hashnode.dev.androidnews.data.repository.FakeUserPreferencesRepositoryImpl
 import vtsen.hashnode.dev.androidnews.domain.usecase.AddBookmarkArticlesUseCase
@@ -38,6 +39,7 @@ import vtsen.hashnode.dev.androidnews.domain.usecase.RemoveBookmarkArticlesUseCa
 import vtsen.hashnode.dev.androidnews.domain.usecase.RemoveReadArticlesUseCase
 import vtsen.hashnode.dev.androidnews.ui.screens.home.AllArticlesViewModel
 
+@Config(manifest = Config.NONE)
 @OptIn(ExperimentalCoroutinesApi::class)
 @RunWith(AndroidJUnit4::class)
 class HomeViewModelTest {

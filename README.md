@@ -20,7 +20,7 @@ This is a simple RSS feed reader app that currently reads my blog (Android Kotli
 - Add login authentication
 
 ## Requirements
-- Android Studio Flamingo or later
+- Android Studio Koala or later
 
 ## Tech Stack
 | Tech Stack | High-level Implementation Description |

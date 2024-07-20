@@ -1,12 +1,13 @@
 buildscript {
     ext {
-        android_gradle_plugin_version = '8.2.2'
+        //Note: this doesn't work anymore, so specify the version directly instead for now
+        //android_gradle_plugin_version = '8.5.1'
     }
 
 }// Top-level build file where you can add configuration options common to all sub-projects/modules.
 plugins {
-    id 'com.android.application' version "$android_gradle_plugin_version" apply false
-    id 'com.android.library' version "$android_gradle_plugin_version" apply false
+    id 'com.android.application' version '8.5.1' apply false
+    id 'com.android.library' version '8.5.1' apply false
     id 'org.jetbrains.kotlin.android' version '1.9.10' apply false
     //https://github.com/google/ksp/releases
     id 'com.google.devtools.ksp' version '1.9.10-1.0.13' apply false
@@ -18,7 +19,7 @@ subprojects {
     spotless {
         kotlin {
             target '**/*.kt'
-            targetExclude("$buildDir/**/*.kt")
+            targetExclude("{getLayout()}.getBuildDirectory()/**/*.kt")
 
             ktlint()
             licenseHeaderFile rootProject.file('spotless/copyright.kt')

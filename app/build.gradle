@@ -15,8 +15,8 @@ android {
 		applicationId "vtsen.hashnode.dev.androidnews"
 		minSdk 21
 		targetSdk 34
-		versionCode 7
-		versionName "3.3"
+		versionCode 8
+		versionName "3.4"
 
 		testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 		vectorDrawables {
@@ -58,8 +58,8 @@ android {
 
 dependencies {
 	implementation 'androidx.core:core-ktx:1.13.1'
-	implementation 'androidx.lifecycle:lifecycle-runtime-compose:2.8.3'
-	implementation 'androidx.activity:activity-compose:1.9.0'
+	implementation 'androidx.lifecycle:lifecycle-runtime-compose:2.8.4'
+	implementation 'androidx.activity:activity-compose:1.9.1'
 
 	// required by "?attr/colorControlNormal" icon drawable vector xml
 	implementation 'androidx.appcompat:appcompat:1.7.0'

@@ -64,6 +64,7 @@ This is a simple RSS feed reader app that currently reads my blog (Android Kotli
 - [How to add Google Play In-app Review Dialog?](https://vtsen.hashnode.dev/how-to-add-google-play-in-app-review-dialog)
 - [How to Request Android Runtime Permissions using Jetpack Compose?](https://vtsen.hashnode.dev/how-to-request-android-runtime-permissions-using-jetpack-compose)
 - [How to Add Spotless Code Formatter to your Android Project?](https://vtsen.hashnode.dev/how-to-add-spotless-code-formatter-to-your-android-project)
+- [Convert KAPT to KSP - Room and Hilt Examples](https://vtsen.hashnode.dev/convert-kapt-to-ksp-room-and-hilt-examples)
 
 ## Branches
 - [master](https://github.com/vinchamp77/AndroidNews) - multiple view models, use recommended way to collect flow

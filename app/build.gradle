@@ -6,16 +6,16 @@ plugins {
 	//TODO: change to KSP
 	id 'com.google.devtools.ksp'
 	//https://plugins.gradle.org/plugin/com.google.protobuf
-	id "com.google.protobuf" version '0.9.3'
+	id "com.google.protobuf" version '0.9.6'
 }
 
 android {
-	compileSdk 34
+	compileSdkVersion(36)
 
 	defaultConfig {
 		applicationId "vtsen.hashnode.dev.androidnews"
-		minSdk 21
-		targetSdk 34
+		minSdk 23
+		targetSdk 36
 		versionCode 8
 		versionName "3.4"
 
@@ -39,10 +39,6 @@ android {
 		sourceCompatibility JavaVersion.VERSION_17
 		targetCompatibility JavaVersion.VERSION_17
 	}
-
-	kotlinOptions {
-		jvmTarget = '17'
-	}
 	buildFeatures {
 		compose true
 	}
@@ -57,61 +53,65 @@ android {
 	namespace 'vtsen.hashnode.dev.androidnews'
 }
 
+kotlin {
+	jvmToolchain(17)
+}
+
 dependencies {
-	implementation 'androidx.core:core-ktx:1.13.1'
-	implementation 'androidx.lifecycle:lifecycle-runtime-compose:2.8.4'
-	implementation 'androidx.activity:activity-compose:1.9.1'
+	implementation 'androidx.core:core-ktx:1.17.0'
+	implementation 'androidx.lifecycle:lifecycle-runtime-compose:2.10.0'
+	implementation 'androidx.activity:activity-compose:1.12.2'
 
 	// required by "?attr/colorControlNormal" icon drawable vector xml
-	implementation 'androidx.appcompat:appcompat:1.7.0'
+	implementation 'androidx.appcompat:appcompat:1.7.1'
 
 	// https://developer.android.com/jetpack/androidx/releases/compose#versions
-	implementation "androidx.compose.material:material:1.6.8"
-	implementation "androidx.compose.ui:ui-tooling-preview:1.6.8"
-	debugImplementation "androidx.compose.ui:ui-tooling:1.6.8"
+	implementation "androidx.compose.material:material:1.10.0"
+	implementation "androidx.compose.ui:ui-tooling-preview:1.10.0"
+	implementation "androidx.compose.material:material-icons-extended:1.7.8"
+	debugImplementation "androidx.compose.ui:ui-tooling:1.10.0"
 
-	implementation "androidx.navigation:navigation-compose:2.7.7"
+	implementation "androidx.navigation:navigation-compose:2.9.6"
 
-	def accompanist_ver = "0.30.1"
-	implementation "com.google.accompanist:accompanist-systemuicontroller:$accompanist_ver"
-	implementation "com.google.accompanist:accompanist-permissions:0.31.0-alpha"
+	implementation "com.google.accompanist:accompanist-systemuicontroller:0.36.0"
+	implementation "com.google.accompanist:accompanist-permissions:0.37.3"
 
-	implementation "io.coil-kt:coil-compose:2.2.2"
+	implementation "io.coil-kt:coil-compose:2.7.0"
 
 	def ktor_version = "2.2.2" //https://github.com/ktorio/ktor/releases
 	implementation "io.ktor:ktor-client-core:$ktor_version"
 	implementation "io.ktor:ktor-client-cio:$ktor_version"
 
-	def room_version = "2.6.1"
+	def room_version = "2.8.4"
 	implementation "androidx.room:room-ktx:$room_version"
 	implementation "androidx.room:room-runtime:$room_version"
 	ksp "androidx.room:room-compiler:$room_version"
 
-	def work_version = "2.9.0"
+	def work_version = "2.11.0"
 	implementation "androidx.work:work-runtime-ktx:$work_version"
 	implementation "androidx.work:work-runtime-ktx:$work_version"
 
-	implementation "androidx.core:core-splashscreen:1.0.1"
+	implementation "androidx.core:core-splashscreen:1.2.0"
 
-	implementation "androidx.datastore:datastore:1.1.1"
-	implementation "com.google.protobuf:protobuf-javalite:3.21.12"
+	implementation "androidx.datastore:datastore:1.2.0"
+	implementation "com.google.protobuf:protobuf-javalite:4.33.2"
 
-	implementation("com.google.android.play:review:2.0.1")
-	implementation("com.google.android.play:review-ktx:2.0.1")
+	implementation("com.google.android.play:review:2.0.2")
+	implementation("com.google.android.play:review-ktx:2.0.2")
 
 	implementation "com.github.vinchamp77:buildutils:0.0.11"
 
 	testImplementation 'junit:junit:4.13.2'
-	testImplementation "androidx.test:core-ktx:1.6.1"
-	testImplementation "androidx.test.ext:junit:1.2.1"
+	testImplementation "androidx.test:core-ktx:1.7.0"
+	testImplementation "androidx.test.ext:junit:1.3.0"
 	testImplementation "androidx.arch.core:core-testing:2.2.0" //required by InstantTaskExecutorRule
-	testImplementation "org.robolectric:robolectric:4.9.1"
-	testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3"
+	testImplementation "org.robolectric:robolectric:4.16"
+	testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.10.2"
 	// required by runTest{}
 
-	androidTestImplementation 'androidx.test.ext:junit:1.2.1'
-	androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.1'
-	androidTestImplementation "androidx.compose.ui:ui-test-junit4:1.6.8"
+	androidTestImplementation 'androidx.test.ext:junit:1.3.0'
+	androidTestImplementation 'androidx.test.espresso:espresso-core:3.7.0'
+	androidTestImplementation "androidx.compose.ui:ui-test-junit4:1.10.0"
 }
 
 protobuf {

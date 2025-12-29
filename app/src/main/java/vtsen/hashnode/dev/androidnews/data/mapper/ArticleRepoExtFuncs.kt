@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Vincent Tsen
+ * Copyright 2025 Vincent Tsen
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,8 +18,8 @@ package vtsen.hashnode.dev.androidnews.data.mapper
 import vtsen.hashnode.dev.androidnews.data.local.ArticleEntity
 import vtsen.hashnode.dev.androidnews.data.repository.ArticleRepo
 
-fun ArticleRepo.toArticleEntity(): ArticleEntity {
-    return ArticleEntity(
+fun ArticleRepo.toArticleEntity(): ArticleEntity =
+    ArticleEntity(
         id = link.toUrlPath(),
         title = title,
         link = link,
@@ -28,4 +28,3 @@ fun ArticleRepo.toArticleEntity(): ArticleEntity {
         image = image,
         feedTitle = feedTitle,
     )
-}

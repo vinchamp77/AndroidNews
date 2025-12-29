@@ -20,7 +20,7 @@ This is a simple RSS feed reader app that currently reads my blog (Android Kotli
 - Add login authentication
 
 ## Requirements
-- Android Studio Koala or later
+- Android Studio Otter or later
 
 ## Tech Stack
 | Tech Stack | High-level Implementation Description |
@@ -74,7 +74,7 @@ This is a simple RSS feed reader app that currently reads my blog (Android Kotli
 
 ## License
 ```
-Copyright 2023 Vincent Tsen
+Copyright 2025 Vincent Tsen
 
 Licensed under the Apache License, Version 2.0 (the "License");
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Vincent Tsen
+ * Copyright 2025 Vincent Tsen
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,10 +21,11 @@ import vtsen.hashnode.dev.androidnews.data.repository.ArticlesRepository
 import vtsen.hashnode.dev.androidnews.domain.mapper.toArticlesUiState
 import vtsen.hashnode.dev.androidnews.domain.model.ArticlesUiState
 
-class GetArticleStatusUseCase(private val articlesRepository: ArticlesRepository) {
-    operator fun invoke(): Flow<ArticlesUiState> {
-        return articlesRepository.getStatus().map { articlesRepoStatus ->
+class GetArticleStatusUseCase(
+    private val articlesRepository: ArticlesRepository,
+) {
+    operator fun invoke(): Flow<ArticlesUiState> =
+        articlesRepository.getStatus().map { articlesRepoStatus ->
             articlesRepoStatus.toArticlesUiState()
         }
-    }
 }

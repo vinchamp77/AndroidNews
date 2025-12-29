@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Vincent Tsen
+ * Copyright 2025 Vincent Tsen
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,33 +23,29 @@ import vtsen.hashnode.dev.androidnews.data.utils.ArticleRepoUtils
 class FakeArticlesRepositoryImpl : ArticlesRepository {
     private var _status: ArticlesRepoStatus = ArticlesRepoStatus.Invalid
 
-    override fun getStatus(): Flow<ArticlesRepoStatus> {
-        return flow {
+    override fun getStatus(): Flow<ArticlesRepoStatus> =
+        flow {
             while (true) {
                 delay(500)
                 emit(_status)
             }
         }
-    }
 
     private var _allArticles: MutableList<ArticleRepo> = mutableListOf()
 
-    override fun getAllArticles(): Flow<List<ArticleRepo>> {
-        return flow {
+    override fun getAllArticles(): Flow<List<ArticleRepo>> =
+        flow {
             while (true) {
                 emit(_allArticles)
                 delay(5000)
             }
         }
-    }
 
     init {
         makeFakeArticles()
     }
 
-    override suspend fun refresh(): ArticlesRepoStatus {
-        return ArticlesRepoStatus.Success(true)
-    }
+    override suspend fun refresh(): ArticlesRepoStatus = ArticlesRepoStatus.Success(true)
 
     override fun clearStatus() {
         _status = ArticlesRepoStatus.Invalid

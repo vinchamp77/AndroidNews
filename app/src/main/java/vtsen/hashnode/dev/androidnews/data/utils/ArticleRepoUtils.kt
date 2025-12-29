@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Vincent Tsen
+ * Copyright 2025 Vincent Tsen
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,8 +27,8 @@ object ArticleRepoUtils {
         return articles
     }
 
-    fun createArticle(): ArticleRepo {
-        return ArticleRepo(
+    fun createArticle(): ArticleRepo =
+        ArticleRepo(
             id = "how-to-implement-hilt-in-android-app",
             title = "How to Implement Hilt in Android App?",
             link = "https://vtsen.hashnode.dev/how-to-implement-hilt-in-android-app",
@@ -37,5 +37,4 @@ object ArticleRepoUtils {
             feedTitle = "Android Kotlin Weekly",
             author = "Vincent Tsen",
         )
-    }
 }

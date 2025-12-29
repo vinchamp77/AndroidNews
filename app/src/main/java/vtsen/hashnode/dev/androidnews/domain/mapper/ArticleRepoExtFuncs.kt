@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Vincent Tsen
+ * Copyright 2025 Vincent Tsen
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,17 +19,16 @@ import vtsen.hashnode.dev.androidnews.data.mapper.toUrlPath
 import vtsen.hashnode.dev.androidnews.data.repository.ArticleRepo
 import vtsen.hashnode.dev.androidnews.domain.model.ArticleUi
 
-fun List<ArticleRepo>.toArticleUiList(): List<ArticleUi> {
-    return map { articleRepo ->
+fun List<ArticleRepo>.toArticleUiList(): List<ArticleUi> =
+    map { articleRepo ->
         articleRepo.toArticleUi()
     }
-}
 
 fun ArticleRepo.toArticleUi(
     bookmarked: Boolean = false,
     read: Boolean = false,
-): ArticleUi {
-    return ArticleUi(
+): ArticleUi =
+    ArticleUi(
         id = link.toUrlPath(),
         title = title,
         link = link,
@@ -40,4 +39,3 @@ fun ArticleRepo.toArticleUi(
         bookmarked = bookmarked,
         read = read,
     )
-}

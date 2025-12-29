@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Vincent Tsen
+ * Copyright 2025 Vincent Tsen
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -69,14 +69,13 @@ class ArticlesRepositoryImpl private constructor(
 
     private var _status: ArticlesRepoStatus = ArticlesRepoStatus.Invalid
 
-    override fun getStatus(): Flow<ArticlesRepoStatus> {
-        return flow {
+    override fun getStatus(): Flow<ArticlesRepoStatus> =
+        flow {
             while (true) {
                 delay(500)
                 emit(_status)
             }
         }
-    }
 
     override fun getAllArticles(): Flow<List<ArticleRepo>> =
         database.selectAllArticles().map { articlesEntity ->

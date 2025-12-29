@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Vincent Tsen
+ * Copyright 2025 Vincent Tsen
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,11 +25,10 @@ class FakeUserPreferencesRepositoryImpl : UserPreferencesRepository {
     init {
     }
 
-    override fun getBookmarkArticles(): Flow<List<String>> {
-        return flow {
+    override fun getBookmarkArticles(): Flow<List<String>> =
+        flow {
             emit(bookmarkArticleIds)
         }
-    }
 
     override suspend fun addBookmarkArticle(articleId: String) {
         if (!bookmarkArticleIds.contains(articleId)) {
@@ -41,11 +40,10 @@ class FakeUserPreferencesRepositoryImpl : UserPreferencesRepository {
         bookmarkArticleIds.remove(articleId)
     }
 
-    override fun getReadArticles(): Flow<List<String>> {
-        return flow {
+    override fun getReadArticles(): Flow<List<String>> =
+        flow {
             emit(readArticleIds)
         }
-    }
 
     override suspend fun addReadArticle(articleId: String) {
         if (!readArticleIds.contains(articleId)) {

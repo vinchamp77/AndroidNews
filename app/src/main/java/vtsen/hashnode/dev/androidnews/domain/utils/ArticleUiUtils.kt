@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Vincent Tsen
+ * Copyright 2025 Vincent Tsen
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,8 +30,8 @@ object ArticleUiUtils {
     fun createArticle(
         bookmarked: Boolean = false,
         read: Boolean = false,
-    ): ArticleUi {
-        return ArticleUi(
+    ): ArticleUi =
+        ArticleUi(
             id = "how-to-implement-hilt-in-android-app",
             title = "How to Implement Hilt in Android App?",
             link = "https://vtsen.hashnode.dev/how-to-implement-hilt-in-android-app",
@@ -42,5 +42,4 @@ object ArticleUiUtils {
             bookmarked = bookmarked,
             read = read,
         )
-    }
 }

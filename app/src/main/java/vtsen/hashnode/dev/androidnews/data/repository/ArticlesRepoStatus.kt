@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Vincent Tsen
+ * Copyright 2025 Vincent Tsen
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,9 @@ sealed interface ArticlesRepoStatus {
 
     object IsLoading : ArticlesRepoStatus
 
-    data class Success(val withNewArticles: Boolean) : ArticlesRepoStatus
+    data class Success(
+        val withNewArticles: Boolean,
+    ) : ArticlesRepoStatus
 
     object Fail : ArticlesRepoStatus
 }

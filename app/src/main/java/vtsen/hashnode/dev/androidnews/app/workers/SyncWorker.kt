@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Vincent Tsen
+ * Copyright 2025 Vincent Tsen
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,8 +35,10 @@ import vtsen.hashnode.dev.androidnews.data.repository.ArticlesRepoStatus
 import vtsen.hashnode.dev.androidnews.data.repository.ArticlesRepositoryImpl
 import vtsen.hashnode.dev.androidnews.ui.main.MainActivity
 
-class SyncWorker(private val appContext: Context, params: WorkerParameters) :
-    CoroutineWorker(appContext, params) {
+class SyncWorker(
+    private val appContext: Context,
+    params: WorkerParameters,
+) : CoroutineWorker(appContext, params) {
     private val notificationChannelId = "AndroidNewsNotificationChannelId"
 
     override suspend fun doWork(): Result {
@@ -82,7 +84,8 @@ class SyncWorker(private val appContext: Context, params: WorkerParameters) :
                 pendingIntentFlag,
             )
 
-        return NotificationCompat.Builder(applicationContext, notificationChannelId)
+        return NotificationCompat
+            .Builder(applicationContext, notificationChannelId)
             .setSmallIcon(R.mipmap.ic_launcher)
             .setContentText("New Articles Arrived!")
             .setContentIntent(mainActivityPendingIntent)

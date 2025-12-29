@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Vincent Tsen
+ * Copyright 2025 Vincent Tsen
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,7 +23,8 @@ class OkHttpWebService : WebService {
         val client = OkHttpClient()
 
         val request: Request =
-            Request.Builder()
+            Request
+                .Builder()
                 .url(url)
                 .build()
 

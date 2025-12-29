@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Vincent Tsen
+ * Copyright 2025 Vincent Tsen
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,14 +19,13 @@ import vtsen.hashnode.dev.androidnews.data.local.ArticleEntity
 import vtsen.hashnode.dev.androidnews.data.remote.ArticleFeed
 import vtsen.hashnode.dev.androidnews.utils.Utils
 
-fun List<ArticleFeed>.toArticleEntities(): List<ArticleEntity> {
-    return map { feedItem ->
+fun List<ArticleFeed>.toArticleEntities(): List<ArticleEntity> =
+    map { feedItem ->
         feedItem.toArticleEntity()
     }
-}
 
-fun ArticleFeed.toArticleEntity(): ArticleEntity {
-    return ArticleEntity(
+fun ArticleFeed.toArticleEntity(): ArticleEntity =
+    ArticleEntity(
         id = feedItem.link.toUrlPath(),
         title = feedItem.title,
         link = feedItem.link,
@@ -35,4 +34,3 @@ fun ArticleFeed.toArticleEntity(): ArticleEntity {
         image = feedItem.image,
         feedTitle = feedTitle,
     )
-}

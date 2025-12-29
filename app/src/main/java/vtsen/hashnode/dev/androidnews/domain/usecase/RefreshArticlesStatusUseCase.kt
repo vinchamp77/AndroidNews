@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Vincent Tsen
+ * Copyright 2025 Vincent Tsen
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,6 +17,8 @@ package vtsen.hashnode.dev.androidnews.domain.usecase
 
 import vtsen.hashnode.dev.androidnews.data.repository.ArticlesRepository
 
-class RefreshArticlesStatusUseCase(private val repository: ArticlesRepository) {
+class RefreshArticlesStatusUseCase(
+    private val repository: ArticlesRepository,
+) {
     suspend operator fun invoke() = repository.refresh()
 }

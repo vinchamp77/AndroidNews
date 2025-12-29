@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Vincent Tsen
+ * Copyright 2025 Vincent Tsen
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,9 @@
  */
 package vtsen.hashnode.dev.androidnews.ui.main.navigation
 
-sealed class NavRoute(val path: String) {
+sealed class NavRoute(
+    val path: String,
+) {
     object Home : NavRoute("home")
 
     object Unread : NavRoute("unread")
@@ -28,21 +30,19 @@ sealed class NavRoute(val path: String) {
 
     object About : NavRoute("about")
 
-    fun withArgs(vararg args: String): String {
-        return buildString {
+    fun withArgs(vararg args: String): String =
+        buildString {
             append(path)
             args.forEach { arg ->
                 append("/$arg")
             }
         }
-    }
 
-    fun withArgsFormat(vararg args: String): String {
-        return buildString {
+    fun withArgsFormat(vararg args: String): String =
+        buildString {
             append(path)
             args.forEach { arg ->
                 append("/{$arg}")
             }
         }
-    }
 }

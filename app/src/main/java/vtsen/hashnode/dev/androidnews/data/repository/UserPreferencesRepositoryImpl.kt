@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Vincent Tsen
+ * Copyright 2025 Vincent Tsen
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -66,11 +66,10 @@ class UserPreferencesRepositoryImpl private constructor(
                 }
             }
 
-    override fun getBookmarkArticles(): Flow<List<String>> {
-        return userPreferencesFlow.map { userPreferences ->
+    override fun getBookmarkArticles(): Flow<List<String>> =
+        userPreferencesFlow.map { userPreferences ->
             userPreferences.bookmarkedArticleIdsMap.keys.toList()
         }
-    }
 
     override suspend fun addBookmarkArticle(articleId: String) {
         dataStore.updateData { preferences ->
@@ -84,11 +83,10 @@ class UserPreferencesRepositoryImpl private constructor(
         }
     }
 
-    override fun getReadArticles(): Flow<List<String>> {
-        return userPreferencesFlow.map { userPreferences ->
+    override fun getReadArticles(): Flow<List<String>> =
+        userPreferencesFlow.map { userPreferences ->
             userPreferences.readArticlesIdsMap.keys.toList()
         }
-    }
 
     override suspend fun addReadArticle(articleId: String) {
         dataStore.updateData { preferences ->

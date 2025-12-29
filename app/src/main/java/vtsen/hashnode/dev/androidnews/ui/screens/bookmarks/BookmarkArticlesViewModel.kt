@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Vincent Tsen
+ * Copyright 2025 Vincent Tsen
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -61,8 +61,7 @@ class BookmarkArticlesViewModel(
                         articleUi.title.contains(searchQuery, ignoreCase = true)
                     }
                 }
-            }
-            .onEach { setIsSearching(false) }
+            }.onEach { setIsSearching(false) }
             .stateIn(
                 scope = viewModelScope,
                 started = SharingStarted.WhileSubscribed(5000),

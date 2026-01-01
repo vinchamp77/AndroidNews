@@ -75,7 +75,7 @@ This is a simple RSS feed reader app that currently reads my blog (Android Kotli
 
 ## License
 ```
-Copyright 2025 Vincent Tsen
+Copyright 2026 Vincent Tsen
 
 Licensed under the Apache License, Version 2.0 (the "License");
 

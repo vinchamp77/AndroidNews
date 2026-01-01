@@ -99,7 +99,7 @@ dependencies {
 	implementation("com.google.android.play:review:2.0.2")
 	implementation("com.google.android.play:review-ktx:2.0.2")
 
-	implementation "com.github.vinchamp77:buildutils:0.0.11"
+	implementation "com.github.vinchamp77:buildutils:0.0.13"
 
 	testImplementation 'junit:junit:4.13.2'
 	testImplementation "androidx.test:core-ktx:1.7.0"
